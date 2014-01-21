@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -31,6 +32,10 @@ public class AttachmentService {
 
 	public Attachment getAttachment(Integer id) {
 		return attachmentMapper.selectByPrimaryKey(id);
+	}
+
+	public List<Attachment> getAttachments(String model, String record, int type) {
+		return attachmentMapper.getAttachments(model, record, type);
 	}
 
 	public InputStream getAttachment(Attachment attachment, boolean thumvnail, boolean download) throws Exception{

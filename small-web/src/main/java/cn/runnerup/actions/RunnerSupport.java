@@ -1,6 +1,7 @@
 package cn.runnerup.actions;
 
 import java.io.Serializable;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,14 @@ public class RunnerSupport extends RestActionSupport implements
 
 	@Autowired
 	private SmallService smallService;
+
+	protected String encodeHttpHeader(String string, String encoding) throws Exception {
+		if(null == string) string = "";
+		if(servletRequest.getHeader("User-Agent").toLowerCase().indexOf("firefox") >= 0)
+			return new String(string.getBytes(encoding), "ISO8859-1");
+		else
+			return URLEncoder.encode(string, encoding);
+	}
 
 	public User getUser() {
 		return smallService.getUser();

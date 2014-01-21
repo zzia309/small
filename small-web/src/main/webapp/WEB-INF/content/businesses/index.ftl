@@ -14,8 +14,9 @@
 		<@initlayout/>
 		<#include "list.ftl">
 		<#include "business.ftl">
+		<#include "attachment.ftl">
 		App.createContentPanel({
-			tabs: [listTab, businessTab]
+			tabs: [listTab, businessTab, attachmentTab]
 		});
 		<@dolayout/>
 	});
