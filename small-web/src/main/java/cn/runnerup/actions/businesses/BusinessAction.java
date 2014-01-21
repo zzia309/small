@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.runnerup.actions.RunnerSupport;
 import cn.runnerup.model.Business;
+import cn.runnerup.model.User;
+import cn.runnerup.service.AttachmentService;
 import cn.runnerup.service.BusinessService;
 
 import com.opensymphony.xwork2.ModelDriven;
@@ -21,6 +23,9 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 
 	@Autowired
 	private BusinessService businessService;
+
+	@Autowired
+	private AttachmentService attachmentService;
 
 	private BusinessModel model = new BusinessModel();
 
@@ -47,6 +52,13 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 	public HttpHeaders create() {
 		try {
 			businessService.createBusiness(model);
+			Integer modelId = model.getId();
+			User user = getUser();
+			if(model.getBusinessfiles() != null) {
+				for(int i=0; i<model.getBusinessfiles().length; i++) {
+					attachmentService.upload(user, "business", modelId.toString(), 0, model.getBusinessfiles()[i], model.getBusinessfilesFileName()[i]);
+				}
+			}
 			model.setSuccess(true);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -55,10 +67,20 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 	}
 
 	public HttpHeaders update() {
-
 		if(business != null) {
-			businessService.updateBusiness(model);
-			model.setSuccess(true);
+			try {
+				Integer modelId = model.getId();
+				User user = getUser();
+				if(model.getBusinessfiles() != null) {
+					for(int i=0; i<model.getBusinessfiles().length; i++) {
+						attachmentService.upload(user, "business", modelId.toString(), 0, model.getBusinessfiles()[i], model.getBusinessfilesFileName()[i]);
+					}
+				}
+				businessService.updateBusiness(model);
+				model.setSuccess(true);
+			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
+			}
 		}
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
 	}

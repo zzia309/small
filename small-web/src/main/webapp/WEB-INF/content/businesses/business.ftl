@@ -236,7 +236,27 @@ var otherPanel = Ext.create('Ext.panel.Panel', {
 
 
 var businessForm = Ext.create('Ext.form.Panel', {
-	items:[lenderPanel, matePanel, guaranteePanel, carPanel, creditPanel, advancePanel, otherPanel],
+	items:[lenderPanel, matePanel, guaranteePanel, carPanel, creditPanel, advancePanel, otherPanel, {
+		xtype: 'panel',
+		layout: 'column',
+		items: [{
+	    	xtype: 'button',
+	    	columnWidth: 0.09,
+	    	text: '添加附件',
+	    	handler: function(){
+	    		var con = this.up('panel').query('[addFieldContainer]')[0];
+	    		con.add({
+	    			xtype: 'xfilefield',
+	    			itemName: 'businessfiles'
+	    		});
+	    	}
+	    }, {
+	    	xtype: 'fieldcontainer',
+	    	addFieldContainer: true,
+	    	layout: 'anchor',
+	    	columnWidth: 0.91
+	    }]
+	}],
 	anchor: '98.6% 140%',
 	layout: 'anchor',
 	autoScroll: true,

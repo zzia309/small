@@ -3,7 +3,6 @@
 <mapper namespace="cn.runnerup.mapper.AttachmentMapper" >
   <resultMap id="BaseResultMap" type="cn.runnerup.model.Attachment" >
     <id column="att_id" property="id" jdbcType="INTEGER" />
-    <result column="att_user" property="user" jdbcType="INTEGER" />
     <result column="att_model" property="model" jdbcType="VARCHAR" />
     <result column="att_record" property="record" jdbcType="VARCHAR" />
     <result column="att_type" property="type" jdbcType="INTEGER" />
@@ -12,134 +11,42 @@
     <result column="att_mime" property="mime" jdbcType="VARCHAR" />
     <result column="att_size" property="size" jdbcType="BIGINT" />
     <result column="att_created" property="created" jdbcType="TIMESTAMP" />
+    <association column="att_user" property="user" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey" />
   </resultMap>
   <sql id="Base_Column_List" >
     att_id, att_user, att_model, att_record, att_type, att_filename, att_path, att_mime,
     att_size, att_created
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from sp_attachments
     where att_id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_attachments
     where att_id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="cn.runnerup.model.Attachment" >
-    insert into sp_attachments (att_id, att_user, att_model,
+    insert into sp_attachments (att_model,
       att_record, att_type, att_filename,
-      att_path, att_mime, att_size, att_created
+      att_path, att_mime, att_size, att_created, att_user
       )
-    values (#{id,jdbcType=INTEGER}, #{user,jdbcType=INTEGER}, #{model,jdbcType=VARCHAR},
+    values (#{model,jdbcType=VARCHAR},
       #{record,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{filename,jdbcType=VARCHAR},
       #{path,jdbcType=VARCHAR}, #{mime,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, #{created,jdbcType=TIMESTAMP}
-      )
+      ,<if test="user == null">NULL</if><if test="user != null">#{user.id,jdbcType=INTEGER}</if>)
+   	<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+		select LAST_INSERT_ID() as id
+	</selectKey>
   </insert>
-  <insert id="insertSelective" parameterType="cn.runnerup.model.Attachment" >
-    insert into sp_attachments
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        att_id,
-      </if>
-      <if test="user != null" >
-        att_user,
-      </if>
-      <if test="model != null" >
-        att_model,
-      </if>
-      <if test="record != null" >
-        att_record,
-      </if>
-      <if test="type != null" >
-        att_type,
-      </if>
-      <if test="filename != null" >
-        att_filename,
-      </if>
-      <if test="path != null" >
-        att_path,
-      </if>
-      <if test="mime != null" >
-        att_mime,
-      </if>
-      <if test="size != null" >
-        att_size,
-      </if>
-      <if test="created != null" >
-        att_created,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="user != null" >
-        #{user,jdbcType=INTEGER},
-      </if>
-      <if test="model != null" >
-        #{model,jdbcType=VARCHAR},
-      </if>
-      <if test="record != null" >
-        #{record,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="filename != null" >
-        #{filename,jdbcType=VARCHAR},
-      </if>
-      <if test="path != null" >
-        #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="mime != null" >
-        #{mime,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null" >
-        #{size,jdbcType=BIGINT},
-      </if>
-      <if test="created != null" >
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.runnerup.model.Attachment" >
-    update sp_attachments
-    <set >
-      <if test="user != null" >
-        att_user = #{user,jdbcType=INTEGER},
-      </if>
-      <if test="model != null" >
-        att_model = #{model,jdbcType=VARCHAR},
-      </if>
-      <if test="record != null" >
-        att_record = #{record,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        att_type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="filename != null" >
-        att_filename = #{filename,jdbcType=VARCHAR},
-      </if>
-      <if test="path != null" >
-        att_path = #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="mime != null" >
-        att_mime = #{mime,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null" >
-        att_size = #{size,jdbcType=BIGINT},
-      </if>
-      <if test="created != null" >
-        att_created = #{created,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where att_id = #{id,jdbcType=INTEGER}
-  </update>
+
   <update id="updateByPrimaryKey" parameterType="cn.runnerup.model.Attachment" >
     update sp_attachments
-    set att_user = #{user,jdbcType=INTEGER},
+    set
       att_model = #{model,jdbcType=VARCHAR},
       att_record = #{record,jdbcType=VARCHAR},
       att_type = #{type,jdbcType=INTEGER},
@@ -147,7 +54,8 @@
       att_path = #{path,jdbcType=VARCHAR},
       att_mime = #{mime,jdbcType=VARCHAR},
       att_size = #{size,jdbcType=BIGINT},
-      att_created = #{created,jdbcType=TIMESTAMP}
+      att_created = #{created,jdbcType=TIMESTAMP},
+      <if test="user == null">att_user = NULL</if><if test="user != null">att_user = #{user.id,jdbcType=INTEGER}</if>
     where att_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

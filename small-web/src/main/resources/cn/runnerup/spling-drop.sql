@@ -189,21 +189,18 @@ CREATE TABLE `sp_businesses` (
 DROP TABLE IF EXISTS `sp_attachments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sp_attachments` (
-  `att_id` int(11) NOT NULL AUTO_INCREMENT,
-  `att_user` int(11) NOT NULL,
-  `att_model` varchar(64) DEFAULT NULL,
-  `att_record` varchar(128) DEFAULT NULL,
-  `att_type` int(11) NOT NULL DEFAULT '1',
-  `att_filename` varchar(255) NOT NULL,
-  `att_path` varchar(2047) NOT NULL,
-  `att_mime` varchar(255) DEFAULT NULL,
-  `att_size` bigint(20) NOT NULL,
-  `att_created` datetime NOT NULL DEFAULT '2013-10-11 10:48:48',
-  PRIMARY KEY (`att_id`),
-  KEY `idx_attachmentuser` (`att_user`),
-  KEY `idx_attachmentrecord` (`att_model`,`att_record`,`att_type`),
-  CONSTRAINT `sp_attachments_ibfk_1` FOREIGN KEY (`att_user`) REFERENCES `sp_users` (`usr_id`)
+create table if not exists sp_attachments(
+	att_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	att_user int NOT NULL,
+	att_model varchar(64) NULL,
+	att_record varchar(128) NULL,
+	att_type int DEFAULT 1 NOT NULL,
+	att_filename varchar(255) NOT NULL,
+	att_path varchar(2047) NOT NULL,
+	att_mime varchar(255) NULL,
+	att_size bigint NOT NULL,
+	att_created datetime DEFAULT '2013-11-07 12:52:54.893' NOT NULL,
+	foreign key (att_user) references sp_users (usr_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

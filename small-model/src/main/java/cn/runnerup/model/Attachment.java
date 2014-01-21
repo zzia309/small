@@ -1,12 +1,15 @@
 package cn.runnerup.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Attachment {
+public class Attachment implements Serializable {
 
-    private Integer id;
+	private static final long serialVersionUID = -5840884828910083483L;
 
-    private Integer user;
+	private Integer id;
+
+    private User user;
 
     private String model;
 
@@ -96,11 +99,11 @@ public class Attachment {
         this.created = created;
     }
 
-	public Integer getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Integer user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

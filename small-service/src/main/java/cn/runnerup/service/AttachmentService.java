@@ -84,7 +84,7 @@ public class AttachmentService {
 		FileUtils.copyFile(file, destFile);
 
 		Attachment attachment = new Attachment();
-//		attachment.setUser(user);
+		attachment.setUser(user);
 		attachment.setModel(model);
 		attachment.setRecord(record);
 		attachment.setType(type);

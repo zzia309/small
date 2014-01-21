@@ -4,6 +4,7 @@
 <head>
 <@myhead/>
 <script type="text/javascript" src="${request.contextPath}/statics/model/Business.js"></script>
+<script type="text/javascript" src="${request.contextPath}/statics/FileField.js"></script>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/style/style.css"/>
 <title>客户信息维护</title>
 <head>
