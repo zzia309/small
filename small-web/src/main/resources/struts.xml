@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<bean type="org.apache.struts2.rest.handler.ContentTypeHandler" name="gson" class="cn.runnerup.struts.GsonTypeHandler"/>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.mapper.class" value="rest" />
+    <constant name="struts.action.extension" value="xhtml,,xml,json,gson"/>
+    <constant name="struts.convention.action.packages" value="cn.runnerup.actions"/>
+    <constant name="struts.convention.action.mapAllMatches" value="true"/>
+    <constant name="struts.convention.default.parent.package" value="runnerup-default"/>
+    <constant name="struts.convention.package.locators.disable" value="true"/>
+    <constant name="struts.rest.content.restrictToGET" value="false"/>
+	<package name="runnerup-default" extends="rest-default">
+
+		<interceptors>
+			<interceptor name="loginPermission" class="cn.runnerup.struts.LoginPermission"></interceptor>
+			<interceptor-stack name="runnerDefaultStack">
+				<interceptor-ref name="loginPermission"/>
+				<interceptor-ref name="restDefaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="runnerDefaultStack"></default-interceptor-ref>
+
+		<default-class-ref class="cn.runnerup.actions.RunnerSupport"/>
+
+		<global-results>
+			<result name = "login" type="redirect">/login</result>
+			<result name = "index" type ="redirect">/index</result>
+		</global-results>
+	</package>
+
+</struts>
+
+<!-- vim:ts=4:sw=4:et:ai:cindent
+ -->

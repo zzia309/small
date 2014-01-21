@@ -1,0 +1,18 @@
+# Package Files #
+*.jar
+*.war
+*.ear
+*.project
+*.classpath
+
+hs_err_*
+
+/target/*
+/small-model/target/*
+/small-model/.settings/*
+.settings/*
+/small-service/target/*
+/small-service/.settings/*
+
+/small-web/target/*
+/small-web/.settings/*

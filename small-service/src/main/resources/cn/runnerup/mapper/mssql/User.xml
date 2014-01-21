@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.runnerup.mapper.UserMapper">
+
+	<sql id="columnList">
+		usr_id,
+		usr_username,
+		usr_password,
+		usr_fullname,
+		usr_disabled,
+		usr_idnumber,
+		usr_gender,
+		usr_address,
+		usr_postalcode,
+		usr_tel,
+		usr_mobile,
+		usr_email,
+		usr_qq,
+		usr_created,
+		usr_updated,
+		usr_createdby,
+		usr_updatedby
+	</sql>
+
+	<select id="selectUser" parameterType="string" resultType="cn.runnerup.model.User">
+		select ur_id id,ur_username username,ur_password password
+		from spling_users where ur_username = #{usernmae}
+	</select>
+
+	<insert id="insertUser" parameterType="cn.runnerup.model.User">
+		insert into spling_users(
+			ur_username,
+			ur_password,
+			ur_disabled
+		) values (
+			#{username,jdbcType=VARCHAR},
+			#{password,jdbcType=CHAR},
+			#{disabled}
+		)
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+			select LAST_INSERT_ID() as id
+		</selectKey>
+	</insert>
+
+</mapper>
+
+<!-- vim:ts=4:sw=4:ai:cindent
+ -->

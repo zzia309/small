@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.runnerup.mapper.FlowAuthorizationMapper" >
+  <resultMap id="BaseResultMap" type="cn.runnerup.model.FlowAuthorization" >
+    <id column="fa_id" property="id" jdbcType="INTEGER" />
+    <result column="fa_role" property="role" jdbcType="INTEGER" />
+    <result column="fa_user" property="user" jdbcType="VARCHAR" />
+    <result column="fa_flow" property="flow" jdbcType="INTEGER" />
+    <result column="fa_fromStatus" property="fromstatus" jdbcType="VARCHAR" />
+    <result column="fa_toStatus" property="tostatus" jdbcType="VARCHAR" />
+    <result column="fa_priority" property="priority" jdbcType="INTEGER" />
+    <result column="fa_created" property="created" jdbcType="TIMESTAMP" />
+    <result column="fa_updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fa_id, fa_role, fa_user, fa_flow, fa_fromStatus, fa_toStatus, fa_priority, fa_created, 
+    fa_updated
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sp_flowauthorizations
+    where fa_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sp_flowauthorizations
+    where fa_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.runnerup.model.FlowAuthorization" >
+    insert into sp_flowauthorizations (fa_id, fa_role, fa_user, 
+      fa_flow, fa_fromStatus, fa_toStatus, 
+      fa_priority, fa_created, fa_updated
+      )
+    values (#{id,jdbcType=INTEGER}, #{role,jdbcType=INTEGER}, #{user,jdbcType=VARCHAR}, 
+      #{flow,jdbcType=INTEGER}, #{fromstatus,jdbcType=VARCHAR}, #{tostatus,jdbcType=VARCHAR}, 
+      #{priority,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.runnerup.model.FlowAuthorization" >
+    insert into sp_flowauthorizations
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        fa_id,
+      </if>
+      <if test="role != null" >
+        fa_role,
+      </if>
+      <if test="user != null" >
+        fa_user,
+      </if>
+      <if test="flow != null" >
+        fa_flow,
+      </if>
+      <if test="fromstatus != null" >
+        fa_fromStatus,
+      </if>
+      <if test="tostatus != null" >
+        fa_toStatus,
+      </if>
+      <if test="priority != null" >
+        fa_priority,
+      </if>
+      <if test="created != null" >
+        fa_created,
+      </if>
+      <if test="updated != null" >
+        fa_updated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="user != null" >
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="flow != null" >
+        #{flow,jdbcType=INTEGER},
+      </if>
+      <if test="fromstatus != null" >
+        #{fromstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tostatus != null" >
+        #{tostatus,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.runnerup.model.FlowAuthorization" >
+    update sp_flowauthorizations
+    <set >
+      <if test="role != null" >
+        fa_role = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="user != null" >
+        fa_user = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="flow != null" >
+        fa_flow = #{flow,jdbcType=INTEGER},
+      </if>
+      <if test="fromstatus != null" >
+        fa_fromStatus = #{fromstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tostatus != null" >
+        fa_toStatus = #{tostatus,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        fa_priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        fa_created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        fa_updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fa_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.runnerup.model.FlowAuthorization" >
+    update sp_flowauthorizations
+    set fa_role = #{role,jdbcType=INTEGER},
+      fa_user = #{user,jdbcType=VARCHAR},
+      fa_flow = #{flow,jdbcType=INTEGER},
+      fa_fromStatus = #{fromstatus,jdbcType=VARCHAR},
+      fa_toStatus = #{tostatus,jdbcType=VARCHAR},
+      fa_priority = #{priority,jdbcType=INTEGER},
+      fa_created = #{created,jdbcType=TIMESTAMP},
+      fa_updated = #{updated,jdbcType=TIMESTAMP}
+    where fa_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.runnerup.mapper.commons.UserExMapper" >
+  <resultMap id="BaseResultMap" type="cn.runnerup.model.User" >
+    <id column="usr_id" property="id" jdbcType="INTEGER" />
+    <result column="usr_username" property="username" jdbcType="VARCHAR" />
+    <result column="usr_password" property="password" jdbcType="CHAR" />
+    <result column="usr_fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="usr_disabled" property="disabled" jdbcType="BIT" />
+    <result column="usr_idnumber" property="idnumber" jdbcType="VARCHAR" />
+    <result column="usr_gender" property="gender" jdbcType="VARCHAR" />
+    <result column="usr_address" property="address" jdbcType="VARCHAR" />
+    <result column="usr_postalcode" property="postalcode" jdbcType="VARCHAR" />
+    <result column="usr_tel" property="tel" jdbcType="VARCHAR" />
+    <result column="usr_mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="usr_email" property="email" jdbcType="VARCHAR" />
+    <result column="usr_qq" property="qq" jdbcType="VARCHAR" />
+    <result column="usr_priority" property="priority" jdbcType="INTEGER" />
+    <result column="usr_created" property="created" jdbcType="TIMESTAMP" />
+    <result column="usr_updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="usr_createdby" property="createdby" jdbcType="INTEGER" />
+    <result column="usr_updatedby" property="updatedby" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    usr_id, usr_username, usr_password, usr_fullname, usr_disabled, usr_priority, usr_idnumber, usr_gender,
+    usr_address, usr_postalcode, usr_tel, usr_mobile, usr_email, usr_qq, usr_created, usr_updated, usr_createdby, usr_updatedby
+  </sql>
+
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from sp_users
+    where usr_username = #{username,jdbcType=VARCHAR} limit 1
+  </select>
+  <select id="selectAllUsers" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+  	select
+    <include refid="Base_Column_List" />
+    from sp_users
+    <if test="condition != null">
+    	where usr_username like '%${condition}%'
+    	or usr_fullname like '%${condition}%'
+    	or usr_idnumber like '%${condition}%'
+    	or usr_address like '%${condition}%'
+    	or usr_mobile like '%${condition}%'
+    	or usr_email like '%${condition}%'
+    	or usr_tel like '%${condition}%'
+    	or usr_qq like '%${condition}%'
+    </if>
+    limit ${limit} offset ${start}
+  </select>
+  <select id="selectCount" resultType="int" parameterType="java.util.HashMap">
+  	select count(1)
+    from sp_users
+    <if test="condition != null">
+    	where usr_username like '%${condition}%'
+    	or usr_fullname like '%${condition}%'
+    	or usr_idnumber like '%${condition}%'
+    	or usr_address like '%${condition}%'
+    	or usr_mobile like '%${condition}%'
+    	or usr_email like '%${condition}%'
+    	or usr_tel like '%${condition}%'
+    	or usr_qq like '%${condition}%'
+    </if>
+  </select>
+
+</mapper>

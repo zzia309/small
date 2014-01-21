@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.runnerup.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.runnerup.model.User" >
+    <id column="usr_id" property="id" jdbcType="INTEGER" />
+    <result column="usr_username" property="username" jdbcType="VARCHAR" />
+    <result column="usr_password" property="password" jdbcType="CHAR" />
+    <result column="usr_fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="usr_disabled" property="disabled" jdbcType="BIT" />
+    <result column="usr_idnumber" property="idnumber" jdbcType="VARCHAR" />
+    <result column="usr_gender" property="gender" jdbcType="VARCHAR" />
+    <result column="usr_address" property="address" jdbcType="VARCHAR" />
+    <result column="usr_postalcode" property="postalcode" jdbcType="VARCHAR" />
+    <result column="usr_tel" property="tel" jdbcType="VARCHAR" />
+    <result column="usr_mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="usr_email" property="email" jdbcType="VARCHAR" />
+    <result column="usr_qq" property="qq" jdbcType="VARCHAR" />
+    <result column="usr_priority" property="priority" jdbcType="INTEGER" />
+    <result column="usr_created" property="created" jdbcType="TIMESTAMP" />
+    <result column="usr_updated" property="updated" jdbcType="TIMESTAMP" />
+    <result column="usr_createdby" property="createdby" jdbcType="INTEGER" />
+    <result column="usr_updatedby" property="updatedby" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    usr_id, usr_username, usr_password, usr_fullname, usr_disabled,
+    usr_idnumber, usr_gender, usr_priority,
+    usr_address, usr_postalcode, usr_tel, usr_mobile, usr_email, usr_qq, usr_created, usr_updated, usr_createdby, usr_updatedby
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sp_users
+    where usr_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sp_users
+    where usr_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.runnerup.model.User" >
+    insert into sp_users (usr_id, usr_username, usr_password,
+      usr_fullname,
+      usr_disabled,
+      usr_priority,
+      usr_idnumber, usr_gender, usr_address,
+      usr_postalcode, usr_tel, usr_mobile,
+      usr_email, usr_qq, usr_created,
+      usr_updated, usr_createdby, usr_updatedby
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR},
+      #{fullname,jdbcType=VARCHAR},
+      #{disabled,jdbcType=BIT},
+      #{priority,jdbcType=INTEGER},
+      #{idnumber,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+      #{postalcode,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP},
+      #{updated,jdbcType=TIMESTAMP}, #{createdby,jdbcType=INTEGER}, #{updatedby,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.runnerup.model.User" >
+    insert into sp_users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        usr_id,
+      </if>
+      <if test="username != null" >
+        usr_username,
+      </if>
+      <if test="password != null" >
+        usr_password,
+      </if>
+      <if test="fullname != null" >
+        usr_fullname,
+      </if>
+      <if test="disabled != null" >
+        usr_disabled,
+      </if>
+      <if test="priority != null" >
+        usr_priority,
+      </if>
+      <if test="idnumber != null" >
+        usr_idnumber,
+      </if>
+      <if test="gender != null" >
+        usr_gender,
+      </if>
+      <if test="address != null" >
+        usr_address,
+      </if>
+      <if test="postalcode != null" >
+        usr_postalcode,
+      </if>
+      <if test="tel != null" >
+        usr_tel,
+      </if>
+      <if test="mobile != null" >
+        usr_mobile,
+      </if>
+      <if test="email != null" >
+        usr_email,
+      </if>
+      <if test="qq != null" >
+        usr_qq,
+      </if>
+      <if test="created != null" >
+        usr_created,
+      </if>
+      <if test="updated != null" >
+        usr_updated,
+      </if>
+      <if test="createdby != null" >
+        usr_createdby,
+      </if>
+      <if test="updatedby != null" >
+        usr_updatedby,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="fullname != null" >
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null" >
+        #{disabled,jdbcType=BIT},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="idnumber != null" >
+        #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdby != null" >
+        #{createdby,jdbcType=INTEGER},
+      </if>
+      <if test="updatedby != null" >
+        #{updatedby,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.runnerup.model.User" >
+    update sp_users
+    <set >
+      <if test="username != null" >
+        usr_username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        usr_password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="fullname != null" >
+        usr_fullname = #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null" >
+        usr_disabled = #{disabled,jdbcType=BIT},
+      </if>
+      <if test="priority != null" >
+        usr_priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="idnumber != null" >
+        usr_idnumber = #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        usr_gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        usr_address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null" >
+        usr_postalcode = #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        usr_tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        usr_mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        usr_email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        usr_qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        usr_created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        usr_updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdby != null" >
+        usr_createdby = #{createdby,jdbcType=INTEGER},
+      </if>
+      <if test="updatedby != null" >
+        usr_updatedby = #{updatedby,jdbcType=INTEGER},
+      </if>
+    </set>
+    where usr_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.runnerup.model.User" >
+    update sp_users
+    set usr_username = #{username,jdbcType=VARCHAR},
+      usr_password = #{password,jdbcType=CHAR},
+      usr_fullname = #{fullname,jdbcType=VARCHAR},
+      usr_disabled = #{disabled,jdbcType=BIT},
+      usr_priority = #{priority,jdbcType=INTEGER},
+      usr_idnumber = #{idnumber,jdbcType=VARCHAR},
+      usr_gender = #{gender,jdbcType=VARCHAR},
+      usr_address = #{address,jdbcType=VARCHAR},
+      usr_postalcode = #{postalcode,jdbcType=VARCHAR},
+      usr_tel = #{tel,jdbcType=VARCHAR},
+      usr_mobile = #{mobile,jdbcType=VARCHAR},
+      usr_email = #{email,jdbcType=VARCHAR},
+      usr_qq = #{qq,jdbcType=VARCHAR},
+      usr_created = #{created,jdbcType=TIMESTAMP},
+      usr_updated = #{updated,jdbcType=TIMESTAMP},
+      usr_createdby = #{createdby,jdbcType=INTEGER},
+      usr_updatedby = #{updatedby,jdbcType=INTEGER}
+    where usr_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

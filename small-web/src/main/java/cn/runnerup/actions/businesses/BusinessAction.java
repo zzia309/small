@@ -1,0 +1,97 @@
+package cn.runnerup.actions.businesses;
+
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts2.rest.DefaultHttpHeaders;
+import org.apache.struts2.rest.HttpHeaders;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import cn.runnerup.actions.RunnerSupport;
+import cn.runnerup.model.Business;
+import cn.runnerup.service.BusinessService;
+
+import com.opensymphony.xwork2.ModelDriven;
+
+public class BusinessAction extends RunnerSupport implements ModelDriven<BusinessModel>{
+
+	private static final long serialVersionUID = 6761123230844817537L;
+
+	protected final Log logger = LogFactory.getLog(getClass());
+
+	@Autowired
+	private BusinessService businessService;
+
+	private BusinessModel model = new BusinessModel();
+
+	private Business business;
+
+	private int id;
+
+	public String show(){
+		model.setSuccess(true);
+		return SUCCESS;
+	}
+
+	public String editNew() {
+		model.setSuccess(true);
+		return "edit";
+	}
+
+
+	public String edit() {
+		model.setSuccess(business != null);
+		return "edit";
+	}
+
+	public HttpHeaders create() {
+		try {
+			businessService.createBusiness(model);
+			model.setSuccess(true);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
+	}
+
+	public HttpHeaders update() {
+
+		if(business != null) {
+			businessService.updateBusiness(model);
+			model.setSuccess(true);
+		}
+		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
+	}
+
+	public HttpHeaders destroy() {
+		try {
+			if(business != null) {
+				businessService.deleteBusiness(business);
+				model.setSuccess(true);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
+	}
+
+
+	public BusinessModel getModel() {
+		return model;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(Integer id) throws Exception {
+		if(id != null){
+			business = businessService.getBusiness(id);
+			PropertyUtils.copyProperties(model, business);
+		}else{
+			addActionError("miss id or business is not exist");
+		}
+		this.id = id;
+	}
+
+}
