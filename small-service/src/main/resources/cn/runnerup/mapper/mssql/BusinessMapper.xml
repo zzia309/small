@@ -61,24 +61,28 @@
     buss_branch, buss_advances, buss_advanceDate, buss_insuranceAgent, buss_insuranceStart,
     buss_insuranceEnd, buss_certificate, buss_isImpawn, buss_isSongHang, buss_status
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from sp_businesses
     where buss_id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_businesses
     where buss_id = #{id,jdbcType=INTEGER}
   </delete>
+
   <select id="getAllBusinesses" resultMap="BaseResultMap">
   	 select
     <include refid="Base_Column_List" />
     from sp_businesses
     where buss_id is not null
   </select>
+
   <insert id="insert" parameterType="cn.runnerup.model.Business" >
-    insert into sp_businesses (buss_id, buss_lenderName, buss_lenderSex,
+    insert into sp_businesses (buss_lenderName, buss_lenderSex,
       buss_lenderAge, buss_lenderCard, buss_lenderTel,
       buss_lenderEstate, buss_lenderUnit, buss_lenderUnitTel,
       buss_lenderArea, buss_mateName, buss_mateSex,
@@ -94,7 +98,7 @@
       buss_advanceDate, buss_insuranceAgent, buss_insuranceStart,
       buss_insuranceEnd, buss_certificate, buss_isImpawn,
       buss_isSongHang, buss_status)
-    values (#{id,jdbcType=INTEGER}, #{lendername,jdbcType=VARCHAR}, #{lendersex,jdbcType=CHAR},
+    values (#{lendername,jdbcType=VARCHAR}, #{lendersex,jdbcType=CHAR},
       #{lenderage,jdbcType=INTEGER}, #{lendercard,jdbcType=VARCHAR}, #{lendertel,jdbcType=VARCHAR},
       #{lenderestate,jdbcType=VARCHAR}, #{lenderunit,jdbcType=VARCHAR}, #{lenderunittel,jdbcType=VARCHAR},
       #{lenderarea,jdbcType=VARCHAR}, #{matename,jdbcType=VARCHAR}, #{matesex,jdbcType=CHAR},
@@ -110,440 +114,11 @@
       #{advancedate,jdbcType=TIMESTAMP}, #{insuranceagent,jdbcType=VARCHAR}, #{insurancestart,jdbcType=TIMESTAMP},
       #{insuranceend,jdbcType=TIMESTAMP}, #{certificate,jdbcType=VARCHAR}, #{isimpawn,jdbcType=TINYINT},
       #{issonghang,jdbcType=TINYINT}, #{status,jdbcType=VARCHAR})
+      <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+		select LAST_INSERT_ID() as id
+	  </selectKey>
   </insert>
-  <insert id="insertSelective" parameterType="cn.runnerup.model.Business" >
-    insert into sp_businesses
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        buss_id,
-      </if>
-      <if test="lendername != null" >
-        buss_lenderName,
-      </if>
-      <if test="lendersex != null" >
-        buss_lenderSex,
-      </if>
-      <if test="lenderage != null" >
-        buss_lenderAge,
-      </if>
-      <if test="lendercard != null" >
-        buss_lenderCard,
-      </if>
-      <if test="lendertel != null" >
-        buss_lenderTel,
-      </if>
-      <if test="lenderestate != null" >
-        buss_lenderEstate,
-      </if>
-      <if test="lenderunit != null" >
-        buss_lenderUnit,
-      </if>
-      <if test="lenderunittel != null" >
-        buss_lenderUnitTel,
-      </if>
-      <if test="lenderarea != null" >
-        buss_lenderArea,
-      </if>
-      <if test="matename != null" >
-        buss_mateName,
-      </if>
-      <if test="matesex != null" >
-        buss_mateSex,
-      </if>
-      <if test="mateage != null" >
-        buss_mateAge,
-      </if>
-      <if test="matecard != null" >
-        buss_mateCard,
-      </if>
-      <if test="matetel != null" >
-        buss_mateTel,
-      </if>
-      <if test="mateestate != null" >
-        buss_mateEstate,
-      </if>
-      <if test="mateunit != null" >
-        buss_mateUnit,
-      </if>
-      <if test="mateunittel != null" >
-        buss_mateUnitTel,
-      </if>
-      <if test="matearea != null" >
-        buss_mateArea,
-      </if>
-      <if test="guaranteename != null" >
-        buss_guaranteeName,
-      </if>
-      <if test="guaranteesex != null" >
-        buss_guaranteeSex,
-      </if>
-      <if test="guaranteeage != null" >
-        buss_guaranteeAge,
-      </if>
-      <if test="guaranteecard != null" >
-        buss_guaranteeCard,
-      </if>
-      <if test="guaranteetel != null" >
-        buss_guaranteeTel,
-      </if>
-      <if test="guaranteeestate != null" >
-        buss_guaranteeEstate,
-      </if>
-      <if test="guaranteeunit != null" >
-        buss_guaranteeUnit,
-      </if>
-      <if test="guaranteeunittel != null" >
-        buss_guaranteeUnitTel,
-      </if>
-      <if test="guaranteearea != null" >
-        buss_guaranteeArea,
-      </if>
-      <if test="sales != null" >
-        buss_sales,
-      </if>
-      <if test="manager != null" >
-        buss_manager,
-      </if>
-      <if test="cartype != null" >
-        buss_carType,
-      </if>
-      <if test="years != null" >
-        buss_years,
-      </if>
-      <if test="bail != null" >
-        buss_bail,
-      </if>
-      <if test="notaryfee != null" >
-        buss_notaryFee,
-      </if>
-      <if test="otherFee != null" >
-        buss_other_fee,
-      </if>
-      <if test="guaranteefees != null" >
-        buss_guaranteeFees,
-      </if>
-      <if test="credit != null" >
-        buss_credit,
-      </if>
-      <if test="branch != null" >
-        buss_branch,
-      </if>
-      <if test="advances != null" >
-        buss_advances,
-      </if>
-      <if test="advancedate != null" >
-        buss_advanceDate,
-      </if>
-      <if test="insuranceagent != null" >
-        buss_insuranceAgent,
-      </if>
-      <if test="insurancestart != null" >
-        buss_insuranceStart,
-      </if>
-      <if test="insuranceend != null" >
-        buss_insuranceEnd,
-      </if>
-      <if test="certificate != null" >
-        buss_certificate,
-      </if>
-      <if test="isimpawn != null" >
-        buss_isImpawn,
-      </if>
-      <if test="issonghang != null" >
-        buss_isSongHang,
-      </if>
-      <if test="status != null" >
-        buss_status,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="lendername != null" >
-        #{lendername,jdbcType=VARCHAR},
-      </if>
-      <if test="lendersex != null" >
-        #{lendersex,jdbcType=CHAR},
-      </if>
-      <if test="lenderage != null" >
-        #{lenderage,jdbcType=INTEGER},
-      </if>
-      <if test="lendercard != null" >
-        #{lendercard,jdbcType=VARCHAR},
-      </if>
-      <if test="lendertel != null" >
-        #{lendertel,jdbcType=VARCHAR},
-      </if>
-      <if test="lenderestate != null" >
-        #{lenderestate,jdbcType=VARCHAR},
-      </if>
-      <if test="lenderunit != null" >
-        #{lenderunit,jdbcType=VARCHAR},
-      </if>
-      <if test="lenderunittel != null" >
-        #{lenderunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="lenderarea != null" >
-        #{lenderarea,jdbcType=VARCHAR},
-      </if>
-      <if test="matename != null" >
-        #{matename,jdbcType=VARCHAR},
-      </if>
-      <if test="matesex != null" >
-        #{matesex,jdbcType=CHAR},
-      </if>
-      <if test="mateage != null" >
-        #{mateage,jdbcType=INTEGER},
-      </if>
-      <if test="matecard != null" >
-        #{matecard,jdbcType=VARCHAR},
-      </if>
-      <if test="matetel != null" >
-        #{matetel,jdbcType=VARCHAR},
-      </if>
-      <if test="mateestate != null" >
-        #{mateestate,jdbcType=VARCHAR},
-      </if>
-      <if test="mateunit != null" >
-        #{mateunit,jdbcType=VARCHAR},
-      </if>
-      <if test="mateunittel != null" >
-        #{mateunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="matearea != null" >
-        #{matearea,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteename != null" >
-        #{guaranteename,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteesex != null" >
-        #{guaranteesex,jdbcType=CHAR},
-      </if>
-      <if test="guaranteeage != null" >
-        #{guaranteeage,jdbcType=INTEGER},
-      </if>
-      <if test="guaranteecard != null" >
-        #{guaranteecard,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteetel != null" >
-        #{guaranteetel,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeestate != null" >
-        #{guaranteeestate,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeunit != null" >
-        #{guaranteeunit,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeunittel != null" >
-        #{guaranteeunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteearea != null" >
-        #{guaranteearea,jdbcType=VARCHAR},
-      </if>
-      <if test="sales != null" >
-        #{sales,jdbcType=VARCHAR},
-      </if>
-      <if test="manager != null" >
-        #{manager,jdbcType=VARCHAR},
-      </if>
-      <if test="cartype != null" >
-        #{cartype,jdbcType=VARCHAR},
-      </if>
-      <if test="years != null" >
-        #{years,jdbcType=INTEGER},
-      </if>
-      <if test="bail != null" >
-        #{bail,jdbcType=DECIMAL},
-      </if>
-      <if test="notaryfee != null" >
-        #{notaryfee,jdbcType=DECIMAL},
-      </if>
-      <if test="otherFee != null" >
-        #{otherFee,jdbcType=DECIMAL},
-      </if>
-      <if test="guaranteefees != null" >
-        #{guaranteefees,jdbcType=DECIMAL},
-      </if>
-      <if test="credit != null" >
-        #{credit,jdbcType=VARCHAR},
-      </if>
-      <if test="branch != null" >
-        #{branch,jdbcType=VARCHAR},
-      </if>
-      <if test="advances != null" >
-        #{advances,jdbcType=DECIMAL},
-      </if>
-      <if test="advancedate != null" >
-        #{advancedate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="insuranceagent != null" >
-        #{insuranceagent,jdbcType=VARCHAR},
-      </if>
-      <if test="insurancestart != null" >
-        #{insurancestart,jdbcType=TIMESTAMP},
-      </if>
-      <if test="insuranceend != null" >
-        #{insuranceend,jdbcType=TIMESTAMP},
-      </if>
-      <if test="certificate != null" >
-        #{certificate,jdbcType=VARCHAR},
-      </if>
-      <if test="isimpawn != null" >
-        #{isimpawn,jdbcType=TINYINT},
-      </if>
-      <if test="issonghang != null" >
-        #{issonghang,jdbcType=TINYINT},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.runnerup.model.Business" >
-    update sp_businesses
-    <set >
-      <if test="lendername != null" >
-        buss_lenderName = #{lendername,jdbcType=VARCHAR},
-      </if>
-      <if test="lendersex != null" >
-        buss_lenderSex = #{lendersex,jdbcType=CHAR},
-      </if>
-      <if test="lenderage != null" >
-        buss_lenderAge = #{lenderage,jdbcType=INTEGER},
-      </if>
-      <if test="lendercard != null" >
-        buss_lenderCard = #{lendercard,jdbcType=VARCHAR},
-      </if>
-      <if test="lendertel != null" >
-        buss_lenderTel = #{lendertel,jdbcType=VARCHAR},
-      </if>
-      <if test="lenderestate != null" >
-        buss_lenderEstate = #{lenderestate,jdbcType=VARCHAR},
-      </if>
-      <if test="lenderunit != null" >
-        buss_lenderUnit = #{lenderunit,jdbcType=VARCHAR},
-      </if>
-      <if test="lenderunittel != null" >
-        buss_lenderUnitTel = #{lenderunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="lenderarea != null" >
-        buss_lenderArea = #{lenderarea,jdbcType=VARCHAR},
-      </if>
-      <if test="matename != null" >
-        buss_mateName = #{matename,jdbcType=VARCHAR},
-      </if>
-      <if test="matesex != null" >
-        buss_mateSex = #{matesex,jdbcType=CHAR},
-      </if>
-      <if test="mateage != null" >
-        buss_mateAge = #{mateage,jdbcType=INTEGER},
-      </if>
-      <if test="matecard != null" >
-        buss_mateCard = #{matecard,jdbcType=VARCHAR},
-      </if>
-      <if test="matetel != null" >
-        buss_mateTel = #{matetel,jdbcType=VARCHAR},
-      </if>
-      <if test="mateestate != null" >
-        buss_mateEstate = #{mateestate,jdbcType=VARCHAR},
-      </if>
-      <if test="mateunit != null" >
-        buss_mateUnit = #{mateunit,jdbcType=VARCHAR},
-      </if>
-      <if test="mateunittel != null" >
-        buss_mateUnitTel = #{mateunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="matearea != null" >
-        buss_mateArea = #{matearea,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteename != null" >
-        buss_guaranteeName = #{guaranteename,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteesex != null" >
-        buss_guaranteeSex = #{guaranteesex,jdbcType=CHAR},
-      </if>
-      <if test="guaranteeage != null" >
-        buss_guaranteeAge = #{guaranteeage,jdbcType=INTEGER},
-      </if>
-      <if test="guaranteecard != null" >
-        buss_guaranteeCard = #{guaranteecard,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteetel != null" >
-        buss_guaranteeTel = #{guaranteetel,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeestate != null" >
-        buss_guaranteeEstate = #{guaranteeestate,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeunit != null" >
-        buss_guaranteeUnit = #{guaranteeunit,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeunittel != null" >
-        buss_guaranteeUnitTel = #{guaranteeunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteearea != null" >
-        buss_guaranteeArea = #{guaranteearea,jdbcType=VARCHAR},
-      </if>
-      <if test="sales != null" >
-        buss_sales = #{sales,jdbcType=VARCHAR},
-      </if>
-      <if test="manager != null" >
-        buss_manager = #{manager,jdbcType=VARCHAR},
-      </if>
-      <if test="cartype != null" >
-        buss_carType = #{cartype,jdbcType=VARCHAR},
-      </if>
-      <if test="years != null" >
-        buss_years = #{years,jdbcType=INTEGER},
-      </if>
-      <if test="bail != null" >
-        buss_bail = #{bail,jdbcType=DECIMAL},
-      </if>
-      <if test="notaryfee != null" >
-        buss_notaryFee = #{notaryfee,jdbcType=DECIMAL},
-      </if>
-      <if test="otherFee != null" >
-        buss_other_fee = #{otherFee,jdbcType=DECIMAL},
-      </if>
-      <if test="guaranteefees != null" >
-        buss_guaranteeFees = #{guaranteefees,jdbcType=DECIMAL},
-      </if>
-      <if test="credit != null" >
-        buss_credit = #{credit,jdbcType=VARCHAR},
-      </if>
-      <if test="branch != null" >
-        buss_branch = #{branch,jdbcType=VARCHAR},
-      </if>
-      <if test="advances != null" >
-        buss_advances = #{advances,jdbcType=DECIMAL},
-      </if>
-      <if test="advancedate != null" >
-        buss_advanceDate = #{advancedate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="insuranceagent != null" >
-        buss_insuranceAgent = #{insuranceagent,jdbcType=VARCHAR},
-      </if>
-      <if test="insurancestart != null" >
-        buss_insuranceStart = #{insurancestart,jdbcType=TIMESTAMP},
-      </if>
-      <if test="insuranceend != null" >
-        buss_insuranceEnd = #{insuranceend,jdbcType=TIMESTAMP},
-      </if>
-      <if test="certificate != null" >
-        buss_certificate = #{certificate,jdbcType=VARCHAR},
-      </if>
-      <if test="isimpawn != null" >
-        buss_isImpawn = #{isimpawn,jdbcType=TINYINT},
-      </if>
-      <if test="issonghang != null" >
-        buss_isSongHang = #{issonghang,jdbcType=TINYINT},
-      </if>
-      <if test="status != null" >
-        buss_status = #{status,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where buss_id = #{id,jdbcType=INTEGER}
-  </update>
+
   <update id="updateByPrimaryKey" parameterType="cn.runnerup.model.Business" >
     update sp_businesses
     set buss_lenderName = #{lendername,jdbcType=VARCHAR},
