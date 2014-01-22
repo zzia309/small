@@ -59,10 +59,20 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 
 	public String createFlow() {
 		Integer modelId = model.getId();
+		model.setFlow(true);
 		if(modelId != null) {
-
+			Business business = businessService.getBusinessByCustomer(modelId);
+			if(business != null) {
+				business.setStatus("new");
+				businessService.updateBusiness(business);
+			}else {
+				business = new Business();
+				business.setCustomer(model);
+				business.setStatus("new");
+				businessService.createBusiness(business);
+			}
+			customerService.updateCustomer(model);
 		}else {
-			model.setFlow(true);
 			customerService.createCustomer(model);
 			Business business = new Business();
 			business.setCustomer(model);

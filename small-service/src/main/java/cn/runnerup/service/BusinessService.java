@@ -31,6 +31,10 @@ public class BusinessService {
 		return businessMapper.selectByPrimaryKey(id);
 	}
 
+	public Business getBusinessByCustomer(Integer customer){
+		return businessMapper.selectByCustomer(customer);
+	}
+
 	public void updateBusiness(Business business){
 		businessMapper.updateByPrimaryKey(business);
 	}

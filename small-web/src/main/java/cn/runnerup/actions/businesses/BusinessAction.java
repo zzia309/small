@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.runnerup.actions.RunnerSupport;
 import cn.runnerup.model.Business;
+import cn.runnerup.model.Customer;
 import cn.runnerup.model.User;
 import cn.runnerup.service.AttachmentService;
 import cn.runnerup.service.BusinessService;
+import cn.runnerup.service.CustomerService;
 
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -26,6 +28,9 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 
 	@Autowired
 	private AttachmentService attachmentService;
+
+	@Autowired
+	private CustomerService customerService;
 
 	private BusinessModel model = new BusinessModel();
 
@@ -71,6 +76,11 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 			try {
 				Integer modelId = model.getId();
 				User user = getUser();
+				if("-".equals(model.getNewStatus())) {
+					Customer customer = model.getCustomer();
+					customer.setFlow(false);
+					customerService.updateCustomer(customer);
+				}
 				if(model.getBusinessfiles() != null) {
 					for(int i=0; i<model.getBusinessfiles().length; i++) {
 						attachmentService.upload(user, "business", modelId.toString(), 0, model.getBusinessfiles()[i], model.getBusinessfilesFileName()[i]);

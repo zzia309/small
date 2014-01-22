@@ -18,4 +18,7 @@ public interface BusinessMapper {
     int updateByPrimaryKey(Business record);
 
     List<Business> getAllBusinesses();
+
+    Business selectByCustomer(Integer customer);
+
 }
