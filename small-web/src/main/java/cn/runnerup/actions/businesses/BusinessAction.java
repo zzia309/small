@@ -1,6 +1,7 @@
 package cn.runnerup.actions.businesses;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.rest.DefaultHttpHeaders;
@@ -76,11 +77,14 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 			try {
 				Integer modelId = model.getId();
 				User user = getUser();
-				if("-".equals(model.getNewStatus())) {
+				String newStatus = model.getNewStatus();
+				if("-".equals(newStatus)) {
 					Customer customer = model.getCustomer();
 					customer.setFlow(false);
 					customerService.updateCustomer(customer);
 				}
+				if(StringUtils.isNotBlank(newStatus))
+					model.setStatus(newStatus);
 				if(model.getBusinessfiles() != null) {
 					for(int i=0; i<model.getBusinessfiles().length; i++) {
 						attachmentService.upload(user, "business", modelId.toString(), 0, model.getBusinessfiles()[i], model.getBusinessfilesFileName()[i]);

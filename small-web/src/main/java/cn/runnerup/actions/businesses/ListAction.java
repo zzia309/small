@@ -1,28 +1,43 @@
 package cn.runnerup.actions.businesses;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import com.opensymphony.xwork2.ModelDriven;
+
 import cn.runnerup.actions.RunnerSupport;
-import cn.runnerup.model.Business;
+import cn.runnerup.mapper.FlowAuthorizationMapper;
+import cn.runnerup.model.User;
 import cn.runnerup.service.BusinessService;
 
-public class ListAction extends RunnerSupport implements ModelDriven<List<Business>>{
+import com.opensymphony.xwork2.ModelDriven;
+
+public class ListAction extends RunnerSupport implements ModelDriven<ListModel>{
 
 	private static final long serialVersionUID = -2993395498134509472L;
 
-	private List<Business> model = new ArrayList<Business>();
+	private ListModel model = new ListModel();
 
 	@Autowired
 	private BusinessService businessService;
 
+	@Autowired
+	private FlowAuthorizationMapper flowAuthorizationMapper;
+
 	public String index(){
-		model = businessService.getAllBusinesses();
+		User user = getUser();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("limit", model.getLimit());
+		map.put("start", model.getStart());
+		List<String> status = flowAuthorizationMapper.selectFromStatus(user.getPriority());
+		map.put("status", status);
+		model.setModels(businessService.getAllBusinesses(map));
+		model.setTotal(businessService.getBusinessCount(map));
 		return SUCCESS;
 	}
 
-	public List<Business> getModel() {
+	public ListModel getModel() {
 		return model;
 	}
 

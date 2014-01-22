@@ -264,21 +264,122 @@ var businessForm = Ext.create('Ext.form.Panel', {
 
 	},
 	buttons:[{
-		text: 'Save',
+		text: '驳回',
 		handler: function(){
 			var me = this;
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
-			console.log(id);
 			if(Ext.isEmpty(id)){
-				var url = '${request.contextPath}/businesses/business.gson';
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
 				form.submit({
 					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: '-'
+					},
 					success: function(){
 						App.openTab('list');
 						businessStore.load();
 					}
 				});
+			}
+		}
+	}, {
+		text: '初审',
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'trial'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	},{
+		text: '终审',
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'final'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	},{
+		text: '老板过件',
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'boss'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	},{
+		text: '财务',
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'finance'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	},{
+		text: '抄单',
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
 			}else{
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
 				form.submit({
@@ -294,9 +395,48 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			}
 		}
 	},{
-		text: 'Cancel',
+		text: '后勤',
 		handler: function(){
-			windows.hide();
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'finance'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	},{
+		text: '关闭',
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'logistics'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
 		}
 	}]
 });

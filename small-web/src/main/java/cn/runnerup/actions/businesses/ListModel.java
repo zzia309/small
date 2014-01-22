@@ -3,13 +3,13 @@ package cn.runnerup.actions.businesses;
 import java.io.Serializable;
 import java.util.List;
 
-import cn.runnerup.model.User;
+import cn.runnerup.model.Business;
 
 public class ListModel implements Serializable {
 
 	private static final long serialVersionUID = -271613263977061925L;
 
-	private List<User> models;
+	private List<Business> models;
 
 	private int start = 0;
 
@@ -17,11 +17,11 @@ public class ListModel implements Serializable {
 
 	private int total;
 
-	public List<User> getModels() {
+	public List<Business> getModels() {
 		return models;
 	}
 
-	public void setModels(List<User> models) {
+	public void setModels(List<Business> models) {
 		this.models = models;
 	}
 
