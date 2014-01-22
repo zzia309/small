@@ -1,6 +1,8 @@
 package cn.runnerup.actions.customers;
 
 
+import java.util.Calendar;
+
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
@@ -47,7 +49,10 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 	}
 
 	public HttpHeaders create() {
+		model.setCreatedby(getUser());
+		model.setCreated(Calendar.getInstance().getTime());
 		customerService.createCustomer(model);
+
 		model.setSuccess(true);
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
 	}

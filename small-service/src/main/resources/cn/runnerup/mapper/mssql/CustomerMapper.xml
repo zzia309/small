@@ -58,6 +58,9 @@
     <result column="cs_otherFees" property="otherfees" jdbcType="DECIMAL" />
     <result column="cs_guaranteeFees" property="guaranteefees" jdbcType="DECIMAL" />
 	<result column="cs_isflow" property="isFlow" />
+	<result column="cs_created" property="created"/>
+	<association property="createdby" column="cs_createdby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
+
   </resultMap>
   <sql id="Base_Column_List" >
     cs_id, cs_loanerName, cs_loanerSex, cs_loanerAge, cs_loanerCard, cs_loanerTel, cs_loanerHomeAddress,
@@ -69,7 +72,9 @@
     cs_guaranteeUnitTel, cs_guaranteeArea, cs_guaranteeMary, cs_guaranteeBirthplace,
     cs_guaranteeHukou, cs_guaranteeUnitAddress, cs_guaranteePosition, cs_sales, cs_manager,
     cs_years, cs_stages, cs_carType, cs_carPrice, cs_carLoans, cs_carRate, cs_carBrokerage,
-    cs_carToObject, cs_carToAccount, cs_bail, cs_notaryFees, cs_otherFees, cs_guaranteeFees, cs_isflow
+    cs_carToObject, cs_carToAccount, cs_bail, cs_notaryFees, cs_otherFees, cs_guaranteeFees, cs_isflow,
+    cs_createdby,
+    cs_created
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -78,11 +83,12 @@
     where cs_id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="getAllCustomers" resultMap="BaseResultMap">
+  <select id="getAllCustomersByCreatedby" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	select
     <include refid="Base_Column_List" />
-    from sp_customers where cs_id is not null
+    from sp_customers where cs_createdby = #{id,jdbcType=INTEGER}
   </select>
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_customers
@@ -108,7 +114,9 @@
       cs_carPrice, cs_carLoans, cs_carRate,
       cs_carBrokerage, cs_carToObject, cs_carToAccount,
       cs_bail, cs_notaryFees, cs_otherFees,
-      cs_guaranteeFees, cs_isflow)
+      cs_guaranteeFees, cs_isflow,cs_created,
+      cs_createdby
+      )
     values (#{loanername,jdbcType=VARCHAR}, #{loanersex,jdbcType=VARCHAR},
       #{loanerage,jdbcType=INTEGER}, #{loanercard,jdbcType=VARCHAR}, #{loanertel,jdbcType=VARCHAR},
       #{loanerhomeaddress,jdbcType=VARCHAR}, #{loanerunit,jdbcType=VARCHAR}, #{loanerunittel,jdbcType=VARCHAR},
@@ -127,7 +135,10 @@
       #{carprice,jdbcType=DECIMAL}, #{carloans,jdbcType=DECIMAL}, #{carrate,jdbcType=DECIMAL},
       #{carbrokerage,jdbcType=DECIMAL}, #{cartoobject,jdbcType=VARCHAR}, #{cartoaccount,jdbcType=VARCHAR},
       #{bail,jdbcType=DECIMAL}, #{notaryfees,jdbcType=DECIMAL}, #{otherfees,jdbcType=DECIMAL},
-      #{guaranteefees,jdbcType=DECIMAL}, #{isFlow,jdbcType=BOOLEAN})
+      #{guaranteefees,jdbcType=DECIMAL}, #{isFlow,jdbcType=BOOLEAN},
+      #{created,jdbcType=TIMESTAMP},
+      <if test="createdby == null">NULL</if><if test="createdby != null">#{createdby.id,jdbcType=INTEGER}</if>
+      )
 	<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
 		select LAST_INSERT_ID() as id
 	</selectKey>
@@ -190,7 +201,9 @@
       cs_notaryFees = #{notaryfees,jdbcType=DECIMAL},
       cs_otherFees = #{otherfees,jdbcType=DECIMAL},
       cs_guaranteeFees = #{guaranteefees,jdbcType=DECIMAL}
-      cs_isflow = #{isFlow,jdbcType=BOOLEAN}
+      cs_isflow = #{isFlow,jdbcType=BOOLEAN},
+      cs_created = #{created, jdbcType=TIMESTAMP},
+      <if test="createdby == null">cs_createdby = NULL</if><if test="createdby != null">cs_createdby = #{createdby.id,jdbcType=INTEGER}</if>
     where cs_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

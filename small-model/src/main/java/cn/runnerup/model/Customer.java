@@ -1,5 +1,7 @@
 package cn.runnerup.model;
 
+import java.util.Date;
+
 public class Customer {
     private Integer id;
 
@@ -112,6 +114,26 @@ public class Customer {
     private Long guaranteefees;
 
     private boolean isFlow;
+
+    private User createdby;
+
+    private Date created = new Date(System.currentTimeMillis());
+
+	public User getCreatedby() {
+		return createdby;
+	}
+
+	public void setCreatedby(User createdby) {
+		this.createdby = createdby;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
 
 	public Integer getId() {
 		return id;

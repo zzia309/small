@@ -21,7 +21,7 @@ public class ListAction extends RunnerSupport implements ModelDriven<List<Custom
 	private CustomerService customerService;
 
 	public String index(){
-		model = customerService.getAllCustomers();
+		model = customerService.getAllCustomers(getUser());
 		return SUCCESS;
 	}
 

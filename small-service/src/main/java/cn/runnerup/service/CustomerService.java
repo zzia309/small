@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import cn.runnerup.mapper.CustomerMapper;
 import cn.runnerup.model.Customer;
+import cn.runnerup.model.User;
 
 @Service
 public class CustomerService {
@@ -15,8 +16,8 @@ public class CustomerService {
 	private CustomerMapper customerMapper;
 
 
-	public List<Customer> getAllCustomers(){
-		return customerMapper.getAllCustomers();
+	public List<Customer> getAllCustomers(User user){
+		return customerMapper.getAllCustomersByCreatedby(user.getId());
 	}
 
 	public Customer getCustomer(Integer id){
