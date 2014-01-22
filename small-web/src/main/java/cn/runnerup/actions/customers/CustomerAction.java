@@ -52,7 +52,6 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 		model.setCreatedby(getUser());
 		model.setCreated(Calendar.getInstance().getTime());
 		customerService.createCustomer(model);
-
 		model.setSuccess(true);
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
 	}
@@ -73,6 +72,8 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 			}
 			customerService.updateCustomer(model);
 		}else {
+			model.setCreatedby(getUser());
+			model.setCreated(Calendar.getInstance().getTime());
 			customerService.createCustomer(model);
 			Business business = new Business();
 			business.setCustomer(model);

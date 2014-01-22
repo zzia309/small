@@ -54,7 +54,24 @@
   	 select
     <include refid="Base_Column_List" />
     from sp_businesses
-    where buss_id is not null
+	<if test="status != null">
+		where buss_status in
+		<foreach collection="status" index="index" item="item" open="(" separator="," close=")">
+				#{item}
+		</foreach>
+	</if>
+    limit ${limit} offset ${start}
+  </select>
+
+  <select id="selectCount" resultType="int" parameterType="java.util.HashMap">
+  	select count(1)
+    from sp_businesses
+	<if test="status != null">
+		where buss_status in
+		<foreach collection="status" index="index" item="item" open="(" separator="," close=")">
+				#{item}
+		</foreach>
+	</if>
   </select>
 
    <insert id="insert" parameterType="cn.runnerup.model.Business" >

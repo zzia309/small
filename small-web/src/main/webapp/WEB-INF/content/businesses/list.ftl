@@ -5,7 +5,7 @@ var businessStore = Ext.create('Ext.data.Store', {
 		url: '${request.contextPath}/businesses/list.gson',
 		reader: {
 			type: 'json',
-			root: 'model'
+			root: 'models'
 		}
 	},
 	autoLoad: true

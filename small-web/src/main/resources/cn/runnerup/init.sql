@@ -1,4 +1,10 @@
-insert into sp_users(usr_username, usr_password, usr_priority, usr_gender)values('admin', '356a192b7913b04c54574d18c28d46e6395428ab', 2, 'M');
+insert into sp_users(usr_username, usr_password, usr_priority, usr_gender)values('admin', '356a192b7913b04c54574d18c28d46e6395428ab', 1, 'M');
+insert into sp_users(usr_username, usr_password, usr_priority, usr_gender)values('111', '356a192b7913b04c54574d18c28d46e6395428ab', 2, 'M');
+insert into sp_users(usr_username, usr_password, usr_priority, usr_gender)values('222', '356a192b7913b04c54574d18c28d46e6395428ab', 3, 'M');
+insert into sp_users(usr_username, usr_password, usr_priority, usr_gender)values('333', '356a192b7913b04c54574d18c28d46e6395428ab', 4, 'M');
+insert into sp_users(usr_username, usr_password, usr_priority, usr_gender)values('444', '356a192b7913b04c54574d18c28d46e6395428ab', 5, 'M');
+insert into sp_users(usr_username, usr_password, usr_priority, usr_gender)values('555', '356a192b7913b04c54574d18c28d46e6395428ab', 6, 'M');
+insert into sp_users(usr_username, usr_password, usr_priority, usr_gender)values('666', '356a192b7913b04c54574d18c28d46e6395428ab', 7, 'M');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(1, '-', 'new');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(2, 'new', '-');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(2, 'new', 'trial');

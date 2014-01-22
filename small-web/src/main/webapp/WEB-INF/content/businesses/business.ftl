@@ -126,27 +126,47 @@ var businessForm = Ext.create('Ext.form.Panel', {
 
 	},
 	buttons:[{
-		text: 'Save',
+		text: '驳回',
 		handler: function(){
 			var me = this;
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
-			console.log(id);
 			if(Ext.isEmpty(id)){
-				var url = '${request.contextPath}/businesses/business.gson';
-				form.submit({
-					url: url,
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
 			}else{
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
 				form.submit({
 					url: url,
 					params: {
-						_method: 'PUT'
+						_method: 'PUT',
+						newStatus: '-'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	}, {
+		text: '初审',
+		hidden:<#if action.user?? && (action.user.priority=2)>
+			false
+			<#else>
+			true
+		</#if>,
+		handler: function(){
+			debugger;
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'trial'
 					},
 					success: function(){
 						App.openTab('list');
@@ -156,9 +176,140 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			}
 		}
 	},{
-		text: 'Cancel',
+		text: '终审',
+		hidden:<#if action.user?? && (action.user.priority=3)>
+			false
+			<#else>
+			true
+		</#if>,
 		handler: function(){
-			windows.hide();
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'final'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	},{
+		text: '老板过件',
+		hidden:<#if action.user?? && (action.user.priority=4)>
+			false
+			<#else>
+			true
+		</#if>,
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'boss'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	},{
+		text: '财务',
+		hidden:<#if action.user?? && (action.user.priority=5)>
+			false
+			<#else>
+			true
+		</#if>,
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'finance'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	},{
+		text: '后勤',
+		hidden:<#if action.user?? && (action.user.priority=6)>
+			false
+			<#else>
+			true
+		</#if>,
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'finance'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	},{
+		text: '关闭',
+		hidden:
+		<#if action.user?? && (action.user.priority=7)>
+			false
+			<#else>
+			true
+		</#if>,
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'logistics'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
 		}
 	}]
 });

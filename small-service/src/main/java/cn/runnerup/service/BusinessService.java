@@ -1,6 +1,7 @@
 package cn.runnerup.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,12 @@ public class BusinessService {
 	@Autowired
 	private BusinessMapper businessMapper;
 
-	public List<Business> getAllBusinesses(){
-		return businessMapper.getAllBusinesses();
+	public List<Business> getAllBusinesses(Map<String, Object> map){
+		return businessMapper.getAllBusinesses(map);
+	}
+
+	public int getBusinessCount(Map<String, Object> map){
+		return businessMapper.selectCount(map);
 	}
 
 	public void deleteBusiness(Business business){

@@ -1,6 +1,7 @@
 package cn.runnerup.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.runnerup.model.Business;
 
@@ -17,7 +18,9 @@ public interface BusinessMapper {
 
     int updateByPrimaryKey(Business record);
 
-    List<Business> getAllBusinesses();
+    List<Business> getAllBusinesses(Map<String, Object> map);
+
+    int selectCount(Map<String, Object> map);
 
     Business selectByCustomer(Integer customer);
 
