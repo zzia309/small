@@ -2,10 +2,10 @@ insert into sp_users(usr_username, usr_password, usr_priority, usr_gender)values
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(1, '-', 'new');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(2, 'new', '-');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(2, 'new', 'trial');
-insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(3, 'trial', 'new');
+insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(3, 'trial', '-');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(3, 'trial', 'final');
-insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(4, 'final', 'trial');
+insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(4, 'final', '-');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(4, 'final', 'boss');
-insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(5, 'boss', 'final');
+insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(5, 'boss', '-');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(5, 'boss', 'finance');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(6, 'finance', 'logistics');
