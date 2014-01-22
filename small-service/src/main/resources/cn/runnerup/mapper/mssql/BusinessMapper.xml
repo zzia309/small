@@ -51,20 +51,21 @@
   </select>
 
    <insert id="insert" parameterType="cn.runnerup.model.Business" >
-    insert into sp_businesses (buss_id, buss_customer, buss_credit,
+    insert into sp_businesses (buss_id, buss_credit,
       buss_publicOrder, buss_court, buss_branch,
       buss_advances, buss_advanceDate, buss_loanDate,
       buss_insuranceAgent, buss_insuranceStart, buss_insuranceEnd,
       buss_certificate, buss_isImpawn, buss_isSongHang,
       buss_carModel, buss_carEngine, buss_carFrame,
-      buss_status)
-    values (#{id,jdbcType=INTEGER}, #{customer,jdbcType=INTEGER}, #{credit,jdbcType=VARCHAR},
+      buss_status, buss_customer)
+    values (#{id,jdbcType=INTEGER}, #{credit,jdbcType=VARCHAR},
       #{publicorder,jdbcType=VARCHAR}, #{court,jdbcType=VARCHAR}, #{branch,jdbcType=VARCHAR},
       #{advances,jdbcType=DECIMAL}, #{advancedate,jdbcType=TIMESTAMP}, #{loandate,jdbcType=TIMESTAMP},
       #{insuranceagent,jdbcType=VARCHAR}, #{insurancestart,jdbcType=TIMESTAMP}, #{insuranceend,jdbcType=TIMESTAMP},
       #{certificate,jdbcType=VARCHAR}, #{isimpawn,jdbcType=TINYINT}, #{issonghang,jdbcType=TINYINT},
       #{carmodel,jdbcType=VARCHAR}, #{carengine,jdbcType=VARCHAR}, #{carframe,jdbcType=VARCHAR},
-      #{status,jdbcType=VARCHAR})
+      #{status,jdbcType=VARCHAR},
+      <if test="customer == null">NULL</if><if test="customer != null">#{customer.id,jdbcType=INTEGER}</if>)
       <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
 		select LAST_INSERT_ID() as id
 	  </selectKey>
@@ -73,8 +74,7 @@
 
   <update id="updateByPrimaryKey" parameterType="cn.runnerup.model.Business" >
 		update sp_businesses
-			set buss_customer = #{customer,jdbcType=INTEGER},
-			buss_credit = #{credit,jdbcType=VARCHAR},
+			set buss_credit = #{credit,jdbcType=VARCHAR},
 			buss_publicOrder = #{publicorder,jdbcType=VARCHAR},
 			buss_court = #{court,jdbcType=VARCHAR},
 			buss_branch = #{branch,jdbcType=VARCHAR},
@@ -90,7 +90,8 @@
 			buss_carModel = #{carmodel,jdbcType=VARCHAR},
 			buss_carEngine = #{carengine,jdbcType=VARCHAR},
 			buss_carFrame = #{carframe,jdbcType=VARCHAR},
-			buss_status = #{status,jdbcType=VARCHAR}
+			buss_status = #{status,jdbcType=VARCHAR},
+      		<if test="customer == null">buss_customer = NULL</if><if test="customer != null">buss_customer = #{customer.id,jdbcType=INTEGER}</if>)
 		where buss_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

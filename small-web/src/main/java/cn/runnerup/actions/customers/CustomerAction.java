@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.runnerup.actions.RunnerSupport;
+import cn.runnerup.model.Business;
 import cn.runnerup.model.Customer;
+import cn.runnerup.service.BusinessService;
 import cn.runnerup.service.CustomerService;
 
 public class CustomerAction extends RunnerSupport implements ModelDriven<CustomerModel>{
@@ -20,6 +22,9 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 
 	@Autowired
 	private CustomerService customerService;
+
+	@Autowired
+	private BusinessService businessService;
 
 	private Integer id;
 
@@ -45,6 +50,22 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 		customerService.createCustomer(model);
 		model.setSuccess(true);
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
+	}
+
+	public String createFlow() {
+		Integer modelId = model.getId();
+		if(modelId != null) {
+
+		}else {
+			model.setFlow(true);
+			customerService.createCustomer(model);
+			Business business = new Business();
+			business.setCustomer(model);
+			business.setStatus("new");
+			businessService.createBusiness(business);
+		}
+		model.setSuccess(true);
+		return SUCCESS;
 	}
 
 	public HttpHeaders update() {

@@ -281,6 +281,29 @@ var customerForm = Ext.create('Ext.form.Panel', {
 			}
 	    },{
 	    	xtype: 'button',
+			text: '转征信人员',
+			itemId: 'credit ',
+			disabled: true,
+			formBind: true,
+			handler: function(){
+				var form = this.up('form').getForm();
+				if(form.isValid()){
+					var url = '${request.contextPath}/customers/customer!createFlow.gson';
+					form.submit({
+						url: url,
+						success: function(form, action){
+							var values = action.result;
+							if(values.success){
+								App.currentId = null;
+								App.openTab('list');
+								store.load();
+							}
+						}
+					});
+				}
+			}
+	    },{
+	    	xtype: 'button',
 			text: '重置',
 			itemId: 'reset',
 			handler: function(){
