@@ -200,7 +200,7 @@
       cs_bail = #{bail,jdbcType=DECIMAL},
       cs_notaryFees = #{notaryfees,jdbcType=DECIMAL},
       cs_otherFees = #{otherfees,jdbcType=DECIMAL},
-      cs_guaranteeFees = #{guaranteefees,jdbcType=DECIMAL}
+      cs_guaranteeFees = #{guaranteefees,jdbcType=DECIMAL},
       cs_isflow = #{isFlow,jdbcType=BOOLEAN},
       cs_created = #{created, jdbcType=TIMESTAMP},
       <if test="createdby == null">cs_createdby = NULL</if><if test="createdby != null">cs_createdby = #{createdby.id,jdbcType=INTEGER}</if>
