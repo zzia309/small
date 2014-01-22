@@ -2,64 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.runnerup.mapper.BusinessMapper" >
   <resultMap id="BaseResultMap" type="cn.runnerup.model.Business" >
-    <id column="buss_id" property="id" jdbcType="INTEGER" />
-    <result column="buss_lenderName" property="lendername" jdbcType="VARCHAR" />
-    <result column="buss_lenderSex" property="lendersex" jdbcType="CHAR" />
-    <result column="buss_lenderAge" property="lenderage" jdbcType="INTEGER" />
-    <result column="buss_lenderCard" property="lendercard" jdbcType="VARCHAR" />
-    <result column="buss_lenderTel" property="lendertel" jdbcType="VARCHAR" />
-    <result column="buss_lenderEstate" property="lenderestate" jdbcType="VARCHAR" />
-    <result column="buss_lenderUnit" property="lenderunit" jdbcType="VARCHAR" />
-    <result column="buss_lenderUnitTel" property="lenderunittel" jdbcType="VARCHAR" />
-    <result column="buss_lenderArea" property="lenderarea" jdbcType="VARCHAR" />
-    <result column="buss_mateName" property="matename" jdbcType="VARCHAR" />
-    <result column="buss_mateSex" property="matesex" jdbcType="CHAR" />
-    <result column="buss_mateAge" property="mateage" jdbcType="INTEGER" />
-    <result column="buss_mateCard" property="matecard" jdbcType="VARCHAR" />
-    <result column="buss_mateTel" property="matetel" jdbcType="VARCHAR" />
-    <result column="buss_mateEstate" property="mateestate" jdbcType="VARCHAR" />
-    <result column="buss_mateUnit" property="mateunit" jdbcType="VARCHAR" />
-    <result column="buss_mateUnitTel" property="mateunittel" jdbcType="VARCHAR" />
-    <result column="buss_mateArea" property="matearea" jdbcType="VARCHAR" />
-    <result column="buss_guaranteeName" property="guaranteename" jdbcType="VARCHAR" />
-    <result column="buss_guaranteeSex" property="guaranteesex" jdbcType="CHAR" />
-    <result column="buss_guaranteeAge" property="guaranteeage" jdbcType="INTEGER" />
-    <result column="buss_guaranteeCard" property="guaranteecard" jdbcType="VARCHAR" />
-    <result column="buss_guaranteeTel" property="guaranteetel" jdbcType="VARCHAR" />
-    <result column="buss_guaranteeEstate" property="guaranteeestate" jdbcType="VARCHAR" />
-    <result column="buss_guaranteeUnit" property="guaranteeunit" jdbcType="VARCHAR" />
-    <result column="buss_guaranteeUnitTel" property="guaranteeunittel" jdbcType="VARCHAR" />
-    <result column="buss_guaranteeArea" property="guaranteearea" jdbcType="VARCHAR" />
-    <result column="buss_sales" property="sales" jdbcType="VARCHAR" />
-    <result column="buss_manager" property="manager" jdbcType="VARCHAR" />
-    <result column="buss_carType" property="cartype" jdbcType="VARCHAR" />
-    <result column="buss_years" property="years" jdbcType="INTEGER" />
-    <result column="buss_bail" property="bail" jdbcType="DECIMAL" />
-    <result column="buss_notaryFee" property="notaryfee" jdbcType="DECIMAL" />
-    <result column="buss_other_fee" property="otherFee" jdbcType="DECIMAL" />
-    <result column="buss_guaranteeFees" property="guaranteefees" jdbcType="DECIMAL" />
+     <id column="buss_id" property="id" jdbcType="INTEGER" />
     <result column="buss_credit" property="credit" jdbcType="VARCHAR" />
+    <result column="buss_publicOrder" property="publicorder" jdbcType="VARCHAR" />
+    <result column="buss_court" property="court" jdbcType="VARCHAR" />
     <result column="buss_branch" property="branch" jdbcType="VARCHAR" />
     <result column="buss_advances" property="advances" jdbcType="DECIMAL" />
     <result column="buss_advanceDate" property="advancedate" jdbcType="TIMESTAMP" />
+    <result column="buss_loanDate" property="loandate" jdbcType="TIMESTAMP" />
     <result column="buss_insuranceAgent" property="insuranceagent" jdbcType="VARCHAR" />
     <result column="buss_insuranceStart" property="insurancestart" jdbcType="TIMESTAMP" />
     <result column="buss_insuranceEnd" property="insuranceend" jdbcType="TIMESTAMP" />
     <result column="buss_certificate" property="certificate" jdbcType="VARCHAR" />
     <result column="buss_isImpawn" property="isimpawn" jdbcType="TINYINT" />
     <result column="buss_isSongHang" property="issonghang" jdbcType="TINYINT" />
+    <result column="buss_carModel" property="carmodel" jdbcType="VARCHAR" />
+    <result column="buss_carEngine" property="carengine" jdbcType="VARCHAR" />
+    <result column="buss_carFrame" property="carframe" jdbcType="VARCHAR" />
     <result column="buss_status" property="status" jdbcType="VARCHAR" />
+    <result column="buss_customer" property="customer" jdbcType="INTEGER" />
+    <association property="customer" column="buss_customer" select="cn.runnerup.mapper.CustomerMapper.selectByPrimaryKey"/>
   </resultMap>
+
   <sql id="Base_Column_List" >
-    buss_id, buss_lenderName, buss_lenderSex, buss_lenderAge, buss_lenderCard, buss_lenderTel,
-    buss_lenderEstate, buss_lenderUnit, buss_lenderUnitTel, buss_lenderArea, buss_mateName,
-    buss_mateSex, buss_mateAge, buss_mateCard, buss_mateTel, buss_mateEstate, buss_mateUnit,
-    buss_mateUnitTel, buss_mateArea, buss_guaranteeName, buss_guaranteeSex, buss_guaranteeAge,
-    buss_guaranteeCard, buss_guaranteeTel, buss_guaranteeEstate, buss_guaranteeUnit,
-    buss_guaranteeUnitTel, buss_guaranteeArea, buss_sales, buss_manager, buss_carType,
-    buss_years, buss_bail, buss_notaryFee, buss_other_fee, buss_guaranteeFees, buss_credit,
-    buss_branch, buss_advances, buss_advanceDate, buss_insuranceAgent, buss_insuranceStart,
-    buss_insuranceEnd, buss_certificate, buss_isImpawn, buss_isSongHang, buss_status
+    buss_id, buss_customer, buss_credit, buss_publicOrder, buss_court, buss_branch, buss_advances,
+    buss_advanceDate, buss_loanDate, buss_insuranceAgent, buss_insuranceStart, buss_insuranceEnd,
+    buss_certificate, buss_isImpawn, buss_isSongHang, buss_carModel, buss_carEngine,
+    buss_carFrame, buss_status
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -81,92 +50,47 @@
     where buss_id is not null
   </select>
 
-  <insert id="insert" parameterType="cn.runnerup.model.Business" >
-    insert into sp_businesses (buss_lenderName, buss_lenderSex,
-      buss_lenderAge, buss_lenderCard, buss_lenderTel,
-      buss_lenderEstate, buss_lenderUnit, buss_lenderUnitTel,
-      buss_lenderArea, buss_mateName, buss_mateSex,
-      buss_mateAge, buss_mateCard, buss_mateTel,
-      buss_mateEstate, buss_mateUnit, buss_mateUnitTel,
-      buss_mateArea, buss_guaranteeName, buss_guaranteeSex,
-      buss_guaranteeAge, buss_guaranteeCard, buss_guaranteeTel,
-      buss_guaranteeEstate, buss_guaranteeUnit, buss_guaranteeUnitTel,
-      buss_guaranteeArea, buss_sales, buss_manager,
-      buss_carType, buss_years, buss_bail,
-      buss_notaryFee, buss_other_fee, buss_guaranteeFees,
-      buss_credit, buss_branch, buss_advances,
-      buss_advanceDate, buss_insuranceAgent, buss_insuranceStart,
-      buss_insuranceEnd, buss_certificate, buss_isImpawn,
-      buss_isSongHang, buss_status)
-    values (#{lendername,jdbcType=VARCHAR}, #{lendersex,jdbcType=CHAR},
-      #{lenderage,jdbcType=INTEGER}, #{lendercard,jdbcType=VARCHAR}, #{lendertel,jdbcType=VARCHAR},
-      #{lenderestate,jdbcType=VARCHAR}, #{lenderunit,jdbcType=VARCHAR}, #{lenderunittel,jdbcType=VARCHAR},
-      #{lenderarea,jdbcType=VARCHAR}, #{matename,jdbcType=VARCHAR}, #{matesex,jdbcType=CHAR},
-      #{mateage,jdbcType=INTEGER}, #{matecard,jdbcType=VARCHAR}, #{matetel,jdbcType=VARCHAR},
-      #{mateestate,jdbcType=VARCHAR}, #{mateunit,jdbcType=VARCHAR}, #{mateunittel,jdbcType=VARCHAR},
-      #{matearea,jdbcType=VARCHAR}, #{guaranteename,jdbcType=VARCHAR}, #{guaranteesex,jdbcType=CHAR},
-      #{guaranteeage,jdbcType=INTEGER}, #{guaranteecard,jdbcType=VARCHAR}, #{guaranteetel,jdbcType=VARCHAR},
-      #{guaranteeestate,jdbcType=VARCHAR}, #{guaranteeunit,jdbcType=VARCHAR}, #{guaranteeunittel,jdbcType=VARCHAR},
-      #{guaranteearea,jdbcType=VARCHAR}, #{sales,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR},
-      #{cartype,jdbcType=VARCHAR}, #{years,jdbcType=INTEGER}, #{bail,jdbcType=DECIMAL},
-      #{notaryfee,jdbcType=DECIMAL}, #{otherFee,jdbcType=DECIMAL}, #{guaranteefees,jdbcType=DECIMAL},
-      #{credit,jdbcType=VARCHAR}, #{branch,jdbcType=VARCHAR}, #{advances,jdbcType=DECIMAL},
-      #{advancedate,jdbcType=TIMESTAMP}, #{insuranceagent,jdbcType=VARCHAR}, #{insurancestart,jdbcType=TIMESTAMP},
-      #{insuranceend,jdbcType=TIMESTAMP}, #{certificate,jdbcType=VARCHAR}, #{isimpawn,jdbcType=TINYINT},
-      #{issonghang,jdbcType=TINYINT}, #{status,jdbcType=VARCHAR})
+   <insert id="insert" parameterType="cn.runnerup.model.Business" >
+    insert into sp_businesses (buss_id, buss_customer, buss_credit,
+      buss_publicOrder, buss_court, buss_branch,
+      buss_advances, buss_advanceDate, buss_loanDate,
+      buss_insuranceAgent, buss_insuranceStart, buss_insuranceEnd,
+      buss_certificate, buss_isImpawn, buss_isSongHang,
+      buss_carModel, buss_carEngine, buss_carFrame,
+      buss_status)
+    values (#{id,jdbcType=INTEGER}, #{customer,jdbcType=INTEGER}, #{credit,jdbcType=VARCHAR},
+      #{publicorder,jdbcType=VARCHAR}, #{court,jdbcType=VARCHAR}, #{branch,jdbcType=VARCHAR},
+      #{advances,jdbcType=DECIMAL}, #{advancedate,jdbcType=TIMESTAMP}, #{loandate,jdbcType=TIMESTAMP},
+      #{insuranceagent,jdbcType=VARCHAR}, #{insurancestart,jdbcType=TIMESTAMP}, #{insuranceend,jdbcType=TIMESTAMP},
+      #{certificate,jdbcType=VARCHAR}, #{isimpawn,jdbcType=TINYINT}, #{issonghang,jdbcType=TINYINT},
+      #{carmodel,jdbcType=VARCHAR}, #{carengine,jdbcType=VARCHAR}, #{carframe,jdbcType=VARCHAR},
+      #{status,jdbcType=VARCHAR})
       <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
 		select LAST_INSERT_ID() as id
 	  </selectKey>
+
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="cn.runnerup.model.Business" >
-    update sp_businesses
-    set buss_lenderName = #{lendername,jdbcType=VARCHAR},
-      buss_lenderSex = #{lendersex,jdbcType=CHAR},
-      buss_lenderAge = #{lenderage,jdbcType=INTEGER},
-      buss_lenderCard = #{lendercard,jdbcType=VARCHAR},
-      buss_lenderTel = #{lendertel,jdbcType=VARCHAR},
-      buss_lenderEstate = #{lenderestate,jdbcType=VARCHAR},
-      buss_lenderUnit = #{lenderunit,jdbcType=VARCHAR},
-      buss_lenderUnitTel = #{lenderunittel,jdbcType=VARCHAR},
-      buss_lenderArea = #{lenderarea,jdbcType=VARCHAR},
-      buss_mateName = #{matename,jdbcType=VARCHAR},
-      buss_mateSex = #{matesex,jdbcType=CHAR},
-      buss_mateAge = #{mateage,jdbcType=INTEGER},
-      buss_mateCard = #{matecard,jdbcType=VARCHAR},
-      buss_mateTel = #{matetel,jdbcType=VARCHAR},
-      buss_mateEstate = #{mateestate,jdbcType=VARCHAR},
-      buss_mateUnit = #{mateunit,jdbcType=VARCHAR},
-      buss_mateUnitTel = #{mateunittel,jdbcType=VARCHAR},
-      buss_mateArea = #{matearea,jdbcType=VARCHAR},
-      buss_guaranteeName = #{guaranteename,jdbcType=VARCHAR},
-      buss_guaranteeSex = #{guaranteesex,jdbcType=CHAR},
-      buss_guaranteeAge = #{guaranteeage,jdbcType=INTEGER},
-      buss_guaranteeCard = #{guaranteecard,jdbcType=VARCHAR},
-      buss_guaranteeTel = #{guaranteetel,jdbcType=VARCHAR},
-      buss_guaranteeEstate = #{guaranteeestate,jdbcType=VARCHAR},
-      buss_guaranteeUnit = #{guaranteeunit,jdbcType=VARCHAR},
-      buss_guaranteeUnitTel = #{guaranteeunittel,jdbcType=VARCHAR},
-      buss_guaranteeArea = #{guaranteearea,jdbcType=VARCHAR},
-      buss_sales = #{sales,jdbcType=VARCHAR},
-      buss_manager = #{manager,jdbcType=VARCHAR},
-      buss_carType = #{cartype,jdbcType=VARCHAR},
-      buss_years = #{years,jdbcType=INTEGER},
-      buss_bail = #{bail,jdbcType=DECIMAL},
-      buss_notaryFee = #{notaryfee,jdbcType=DECIMAL},
-      buss_other_fee = #{otherFee,jdbcType=DECIMAL},
-      buss_guaranteeFees = #{guaranteefees,jdbcType=DECIMAL},
-      buss_credit = #{credit,jdbcType=VARCHAR},
-      buss_branch = #{branch,jdbcType=VARCHAR},
-      buss_advances = #{advances,jdbcType=DECIMAL},
-      buss_advanceDate = #{advancedate,jdbcType=TIMESTAMP},
-      buss_insuranceAgent = #{insuranceagent,jdbcType=VARCHAR},
-      buss_insuranceStart = #{insurancestart,jdbcType=TIMESTAMP},
-      buss_insuranceEnd = #{insuranceend,jdbcType=TIMESTAMP},
-      buss_certificate = #{certificate,jdbcType=VARCHAR},
-      buss_isImpawn = #{isimpawn,jdbcType=TINYINT},
-      buss_isSongHang = #{issonghang,jdbcType=TINYINT},
-      buss_status = #{status,jdbcType=VARCHAR}
-    where buss_id = #{id,jdbcType=INTEGER}
+		update sp_businesses
+			set buss_customer = #{customer,jdbcType=INTEGER},
+			buss_credit = #{credit,jdbcType=VARCHAR},
+			buss_publicOrder = #{publicorder,jdbcType=VARCHAR},
+			buss_court = #{court,jdbcType=VARCHAR},
+			buss_branch = #{branch,jdbcType=VARCHAR},
+			buss_advances = #{advances,jdbcType=DECIMAL},
+			buss_advanceDate = #{advancedate,jdbcType=TIMESTAMP},
+			buss_loanDate = #{loandate,jdbcType=TIMESTAMP},
+			buss_insuranceAgent = #{insuranceagent,jdbcType=VARCHAR},
+			buss_insuranceStart = #{insurancestart,jdbcType=TIMESTAMP},
+			buss_insuranceEnd = #{insuranceend,jdbcType=TIMESTAMP},
+			buss_certificate = #{certificate,jdbcType=VARCHAR},
+			buss_isImpawn = #{isimpawn,jdbcType=TINYINT},
+			buss_isSongHang = #{issonghang,jdbcType=TINYINT},
+			buss_carModel = #{carmodel,jdbcType=VARCHAR},
+			buss_carEngine = #{carengine,jdbcType=VARCHAR},
+			buss_carFrame = #{carframe,jdbcType=VARCHAR},
+			buss_status = #{status,jdbcType=VARCHAR}
+		where buss_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
