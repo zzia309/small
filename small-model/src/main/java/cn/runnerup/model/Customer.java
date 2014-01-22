@@ -111,6 +111,8 @@ public class Customer {
 
     private Long guaranteefees;
 
+    private boolean isFlow;
+
 	public Integer getId() {
 		return id;
 	}
@@ -549,6 +551,14 @@ public class Customer {
 
 	public void setGuaranteefees(Long guaranteefees) {
 		this.guaranteefees = guaranteefees;
+	}
+
+	public boolean isFlow() {
+		return isFlow;
+	}
+
+	public void setFlow(boolean isFlow) {
+		this.isFlow = isFlow;
 	}
 
 }

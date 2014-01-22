@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.runnerup.model.Customer" >
     <id column="cs_id" property="id" jdbcType="INTEGER" />
     <result column="cs_loanerName" property="loanername" jdbcType="VARCHAR" />
-    <result column="cs_loanerSex" property="loanersex" jdbcType="CHAR" />
+    <result column="cs_loanerSex" property="loanersex" jdbcType="VARCHAR" />
     <result column="cs_loanerAge" property="loanerage" jdbcType="INTEGER" />
     <result column="cs_loanerCard" property="loanercard" jdbcType="VARCHAR" />
     <result column="cs_loanerTel" property="loanertel" jdbcType="VARCHAR" />
@@ -18,7 +18,7 @@
     <result column="cs_loanerUnitAddress" property="loanerunitaddress" jdbcType="VARCHAR" />
     <result column="cs_loanerPosition" property="loanerposition" jdbcType="VARCHAR" />
     <result column="cs_mateName" property="matename" jdbcType="VARCHAR" />
-    <result column="cs_mateSex" property="matesex" jdbcType="CHAR" />
+    <result column="cs_mateSex" property="matesex" jdbcType="VARCHAR" />
     <result column="cs_mateAge" property="mateage" jdbcType="INTEGER" />
     <result column="cs_mateCard" property="matecard" jdbcType="VARCHAR" />
     <result column="cs_mateTel" property="matetel" jdbcType="VARCHAR" />
@@ -29,7 +29,7 @@
     <result column="cs_mateUnitAddress" property="mateunitaddress" jdbcType="VARCHAR" />
     <result column="cs_matePosition" property="mateposition" jdbcType="VARCHAR" />
     <result column="cs_guaranteeName" property="guaranteename" jdbcType="VARCHAR" />
-    <result column="cs_guaranteeSex" property="guaranteesex" jdbcType="CHAR" />
+    <result column="cs_guaranteeSex" property="guaranteesex" jdbcType="VARCHAR" />
     <result column="cs_guaranteeAge" property="guaranteeage" jdbcType="INTEGER" />
     <result column="cs_guaranteeCard" property="guaranteecard" jdbcType="VARCHAR" />
     <result column="cs_guaranteeTel" property="guaranteetel" jdbcType="VARCHAR" />
@@ -57,6 +57,7 @@
     <result column="cs_notaryFees" property="notaryfees" jdbcType="DECIMAL" />
     <result column="cs_otherFees" property="otherfees" jdbcType="DECIMAL" />
     <result column="cs_guaranteeFees" property="guaranteefees" jdbcType="DECIMAL" />
+	<result column="cs_isflow" property="isFlow" />
   </resultMap>
   <sql id="Base_Column_List" >
     cs_id, cs_loanerName, cs_loanerSex, cs_loanerAge, cs_loanerCard, cs_loanerTel, cs_loanerHomeAddress,
@@ -68,7 +69,7 @@
     cs_guaranteeUnitTel, cs_guaranteeArea, cs_guaranteeMary, cs_guaranteeBirthplace,
     cs_guaranteeHukou, cs_guaranteeUnitAddress, cs_guaranteePosition, cs_sales, cs_manager,
     cs_years, cs_stages, cs_carType, cs_carPrice, cs_carLoans, cs_carRate, cs_carBrokerage,
-    cs_carToObject, cs_carToAccount, cs_bail, cs_notaryFees, cs_otherFees, cs_guaranteeFees
+    cs_carToObject, cs_carToAccount, cs_bail, cs_notaryFees, cs_otherFees, cs_guaranteeFees, cs_isflow
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -87,8 +88,9 @@
     delete from sp_customers
     where cs_id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="cn.runnerup.model.Customer" >
-    insert into sp_customers (cs_id, cs_loanerName, cs_loanerSex,
+    insert into sp_customers (cs_loanerName, cs_loanerSex,
       cs_loanerAge, cs_loanerCard, cs_loanerTel,
       cs_loanerHomeAddress, cs_loanerUnit, cs_loanerUnitTel,
       cs_loanerMarry, cs_loanerArea, cs_loanerBirthplace,
@@ -106,17 +108,17 @@
       cs_carPrice, cs_carLoans, cs_carRate,
       cs_carBrokerage, cs_carToObject, cs_carToAccount,
       cs_bail, cs_notaryFees, cs_otherFees,
-      cs_guaranteeFees)
-    values (#{id,jdbcType=INTEGER}, #{loanername,jdbcType=VARCHAR}, #{loanersex,jdbcType=CHAR},
+      cs_guaranteeFees, cs_isflow)
+    values (#{loanername,jdbcType=VARCHAR}, #{loanersex,jdbcType=VARCHAR},
       #{loanerage,jdbcType=INTEGER}, #{loanercard,jdbcType=VARCHAR}, #{loanertel,jdbcType=VARCHAR},
       #{loanerhomeaddress,jdbcType=VARCHAR}, #{loanerunit,jdbcType=VARCHAR}, #{loanerunittel,jdbcType=VARCHAR},
       #{loanermarry,jdbcType=VARCHAR}, #{loanerarea,jdbcType=VARCHAR}, #{loanerbirthplace,jdbcType=VARCHAR},
       #{loanerhukou,jdbcType=VARCHAR}, #{loanerunitaddress,jdbcType=VARCHAR}, #{loanerposition,jdbcType=VARCHAR},
-      #{matename,jdbcType=VARCHAR}, #{matesex,jdbcType=CHAR}, #{mateage,jdbcType=INTEGER},
+      #{matename,jdbcType=VARCHAR}, #{matesex,jdbcType=VARCHAR}, #{mateage,jdbcType=INTEGER},
       #{matecard,jdbcType=VARCHAR}, #{matetel,jdbcType=VARCHAR}, #{mateunit,jdbcType=VARCHAR},
       #{mateunittel,jdbcType=VARCHAR}, #{matebirthplace,jdbcType=VARCHAR}, #{matehukou,jdbcType=VARCHAR},
       #{mateunitaddress,jdbcType=VARCHAR}, #{mateposition,jdbcType=VARCHAR}, #{guaranteename,jdbcType=VARCHAR},
-      #{guaranteesex,jdbcType=CHAR}, #{guaranteeage,jdbcType=INTEGER}, #{guaranteecard,jdbcType=VARCHAR},
+      #{guaranteesex,jdbcType=VARCHAR}, #{guaranteeage,jdbcType=INTEGER}, #{guaranteecard,jdbcType=VARCHAR},
       #{guaranteetel,jdbcType=VARCHAR}, #{guaranteehomeaddress,jdbcType=VARCHAR}, #{guaranteeunit,jdbcType=VARCHAR},
       #{guaranteeunittel,jdbcType=VARCHAR}, #{guaranteearea,jdbcType=VARCHAR}, #{guaranteemary,jdbcType=VARCHAR},
       #{guaranteebirthplace,jdbcType=VARCHAR}, #{guaranteehukou,jdbcType=VARCHAR}, #{guaranteeunitaddress,jdbcType=VARCHAR},
@@ -125,517 +127,17 @@
       #{carprice,jdbcType=DECIMAL}, #{carloans,jdbcType=DECIMAL}, #{carrate,jdbcType=DECIMAL},
       #{carbrokerage,jdbcType=DECIMAL}, #{cartoobject,jdbcType=VARCHAR}, #{cartoaccount,jdbcType=VARCHAR},
       #{bail,jdbcType=DECIMAL}, #{notaryfees,jdbcType=DECIMAL}, #{otherfees,jdbcType=DECIMAL},
-      #{guaranteefees,jdbcType=DECIMAL})
+      #{guaranteefees,jdbcType=DECIMAL}, #{isFlow,jdbcType=BOOLEAN})
+	<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+		select LAST_INSERT_ID() as id
+	</selectKey>
+
   </insert>
-  <insert id="insertSelective" parameterType="cn.runnerup.model.Customer" >
-    insert into sp_customers
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        cs_id,
-      </if>
-      <if test="loanername != null" >
-        cs_loanerName,
-      </if>
-      <if test="loanersex != null" >
-        cs_loanerSex,
-      </if>
-      <if test="loanerage != null" >
-        cs_loanerAge,
-      </if>
-      <if test="loanercard != null" >
-        cs_loanerCard,
-      </if>
-      <if test="loanertel != null" >
-        cs_loanerTel,
-      </if>
-      <if test="loanerhomeaddress != null" >
-        cs_loanerHomeAddress,
-      </if>
-      <if test="loanerunit != null" >
-        cs_loanerUnit,
-      </if>
-      <if test="loanerunittel != null" >
-        cs_loanerUnitTel,
-      </if>
-      <if test="loanermarry != null" >
-        cs_loanerMarry,
-      </if>
-      <if test="loanerarea != null" >
-        cs_loanerArea,
-      </if>
-      <if test="loanerbirthplace != null" >
-        cs_loanerBirthplace,
-      </if>
-      <if test="loanerhukou != null" >
-        cs_loanerHukou,
-      </if>
-      <if test="loanerunitaddress != null" >
-        cs_loanerUnitAddress,
-      </if>
-      <if test="loanerposition != null" >
-        cs_loanerPosition,
-      </if>
-      <if test="matename != null" >
-        cs_mateName,
-      </if>
-      <if test="matesex != null" >
-        cs_mateSex,
-      </if>
-      <if test="mateage != null" >
-        cs_mateAge,
-      </if>
-      <if test="matecard != null" >
-        cs_mateCard,
-      </if>
-      <if test="matetel != null" >
-        cs_mateTel,
-      </if>
-      <if test="mateunit != null" >
-        cs_mateUnit,
-      </if>
-      <if test="mateunittel != null" >
-        cs_mateUnitTel,
-      </if>
-      <if test="matebirthplace != null" >
-        cs_mateBirthplace,
-      </if>
-      <if test="matehukou != null" >
-        cs_mateHukou,
-      </if>
-      <if test="mateunitaddress != null" >
-        cs_mateUnitAddress,
-      </if>
-      <if test="mateposition != null" >
-        cs_matePosition,
-      </if>
-      <if test="guaranteename != null" >
-        cs_guaranteeName,
-      </if>
-      <if test="guaranteesex != null" >
-        cs_guaranteeSex,
-      </if>
-      <if test="guaranteeage != null" >
-        cs_guaranteeAge,
-      </if>
-      <if test="guaranteecard != null" >
-        cs_guaranteeCard,
-      </if>
-      <if test="guaranteetel != null" >
-        cs_guaranteeTel,
-      </if>
-      <if test="guaranteehomeaddress != null" >
-        cs_guaranteeHomeAddress,
-      </if>
-      <if test="guaranteeunit != null" >
-        cs_guaranteeUnit,
-      </if>
-      <if test="guaranteeunittel != null" >
-        cs_guaranteeUnitTel,
-      </if>
-      <if test="guaranteearea != null" >
-        cs_guaranteeArea,
-      </if>
-      <if test="guaranteemary != null" >
-        cs_guaranteeMary,
-      </if>
-      <if test="guaranteebirthplace != null" >
-        cs_guaranteeBirthplace,
-      </if>
-      <if test="guaranteehukou != null" >
-        cs_guaranteeHukou,
-      </if>
-      <if test="guaranteeunitaddress != null" >
-        cs_guaranteeUnitAddress,
-      </if>
-      <if test="guaranteeposition != null" >
-        cs_guaranteePosition,
-      </if>
-      <if test="sales != null" >
-        cs_sales,
-      </if>
-      <if test="manager != null" >
-        cs_manager,
-      </if>
-      <if test="years != null" >
-        cs_years,
-      </if>
-      <if test="stages != null" >
-        cs_stages,
-      </if>
-      <if test="cartype != null" >
-        cs_carType,
-      </if>
-      <if test="carprice != null" >
-        cs_carPrice,
-      </if>
-      <if test="carloans != null" >
-        cs_carLoans,
-      </if>
-      <if test="carrate != null" >
-        cs_carRate,
-      </if>
-      <if test="carbrokerage != null" >
-        cs_carBrokerage,
-      </if>
-      <if test="cartoobject != null" >
-        cs_carToObject,
-      </if>
-      <if test="cartoaccount != null" >
-        cs_carToAccount,
-      </if>
-      <if test="bail != null" >
-        cs_bail,
-      </if>
-      <if test="notaryfees != null" >
-        cs_notaryFees,
-      </if>
-      <if test="otherfees != null" >
-        cs_otherFees,
-      </if>
-      <if test="guaranteefees != null" >
-        cs_guaranteeFees,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="loanername != null" >
-        #{loanername,jdbcType=VARCHAR},
-      </if>
-      <if test="loanersex != null" >
-        #{loanersex,jdbcType=CHAR},
-      </if>
-      <if test="loanerage != null" >
-        #{loanerage,jdbcType=INTEGER},
-      </if>
-      <if test="loanercard != null" >
-        #{loanercard,jdbcType=VARCHAR},
-      </if>
-      <if test="loanertel != null" >
-        #{loanertel,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerhomeaddress != null" >
-        #{loanerhomeaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerunit != null" >
-        #{loanerunit,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerunittel != null" >
-        #{loanerunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="loanermarry != null" >
-        #{loanermarry,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerarea != null" >
-        #{loanerarea,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerbirthplace != null" >
-        #{loanerbirthplace,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerhukou != null" >
-        #{loanerhukou,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerunitaddress != null" >
-        #{loanerunitaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerposition != null" >
-        #{loanerposition,jdbcType=VARCHAR},
-      </if>
-      <if test="matename != null" >
-        #{matename,jdbcType=VARCHAR},
-      </if>
-      <if test="matesex != null" >
-        #{matesex,jdbcType=CHAR},
-      </if>
-      <if test="mateage != null" >
-        #{mateage,jdbcType=INTEGER},
-      </if>
-      <if test="matecard != null" >
-        #{matecard,jdbcType=VARCHAR},
-      </if>
-      <if test="matetel != null" >
-        #{matetel,jdbcType=VARCHAR},
-      </if>
-      <if test="mateunit != null" >
-        #{mateunit,jdbcType=VARCHAR},
-      </if>
-      <if test="mateunittel != null" >
-        #{mateunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="matebirthplace != null" >
-        #{matebirthplace,jdbcType=VARCHAR},
-      </if>
-      <if test="matehukou != null" >
-        #{matehukou,jdbcType=VARCHAR},
-      </if>
-      <if test="mateunitaddress != null" >
-        #{mateunitaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="mateposition != null" >
-        #{mateposition,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteename != null" >
-        #{guaranteename,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteesex != null" >
-        #{guaranteesex,jdbcType=CHAR},
-      </if>
-      <if test="guaranteeage != null" >
-        #{guaranteeage,jdbcType=INTEGER},
-      </if>
-      <if test="guaranteecard != null" >
-        #{guaranteecard,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteetel != null" >
-        #{guaranteetel,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteehomeaddress != null" >
-        #{guaranteehomeaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeunit != null" >
-        #{guaranteeunit,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeunittel != null" >
-        #{guaranteeunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteearea != null" >
-        #{guaranteearea,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteemary != null" >
-        #{guaranteemary,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteebirthplace != null" >
-        #{guaranteebirthplace,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteehukou != null" >
-        #{guaranteehukou,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeunitaddress != null" >
-        #{guaranteeunitaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeposition != null" >
-        #{guaranteeposition,jdbcType=VARCHAR},
-      </if>
-      <if test="sales != null" >
-        #{sales,jdbcType=VARCHAR},
-      </if>
-      <if test="manager != null" >
-        #{manager,jdbcType=VARCHAR},
-      </if>
-      <if test="years != null" >
-        #{years,jdbcType=INTEGER},
-      </if>
-      <if test="stages != null" >
-        #{stages,jdbcType=INTEGER},
-      </if>
-      <if test="cartype != null" >
-        #{cartype,jdbcType=VARCHAR},
-      </if>
-      <if test="carprice != null" >
-        #{carprice,jdbcType=DECIMAL},
-      </if>
-      <if test="carloans != null" >
-        #{carloans,jdbcType=DECIMAL},
-      </if>
-      <if test="carrate != null" >
-        #{carrate,jdbcType=DECIMAL},
-      </if>
-      <if test="carbrokerage != null" >
-        #{carbrokerage,jdbcType=DECIMAL},
-      </if>
-      <if test="cartoobject != null" >
-        #{cartoobject,jdbcType=VARCHAR},
-      </if>
-      <if test="cartoaccount != null" >
-        #{cartoaccount,jdbcType=VARCHAR},
-      </if>
-      <if test="bail != null" >
-        #{bail,jdbcType=DECIMAL},
-      </if>
-      <if test="notaryfees != null" >
-        #{notaryfees,jdbcType=DECIMAL},
-      </if>
-      <if test="otherfees != null" >
-        #{otherfees,jdbcType=DECIMAL},
-      </if>
-      <if test="guaranteefees != null" >
-        #{guaranteefees,jdbcType=DECIMAL},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.runnerup.model.Customer" >
-    update sp_customers
-    <set >
-      <if test="loanername != null" >
-        cs_loanerName = #{loanername,jdbcType=VARCHAR},
-      </if>
-      <if test="loanersex != null" >
-        cs_loanerSex = #{loanersex,jdbcType=CHAR},
-      </if>
-      <if test="loanerage != null" >
-        cs_loanerAge = #{loanerage,jdbcType=INTEGER},
-      </if>
-      <if test="loanercard != null" >
-        cs_loanerCard = #{loanercard,jdbcType=VARCHAR},
-      </if>
-      <if test="loanertel != null" >
-        cs_loanerTel = #{loanertel,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerhomeaddress != null" >
-        cs_loanerHomeAddress = #{loanerhomeaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerunit != null" >
-        cs_loanerUnit = #{loanerunit,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerunittel != null" >
-        cs_loanerUnitTel = #{loanerunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="loanermarry != null" >
-        cs_loanerMarry = #{loanermarry,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerarea != null" >
-        cs_loanerArea = #{loanerarea,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerbirthplace != null" >
-        cs_loanerBirthplace = #{loanerbirthplace,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerhukou != null" >
-        cs_loanerHukou = #{loanerhukou,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerunitaddress != null" >
-        cs_loanerUnitAddress = #{loanerunitaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="loanerposition != null" >
-        cs_loanerPosition = #{loanerposition,jdbcType=VARCHAR},
-      </if>
-      <if test="matename != null" >
-        cs_mateName = #{matename,jdbcType=VARCHAR},
-      </if>
-      <if test="matesex != null" >
-        cs_mateSex = #{matesex,jdbcType=CHAR},
-      </if>
-      <if test="mateage != null" >
-        cs_mateAge = #{mateage,jdbcType=INTEGER},
-      </if>
-      <if test="matecard != null" >
-        cs_mateCard = #{matecard,jdbcType=VARCHAR},
-      </if>
-      <if test="matetel != null" >
-        cs_mateTel = #{matetel,jdbcType=VARCHAR},
-      </if>
-      <if test="mateunit != null" >
-        cs_mateUnit = #{mateunit,jdbcType=VARCHAR},
-      </if>
-      <if test="mateunittel != null" >
-        cs_mateUnitTel = #{mateunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="matebirthplace != null" >
-        cs_mateBirthplace = #{matebirthplace,jdbcType=VARCHAR},
-      </if>
-      <if test="matehukou != null" >
-        cs_mateHukou = #{matehukou,jdbcType=VARCHAR},
-      </if>
-      <if test="mateunitaddress != null" >
-        cs_mateUnitAddress = #{mateunitaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="mateposition != null" >
-        cs_matePosition = #{mateposition,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteename != null" >
-        cs_guaranteeName = #{guaranteename,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteesex != null" >
-        cs_guaranteeSex = #{guaranteesex,jdbcType=CHAR},
-      </if>
-      <if test="guaranteeage != null" >
-        cs_guaranteeAge = #{guaranteeage,jdbcType=INTEGER},
-      </if>
-      <if test="guaranteecard != null" >
-        cs_guaranteeCard = #{guaranteecard,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteetel != null" >
-        cs_guaranteeTel = #{guaranteetel,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteehomeaddress != null" >
-        cs_guaranteeHomeAddress = #{guaranteehomeaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeunit != null" >
-        cs_guaranteeUnit = #{guaranteeunit,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeunittel != null" >
-        cs_guaranteeUnitTel = #{guaranteeunittel,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteearea != null" >
-        cs_guaranteeArea = #{guaranteearea,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteemary != null" >
-        cs_guaranteeMary = #{guaranteemary,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteebirthplace != null" >
-        cs_guaranteeBirthplace = #{guaranteebirthplace,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteehukou != null" >
-        cs_guaranteeHukou = #{guaranteehukou,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeunitaddress != null" >
-        cs_guaranteeUnitAddress = #{guaranteeunitaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="guaranteeposition != null" >
-        cs_guaranteePosition = #{guaranteeposition,jdbcType=VARCHAR},
-      </if>
-      <if test="sales != null" >
-        cs_sales = #{sales,jdbcType=VARCHAR},
-      </if>
-      <if test="manager != null" >
-        cs_manager = #{manager,jdbcType=VARCHAR},
-      </if>
-      <if test="years != null" >
-        cs_years = #{years,jdbcType=INTEGER},
-      </if>
-      <if test="stages != null" >
-        cs_stages = #{stages,jdbcType=INTEGER},
-      </if>
-      <if test="cartype != null" >
-        cs_carType = #{cartype,jdbcType=VARCHAR},
-      </if>
-      <if test="carprice != null" >
-        cs_carPrice = #{carprice,jdbcType=DECIMAL},
-      </if>
-      <if test="carloans != null" >
-        cs_carLoans = #{carloans,jdbcType=DECIMAL},
-      </if>
-      <if test="carrate != null" >
-        cs_carRate = #{carrate,jdbcType=DECIMAL},
-      </if>
-      <if test="carbrokerage != null" >
-        cs_carBrokerage = #{carbrokerage,jdbcType=DECIMAL},
-      </if>
-      <if test="cartoobject != null" >
-        cs_carToObject = #{cartoobject,jdbcType=VARCHAR},
-      </if>
-      <if test="cartoaccount != null" >
-        cs_carToAccount = #{cartoaccount,jdbcType=VARCHAR},
-      </if>
-      <if test="bail != null" >
-        cs_bail = #{bail,jdbcType=DECIMAL},
-      </if>
-      <if test="notaryfees != null" >
-        cs_notaryFees = #{notaryfees,jdbcType=DECIMAL},
-      </if>
-      <if test="otherfees != null" >
-        cs_otherFees = #{otherfees,jdbcType=DECIMAL},
-      </if>
-      <if test="guaranteefees != null" >
-        cs_guaranteeFees = #{guaranteefees,jdbcType=DECIMAL},
-      </if>
-    </set>
-    where cs_id = #{id,jdbcType=INTEGER}
-  </update>
+
   <update id="updateByPrimaryKey" parameterType="cn.runnerup.model.Customer" >
     update sp_customers
     set cs_loanerName = #{loanername,jdbcType=VARCHAR},
-      cs_loanerSex = #{loanersex,jdbcType=CHAR},
+      cs_loanerSex = #{loanersex,jdbcType=VARCHAR},
       cs_loanerAge = #{loanerage,jdbcType=INTEGER},
       cs_loanerCard = #{loanercard,jdbcType=VARCHAR},
       cs_loanerTel = #{loanertel,jdbcType=VARCHAR},
@@ -649,7 +151,7 @@
       cs_loanerUnitAddress = #{loanerunitaddress,jdbcType=VARCHAR},
       cs_loanerPosition = #{loanerposition,jdbcType=VARCHAR},
       cs_mateName = #{matename,jdbcType=VARCHAR},
-      cs_mateSex = #{matesex,jdbcType=CHAR},
+      cs_mateSex = #{matesex,jdbcType=VARCHAR},
       cs_mateAge = #{mateage,jdbcType=INTEGER},
       cs_mateCard = #{matecard,jdbcType=VARCHAR},
       cs_mateTel = #{matetel,jdbcType=VARCHAR},
@@ -660,7 +162,7 @@
       cs_mateUnitAddress = #{mateunitaddress,jdbcType=VARCHAR},
       cs_matePosition = #{mateposition,jdbcType=VARCHAR},
       cs_guaranteeName = #{guaranteename,jdbcType=VARCHAR},
-      cs_guaranteeSex = #{guaranteesex,jdbcType=CHAR},
+      cs_guaranteeSex = #{guaranteesex,jdbcType=VARCHAR},
       cs_guaranteeAge = #{guaranteeage,jdbcType=INTEGER},
       cs_guaranteeCard = #{guaranteecard,jdbcType=VARCHAR},
       cs_guaranteeTel = #{guaranteetel,jdbcType=VARCHAR},
@@ -688,6 +190,7 @@
       cs_notaryFees = #{notaryfees,jdbcType=DECIMAL},
       cs_otherFees = #{otherfees,jdbcType=DECIMAL},
       cs_guaranteeFees = #{guaranteefees,jdbcType=DECIMAL}
+      cs_isflow = #{isFlow,jdbcType=BOOLEAN}
     where cs_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
