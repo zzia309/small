@@ -12,6 +12,8 @@ public class BusinessModel extends Business{
 
 	private String[] businessfilesFileName;
 
+	private String newStatus;
+
 	public boolean isSuccess() {
 		return success;
 	}
@@ -34,6 +36,14 @@ public class BusinessModel extends Business{
 
 	public void setBusinessfilesFileName(String[] businessfilesFileName) {
 		this.businessfilesFileName = businessfilesFileName;
+	}
+
+	public String getNewStatus() {
+		return newStatus;
+	}
+
+	public void setNewStatus(String newStatus) {
+		this.newStatus = newStatus;
 	}
 
 }

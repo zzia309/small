@@ -38,6 +38,13 @@
     where buss_id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="selectByCustomer" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sp_businesses
+    where buss_customer = #{customer,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_businesses
     where buss_id = #{id,jdbcType=INTEGER}
@@ -91,7 +98,7 @@
 			buss_carEngine = #{carengine,jdbcType=VARCHAR},
 			buss_carFrame = #{carframe,jdbcType=VARCHAR},
 			buss_status = #{status,jdbcType=VARCHAR},
-      		<if test="customer == null">buss_customer = NULL</if><if test="customer != null">buss_customer = #{customer.id,jdbcType=INTEGER}</if>)
+      		<if test="customer == null">buss_customer = NULL</if><if test="customer != null">buss_customer = #{customer.id,jdbcType=INTEGER}</if>
 		where buss_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
