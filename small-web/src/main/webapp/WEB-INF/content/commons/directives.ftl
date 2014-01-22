@@ -14,9 +14,6 @@
 			children: [{ text: "用户信息维护", leaf: true, uri: '${request.contextPath}/users/index' },
 				{ text: "担保流程", leaf: true, uri: '${request.contextPath}/businesses/index' },
 				{ text: "担保信息维护", leaf: true, uri: '${request.contextPath}/customers/index' }
-				<#if action.user?? && (action.user.priority > 3)>,
-					{ text: "担保信息维护", leaf: true, uri: '${request.contextPath}/issues/index' }
-				</#if>
 			]}
 	});
 	Eap.layout.Default.createMenu({store: root});

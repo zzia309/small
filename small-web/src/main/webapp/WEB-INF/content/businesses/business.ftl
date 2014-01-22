@@ -287,7 +287,13 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		}
 	}, {
 		text: '初审',
+		hidden:<#if action.user?? && (action.user.priority=2)>
+			false
+			<#else>
+			true
+		</#if>,
 		handler: function(){
+			debugger;
 			var me = this;
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
@@ -309,6 +315,11 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		}
 	},{
 		text: '终审',
+		hidden:<#if action.user?? && (action.user.priority=3)>
+			false
+			<#else>
+			true
+		</#if>,
 		handler: function(){
 			var me = this;
 			var form = me.up('form').getForm();
@@ -331,6 +342,11 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		}
 	},{
 		text: '老板过件',
+		hidden:<#if action.user?? && (action.user.priority=4)>
+			false
+			<#else>
+			true
+		</#if>,
 		handler: function(){
 			var me = this;
 			var form = me.up('form').getForm();
@@ -353,6 +369,11 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		}
 	},{
 		text: '财务',
+		hidden:<#if action.user?? && (action.user.priority=5)>
+			false
+			<#else>
+			true
+		</#if>,
 		handler: function(){
 			var me = this;
 			var form = me.up('form').getForm();
@@ -374,28 +395,12 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			}
 		}
 	},{
-		text: '抄单',
-		handler: function(){
-			var me = this;
-			var form = me.up('form').getForm();
-			var id = form.findField('id').getValue();
-			if(Ext.isEmpty(id)){
-			}else{
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT'
-					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
-			}
-		}
-	},{
 		text: '后勤',
+		hidden:<#if action.user?? && (action.user.priority=6)>
+			false
+			<#else>
+			true
+		</#if>,
 		handler: function(){
 			var me = this;
 			var form = me.up('form').getForm();
@@ -418,6 +423,12 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		}
 	},{
 		text: '关闭',
+		hidden:
+		<#if action.user?? && (action.user.priority=7)>
+			false
+			<#else>
+			true
+		</#if>,
 		handler: function(){
 			var me = this;
 			var form = me.up('form').getForm();
