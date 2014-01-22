@@ -12,11 +12,20 @@
 <script type="text/javascript">
 	Ext.onReady(function() {
 		<@initlayout/>
+		var genderStore = Ext.create('Ext.data.Store', {
+			fields: ['id', 'value'],
+			data:[{
+				'id': 'M', 'value': '男'
+			},{
+				'id': 'G', 'value': '女'
+			}]
+		});
 		<#include "list.ftl">
 		<#include "business.ftl">
+		<#include "customer.ftl">
 		<#include "attachment.ftl">
 		App.createContentPanel({
-			tabs: [listTab, businessTab, attachmentTab]
+			tabs: [listTab, businessTab, customerTab, attachmentTab]
 		});
 		<@dolayout/>
 	});
