@@ -17,11 +17,18 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 		name: 'loanername',
 		allowBlank: false
 	}, {
+		xtype: 'combo',
 		fieldLabel: '客户性别',
-		name: 'loanersex'
+		name: 'loanersex',
+		store: genderStore,
+		valueField: 'id',
+		displayField: 'value'
 	}, {
+		xtype: 'numberfield',
 		fieldLabel: '客户年龄',
-		name: 'loanerage'
+		name: 'loanerage',
+		maxValue: 57,
+        minValue: 20
 	}, {
 		fieldLabel: '客户身份证',
 		name: 'loanercard'
@@ -73,11 +80,17 @@ var matePanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '配偶姓名',
 		name: 'matename'
 	}, {
+		xtype: 'combo',
 		fieldLabel: '配偶性别',
-		name: 'matesex'
+		name: 'matesex',
+		store: genderStore,
+		valueField: 'id',
+		displayField: 'value'
 	}, {
+		xtype: 'numberfield',
 		fieldLabel: '配偶年龄',
-		name: 'mateage'
+		name: 'mateage',
+		minValue: 20
 	}, {
 		fieldLabel: '配偶身份证',
 		name: 'matecard'
@@ -120,11 +133,17 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '担保人姓名',
 		name: 'guaranteename'
 	}, {
+		xtype: 'combo',
 		fieldLabel: '担保人性别',
-		name: 'guaranteesex'
+		name: 'guaranteesex',
+		store: genderStore,
+		valueField: 'id',
+		displayField: 'value'
 	}, {
+		xtype: 'numberfield',
 		fieldLabel: '担保人年龄',
-		name: 'guaranteeage'
+		name: 'guaranteeage',
+        minValue: 20
 	}, {
 		fieldLabel: '担保人身份证',
 		name: 'guaranteecard'
