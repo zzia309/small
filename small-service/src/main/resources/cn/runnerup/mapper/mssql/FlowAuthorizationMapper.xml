@@ -51,13 +51,13 @@
     where fa_id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectFromStatus" resultMap="string" parameterType="java.lang.Integer" >
+  <select id="selectFromStatus" resultType="java.lang.String" parameterType="java.lang.Integer" >
     select distinct fa_fromStatus
     from sp_flowauthorizations
     where fa_role = #{role,jdbcType=INTEGER}
   </select>
 
-  <select id="selectToStatus" resultMap="string">
+  <select id="selectToStatus" resultType="java.lang.String">
     select distinct fa_toStatus
     from sp_flowauthorizations
     where fa_role = #{role,jdbcType=INTEGER} and fa_fromStatus = #{toStatus, jdbcType=VARCHAR}
