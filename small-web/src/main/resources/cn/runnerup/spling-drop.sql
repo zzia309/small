@@ -177,76 +177,33 @@ CREATE TABLE `sp_customers` (
 -- Dumping data for table `sp_users`
 --
 DROP TABLE IF EXISTS `sp_businesses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sp_businesses` (
-
   `buss_id` int(11) NOT NULL AUTO_INCREMENT,
-
-  `buss_lenderName` varchar(64) DEFAULT NULL,
-  `buss_lenderSex` char(1) DEFAULT NULL,
-  `buss_lenderAge` int(11) DEFAULT NULL,
-  `buss_lenderCard` varchar(64) DEFAULT NULL,
-  `buss_lenderTel` varchar(64) DEFAULT NULL,
-  `buss_lenderEstate` varchar(64) DEFAULT NULL,
-  `buss_lenderUnit` varchar(64) DEFAULT NULL,
-  `buss_lenderUnitTel` varchar(64) DEFAULT NULL,
-  `buss_lenderArea` varchar(64) DEFAULT NULL,
-
-
-  `buss_mateName` varchar(64) DEFAULT NULL,
-  `buss_mateSex` char(1) DEFAULT NULL,
-  `buss_mateAge` int(11) DEFAULT NULL,
-  `buss_mateCard` varchar(64) DEFAULT NULL,
-  `buss_mateTel` varchar(64) DEFAULT NULL,
-  `buss_mateEstate` varchar(64) DEFAULT NULL,
-  `buss_mateUnit` varchar(64) DEFAULT NULL,
-  `buss_mateUnitTel` varchar(64) DEFAULT NULL,
-  `buss_mateArea` varchar(64) DEFAULT NULL,
-
-
-  `buss_guaranteeName` varchar(64) DEFAULT NULL,
-  `buss_guaranteeSex` char(1) DEFAULT NULL,
-  `buss_guaranteeAge` int(11) DEFAULT NULL,
-  `buss_guaranteeCard` varchar(64) DEFAULT NULL,
-  `buss_guaranteeTel` varchar(64) DEFAULT NULL,
-  `buss_guaranteeEstate` varchar(64) DEFAULT NULL,
-  `buss_guaranteeUnit` varchar(64) DEFAULT NULL,
-  `buss_guaranteeUnitTel` varchar(64) DEFAULT NULL,
-  `buss_guaranteeArea` varchar(64) DEFAULT NULL,
-
-
-  `buss_sales` varchar(64) DEFAULT NULL,
-  `buss_manager` varchar(64) DEFAULT NULL,
-  `buss_carType` varchar(32) DEFAULT NULL,
-  `buss_years` int(11) DEFAULT NULL,
-
-
-  `buss_bail` decimal(10,0) DEFAULT NULL,
-  `buss_notaryFee` decimal(10,0) DEFAULT NULL,
-  `buss_other_fee` decimal(10,0) DEFAULT NULL,
-  `buss_guaranteeFees` decimal(10,0) DEFAULT NULL,
-
+  `buss_customer` int(11) NOT NULL,
   `buss_credit` varchar(256) DEFAULT NULL,
-
+  `buss_publicOrder` varchar(256) DEFAULT NULL,
+  `buss_court` varchar(256) DEFAULT NULL,
   `buss_branch` varchar(64) DEFAULT NULL,
   `buss_advances` decimal(10,0) DEFAULT NULL,
   `buss_advanceDate` datetime DEFAULT NULL,
-
+  `buss_loanDate` datetime DEFAULT NULL,
   `buss_insuranceAgent` varchar(64) DEFAULT NULL,
   `buss_insuranceStart` datetime DEFAULT NULL,
   `buss_insuranceEnd` datetime DEFAULT NULL,
   `buss_certificate` varchar(64) DEFAULT NULL,
   `buss_isImpawn` tinyint(4) DEFAULT NULL,
   `buss_isSongHang` tinyint(4) DEFAULT NULL,
-
+  `buss_carModel` varchar(64) DEFAULT NULL,
+  `buss_carEngine` varchar(64) DEFAULT NULL,
+  `buss_carFrame` varchar(64) DEFAULT NULL,
   `buss_status` varchar(64) DEFAULT NULL,
-
-  PRIMARY KEY (`buss_id`)
+  PRIMARY KEY (`buss_id`),
+  KEY `foreign_key_customer` (`buss_customer`),
+  CONSTRAINT `foreign_key_customer` FOREIGN KEY (`buss_customer`) REFERENCES `sp_customers` (`cs_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
-
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 
 
 DROP TABLE IF EXISTS `sp_attachments`;
