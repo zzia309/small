@@ -110,6 +110,69 @@ CREATE TABLE `sp_users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+DROP TABLE IF EXISTS `sp_customers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sp_customers` (
+  `cs_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cs_loanerName` varchar(64) DEFAULT NULL,
+  `cs_loanerSex` char(1) DEFAULT NULL,
+  `cs_loanerAge` int(11) DEFAULT NULL,
+  `cs_loanerCard` varchar(64) DEFAULT NULL,
+  `cs_loanerTel` varchar(64) DEFAULT NULL,
+  `cs_loanerHomeAddress` varchar(64) DEFAULT NULL,
+  `cs_loanerUnit` varchar(64) DEFAULT NULL,
+  `cs_loanerUnitTel` varchar(64) DEFAULT NULL,
+  `cs_loanerMarry` varchar(64) DEFAULT NULL,
+  `cs_loanerArea` varchar(64) DEFAULT NULL,
+  `cs_loanerBirthplace` varchar(64) DEFAULT NULL,
+  `cs_loanerHukou` varchar(64) DEFAULT NULL,
+  `cs_loanerUnitAddress` varchar(64) DEFAULT NULL,
+  `cs_loanerPosition` varchar(64) DEFAULT NULL,
+  `cs_mateName` varchar(64) DEFAULT NULL,
+  `cs_mateSex` char(1) DEFAULT NULL,
+  `cs_mateAge` int(11) DEFAULT NULL,
+  `cs_mateCard` varchar(64) DEFAULT NULL,
+  `cs_mateTel` varchar(64) DEFAULT NULL,
+  `cs_mateUnit` varchar(64) DEFAULT NULL,
+  `cs_mateUnitTel` varchar(64) DEFAULT NULL,
+  `cs_mateBirthplace` varchar(64) DEFAULT NULL,
+  `cs_mateHukou` varchar(64) DEFAULT NULL,
+  `cs_mateUnitAddress` varchar(64) DEFAULT NULL,
+  `cs_matePosition` varchar(64) DEFAULT NULL,
+  `cs_guaranteeName` varchar(64) DEFAULT NULL,
+  `cs_guaranteeSex` char(1) DEFAULT NULL,
+  `cs_guaranteeAge` int(11) DEFAULT NULL,
+  `cs_guaranteeCard` varchar(64) DEFAULT NULL,
+  `cs_guaranteeTel` varchar(64) DEFAULT NULL,
+  `cs_guaranteeHomeAddress` varchar(64) DEFAULT NULL,
+  `cs_guaranteeUnit` varchar(64) DEFAULT NULL,
+  `cs_guaranteeUnitTel` varchar(64) DEFAULT NULL,
+  `cs_guaranteeArea` varchar(64) DEFAULT NULL,
+  `cs_guaranteeMary` varchar(64) DEFAULT NULL,
+  `cs_guaranteeBirthplace` varchar(64) DEFAULT NULL,
+  `cs_guaranteeHukou` varchar(64) DEFAULT NULL,
+  `cs_guaranteeUnitAddress` varchar(64) DEFAULT NULL,
+  `cs_guaranteePosition` varchar(64) DEFAULT NULL,
+  `cs_sales` varchar(64) DEFAULT NULL,
+  `cs_manager` varchar(64) DEFAULT NULL,
+  `cs_years` int(11) DEFAULT NULL,
+  `cs_stages` int(11) DEFAULT NULL,
+  `cs_carType` varchar(32) DEFAULT NULL,
+  `cs_carPrice` decimal(10,0) DEFAULT NULL,
+  `cs_carLoans` decimal(10,0) DEFAULT NULL,
+  `cs_carRate` decimal(10,0) DEFAULT NULL,
+  `cs_carBrokerage` decimal(10,0) DEFAULT NULL,
+  `cs_carToObject` varchar(64) DEFAULT NULL,
+  `cs_carToAccount` varchar(64) DEFAULT NULL,
+  `cs_bail` decimal(10,0) DEFAULT NULL,
+  `cs_notaryFees` decimal(10,0) DEFAULT NULL,
+  `cs_otherFees` decimal(10,0) DEFAULT NULL,
+  `cs_guaranteeFees` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`cs_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 --
 -- Dumping data for table `sp_users`
 --
