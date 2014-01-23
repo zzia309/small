@@ -18,4 +18,7 @@ public interface CustomerMapper {
     int updateByPrimaryKey(Customer record);
 
     List<Customer> getAllCustomersByCreatedby(Integer id);
+
+    List<Customer> selectAllCustomer();
+
 }

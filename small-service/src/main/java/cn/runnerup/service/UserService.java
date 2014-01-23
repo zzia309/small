@@ -71,4 +71,7 @@ public class UserService {
 		return DigestUtils.sha1Hex(password);
 	}
 
+	public List<User> selectAll(){
+		return mapper.selectAllUser();
+	}
 }

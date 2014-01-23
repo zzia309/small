@@ -13,6 +13,17 @@ var creditPanel = Ext.create('Ext.panel.Panel', {
 		name: 'id',
 		hidden: true
 	},{
+		fieldLabel: '客户',
+		xtype: 'xcombo',
+    	name: 'customer',
+    	store: customerStore,
+		triggerAction: 'all',
+		selectOnFocus: true,
+		editable: false,
+		queryMode: 'local',
+		valueField: 'id',
+		displayField: 'loanername'
+	},{
 		name: 'customer',
 		hidden: true
 	},{
@@ -155,7 +166,6 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			true
 		</#if>,
 		handler: function(){
-			debugger;
 			var me = this;
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();

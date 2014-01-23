@@ -11,6 +11,19 @@ var store = Ext.create('Ext.data.Store', {
 	autoLoad: true
  });
 
+ var userStore = Ext.create('Ext.data.Store', {
+	 fields: ['id', 'username'],
+     proxy: {
+		type: 'ajax',
+		url: '${request.contextPath}/stores/user-store.gson',
+		reader: {
+			type: 'json',
+			root: 'model'
+		}
+	},
+	autoLoad: true
+ });
+
 var listgrid = Ext.create('Ext.grid.Panel', {
 	tbar:[{
 		xtype: 'button',

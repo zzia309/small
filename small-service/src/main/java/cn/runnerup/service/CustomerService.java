@@ -37,4 +37,8 @@ public class CustomerService {
 		customerMapper.updateByPrimaryKey(customer);
 	}
 
+	public List<Customer> selectAll(){
+		return customerMapper.selectAllCustomer();
+	}
+
 }

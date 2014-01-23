@@ -12,6 +12,19 @@ var businessStore = Ext.create('Ext.data.Store', {
  });
 
 
+var customerStore = Ext.create('Ext.data.Store', {
+	 fields: ['id', 'loanername'],
+     proxy: {
+		type: 'ajax',
+		url: '${request.contextPath}/stores/customer-store.gson',
+		reader: {
+			type: 'json',
+			root: 'model'
+		}
+	},
+	autoLoad: true
+ });
+
 var listgrid = Ext.create('Ext.grid.Panel', {
 	header: false,
 	tbar:[{

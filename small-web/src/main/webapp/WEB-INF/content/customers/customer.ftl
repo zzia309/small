@@ -239,8 +239,39 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	}]
 });
 
+var createPanel = Ext.create('Ext.panel.Panel', {
+	title: '创建信息',
+	layout: 'column',
+	collapsible: true,
+	anchor: '100% 10%',
+	defaults: {
+		columnWidth: 0.5,
+		labelAlign: 'right',
+		margin: '2 0 0 0'
+	},
+	items:[ {
+		fieldLabel: '创建日期',
+		xtype: 'xdatefield',
+		name: 'created',
+		format: 'Y-m-d H:i:s',
+		readOnly: true
+	}, {
+		fieldLabel: '创建人',
+		xtype: 'xcombo',
+    	name: 'createdby',
+    	store: userStore,
+		triggerAction: 'all',
+		selectOnFocus: true,
+		editable: false,
+		queryMode: 'local',
+		valueField: 'id',
+		readOnly: true,
+		displayField: 'username'
+	}]
+});
+
 var customerForm = Ext.create('Ext.form.Panel', {
-	items: [loanerPanel, matePanel, guaranteePanel, carPanel, {
+	items: [loanerPanel, matePanel, guaranteePanel, carPanel, createPanel, {
 		xtype: 'panel',
 		layout: 'column',
 		items: [{

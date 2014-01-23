@@ -35,6 +35,13 @@
     where usr_id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="selectAllUser" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from sp_users
+    where usr_id is not null
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_users
     where usr_id = #{id,jdbcType=INTEGER}

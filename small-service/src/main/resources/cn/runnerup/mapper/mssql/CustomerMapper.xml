@@ -83,6 +83,13 @@
     where cs_id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="selectAllCustomer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sp_customers
+    where cs_id is not null
+  </select>
+
   <select id="getAllCustomersByCreatedby" resultMap="BaseResultMap" parameterType="java.lang.Integer">
   	select
     <include refid="Base_Column_List" />
