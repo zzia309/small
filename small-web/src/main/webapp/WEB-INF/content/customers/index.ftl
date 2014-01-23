@@ -22,8 +22,8 @@
 		<@initlayout/>
 		<#include "list.ftl">
 		<#include "customer.ftl">
-		<#include "attachment.ftl">
 		<#include "woflow.ftl">
+		<#include "attachment.ftl">
 		App.createContentPanel({
 			tabs: [listTab, customerTab, attachmentTab]
 		});

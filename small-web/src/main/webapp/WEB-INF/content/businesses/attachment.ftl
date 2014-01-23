@@ -4,8 +4,9 @@ var attachmentStore = Ext.create('Ext.data.Store', {
 });
 
 var attachmentGrid = Ext.create('Ext.grid.Panel',{
-	height: 255,
+	height: 200,
 	autoScroll: true,
+	region: 'north',
 	title: '附件列表',
 	store: attachmentStore,
 	columns: [{
@@ -62,6 +63,7 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 var attachmentTab = {
 	itemId: 'attachment',
 	title: '流程和附件',
+	layout: 'border',
 	items: [woFlowPanel, attachmentGrid],
 	edit: function(){},
 	listeners: {

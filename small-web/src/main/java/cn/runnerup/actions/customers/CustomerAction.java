@@ -80,8 +80,9 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 			Integer modelId = model.getId();
 			model.setFlow(true);
 			User user = getUser();
+			Business business = null;
 			if(modelId != null) {
-				Business business = businessService.getBusinessByCustomer(modelId);
+				business = businessService.getBusinessByCustomer(modelId);
 				if(business != null) {
 					business.setStatus("new");
 					businessService.updateBusiness(business);
@@ -106,12 +107,12 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 						attachmentService.upload(getUser(), "customer", model.getId().toString(), 0, model.getCustomerfile()[i], model.getCustomerfileFileName()[i]);
 					}
 				}
-				Business business = new Business();
+				business = new Business();
 				business.setCustomer(model);
 				business.setStatus("new");
 				businessService.createBusiness(business);
 			}
-			woFlowService.createWoFlow(user, "", "-", "new", model.getId());
+			woFlowService.createWoFlow(user, "", "-", "new", business.getId());
 			model.setSuccess(true);
 		} catch (Exception e) {
 			// TODO: handle exception
