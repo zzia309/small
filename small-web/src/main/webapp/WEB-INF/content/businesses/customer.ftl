@@ -242,24 +242,7 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 var customerForm = Ext.create('Ext.form.Panel', {
 	items: [loanerPanel, matePanel, guaranteePanel, carPanel],
 	layout: 'anchor',
-	anchor: '98.6% 120%',
-	listeners: {
-		dirtychange: function(form, dirty, eOpts){
-			var saveButton = this.getButton('save');
-			if(dirty)
-				saveButton.enable();
-			else
-				saveButton.disable();
-		},
-		validitychange: function(form, valid, eOpts) {
-			var saveButton = this.getButton('save');
-			console.log(saveButton);
-			if(valid && form.isDirty())
-				saveButton.enable();
-			else
-				saveButton.disable();
-		}
-	}
+	anchor: '98.6% 120%'
 });
 
 var customerTab = {
@@ -271,28 +254,26 @@ var customerTab = {
 	listeners: {
 		activate: function(){
 			var form = customerForm.getForm();
-			var config = {
-				url: '${request.contextPath}/customers/customer/new.gson',
-				method: 'GET',
-				callback: function(options, success, response) {
-					var values = Ext.decode(response.responseText);
-					form.setValues(values);
-				}
-			};
+			var fields = form.getFields();
+			fields.each(function(field){
+				//field.readOnlyCls = "required";
+				field.setReadOnly(true);
+			});
 			if(App.currentId){
-				config = {
-					url: '${request.contextPath}/customers/customer/' + App.currentId + '.gson',
+				Ext.Ajax.request({
+					url: '${request.contextPath}/businesses/customer/' + App.currentId + '.gson',
+					method: 'GET',
 					success: function(response){
-						var values = Ext.decode(response.responseText);
+						var results = Ext.decode(response.responseText);
+						var values = results['customer'];
 						form.setValues(values);
 						var fields = form.getFields();
 						fields.each(function(field){
 							field.resetOriginalValue();
 						});
 					}
-				};
+				});
 			}
-			Ext.Ajax.request(config);
 		}
 	}
 };

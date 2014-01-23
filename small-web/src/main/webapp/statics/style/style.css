@@ -1,3 +1,5 @@
+.x-item-readonly .x-form-text{color:#0B66B0;cursor:default;}
+.x-form-readonly .x-form-text{color:#0B66B0; cursor:default;}
 .y-action-reset{background-image:url('img/action/reset.png');}
 .y-action-save{background-image:url('img/action/save.png');}
 .y-action-new{background-image:url('img/action/new.png');}
