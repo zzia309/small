@@ -67,6 +67,7 @@ Ext.define('Eap.layout.Default', {
 			{
 				iconCls: 'y-action-profile',
 				text: me.tooltips.profile,
+				icon: config.path+'/statics/style/img/action/setting.png',
 				cls: 'my-btn',
 				handler: function() {
 					window.location = Eap.contextPath + '/eap/profile/index';
@@ -76,6 +77,7 @@ Ext.define('Eap.layout.Default', {
 			{
 				iconCls: 'y-action-home',
 				text: me.tooltips.home,
+				icon: config.path+'/statics/style/img/action/home.png',
 				cls: 'my-btn',
 				handler: function() {
 					window.location = Eap.contextPath + '/index';
@@ -85,6 +87,7 @@ Ext.define('Eap.layout.Default', {
 			{
 				iconCls: 'y-action-exit',
 				text: me.tooltips.exit,
+				icon: config.path+'/statics/style/img/action/exit.png',
 				cls: 'my-btn',
 				handler: function() {
 					window.location = config.path+'/logout';

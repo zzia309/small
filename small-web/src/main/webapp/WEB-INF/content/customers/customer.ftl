@@ -379,7 +379,6 @@ var customerForm = Ext.create('Ext.form.Panel', {
 		},
 		validitychange: function(form, valid, eOpts) {
 			var saveButton = this.getButton('save');
-			console.log(saveButton);
 			if(valid && form.isDirty())
 				saveButton.enable();
 			else
