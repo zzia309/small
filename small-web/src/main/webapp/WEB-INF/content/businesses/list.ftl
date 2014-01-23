@@ -29,24 +29,7 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	header: false,
 	tbar:[{
 		xtype: 'button',
-		text: '新增客户信息',
-		handler: function(){
-			App.currentId = null;
-			var tab = App.getTab('business');
-			var form = tab.down('form').getForm();
-			Ext.Ajax.request({
-				url: '${request.contextPath}/businesses/business/new.gson',
-				method: 'GET',
-				callback: function(options, success, response) {
-					var values = Ext.decode(response.responseText);
-					form.setValues(values);
-				}
-			});
-			App.openTab('business', App.currentId);
-		}
-	},{
-		xtype: 'button',
-		text: '修改客户资料',
+		text: '处理流程',
 		handler: function(){
 			var tab = App.getTab('business');
 			var form = tab.down('form').getForm();

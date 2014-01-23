@@ -22,6 +22,7 @@ var creditPanel = Ext.create('Ext.panel.Panel', {
 		editable: false,
 		queryMode: 'local',
 		valueField: 'id',
+		hidden: true,
 		displayField: 'loanername'
 	},{
 		name: 'customer',
