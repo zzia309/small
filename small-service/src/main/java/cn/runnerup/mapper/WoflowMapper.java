@@ -7,11 +7,7 @@ public interface WoflowMapper {
 
     int insert(Woflow record);
 
-    int insertSelective(Woflow record);
-
     Woflow selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Woflow record);
 
     int updateByPrimaryKeyWithBLOBs(Woflow record);
 

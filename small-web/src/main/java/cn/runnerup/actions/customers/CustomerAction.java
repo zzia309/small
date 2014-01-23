@@ -8,13 +8,15 @@ import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensymphony.xwork2.ModelDriven;
-
 import cn.runnerup.actions.RunnerSupport;
 import cn.runnerup.model.Business;
 import cn.runnerup.model.Customer;
+import cn.runnerup.model.User;
 import cn.runnerup.service.BusinessService;
 import cn.runnerup.service.CustomerService;
+import cn.runnerup.service.WoFlowService;
+
+import com.opensymphony.xwork2.ModelDriven;
 
 public class CustomerAction extends RunnerSupport implements ModelDriven<CustomerModel>{
 
@@ -27,6 +29,9 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 
 	@Autowired
 	private BusinessService businessService;
+
+	@Autowired
+	private WoFlowService woFlowService;
 
 	private Integer id;
 
@@ -59,6 +64,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 	public String createFlow() {
 		Integer modelId = model.getId();
 		model.setFlow(true);
+		User user = getUser();
 		if(modelId != null) {
 			Business business = businessService.getBusinessByCustomer(modelId);
 			if(business != null) {
@@ -72,7 +78,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 			}
 			customerService.updateCustomer(model);
 		}else {
-			model.setCreatedby(getUser());
+			model.setCreatedby(user);
 			model.setCreated(Calendar.getInstance().getTime());
 			customerService.createCustomer(model);
 			Business business = new Business();
@@ -80,6 +86,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 			business.setStatus("new");
 			businessService.createBusiness(business);
 		}
+		woFlowService.createWoFlow(user, "", "-", "new", model.getId());
 		model.setSuccess(true);
 		return SUCCESS;
 	}

@@ -14,6 +14,8 @@ public class BusinessModel extends Business{
 
 	private String newStatus;
 
+	private String woflowDescr;
+
 	public boolean isSuccess() {
 		return success;
 	}
@@ -44,6 +46,14 @@ public class BusinessModel extends Business{
 
 	public void setNewStatus(String newStatus) {
 		this.newStatus = newStatus;
+	}
+
+	public String getWoflowDescr() {
+		return woflowDescr;
+	}
+
+	public void setWoflowDescr(String woflowDescr) {
+		this.woflowDescr = woflowDescr;
 	}
 
 }

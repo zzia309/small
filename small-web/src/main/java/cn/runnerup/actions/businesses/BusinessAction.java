@@ -15,6 +15,7 @@ import cn.runnerup.model.User;
 import cn.runnerup.service.AttachmentService;
 import cn.runnerup.service.BusinessService;
 import cn.runnerup.service.CustomerService;
+import cn.runnerup.service.WoFlowService;
 
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -32,6 +33,9 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 
 	@Autowired
 	private CustomerService customerService;
+
+	@Autowired
+	private WoFlowService woFlowService;
 
 	private BusinessModel model = new BusinessModel();
 
@@ -91,6 +95,7 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 					}
 				}
 				businessService.updateBusiness(model);
+				woFlowService.createWoFlow(user, model.getWoflowDescr(), business.getStatus(), newStatus, model.getId());
 				model.setSuccess(true);
 			} catch (Exception e) {
 				logger.error(e.getMessage(), e);

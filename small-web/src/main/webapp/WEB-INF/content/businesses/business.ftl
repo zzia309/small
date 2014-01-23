@@ -412,7 +412,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 					url: url,
 					params: {
 						_method: 'PUT',
-						newStatus: 'finance'
+						newStatus: 'logistics'
 					},
 					success: function(){
 						App.openTab('list');
@@ -440,7 +440,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 					url: url,
 					params: {
 						_method: 'PUT',
-						newStatus: 'logistics'
+						newStatus: 'closed'
 					},
 					success: function(){
 						App.openTab('list');

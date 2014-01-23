@@ -21,23 +21,27 @@
     <result column="usr_createdby" property="createdby" jdbcType="INTEGER" />
     <result column="usr_updatedby" property="updatedby" jdbcType="INTEGER" />
   </resultMap>
+
   <sql id="Base_Column_List" >
     usr_id, usr_username, usr_password, usr_fullname, usr_disabled,
     usr_idnumber, usr_gender, usr_priority,
     usr_address, usr_postalcode, usr_tel, usr_mobile, usr_email, usr_qq, usr_created, usr_updated, usr_createdby, usr_updatedby
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from sp_users
     where usr_id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_users
     where usr_id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="cn.runnerup.model.User" >
-    insert into sp_users (usr_id, usr_username, usr_password,
+    insert into sp_users (usr_username, usr_password,
       usr_fullname,
       usr_disabled,
       usr_priority,
@@ -46,7 +50,7 @@
       usr_email, usr_qq, usr_created,
       usr_updated, usr_createdby, usr_updatedby
       )
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR},
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR},
       #{fullname,jdbcType=VARCHAR},
       #{disabled,jdbcType=BIT},
       #{priority,jdbcType=INTEGER},
@@ -55,6 +59,9 @@
       #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP},
       #{updated,jdbcType=TIMESTAMP}, #{createdby,jdbcType=INTEGER}, #{updatedby,jdbcType=INTEGER}
       )
+	<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+		select LAST_INSERT_ID() as id
+	</selectKey>
   </insert>
   <insert id="insertSelective" parameterType="cn.runnerup.model.User" >
     insert into sp_users

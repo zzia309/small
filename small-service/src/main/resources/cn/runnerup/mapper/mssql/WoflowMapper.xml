@@ -4,181 +4,53 @@
   <resultMap id="BaseResultMap" type="cn.runnerup.model.Woflow" >
     <id column="wof_id" property="id" jdbcType="INTEGER" />
     <result column="wof_wo" property="wo" jdbcType="INTEGER" />
-    <result column="wof_wotype" property="wotype" jdbcType="VARCHAR" />
     <result column="wof_oldStatus" property="oldstatus" jdbcType="VARCHAR" />
     <result column="wof_status" property="status" jdbcType="VARCHAR" />
-    <result column="wof_operator" property="operator" jdbcType="INTEGER" />
-    <result column="wof_createdby" property="createdby" jdbcType="INTEGER" />
-    <result column="wof_creater" property="creater" jdbcType="VARCHAR" />
     <result column="wof_created" property="created" jdbcType="TIMESTAMP" />
-    <result column="wof_flag" property="flag" jdbcType="CHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="cn.runnerup.model.Woflow" extends="BaseResultMap" >
     <result column="wof_descr" property="descr" jdbcType="LONGVARCHAR" />
+    <association property="createdby" column="wof_createdby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
   </resultMap>
+
   <sql id="Base_Column_List" >
-    wof_id, wof_wo, wof_wotype, wof_oldStatus, wof_status, wof_operator, wof_createdby, 
-    wof_creater, wof_created, wof_flag
+    wof_id, wof_wo, wof_oldStatus, wof_status,wof_createdby,
+    wof_created, wof_descr
   </sql>
-  <sql id="Blob_Column_List" >
-    wof_descr
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from sp_woflows
     where wof_id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_woflows
     where wof_id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="cn.runnerup.model.Woflow" >
-    insert into sp_woflows (wof_id, wof_wo, wof_wotype, 
-      wof_oldStatus, wof_status, wof_operator, 
-      wof_createdby, wof_creater, wof_created, 
-      wof_flag, wof_descr)
-    values (#{id,jdbcType=INTEGER}, #{wo,jdbcType=INTEGER}, #{wotype,jdbcType=VARCHAR}, 
-      #{oldstatus,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{operator,jdbcType=INTEGER}, 
-      #{createdby,jdbcType=INTEGER}, #{creater,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
-      #{flag,jdbcType=CHAR}, #{descr,jdbcType=LONGVARCHAR})
+    insert into sp_woflows (wof_wo,
+      wof_oldStatus, wof_status,
+      wof_createdby, wof_created,
+      wof_descr)
+    values (#{wo,jdbcType=INTEGER},
+      #{oldstatus,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+      <if test="createdby == null">wof_createdby = null,</if>
+      <if test="createdby != null">#{createdby.id,jdbcType=INTEGER},</if>
+      #{created,jdbcType=TIMESTAMP},
+      #{descr,jdbcType=LONGVARCHAR})
+      <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+		select LAST_INSERT_ID() as id
+	  </selectKey>
   </insert>
-  <insert id="insertSelective" parameterType="cn.runnerup.model.Woflow" >
-    insert into sp_woflows
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        wof_id,
-      </if>
-      <if test="wo != null" >
-        wof_wo,
-      </if>
-      <if test="wotype != null" >
-        wof_wotype,
-      </if>
-      <if test="oldstatus != null" >
-        wof_oldStatus,
-      </if>
-      <if test="status != null" >
-        wof_status,
-      </if>
-      <if test="operator != null" >
-        wof_operator,
-      </if>
-      <if test="createdby != null" >
-        wof_createdby,
-      </if>
-      <if test="creater != null" >
-        wof_creater,
-      </if>
-      <if test="created != null" >
-        wof_created,
-      </if>
-      <if test="flag != null" >
-        wof_flag,
-      </if>
-      <if test="descr != null" >
-        wof_descr,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="wo != null" >
-        #{wo,jdbcType=INTEGER},
-      </if>
-      <if test="wotype != null" >
-        #{wotype,jdbcType=VARCHAR},
-      </if>
-      <if test="oldstatus != null" >
-        #{oldstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="operator != null" >
-        #{operator,jdbcType=INTEGER},
-      </if>
-      <if test="createdby != null" >
-        #{createdby,jdbcType=INTEGER},
-      </if>
-      <if test="creater != null" >
-        #{creater,jdbcType=VARCHAR},
-      </if>
-      <if test="created != null" >
-        #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="flag != null" >
-        #{flag,jdbcType=CHAR},
-      </if>
-      <if test="descr != null" >
-        #{descr,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.runnerup.model.Woflow" >
-    update sp_woflows
-    <set >
-      <if test="wo != null" >
-        wof_wo = #{wo,jdbcType=INTEGER},
-      </if>
-      <if test="wotype != null" >
-        wof_wotype = #{wotype,jdbcType=VARCHAR},
-      </if>
-      <if test="oldstatus != null" >
-        wof_oldStatus = #{oldstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        wof_status = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="operator != null" >
-        wof_operator = #{operator,jdbcType=INTEGER},
-      </if>
-      <if test="createdby != null" >
-        wof_createdby = #{createdby,jdbcType=INTEGER},
-      </if>
-      <if test="creater != null" >
-        wof_creater = #{creater,jdbcType=VARCHAR},
-      </if>
-      <if test="created != null" >
-        wof_created = #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="flag != null" >
-        wof_flag = #{flag,jdbcType=CHAR},
-      </if>
-      <if test="descr != null" >
-        wof_descr = #{descr,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where wof_id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.runnerup.model.Woflow" >
-    update sp_woflows
-    set wof_wo = #{wo,jdbcType=INTEGER},
-      wof_wotype = #{wotype,jdbcType=VARCHAR},
-      wof_oldStatus = #{oldstatus,jdbcType=VARCHAR},
-      wof_status = #{status,jdbcType=VARCHAR},
-      wof_operator = #{operator,jdbcType=INTEGER},
-      wof_createdby = #{createdby,jdbcType=INTEGER},
-      wof_creater = #{creater,jdbcType=VARCHAR},
-      wof_created = #{created,jdbcType=TIMESTAMP},
-      wof_flag = #{flag,jdbcType=CHAR},
-      wof_descr = #{descr,jdbcType=LONGVARCHAR}
-    where wof_id = #{id,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="cn.runnerup.model.Woflow" >
     update sp_woflows
     set wof_wo = #{wo,jdbcType=INTEGER},
-      wof_wotype = #{wotype,jdbcType=VARCHAR},
       wof_oldStatus = #{oldstatus,jdbcType=VARCHAR},
       wof_status = #{status,jdbcType=VARCHAR},
-      wof_operator = #{operator,jdbcType=INTEGER},
-      wof_createdby = #{createdby,jdbcType=INTEGER},
-      wof_creater = #{creater,jdbcType=VARCHAR},
-      wof_created = #{created,jdbcType=TIMESTAMP},
-      wof_flag = #{flag,jdbcType=CHAR}
+      <if test="createdby == null">wof_createdby = null,</if>
+      <if test="createdby != null">#{createdby.id,jdbcType=INTEGER},</if>
+      wof_created = #{created,jdbcType=TIMESTAMP}
     where wof_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

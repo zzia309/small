@@ -3,21 +3,16 @@ package cn.runnerup.model;
 import java.util.Date;
 
 public class Woflow {
+
     private Integer id;
 
     private Integer wo;
-
-    private String wotype;
 
     private String oldstatus;
 
     private String status;
 
-    private Integer operator;
-
-    private Integer createdby;
-
-    private String creater;
+    private User createdby;
 
     private Date created;
 
@@ -39,14 +34,6 @@ public class Woflow {
         this.wo = wo;
     }
 
-    public String getWotype() {
-        return wotype;
-    }
-
-    public void setWotype(String wotype) {
-        this.wotype = wotype == null ? null : wotype.trim();
-    }
-
     public String getOldstatus() {
         return oldstatus;
     }
@@ -61,30 +48,6 @@ public class Woflow {
 
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
-    }
-
-    public Integer getOperator() {
-        return operator;
-    }
-
-    public void setOperator(Integer operator) {
-        this.operator = operator;
-    }
-
-    public Integer getCreatedby() {
-        return createdby;
-    }
-
-    public void setCreatedby(Integer createdby) {
-        this.createdby = createdby;
-    }
-
-    public String getCreater() {
-        return creater;
-    }
-
-    public void setCreater(String creater) {
-        this.creater = creater == null ? null : creater.trim();
     }
 
     public Date getCreated() {
@@ -102,4 +65,12 @@ public class Woflow {
     public void setDescr(String descr) {
         this.descr = descr == null ? null : descr.trim();
     }
+
+	public User getCreatedby() {
+		return createdby;
+	}
+
+	public void setCreatedby(User createdby) {
+		this.createdby = createdby;
+	}
 }

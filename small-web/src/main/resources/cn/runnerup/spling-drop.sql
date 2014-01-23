@@ -54,19 +54,13 @@ DROP TABLE IF EXISTS `sp_woflows`;
 CREATE TABLE `sp_woflows` (
   `wof_id` int(11) NOT NULL AUTO_INCREMENT,
   `wof_wo` int(11) NOT NULL,
-  `wof_wotype` varchar(64) NOT NULL,
   `wof_oldStatus` varchar(64) DEFAULT NULL,
   `wof_status` varchar(64) DEFAULT NULL,
-  `wof_operator` int(11) DEFAULT NULL,
   `wof_descr` text,
   `wof_createdby` int(11) DEFAULT NULL,
-  `wof_creater` varchar(64) DEFAULT NULL,
   `wof_created` datetime NOT NULL DEFAULT '2014-01-03 12:05:53',
   PRIMARY KEY (`wof_id`),
-  KEY `wof_operator` (`wof_operator`),
   KEY `wof_createdby` (`wof_createdby`),
-  KEY `idx_woFlowwotype` (`wof_wotype`),
-  CONSTRAINT `sp_woflows_ibfk_1` FOREIGN KEY (`wof_operator`) REFERENCES `sp_users` (`usr_id`),
   CONSTRAINT `sp_woflows_ibfk_2` FOREIGN KEY (`wof_createdby`) REFERENCES `sp_users` (`usr_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
