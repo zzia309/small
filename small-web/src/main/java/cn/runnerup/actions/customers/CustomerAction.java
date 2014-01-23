@@ -12,6 +12,7 @@ import cn.runnerup.actions.RunnerSupport;
 import cn.runnerup.model.Business;
 import cn.runnerup.model.Customer;
 import cn.runnerup.model.User;
+import cn.runnerup.service.AttachmentService;
 import cn.runnerup.service.BusinessService;
 import cn.runnerup.service.CustomerService;
 import cn.runnerup.service.WoFlowService;
@@ -32,6 +33,9 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 
 	@Autowired
 	private WoFlowService woFlowService;
+
+	@Autowired
+	private AttachmentService attachmentService;
 
 	private Integer id;
 
@@ -54,47 +58,80 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 	}
 
 	public HttpHeaders create() {
-		model.setCreatedby(getUser());
-		model.setCreated(Calendar.getInstance().getTime());
-		customerService.createCustomer(model);
-		model.setSuccess(true);
+		try {
+			User user = getUser();
+			model.setCreatedby(user);
+			model.setCreated(Calendar.getInstance().getTime());
+			customerService.createCustomer(model);
+			if(model.getCustomerfile() != null) {
+				for(int i=0; i<model.getCustomerfile().length; i++) {
+					attachmentService.upload(user, "customer", model.getId().toString(), 0, model.getCustomerfile()[i], model.getCustomerfileFileName()[i]);
+				}
+			}
+			model.setSuccess(true);
+		} catch (Exception e) {
+
+		}
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
 	}
 
 	public String createFlow() {
-		Integer modelId = model.getId();
-		model.setFlow(true);
-		User user = getUser();
-		if(modelId != null) {
-			Business business = businessService.getBusinessByCustomer(modelId);
-			if(business != null) {
-				business.setStatus("new");
-				businessService.updateBusiness(business);
+		try {
+			Integer modelId = model.getId();
+			model.setFlow(true);
+			User user = getUser();
+			if(modelId != null) {
+				Business business = businessService.getBusinessByCustomer(modelId);
+				if(business != null) {
+					business.setStatus("new");
+					businessService.updateBusiness(business);
+				}else {
+					business = new Business();
+					business.setCustomer(model);
+					business.setStatus("new");
+					businessService.createBusiness(business);
+				}
+				if(model.getCustomerfile() != null) {
+					for(int i=0; i<model.getCustomerfile().length; i++) {
+						attachmentService.upload(getUser(), "customer", model.getId().toString(), 0, model.getCustomerfile()[i], model.getCustomerfileFileName()[i]);
+					}
+				}
+				customerService.updateCustomer(model);
 			}else {
-				business = new Business();
+				model.setCreatedby(user);
+				model.setCreated(Calendar.getInstance().getTime());
+				customerService.createCustomer(model);
+				if(model.getCustomerfile() != null) {
+					for(int i=0; i<model.getCustomerfile().length; i++) {
+						attachmentService.upload(getUser(), "customer", model.getId().toString(), 0, model.getCustomerfile()[i], model.getCustomerfileFileName()[i]);
+					}
+				}
+				Business business = new Business();
 				business.setCustomer(model);
 				business.setStatus("new");
 				businessService.createBusiness(business);
 			}
-			customerService.updateCustomer(model);
-		}else {
-			model.setCreatedby(user);
-			model.setCreated(Calendar.getInstance().getTime());
-			customerService.createCustomer(model);
-			Business business = new Business();
-			business.setCustomer(model);
-			business.setStatus("new");
-			businessService.createBusiness(business);
+			woFlowService.createWoFlow(user, "", "-", "new", model.getId());
+			model.setSuccess(true);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		woFlowService.createWoFlow(user, "", "-", "new", model.getId());
-		model.setSuccess(true);
 		return SUCCESS;
 	}
 
 	public HttpHeaders update() {
-		if(customer != null) {
-			customerService.updateCustomer(model);
-			model.setSuccess(true);
+		try {
+			if(customer != null) {
+				customerService.updateCustomer(model);
+				if(model.getCustomerfile() != null) {
+					for(int i=0; i<model.getCustomerfile().length; i++) {
+						attachmentService.upload(getUser(), "customer", model.getId().toString(), 0, model.getCustomerfile()[i], model.getCustomerfileFileName()[i]);
+					}
+				}
+				model.setSuccess(true);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
 	}

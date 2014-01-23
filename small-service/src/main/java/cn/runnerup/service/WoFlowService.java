@@ -1,6 +1,7 @@
 package cn.runnerup.service;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,4 +26,9 @@ public class WoFlowService {
 		record.setCreatedby(createdby);
 		woflowMapper.insert(record);
 	}
+
+	public List<Woflow> getBusinessFlow(Integer wo) {
+		return woflowMapper.getBusinessFlow(wo);
+	}
+
 }

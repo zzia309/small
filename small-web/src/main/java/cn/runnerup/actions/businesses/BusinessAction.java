@@ -83,7 +83,7 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 				User user = getUser();
 				String newStatus = model.getNewStatus();
 				if("-".equals(newStatus)) {
-					Customer customer = model.getCustomer();
+					Customer customer = business.getCustomer();
 					customer.setFlow(false);
 					customerService.updateCustomer(customer);
 				}

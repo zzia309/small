@@ -16,6 +16,13 @@
     wof_created, wof_descr
   </sql>
 
+  <select id="getBusinessFlow" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sp_woflows
+    where wof_wo = #{wo,jdbcType=INTEGER}
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />

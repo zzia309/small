@@ -62,7 +62,7 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 var attachmentTab = {
 	itemId: 'attachment',
 	title: '流程和附件',
-	items: [woFlowPanel, attachmentGrid],
+	items: [woFlowPanel,attachmentGrid],
 	edit: function(){},
 	listeners: {
 		activate: function() {
@@ -70,7 +70,7 @@ var attachmentTab = {
 				woFlowStore.removeAll();
 				attachmentStore.removeAll();
 				Ext.Ajax.request({
-					url: '${request.contextPath}/commons/attachment/' + App.currentId + '.gson?type=business',
+					url: '${request.contextPath}/commons/attachment/' + App.currentId + '.gson?type=customer',
 					success: function(response) {
 						var result = Ext.decode(response.responseText);
 						if(result.success) {

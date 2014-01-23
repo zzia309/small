@@ -240,7 +240,27 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 });
 
 var customerForm = Ext.create('Ext.form.Panel', {
-	items: [loanerPanel, matePanel, guaranteePanel, carPanel],
+	items: [loanerPanel, matePanel, guaranteePanel, carPanel, {
+		xtype: 'panel',
+		layout: 'column',
+		items: [{
+	    	xtype: 'button',
+	    	columnWidth: 0.09,
+	    	text: '添加附件',
+	    	handler: function(){
+	    		var con = this.up('panel').query('[addFieldContainer]')[0];
+	    		con.add({
+	    			xtype: 'xfilefield',
+	    			itemName: 'customerfile'
+	    		});
+	    	}
+	    }, {
+	    	xtype: 'fieldcontainer',
+	    	addFieldContainer: true,
+	    	layout: 'anchor',
+	    	columnWidth: 0.91
+	    }]
+	}],
 	layout: 'anchor',
 	anchor: '98.6% 120%',
 	dockedItems: [{
