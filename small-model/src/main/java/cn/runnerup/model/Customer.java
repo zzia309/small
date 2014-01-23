@@ -93,25 +93,25 @@ public class Customer {
 
     private String cartype;
 
-    private Long carprice;
+    private Double carprice;
 
-    private Long carloans;
+    private Double carloans;
 
-    private Long carrate;
+    private Double carrate;
 
-    private Long carbrokerage;
+    private Double carbrokerage;
 
     private String cartoobject;
 
     private String cartoaccount;
 
-    private Long bail;
+    private Double bail;
 
-    private Long notaryfees;
+    private Double notaryfees;
 
-    private Long otherfees;
+    private Double otherfees;
 
-    private Long guaranteefees;
+    private Double guaranteefees;
 
     private boolean isFlow;
 
@@ -495,35 +495,35 @@ public class Customer {
 		this.cartype = cartype;
 	}
 
-	public Long getCarprice() {
+	public Double getCarprice() {
 		return carprice;
 	}
 
-	public void setCarprice(Long carprice) {
+	public void setCarprice(Double carprice) {
 		this.carprice = carprice;
 	}
 
-	public Long getCarloans() {
+	public Double getCarloans() {
 		return carloans;
 	}
 
-	public void setCarloans(Long carloans) {
+	public void setCarloans(Double carloans) {
 		this.carloans = carloans;
 	}
 
-	public Long getCarrate() {
+	public Double getCarrate() {
 		return carrate;
 	}
 
-	public void setCarrate(Long carrate) {
+	public void setCarrate(Double carrate) {
 		this.carrate = carrate;
 	}
 
-	public Long getCarbrokerage() {
+	public Double getCarbrokerage() {
 		return carbrokerage;
 	}
 
-	public void setCarbrokerage(Long carbrokerage) {
+	public void setCarbrokerage(Double carbrokerage) {
 		this.carbrokerage = carbrokerage;
 	}
 
@@ -543,35 +543,35 @@ public class Customer {
 		this.cartoaccount = cartoaccount;
 	}
 
-	public Long getBail() {
+	public Double getBail() {
 		return bail;
 	}
 
-	public void setBail(Long bail) {
+	public void setBail(Double bail) {
 		this.bail = bail;
 	}
 
-	public Long getNotaryfees() {
+	public Double getNotaryfees() {
 		return notaryfees;
 	}
 
-	public void setNotaryfees(Long notaryfees) {
+	public void setNotaryfees(Double notaryfees) {
 		this.notaryfees = notaryfees;
 	}
 
-	public Long getOtherfees() {
+	public Double getOtherfees() {
 		return otherfees;
 	}
 
-	public void setOtherfees(Long otherfees) {
+	public void setOtherfees(Double otherfees) {
 		this.otherfees = otherfees;
 	}
 
-	public Long getGuaranteefees() {
+	public Double getGuaranteefees() {
 		return guaranteefees;
 	}
 
-	public void setGuaranteefees(Long guaranteefees) {
+	public void setGuaranteefees(Double guaranteefees) {
 		this.guaranteefees = guaranteefees;
 	}
 

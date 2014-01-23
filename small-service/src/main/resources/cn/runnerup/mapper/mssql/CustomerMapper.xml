@@ -47,16 +47,16 @@
     <result column="cs_years" property="years" jdbcType="INTEGER" />
     <result column="cs_stages" property="stages" jdbcType="INTEGER" />
     <result column="cs_carType" property="cartype" jdbcType="VARCHAR" />
-    <result column="cs_carPrice" property="carprice" jdbcType="DECIMAL" />
-    <result column="cs_carLoans" property="carloans" jdbcType="DECIMAL" />
-    <result column="cs_carRate" property="carrate" jdbcType="DECIMAL" />
-    <result column="cs_carBrokerage" property="carbrokerage" jdbcType="DECIMAL" />
+    <result column="cs_carPrice" property="carprice" jdbcType="DOUBLE" />
+    <result column="cs_carLoans" property="carloans" jdbcType="DOUBLE" />
+    <result column="cs_carRate" property="carrate" jdbcType="DOUBLE" />
+    <result column="cs_carBrokerage" property="carbrokerage" jdbcType="DOUBLE" />
     <result column="cs_carToObject" property="cartoobject" jdbcType="VARCHAR" />
     <result column="cs_carToAccount" property="cartoaccount" jdbcType="VARCHAR" />
-    <result column="cs_bail" property="bail" jdbcType="DECIMAL" />
-    <result column="cs_notaryFees" property="notaryfees" jdbcType="DECIMAL" />
-    <result column="cs_otherFees" property="otherfees" jdbcType="DECIMAL" />
-    <result column="cs_guaranteeFees" property="guaranteefees" jdbcType="DECIMAL" />
+    <result column="cs_bail" property="bail" jdbcType="DOUBLE" />
+    <result column="cs_notaryFees" property="notaryfees" jdbcType="DOUBLE" />
+    <result column="cs_otherFees" property="otherfees" jdbcType="DOUBLE" />
+    <result column="cs_guaranteeFees" property="guaranteefees" jdbcType="DOUBLE" />
 	<result column="cs_isflow" property="isFlow" />
 	<result column="cs_created" property="created"/>
 	<association property="createdby" column="cs_createdby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
@@ -139,10 +139,10 @@
       #{guaranteebirthplace,jdbcType=VARCHAR}, #{guaranteehukou,jdbcType=VARCHAR}, #{guaranteeunitaddress,jdbcType=VARCHAR},
       #{guaranteeposition,jdbcType=VARCHAR}, #{sales,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR},
       #{years,jdbcType=INTEGER}, #{stages,jdbcType=INTEGER}, #{cartype,jdbcType=VARCHAR},
-      #{carprice,jdbcType=DECIMAL}, #{carloans,jdbcType=DECIMAL}, #{carrate,jdbcType=DECIMAL},
-      #{carbrokerage,jdbcType=DECIMAL}, #{cartoobject,jdbcType=VARCHAR}, #{cartoaccount,jdbcType=VARCHAR},
-      #{bail,jdbcType=DECIMAL}, #{notaryfees,jdbcType=DECIMAL}, #{otherfees,jdbcType=DECIMAL},
-      #{guaranteefees,jdbcType=DECIMAL}, #{isFlow,jdbcType=BOOLEAN},
+      #{carprice,jdbcType=DOUBLE}, #{carloans,jdbcType=DOUBLE}, #{carrate,jdbcType=DOUBLE},
+      #{carbrokerage,jdbcType=DOUBLE}, #{cartoobject,jdbcType=VARCHAR}, #{cartoaccount,jdbcType=VARCHAR},
+      #{bail,jdbcType=DOUBLE}, #{notaryfees,jdbcType=DOUBLE}, #{otherfees,jdbcType=DOUBLE},
+      #{guaranteefees,jdbcType=DOUBLE}, #{isFlow,jdbcType=BOOLEAN},
       #{created,jdbcType=TIMESTAMP},
       <if test="createdby == null">NULL</if><if test="createdby != null">#{createdby.id,jdbcType=INTEGER}</if>
       )
@@ -198,16 +198,16 @@
       cs_years = #{years,jdbcType=INTEGER},
       cs_stages = #{stages,jdbcType=INTEGER},
       cs_carType = #{cartype,jdbcType=VARCHAR},
-      cs_carPrice = #{carprice,jdbcType=DECIMAL},
-      cs_carLoans = #{carloans,jdbcType=DECIMAL},
-      cs_carRate = #{carrate,jdbcType=DECIMAL},
-      cs_carBrokerage = #{carbrokerage,jdbcType=DECIMAL},
+      cs_carPrice = #{carprice,jdbcType=DOUBLE},
+      cs_carLoans = #{carloans,jdbcType=DOUBLE},
+      cs_carRate = #{carrate,jdbcType=DOUBLE},
+      cs_carBrokerage = #{carbrokerage,jdbcType=DOUBLE},
       cs_carToObject = #{cartoobject,jdbcType=VARCHAR},
       cs_carToAccount = #{cartoaccount,jdbcType=VARCHAR},
-      cs_bail = #{bail,jdbcType=DECIMAL},
-      cs_notaryFees = #{notaryfees,jdbcType=DECIMAL},
-      cs_otherFees = #{otherfees,jdbcType=DECIMAL},
-      cs_guaranteeFees = #{guaranteefees,jdbcType=DECIMAL},
+      cs_bail = #{bail,jdbcType=DOUBLE},
+      cs_notaryFees = #{notaryfees,jdbcType=DOUBLE},
+      cs_otherFees = #{otherfees,jdbcType=DOUBLE},
+      cs_guaranteeFees = #{guaranteefees,jdbcType=DOUBLE},
       cs_isflow = #{isFlow,jdbcType=BOOLEAN},
       cs_created = #{created, jdbcType=TIMESTAMP},
       <if test="createdby == null">cs_createdby = NULL</if><if test="createdby != null">cs_createdby = #{createdby.id,jdbcType=INTEGER}</if>

@@ -199,25 +199,41 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		name: 'manager'
 	}, {
 		fieldLabel: ' 贷款年限',
-		name: 'years'
+		name: 'years',
+		xtype: 'numberfield',
+		minValue: 1
 	}, {
 		fieldLabel: '贷款分期',
-		name: 'stages'
+		name: 'stages',
+		xtype: 'numberfield',
+		minValue: 1
 	}, {
 		fieldLabel: '购车类型',
 		name: 'cartype'
 	}, {
 		fieldLabel: '车价',
-		name: 'carprice'
+		name: 'carprice',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
 	}, {
 		fieldLabel: '贷款金额',
-		name: 'carloans'
+		name: 'carloans',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
 	}, {
 		fieldLabel: '贷款利率',
-		name: 'carrate'
+		name: 'carrate',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
 	}, {
 		fieldLabel: '佣金',
-		name: 'carbrokerage'
+		name: 'carbrokerage',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
 	}, {
 		fieldLabel: '打款对象',
 		name: 'cartoobject'
@@ -226,16 +242,28 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		name: 'cartoaccount'
 	}, {
 		fieldLabel: '保证金',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4,
 		name: 'bail'
 	}, {
 		fieldLabel: '公证费',
-		name: 'notaryfees'
+		name: 'notaryfees',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
 	}, {
 		fieldLabel: '担保费',
-		name: 'guaranteefees'
+		name: 'guaranteefees',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
 	}, {
 		fieldLabel: '其他费用',
-		name: 'otherfees'
+		name: 'otherfees',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
 	}]
 });
 
@@ -243,7 +271,7 @@ var createPanel = Ext.create('Ext.panel.Panel', {
 	title: '创建信息',
 	layout: 'column',
 	collapsible: true,
-	anchor: '100% 10%',
+	anchor: '100% 8%',
 	defaults: {
 		columnWidth: 0.5,
 		labelAlign: 'right',
@@ -273,6 +301,7 @@ var createPanel = Ext.create('Ext.panel.Panel', {
 var customerForm = Ext.create('Ext.form.Panel', {
 	items: [loanerPanel, matePanel, guaranteePanel, carPanel, createPanel, {
 		xtype: 'panel',
+		height: 200,
 		layout: 'column',
 		items: [{
 	    	xtype: 'button',
@@ -399,6 +428,11 @@ var customerTab = {
 				callback: function(options, success, response) {
 					var values = Ext.decode(response.responseText);
 					form.setValues(values);
+					var fields = form.getFields();
+					fields.each(function(field){
+						field.setReadOnly(false);
+						field.validate();
+					});
 				}
 			};
 			if(App.currentId){
@@ -406,9 +440,17 @@ var customerTab = {
 					url: '${request.contextPath}/customers/customer/' + App.currentId + '.gson',
 					success: function(response){
 						var values = Ext.decode(response.responseText);
+						var flow = values.isFlow;
 						form.setValues(values);
 						var fields = form.getFields();
 						fields.each(function(field){
+							if(flow){
+								field.setReadOnly(true);
+								field.validate();
+							}else{
+								field.setReadOnly(false);
+								field.validate();
+							}
 							field.resetOriginalValue();
 						});
 					}

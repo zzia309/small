@@ -7,7 +7,7 @@
     <result column="buss_publicOrder" property="publicorder" jdbcType="VARCHAR" />
     <result column="buss_court" property="court" jdbcType="VARCHAR" />
     <result column="buss_branch" property="branch" jdbcType="VARCHAR" />
-    <result column="buss_advances" property="advances" jdbcType="DECIMAL" />
+    <result column="buss_advances" property="advances" jdbcType="DOUBLE" />
     <result column="buss_advanceDate" property="advancedate" jdbcType="TIMESTAMP" />
     <result column="buss_loanDate" property="loandate" jdbcType="TIMESTAMP" />
     <result column="buss_insuranceAgent" property="insuranceagent" jdbcType="VARCHAR" />
@@ -84,7 +84,7 @@
       buss_status, buss_customer)
     values (#{id,jdbcType=INTEGER}, #{credit,jdbcType=VARCHAR},
       #{publicorder,jdbcType=VARCHAR}, #{court,jdbcType=VARCHAR}, #{branch,jdbcType=VARCHAR},
-      #{advances,jdbcType=DECIMAL}, #{advancedate,jdbcType=TIMESTAMP}, #{loandate,jdbcType=TIMESTAMP},
+      #{advances,jdbcType=DOUBLE}, #{advancedate,jdbcType=TIMESTAMP}, #{loandate,jdbcType=TIMESTAMP},
       #{insuranceagent,jdbcType=VARCHAR}, #{insurancestart,jdbcType=TIMESTAMP}, #{insuranceend,jdbcType=TIMESTAMP},
       #{certificate,jdbcType=VARCHAR}, #{isimpawn,jdbcType=TINYINT}, #{issonghang,jdbcType=TINYINT},
       #{carmodel,jdbcType=VARCHAR}, #{carengine,jdbcType=VARCHAR}, #{carframe,jdbcType=VARCHAR},
@@ -102,7 +102,7 @@
 			buss_publicOrder = #{publicorder,jdbcType=VARCHAR},
 			buss_court = #{court,jdbcType=VARCHAR},
 			buss_branch = #{branch,jdbcType=VARCHAR},
-			buss_advances = #{advances,jdbcType=DECIMAL},
+			buss_advances = #{advances,jdbcType=DOUBLE},
 			buss_advanceDate = #{advancedate,jdbcType=TIMESTAMP},
 			buss_loanDate = #{loandate,jdbcType=TIMESTAMP},
 			buss_insuranceAgent = #{insuranceagent,jdbcType=VARCHAR},

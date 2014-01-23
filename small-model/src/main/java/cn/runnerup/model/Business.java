@@ -16,7 +16,7 @@ public class Business {
 
     private String branch;
 
-    private Long advances;
+    private Double advances;
 
     private Date advancedate;
 
@@ -90,11 +90,11 @@ public class Business {
 		this.branch = branch;
 	}
 
-	public Long getAdvances() {
+	public Double getAdvances() {
 		return advances;
 	}
 
-	public void setAdvances(Long advances) {
+	public void setAdvances(Double advances) {
 		this.advances = advances;
 	}
 
