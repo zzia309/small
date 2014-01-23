@@ -41,7 +41,7 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 		xtype: 'xdatecolumn',
 		text: '上传时间',
 		dataIndex: 'created',
-		format: Eap.datetimeFormat,
+		format: 'Y-m-d H:i:s',
 		flex: 1
 	},{
 		text: '上传用户',

@@ -59,6 +59,7 @@ var userForm = Ext.create('Ext.form.Panel', {
 	}],
 	buttons:[{
 		text: '保存',
+		icon: '${request.contextPath}/statics/style/img/action/save.png',
 		handler: function(){
 			var me = this;
 			var form = me.up('form').getForm();

@@ -26,6 +26,7 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	},{
 		xtype: 'button',
 		text: '搜索',
+		icon: '${request.contextPath}/statics/style/img/action/search.png',
 		handler: function() {
 			var value = Ext.getCmp('searchField').getValue();
 			if(!Ext.isEmpty(value)) {
@@ -36,18 +37,21 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	}, {
 		xtype: 'button',
 		text: '新增用户信息',
+		icon: '${request.contextPath}/statics/style/img/action/add.png',
 		handler: function(){
 			windows.show();
 		}
 	},{
 		xtype: 'button',
 		text: '修改用户资料',
+		icon: '${request.contextPath}/statics/style/img/action/edit.png',
 		handler: function(){
 			windows.initData();
 		}
 	},{
 		xtype: 'button',
 		text: '删除用户资料',
+		icon: '${request.contextPath}/statics/style/img/action/delete.png',
 		handler: function() {
 			var sm = listgrid.getSelectionModel();
 			if(sm.hasSelection()){

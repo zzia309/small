@@ -113,10 +113,12 @@ var businessForm = Ext.create('Ext.form.Panel', {
 	items:[creditPanel, feePanel, insurancePanel, {
 		xtype: 'panel',
 		layout: 'column',
+		id: 'businessFile',
 		items: [{
 	    	xtype: 'button',
 	    	columnWidth: 0.09,
 	    	text: '添加附件',
+	    	iconCls:'y-action-attachment',
 	    	handler: function(){
 	    		var con = this.up('panel').query('[addFieldContainer]')[0];
 	    		con.add({
@@ -335,6 +337,12 @@ var businessTab = {
 		var form = businessForm.getForm();
 		if(!Ext.isEmpty(id)){
 		}else{
+		}
+	},
+	listeners: {
+		activate: function(){
+			var fieldSet = Ext.getCmp('businessFile');
+			fieldSet.query('[addFieldContainer]')[0].removeAll();
 		}
 	}
 };

@@ -27,6 +27,7 @@ var store = Ext.create('Ext.data.Store', {
 var listgrid = Ext.create('Ext.grid.Panel', {
 	tbar:[{
 		xtype: 'button',
+		icon: '${request.contextPath}/statics/style/img/action/add.png',
 		text: '新增客户信息',
 		handler: function(){
 			App.currentId = null;
@@ -35,6 +36,7 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	},{
 		xtype: 'button',
 		text: '修改客户资料',
+		icon: '${request.contextPath}/statics/style/img/action/edit.png',
 		handler: function(){
 			App.openTab('customer', App.currentId);
 		}

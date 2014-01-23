@@ -274,10 +274,12 @@ var customerForm = Ext.create('Ext.form.Panel', {
 	items: [loanerPanel, matePanel, guaranteePanel, carPanel, createPanel, {
 		xtype: 'panel',
 		layout: 'column',
+		id: 'customerFile',
 		items: [{
 	    	xtype: 'button',
 	    	columnWidth: 0.09,
 	    	text: '添加附件',
+	    	iconCls:'y-action-attachment',
 	    	handler: function(){
 	    		var con = this.up('panel').query('[addFieldContainer]')[0];
 	    		con.add({
@@ -303,6 +305,7 @@ var customerForm = Ext.create('Ext.form.Panel', {
 	    	xtype: 'button',
 			text: '保存',
 			itemId: 'save',
+			icon: '${request.contextPath}/statics/style/img/action/save.png',
 			disabled: true,
 			formBind: true,
 			handler: function(){
@@ -357,6 +360,7 @@ var customerForm = Ext.create('Ext.form.Panel', {
 	    	xtype: 'button',
 			text: '重置',
 			itemId: 'reset',
+			icon: '${request.contextPath}/statics/style/img/action/reset.png',
 			handler: function(){
 				this.up('form').getForm().reset();
 			}
@@ -392,6 +396,8 @@ var customerTab = {
 	items: customerForm,
 	listeners: {
 		activate: function(){
+			var fieldSet = Ext.getCmp('customerFile');
+			fieldSet.query('[addFieldContainer]')[0].removeAll();
 			var form = customerForm.getForm();
 			var config = {
 				url: '${request.contextPath}/customers/customer/new.gson',

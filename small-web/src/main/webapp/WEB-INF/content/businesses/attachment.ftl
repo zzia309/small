@@ -41,7 +41,7 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 		xtype: 'xdatecolumn',
 		text: '上传时间',
 		dataIndex: 'created',
-		format: Eap.datetimeFormat,
+		format: 'Y-m-d H:i:s',
 		flex: 1
 	},{
 		text: '上传用户',
@@ -56,11 +56,9 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 		xtype:'actioncolumn',
         width:50,
         items: [{
-        	iconCls: 'y-action-delete',
+        	icon: '${request.contextPath}/statics/style/img/action/delete.png',
             tooltip: 'Delete',
             handler: function(grid, rowIndex, colIndex) {
-            	console.log('-----');
-                alert("Terminate " + rec.get('firstname'));
             }
         }]
 	}],
