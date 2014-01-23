@@ -117,7 +117,7 @@ public class StaticServlet implements HttpRequestHandler, ServletContextAware {
 	protected URL findContextResource(String name) {
 		URL url = null;
 		try {
-			url = context.getResource("/statics/style/" + name);
+			url = context.getResource("/statics/" + name);
 		} catch (MalformedURLException e) {
 		}
 		return url;

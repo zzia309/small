@@ -56,11 +56,9 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 		xtype:'actioncolumn',
         width:50,
         items: [{
-        	icon: '${request.contextPath}/statics/img/action/delete.png',
+        	icon: '${request.contextPath}/statics/style/img/action/delete.png',
             tooltip: 'Delete',
             handler: function(grid, rowIndex, colIndex) {
-            	console.log('-----');
-                alert("Terminate " + rec.get('firstname'));
             }
         }]
 	}],
