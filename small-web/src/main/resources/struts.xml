@@ -7,6 +7,7 @@
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.mapper.class" value="rest" />
     <constant name="struts.action.extension" value="xhtml,,xml,json,gson"/>
+    <constant name="struts.action.excludePattern" value="/statics/.*?"/>
     <constant name="struts.convention.action.packages" value="cn.runnerup.actions"/>
     <constant name="struts.convention.action.mapAllMatches" value="true"/>
     <constant name="struts.convention.default.parent.package" value="runnerup-default"/>

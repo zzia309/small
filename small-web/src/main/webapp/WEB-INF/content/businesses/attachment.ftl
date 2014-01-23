@@ -52,6 +52,17 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 				return value.fullname;
 			}
 		}
+	},{
+		xtype:'actioncolumn',
+        width:50,
+        items: [{
+        	iconCls: 'y-action-delete',
+            tooltip: 'Delete',
+            handler: function(grid, rowIndex, colIndex) {
+            	console.log('-----');
+                alert("Terminate " + rec.get('firstname'));
+            }
+        }]
 	}],
 	listeners: {
 		itemdblclick: function(view, record) {
@@ -77,7 +88,8 @@ var attachmentTab = {
 						var result = Ext.decode(response.responseText);
 						if(result.success) {
 							attachmentStore.loadData(result['attachments']);
-							woFlowStore.loadData(result['woflows']);
+							if(!Ext.isEmpty(result['woflows']))
+								woFlowStore.loadData(result['woflows']);
 						}else {
 							Ext.MessageBox.alert("提醒", "没有记录");
 						}
