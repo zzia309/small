@@ -28,6 +28,12 @@
 		App.createContentPanel({
 			tabs: [listTab, businessTab, customerTab, attachmentTab]
 		});
+		var selection = listgrid.getSelectionModel().getSelection()[0];
+		if(!selection) {
+			App.getTab("business").setDisabled(true);
+			App.getTab("customer").setDisabled(true);
+			App.getTab("attachment").setDisabled(true);
+		}
 		<@dolayout/>
 	});
 </script>

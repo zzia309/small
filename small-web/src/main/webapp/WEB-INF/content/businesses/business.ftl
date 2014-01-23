@@ -1,13 +1,18 @@
 var creditPanel = Ext.create('Ext.panel.Panel', {
 	defaultType: 'textfield',
 	anchor: '100% 38%',
-	title: '客户信息',
+	title: '征信信息',
 	layout: 'column',
 	collapsible: true,
 	defaults: {
 		columnWidth: 0.5,
 		labelAlign: 'right',
-		margin: '2 0 0 0'
+		margin: '2 0 2 0',
+		<#if action.user?? && action.user.priority==2>
+			readOnly: false
+		<#else>
+			readOnly: true
+		</#if>
 	},
 	items: [{
 		name: 'id',
@@ -50,52 +55,75 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 	defaults: {
 		columnWidth: 0.25,
 		labelAlign: 'right',
-		margin: '2 0 0 0'
+		margin: '2 0 2 0',
+		<#if action.user?? && action.user.priority==6>
+			readOnly: false
+		<#else>
+			readOnly: true
+		</#if>
 	},
 	items: [{
 		fieldLabel: '分公司',
 		name: 'branch'
 	}, {
+		xtype:'numberfield',
 		fieldLabel: '垫款金额',
 		name: 'advances'
 	}, {
-		fieldLabel: '垫款 日期',
+		fieldLabel: '垫款日期',
+		xtype:'xdatefield',
+		format:'Y-m-d',
 		name: 'advanceDate'
 	}, {
 		fieldLabel: '银行放款日期',
+		xtype:'xdatefield',
+		format:'Y-m-d',
 		name: 'loandate'
 	}]
 });
 
 var insurancePanel = Ext.create('Ext.panel.Panel', {
 	defaultType: 'textfield',
-	anchor: '100% 20%',
-	title: '客户信息',
+	anchor: '100% 25%',
+	title: '后勤处理',
 	layout: 'column',
 	collapsible: true,
 	defaults: {
 		columnWidth: 0.3333,
 		labelAlign: 'right',
-		margin: '2 0 0 0'
+		margin: '2 0 2 0',
+		<#if action.user?? && action.user.priority==7>
+			readOnly: false
+		<#else>
+			readOnly: true
+		</#if>
 	},
 	items: [ {
 		fieldLabel: '保险公司',
 		name: 'insuranceAgent'
 	}, {
 		fieldLabel: '保险起始日期',
+		xtype:'xdatefield',
+		format:'Y-m-d',
 		name: 'insuranceStart'
 	}, {
 		fieldLabel: '保险结束日期',
+		xtype:'xdatefield',
+		format:'Y-m-d',
 		name: 'insuranceEnd'
+	}, {
+		fieldLabel: '是否抵押',
+		name: 'isImpawn',
+		xtype: 'checkbox',
+		inputValue: true
+	}, {
+		fieldLabel: '是否送杭',
+		name: 'isSongHang',
+		xtype: 'checkbox',
+		inputValue: true
 	}, {
 		fieldLabel: '证书号',
 		name: 'certificate'
-	}, {
-		fieldLabel: '是否抵押',
-		name: 'isImpawn'
-	}, {
-		fieldLabel: '是否送杭',
-		name: 'isSongHang'
 	}, {
 		fieldLabel: '车辆型号',
 		name: 'carmodel'
@@ -110,11 +138,24 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 
 
 var businessForm = Ext.create('Ext.form.Panel', {
-	items:[creditPanel, feePanel, insurancePanel, {
+	items:[creditPanel,
+		<#if action.user?? && (action.user.priority>5)>
+		feePanel,
+		</#if>
+		<#if action.user?? && (action.user.priority>6)>
+		insurancePanel,
+		</#if>
+		{
 		xtype: 'panel',
 		layout: 'column',
 		id: 'businessFile',
+		margin: '2 0 2 0',
 		items: [{
+			fieldLabel:'流程意见',
+			name:'woflowDescr',
+			columnWidth: 1,
+			xtype: 'htmleditor'
+		},{
 	    	xtype: 'button',
 	    	columnWidth: 0.09,
 	    	text: '添加附件',
@@ -130,10 +171,9 @@ var businessForm = Ext.create('Ext.form.Panel', {
 	    	xtype: 'fieldcontainer',
 	    	addFieldContainer: true,
 	    	layout: 'anchor',
-	    	columnWidth: 0.91
+	    	columnWidth: 0.8
 	    }]
 	}],
-	anchor: '100% 100%',
 	layout: 'anchor',
 	autoScroll: true,
 	init: function(id){
