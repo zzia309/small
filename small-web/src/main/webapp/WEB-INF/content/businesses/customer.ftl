@@ -1,3 +1,11 @@
+var carStore = Ext.create('Ext.data.Store', {
+	fields:['name','code'],
+	data:[
+	  {name: '二手车', code: '二手车'},
+	  {name: '新车', code: '新车'}
+	]
+});
+
 var loanerPanel = Ext.create('Ext.panel.Panel', {
 	title: '贷款人信息',
 	layout: 'column',
@@ -205,7 +213,12 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		name: 'stages'
 	}, {
 		fieldLabel: '购车类型',
-		name: 'cartype'
+		xtype: 'combobox',
+		name: 'cartype',
+	    store: carStore,
+	    queryMode: 'local',
+	    displayField: 'name',
+	    valueField: 'code'
 	}, {
 		fieldLabel: '车价',
 		name: 'carprice'
