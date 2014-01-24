@@ -2,7 +2,7 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 	title: '贷款人信息',
 	layout: 'column',
 	collapsible: true,
-	anchor: '100% 24%',
+	//anchor: '100% 24%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.3333,
@@ -69,7 +69,7 @@ var matePanel = Ext.create('Ext.panel.Panel', {
 	title: '贷款人配偶信息',
 	layout: 'column',
 	collapsible: true,
-	anchor: '100% 20.5%',
+	//anchor: '100% 20.5%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.3333,
@@ -122,7 +122,7 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 	title: '    担保人信息',
 	layout: 'column',
 	collapsible: true,
-	anchor: '100% 24%',
+	//anchor: '100% 24%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.3333,
@@ -184,7 +184,7 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	title: '车辆及销售信息',
 	layout: 'column',
 	collapsible: true,
-	anchor: '100% 20.5%',
+	//anchor: '100% 20.5%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.25,
@@ -271,7 +271,7 @@ var createPanel = Ext.create('Ext.panel.Panel', {
 	title: '创建信息',
 	layout: 'column',
 	collapsible: true,
-	anchor: '100% 8%',
+	//anchor: '100% 8%',
 	defaults: {
 		columnWidth: 0.5,
 		labelAlign: 'right',
@@ -301,7 +301,7 @@ var createPanel = Ext.create('Ext.panel.Panel', {
 var customerForm = Ext.create('Ext.form.Panel', {
 	items: [loanerPanel, matePanel, guaranteePanel, carPanel, createPanel, {
 		xtype: 'panel',
-		height: 200,
+		height: 100,
 		layout: 'column',
 		id: 'customerFile',
 		items: [{
@@ -323,8 +323,8 @@ var customerForm = Ext.create('Ext.form.Panel', {
 	    	columnWidth: 0.91
 	    }]
 	}],
-	layout: 'anchor',
-	anchor: '98.6% 120%',
+	//layout: 'anchor',
+	//anchor: '98.6% 120%',
 	dockedItems: [{
 	    xtype: 'toolbar',
 	    dock: 'bottom',
@@ -418,7 +418,8 @@ var customerForm = Ext.create('Ext.form.Panel', {
 
 var customerTab = {
 	autoScroll: true,
-	layout: 'anchor',
+	//layout: 'anchor',
+	//layout: 'fit',
 	itemId: 'customer',
 	title: '担保信息维护',
 	items: customerForm,
