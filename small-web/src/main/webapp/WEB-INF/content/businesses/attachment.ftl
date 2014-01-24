@@ -54,7 +54,8 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 		}
 	},{
 		xtype:'actioncolumn',
-        width:50,
+		header: '删除附件',
+        width:80,
         items: [{
         	icon: '${request.contextPath}/statics/style/img/action/delete.png',
             tooltip: 'Delete',
