@@ -54,8 +54,8 @@ Ext.define('Model.Customer',{
 	{name: 'bail'},
 	{name: 'notaryfees'},
 	{name: 'guaranteefees'},
-	{name: 'otherfees'}
-
+	{name: 'otherfees'},
+	{name: 'isflow'}
 	]
 });
 

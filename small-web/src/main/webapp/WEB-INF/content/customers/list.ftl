@@ -41,7 +41,11 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	}],
 	columns: [{
 		header: '客户姓名',
-		dataIndex: 'loanername'
+		dataIndex: 'loanername',
+		renderer: function(value, meta, record, rowIndex, colIndex){
+			var flow = record.get('isflow');
+			return value;
+		}
 	}, {
 		header: '客户性别',
 		dataIndex: 'loanersex'
