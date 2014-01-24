@@ -125,6 +125,9 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	listeners: {
 		itemclick: function(view, record, item, index, e, eOpts){
 			App.currentId = record.get('id');
+			App.getTab("business").setDisabled(false);
+			App.getTab("customer").setDisabled(false);
+			App.getTab("attachment").setDisabled(false);
 		},
 		itemdblclick: function(view, record, item, index, e, eOpts){
 			var tab = App.getTab('business');
@@ -153,6 +156,7 @@ var listTab = {
 	edit: function(){},
 	listeners: {
 		activate: function() {
+
 	    }
 	}
 };

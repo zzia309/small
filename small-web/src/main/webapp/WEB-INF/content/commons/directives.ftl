@@ -13,9 +13,16 @@
 	var root = Ext.create('Ext.data.TreeStore', {
 		root: {
 			expanded: true,
-			children: [{ text: "用户信息维护", leaf: true, uri: '${request.contextPath}/users/index' },
-				{ text: "担保流程", leaf: true, uri: '${request.contextPath}/businesses/index' },
-				{ text: "担保信息维护", leaf: true, uri: '${request.contextPath}/customers/index' }
+			children: [
+				<#if action.user?? && (action.user.username=='admin')>
+				{ text: "用户信息维护", icon: '${request.contextPath}/statics/style/img/action/user.png',leaf: true, uri: '${request.contextPath}/users/index' },
+				</#if>
+				<#if action.user?? && (action.user.priority>1)>
+				{ text: "担保流程", icon: '${request.contextPath}/statics/style/img/action/flow.png',leaf: true, uri: '${request.contextPath}/businesses/index' },
+				</#if>
+				<#if action.user?? && (action.user.priority==1)>
+				{ text: "担保信息维护", icon: '${request.contextPath}/statics/style/img/action/customer.png',leaf: true, uri: '${request.contextPath}/customers/index' }
+				</#if>
 			]}
 	});
 	Eap.layout.Default.createMenu({store: root});

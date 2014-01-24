@@ -15,3 +15,4 @@ insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(4, 
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(5, 'boss', '-');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(5, 'boss', 'finance');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(6, 'finance', 'logistics');
+insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(7, 'logistics', 'closed');
