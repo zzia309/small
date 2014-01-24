@@ -27,7 +27,7 @@
 	});
 	Eap.layout.Default.createMenu({store: root});
 	<#if action.user??>
-	Eap.layout.Default.createBanner({username: '${action.user.username!""}', 'path':'${request.contextPath}'});
+	Eap.layout.Default.createBanner({username: '${action.user.fullname!""}', 'path':'${request.contextPath}'});
 	</#if>
 </#macro>
 
