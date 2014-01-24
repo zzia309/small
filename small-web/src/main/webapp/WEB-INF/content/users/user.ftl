@@ -28,7 +28,8 @@ var userForm = Ext.create('Ext.form.Panel', {
 		name: 'priority',
 		store: rolestore,
 		valueField: 'id',
-		displayField: 'value'
+		displayField: 'value',
+		allowBlank: false
 	},{
 		xtype: 'combo',
 		fieldLabel: '性别',

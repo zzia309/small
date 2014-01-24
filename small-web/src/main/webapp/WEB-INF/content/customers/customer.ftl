@@ -22,22 +22,27 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 		name: 'loanersex',
 		store: genderStore,
 		valueField: 'id',
-		displayField: 'value'
+		displayField: 'value',
+		allowBlank: false
 	}, {
 		xtype: 'numberfield',
 		fieldLabel: '客户年龄',
 		name: 'loanerage',
+		allowBlank: false
 		maxValue: 57,
         minValue: 20
 	}, {
 		fieldLabel: '客户身份证',
-		name: 'loanercard'
+		name: 'loanercard',
+		allowBlank: false
 	}, {
 		fieldLabel: '客户电话',
-		name: 'loanertel'
+		name: 'loanertel',
+		allowBlank: false
 	}, {
 		fieldLabel: '客户家庭住址',
-		name: 'loanerhomeaddress'
+		name: 'loanerhomeaddress',
+		allowBlank: false
 	}, {
 		fieldLabel: '客户所在单位',
 		name: 'loanerunit'
@@ -131,28 +136,34 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 	},
 	items:[{
 		fieldLabel: '担保人姓名',
-		name: 'guaranteename'
+		name: 'guaranteename',
+		allowBlank: false
 	}, {
 		xtype: 'combo',
 		fieldLabel: '担保人性别',
 		name: 'guaranteesex',
 		store: genderStore,
 		valueField: 'id',
-		displayField: 'value'
+		displayField: 'value',
+		allowBlank: false
 	}, {
 		xtype: 'numberfield',
 		fieldLabel: '担保人年龄',
 		name: 'guaranteeage',
+		allowBlank: false
         minValue: 20
 	}, {
 		fieldLabel: '担保人身份证',
-		name: 'guaranteecard'
+		name: 'guaranteecard',
+		allowBlank: false
 	}, {
 		fieldLabel: '担保人电话',
-		name: 'guaranteetel'
+		name: 'guaranteetel',
+		allowBlank: false
 	}, {
 		fieldLabel: '担保人家庭住址',
-		name: 'guaranteehomeaddress'
+		name: 'guaranteehomeaddress',
+		allowBlank: false
 	}, {
 		fieldLabel: '担保人所在单位',
 		name: 'guaranteeunit'
