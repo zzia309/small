@@ -1,31 +1,39 @@
 package cn.runnerup.actions.customers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.runnerup.actions.RunnerSupport;
-import cn.runnerup.model.Customer;
 import cn.runnerup.service.CustomerService;
 
-public class ListAction extends RunnerSupport implements ModelDriven<List<Customer>>{
+public class ListAction extends RunnerSupport implements ModelDriven<ListModel>{
 
 	private static final long serialVersionUID = -2993395498134509472L;
 
-	private List<Customer> model = new ArrayList<Customer>();
+	private ListModel model = new ListModel();
 
 	@Autowired
 	private CustomerService customerService;
 
 	public String index(){
-		model = customerService.getAllCustomers(getUser());
+		String condition = servletRequest.getParameter("condition");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("limit", model.getLimit());
+		map.put("start", model.getStart());
+		map.put("user", getUser().getId());
+		if(StringUtils.isNotBlank(condition))
+			map.put("condition", condition.trim());
+		model.setModels(customerService.getCustomers(map));
+		model.setTotal(customerService.getCustomerCount(map));
 		return SUCCESS;
 	}
 
-	public List<Customer> getModel() {
+	public ListModel getModel() {
 		return model;
 	}
 

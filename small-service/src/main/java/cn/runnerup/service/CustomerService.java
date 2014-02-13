@@ -1,6 +1,7 @@
 package cn.runnerup.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,14 @@ public class CustomerService {
 
 	public List<Customer> selectAll(){
 		return customerMapper.selectAllCustomer();
+	}
+
+	public List<Customer> getCustomers(Map<String, Object> map) {
+		return customerMapper.getCustomers(map);
+	}
+
+	public int getCustomerCount(Map<String, Object> map) {
+		return customerMapper.getCustomersCount(map);
 	}
 
 }

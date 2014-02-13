@@ -75,10 +75,19 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		format:'Y-m-d',
 		name: 'advanceDate'
 	}, {
+		fieldLabel: '垫款银行',
+		name: 'advancebank'
+	}, {
+		fieldLabel: '银行放款金额',
+		name: 'amounts'
+	}, {
 		fieldLabel: '银行放款日期',
 		xtype:'xdatefield',
 		format:'Y-m-d',
 		name: 'loandate'
+	},{
+		fieldLabel: '本单毛利',
+		name: 'profits'
 	}]
 });
 
@@ -133,6 +142,9 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 	}, {
 		fieldLabel: '车架',
 		name: 'carframe'
+	}, {
+		fieldLabel: '车牌',
+		name: 'carno'
 	}]
 });
 

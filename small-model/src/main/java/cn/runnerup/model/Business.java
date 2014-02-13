@@ -42,8 +42,48 @@ public class Business {
 
     private String status;
 
-	public Integer getId() {
+    private String carno;
+
+    private String advancebank;
+
+    private Double amounts;
+
+    private Double profits;
+
+    public Integer getId() {
 		return id;
+	}
+
+	public String getCarno() {
+		return carno;
+	}
+
+	public void setCarno(String carno) {
+		this.carno = carno;
+	}
+
+	public String getAdvancebank() {
+		return advancebank;
+	}
+
+	public void setAdvancebank(String advancebank) {
+		this.advancebank = advancebank;
+	}
+
+	public Double getAmounts() {
+		return amounts;
+	}
+
+	public void setAmounts(Double amounts) {
+		this.amounts = amounts;
+	}
+
+	public Double getProfits() {
+		return profits;
+	}
+
+	public void setProfits(Double profits) {
+		this.profits = profits;
 	}
 
 	public void setId(Integer id) {

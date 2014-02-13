@@ -1,12 +1,3 @@
-var carStore = Ext.create('Ext.data.Store', {
-	fields:['name','code'],
-	data:[
-	  {name: '二手车', code: '二手车'},
-	  {name: '新车', code: '新车'}
-	]
-});
-
-
 var loanerPanel = Ext.create('Ext.panel.Panel', {
 	title: '贷款人信息',
 	layout: 'column',
@@ -93,13 +84,13 @@ var matePanel = Ext.create('Ext.panel.Panel', {
 	items:[{
 		fieldLabel: '配偶姓名',
 		name: 'matename'
-	}, {
-		xtype: 'combo',
-		fieldLabel: '配偶性别',
-		name: 'matesex',
-		store: genderStore,
-		valueField: 'id',
-		displayField: 'value'
+	//}, {
+	//	xtype: 'combo',
+	//	fieldLabel: '配偶性别',
+	//	name: 'matesex',
+	//	store: genderStore,
+	//	valueField: 'id',
+	//	displayField: 'value'
 	}, {
 		xtype: 'numberfield',
 		fieldLabel: '配偶年龄',
@@ -197,6 +188,18 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 	}, {
 		fieldLabel: '担保人户口所在地',
 		name: 'guaranteehukou'
+	}, {
+		fieldLabel: '担保人配偶姓名',
+		name: 'guaranteematename'
+	}, {
+		fieldLabel: '担保人配偶身份证',
+		name: 'guaranteematecard'
+	}, {
+		fieldLabel: '担保人配偶电话',
+		name: 'guaranteematetel'
+	}, {
+		fieldLabel: '是否银行担保',
+		name: 'isbank'
 	}]
 });
 
@@ -217,6 +220,16 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	}, {
 		fieldLabel: ' 经理',
 		name: 'manager'
+	}, {
+		fieldLabel: '开户银行',
+		name: 'bankaccount',
+		xtype: 'combo',
+		store: bankStore,
+		valueField: 'code',
+		displayField: 'name'
+	}, {
+		fieldLabel: '是否GPS',
+		name: 'isgps'
 	}, {
 		fieldLabel: ' 贷款年限',
 		name: 'years',
@@ -286,9 +299,7 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	}, {
 		fieldLabel: '其他费用',
 		name: 'otherfees',
-		xtype: 'numberfield',
-		allowDecimals: true,
-		decimalPrecision: 4
+		columnWidth: 1
 	}]
 });
 

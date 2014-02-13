@@ -12,14 +12,7 @@
 <script type="text/javascript">
 	Ext.onReady(function() {
 		<@initlayout/>
-		var genderStore = Ext.create('Ext.data.Store', {
-			fields: ['id', 'value'],
-			data:[{
-				'id': 'M', 'value': '男'
-			},{
-				'id': 'G', 'value': '女'
-			}]
-		});
+		<#include "../commons/store.ftl">
 		<#include "list.ftl">
 		<#include "woflow.ftl">
 		<#include "customer.ftl">

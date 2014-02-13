@@ -1,6 +1,7 @@
 package cn.runnerup.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.runnerup.model.Customer;
 
@@ -21,4 +22,7 @@ public interface CustomerMapper {
 
     List<Customer> selectAllCustomer();
 
+    int getCustomersCount(Map<String, Object> map);
+
+    List<Customer> getCustomers(Map<String, Object> map);
 }

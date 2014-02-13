@@ -125,7 +125,6 @@ CREATE TABLE `sp_customers` (
   `cs_loanerUnitAddress` varchar(64) DEFAULT NULL,
   `cs_loanerPosition` varchar(64) DEFAULT NULL,
   `cs_mateName` varchar(64) DEFAULT NULL,
-  `cs_mateSex`  varchar(1) DEFAULT NULL,
   `cs_mateAge` int(11) DEFAULT NULL,
   `cs_mateCard` varchar(64) DEFAULT NULL,
   `cs_mateTel` varchar(64) DEFAULT NULL,
@@ -167,6 +166,13 @@ CREATE TABLE `sp_customers` (
   `cs_isflow` tinyint(1) NOT NULL DEFAULT '0',
   `cs_createdby` int(11) NOT NULL,
   `cs_created` datetime NOT NULL,
+  `cs_guaranteeMateName` varchar(64) DEFAULT NULL,
+  `cs_guaranteeMateCard` varchar(64) DEFAULT NULL,
+  `cs_guaranteeMateTel` varchar(64) DEFAULT NULL,
+  `cs_isBank` tinyint(1) NOT NULL DEFAULT '0',
+  `cs_bankAccount` varchar(64) DEFAULT NULL,
+  `cs_isGps` tinyint(1) NOT NULL DEFAULT '0',
+
   PRIMARY KEY (`cs_id`),
   KEY `foreign_key_createdby` (`cs_createdby`),
   CONSTRAINT `foreign_key_createdby` FOREIGN KEY (`cs_createdby`) REFERENCES `sp_users` (`usr_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -198,6 +204,13 @@ CREATE TABLE `sp_businesses` (
   `buss_carEngine` varchar(64) DEFAULT NULL,
   `buss_carFrame` varchar(64) DEFAULT NULL,
   `buss_status` varchar(64) DEFAULT NULL,
+  `buss_carNo` varchar(64) DEFAULT NULL,
+  `buss_advanceBank` varchar(64) DEFAULT NULL,
+  `buss_amounts` double(10, 4) DEFAULT NULL,
+  `buss_profits` double(10, 4) DEFAULT NULL,
+
+
+
   PRIMARY KEY (`buss_id`),
   KEY `foreign_key_customer` (`buss_customer`),
   CONSTRAINT `foreign_key_customer` FOREIGN KEY (`buss_customer`) REFERENCES `sp_customers` (`cs_id`) ON DELETE NO ACTION ON UPDATE NO ACTION

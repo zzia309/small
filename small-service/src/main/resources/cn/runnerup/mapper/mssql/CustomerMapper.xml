@@ -18,7 +18,6 @@
     <result column="cs_loanerUnitAddress" property="loanerunitaddress" jdbcType="VARCHAR" />
     <result column="cs_loanerPosition" property="loanerposition" jdbcType="VARCHAR" />
     <result column="cs_mateName" property="matename" jdbcType="VARCHAR" />
-    <result column="cs_mateSex" property="matesex" jdbcType="VARCHAR" />
     <result column="cs_mateAge" property="mateage" jdbcType="INTEGER" />
     <result column="cs_mateCard" property="matecard" jdbcType="VARCHAR" />
     <result column="cs_mateTel" property="matetel" jdbcType="VARCHAR" />
@@ -59,13 +58,21 @@
     <result column="cs_guaranteeFees" property="guaranteefees" jdbcType="DOUBLE" />
 	<result column="cs_isflow" property="isFlow" />
 	<result column="cs_created" property="created"/>
+
+	<result column="cs_guaranteeMateName" property="guaranteematename" jdbcType="VARCHAR" />
+	<result column="cs_guaranteeMateCard" property="guaranteematecard" jdbcType="VARCHAR" />
+	<result column="cs_guaranteeMateTel" property="guaranteematetel" jdbcType="VARCHAR" />
+	<result column="cs_isBank" property="isbank" />
+	<result column="cs_bankAccount" property="bankaccount" jdbcType="VARCHAR" />
+	<result column="cs_isGps" property="isgps" />
+
 	<association property="createdby" column="cs_createdby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
 
   </resultMap>
   <sql id="Base_Column_List" >
     cs_id, cs_loanerName, cs_loanerSex, cs_loanerAge, cs_loanerCard, cs_loanerTel, cs_loanerHomeAddress,
     cs_loanerUnit, cs_loanerUnitTel, cs_loanerMarry, cs_loanerArea, cs_loanerBirthplace,
-    cs_loanerHukou, cs_loanerUnitAddress, cs_loanerPosition, cs_mateName, cs_mateSex,
+    cs_loanerHukou, cs_loanerUnitAddress, cs_loanerPosition, cs_mateName,
     cs_mateAge, cs_mateCard, cs_mateTel, cs_mateUnit, cs_mateUnitTel, cs_mateBirthplace,
     cs_mateHukou, cs_mateUnitAddress, cs_matePosition, cs_guaranteeName, cs_guaranteeSex,
     cs_guaranteeAge, cs_guaranteeCard, cs_guaranteeTel, cs_guaranteeHomeAddress, cs_guaranteeUnit,
@@ -74,7 +81,13 @@
     cs_years, cs_stages, cs_carType, cs_carPrice, cs_carLoans, cs_carRate, cs_carBrokerage,
     cs_carToObject, cs_carToAccount, cs_bail, cs_notaryFees, cs_otherFees, cs_guaranteeFees, cs_isflow,
     cs_createdby,
-    cs_created
+    cs_created,
+    cs_guaranteeMateName,
+    cs_guaranteeMateCard,
+    cs_guaranteeMateTel,
+    cs_isBank,
+    cs_bankAccount,
+    cs_isGps
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -96,6 +109,32 @@
     from sp_customers where cs_createdby = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="getCustomers" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+  	select
+    <include refid="Base_Column_List" />
+    from sp_customers
+    <if test="user != null">
+	    where cs_createdby = #{user,jdbcType=INTEGER}
+    </if>
+    <if test="condition != null">
+    	and (cs_loanerName like '%${condition}%' or cs_loanerCard like '%${condition}%'
+    	or cs_guaranteeName like '%${condition}%' or cs_guaranteeCard like '%${condition}%' or cs_carType like '%${condition}%')
+    </if>
+    limit ${limit} offset ${start}
+  </select>
+
+   <select id="getCustomersCount" resultType="int" parameterType="java.util.HashMap">
+  	select
+    count(*)
+    from sp_customers
+    <if test="user != null">
+	    where cs_createdby = #{user,jdbcType=INTEGER}
+    </if>
+    <if test="condition != null">
+    	and (cs_loanerName like '%${condition}%' or cs_loanerCard like '%${condition}%'
+    	or cs_guaranteeName like '%${condition}%' or cs_guaranteeCard like '%${condition}%' or cs_carType like '%${condition}%')
+    </if>
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_customers
@@ -108,7 +147,7 @@
       cs_loanerHomeAddress, cs_loanerUnit, cs_loanerUnitTel,
       cs_loanerMarry, cs_loanerArea, cs_loanerBirthplace,
       cs_loanerHukou, cs_loanerUnitAddress, cs_loanerPosition,
-      cs_mateName, cs_mateSex, cs_mateAge,
+      cs_mateName,cs_mateAge,
       cs_mateCard, cs_mateTel, cs_mateUnit,
       cs_mateUnitTel, cs_mateBirthplace, cs_mateHukou,
       cs_mateUnitAddress, cs_matePosition, cs_guaranteeName,
@@ -122,6 +161,12 @@
       cs_carBrokerage, cs_carToObject, cs_carToAccount,
       cs_bail, cs_notaryFees, cs_otherFees,
       cs_guaranteeFees, cs_isflow,cs_created,
+      cs_guaranteeMateName,
+      cs_guaranteeMateCard,
+      cs_guaranteeMateTel,
+      cs_isBank,
+      cs_bankAccount,
+      cs_isGps,
       cs_createdby
       )
     values (#{loanername,jdbcType=VARCHAR}, #{loanersex,jdbcType=VARCHAR},
@@ -129,7 +174,7 @@
       #{loanerhomeaddress,jdbcType=VARCHAR}, #{loanerunit,jdbcType=VARCHAR}, #{loanerunittel,jdbcType=VARCHAR},
       #{loanermarry,jdbcType=VARCHAR}, #{loanerarea,jdbcType=VARCHAR}, #{loanerbirthplace,jdbcType=VARCHAR},
       #{loanerhukou,jdbcType=VARCHAR}, #{loanerunitaddress,jdbcType=VARCHAR}, #{loanerposition,jdbcType=VARCHAR},
-      #{matename,jdbcType=VARCHAR}, #{matesex,jdbcType=VARCHAR}, #{mateage,jdbcType=INTEGER},
+      #{matename,jdbcType=VARCHAR}, #{mateage,jdbcType=INTEGER},
       #{matecard,jdbcType=VARCHAR}, #{matetel,jdbcType=VARCHAR}, #{mateunit,jdbcType=VARCHAR},
       #{mateunittel,jdbcType=VARCHAR}, #{matebirthplace,jdbcType=VARCHAR}, #{matehukou,jdbcType=VARCHAR},
       #{mateunitaddress,jdbcType=VARCHAR}, #{mateposition,jdbcType=VARCHAR}, #{guaranteename,jdbcType=VARCHAR},
@@ -144,6 +189,12 @@
       #{bail,jdbcType=DOUBLE}, #{notaryfees,jdbcType=DOUBLE}, #{otherfees,jdbcType=DOUBLE},
       #{guaranteefees,jdbcType=DOUBLE}, #{isFlow,jdbcType=BOOLEAN},
       #{created,jdbcType=TIMESTAMP},
+      #{guaranteematename, jdbcType=VARCHAR},
+      #{guaranteematecard, jdbcType=VARCHAR},
+      #{guaranteematetel, jdbcType=VARCHAR},
+      #{isbank, jdbcType=BOOLEAN},
+      #{bankaccount, jdbcType=VARCHAR},
+      #{isgps, jdbcType=BOOLEAN},
       <if test="createdby == null">NULL</if><if test="createdby != null">#{createdby.id,jdbcType=INTEGER}</if>
       )
 	<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
@@ -169,7 +220,6 @@
       cs_loanerUnitAddress = #{loanerunitaddress,jdbcType=VARCHAR},
       cs_loanerPosition = #{loanerposition,jdbcType=VARCHAR},
       cs_mateName = #{matename,jdbcType=VARCHAR},
-      cs_mateSex = #{matesex,jdbcType=VARCHAR},
       cs_mateAge = #{mateage,jdbcType=INTEGER},
       cs_mateCard = #{matecard,jdbcType=VARCHAR},
       cs_mateTel = #{matetel,jdbcType=VARCHAR},
@@ -210,6 +260,12 @@
       cs_guaranteeFees = #{guaranteefees,jdbcType=DOUBLE},
       cs_isflow = #{isFlow,jdbcType=BOOLEAN},
       cs_created = #{created, jdbcType=TIMESTAMP},
+      cs_guaranteeMateName = #{guaranteematename, jdbcType=VARCHAR},
+      cs_guaranteeMateCard = #{guaranteematecard, jdbcType=VARCHAR},
+      cs_guaranteeMateTel = #{guaranteematetel, jdbcType=VARCHAR},
+      cs_isBank = #{isbank, jdbcType=BOOLEAN},
+      cs_bankAccount = #{bankaccount, jdbcType=VARCHAR},
+      cs_isGps = #{isgps, jdbcType=BOOLEAN},
       <if test="createdby == null">cs_createdby = NULL</if><if test="createdby != null">cs_createdby = #{createdby.id,jdbcType=INTEGER}</if>
     where cs_id = #{id,jdbcType=INTEGER}
   </update>

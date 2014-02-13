@@ -35,8 +35,6 @@ public class Customer {
 
     private String matename;
 
-    private String matesex;
-
     private Integer mateage;
 
     private String matecard;
@@ -83,6 +81,7 @@ public class Customer {
 
     private String guaranteeposition;
 
+
     private String sales;
 
     private String manager;
@@ -118,6 +117,58 @@ public class Customer {
     private User createdby;
 
     private Date created = new Date(System.currentTimeMillis());
+
+    private String guaranteematename;
+
+    private String guaranteematecard;
+
+    private String guaranteematetel;
+
+    private boolean isbank;
+
+    private String bankaccount;
+
+    private String isgps;
+
+	public String getGuaranteematecard() {
+		return guaranteematecard;
+	}
+
+	public void setGuaranteematecard(String guaranteematecard) {
+		this.guaranteematecard = guaranteematecard;
+	}
+
+	public String getGuaranteematetel() {
+		return guaranteematetel;
+	}
+
+	public void setGuaranteematetel(String guaranteematetel) {
+		this.guaranteematetel = guaranteematetel;
+	}
+
+	public boolean isIsbank() {
+		return isbank;
+	}
+
+	public void setIsbank(boolean isbank) {
+		this.isbank = isbank;
+	}
+
+	public String getBankaccount() {
+		return bankaccount;
+	}
+
+	public void setBankaccount(String bankaccount) {
+		this.bankaccount = bankaccount;
+	}
+
+	public String getIsgps() {
+		return isgps;
+	}
+
+	public void setIsgps(String isgps) {
+		this.isgps = isgps;
+	}
 
 	public User getCreatedby() {
 		return createdby;
@@ -263,12 +314,13 @@ public class Customer {
 		this.matename = matename;
 	}
 
-	public String getMatesex() {
-		return matesex;
+
+	public String getGuaranteematename() {
+		return guaranteematename;
 	}
 
-	public void setMatesex(String matesex) {
-		this.matesex = matesex;
+	public void setGuaranteematename(String guaranteematename) {
+		this.guaranteematename = guaranteematename;
 	}
 
 	public Integer getMateage() {

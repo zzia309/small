@@ -1,3 +1,5 @@
+<#include "search.ftl">
+
 var businessStore = Ext.create('Ext.data.Store', {
      model: 'Model.Business',
      proxy: {
@@ -8,9 +10,9 @@ var businessStore = Ext.create('Ext.data.Store', {
 			root: 'models'
 		}
 	},
+	pageSize: 10,
 	autoLoad: true
  });
-
 
 var customerStore = Ext.create('Ext.data.Store', {
 	 fields: ['id', 'loanername'],
@@ -27,7 +29,10 @@ var customerStore = Ext.create('Ext.data.Store', {
 
 var listgrid = Ext.create('Ext.grid.Panel', {
 	header: false,
-	tbar:[{
+	region: 'center',
+	tbar:[
+	/*
+	{
 		xtype: 'button',
 		text: '处理流程',
 		handler: function(){
@@ -46,7 +51,10 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 			});
 			App.openTab('business', App.currentId);
 		}
-	}],
+	}
+	*/
+
+	],
 	columns: [{
 		header: 'ID',
 		dataIndex: 'id',
@@ -151,8 +159,8 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 var listTab = {
 	itemId: 'list',
 	title: '列表',
-	layout: 'fit',
-	items: listgrid,
+	layout: 'border',
+	items: [searchPanel, listgrid],
 	edit: function(){},
 	listeners: {
 		activate: function() {

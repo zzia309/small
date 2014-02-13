@@ -5,9 +5,10 @@ var store = Ext.create('Ext.data.Store', {
 		url: '${request.contextPath}/customers/list.gson',
 		reader: {
 			type: 'json',
-			root: 'model'
+			root: 'models'
 		}
 	},
+	pageSize: 1,
 	autoLoad: true
  });
 
@@ -26,6 +27,28 @@ var store = Ext.create('Ext.data.Store', {
 
 var listgrid = Ext.create('Ext.grid.Panel', {
 	tbar:[{
+		xtype: 'textfield',
+		id: 'searchField',
+		width: 300,
+		emptyText: '客户姓名/身份证或担保人姓名/身份证号',
+		listeners: {
+			change: function(oldvalue, newvalue) {
+				store.proxy.extraParams = {};
+				store.proxy.extraParams['condition'] = newvalue;
+			}
+		}
+	},{
+		xtype: 'button',
+		text: '搜索',
+		icon: '${request.contextPath}/statics/style/img/action/search.png',
+		handler: function() {
+			var value = Ext.getCmp('searchField').getValue();
+			if(!Ext.isEmpty(value)) {
+				store.proxy.url = '${request.contextPath}/customers/list.gson';
+				store.load();
+			}
+		}
+	}, {
 		xtype: 'button',
 		icon: '${request.contextPath}/statics/style/img/action/add.png',
 		text: '新增客户信息',
