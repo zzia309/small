@@ -140,6 +140,33 @@
     	or exists(select 1 from sp_businesses where cs_id = buss_customer and buss_carNo = #{condition}))
     </if>
   </select>
+  
+  <select id="getCheckCustomers" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+  	select
+    <include refid="Base_Column_List" />
+    from sp_customers
+    <if test="condition != null">
+    	left join sp_businesses on cs_id = buss_customer
+    	where cs_loanerName= #{condition} or cs_loanerCard= #{condition}
+    	or cs_guaranteeName= #{condition} or cs_guaranteeCard= #{condition}
+    	or exists(select 1 from sp_businesses where cs_id = buss_customer and buss_carNo = #{condition})
+    	or cs_sales = #{condition}
+    </if>
+    limit ${limit} offset ${start}
+  </select>
+
+   <select id="getCheckCustomersCount" resultType="int" parameterType="java.util.HashMap">
+  	select
+    count(*)
+    from sp_customers
+    <if test="condition != null">
+    	left join sp_businesses on cs_id = buss_customer
+    	where cs_loanerName= #{condition} or cs_loanerCard= #{condition}
+    	or cs_guaranteeName= #{condition} or cs_guaranteeCard= #{condition}
+    	or exists(select 1 from sp_businesses where cs_id = buss_customer and buss_carNo = #{condition})
+    	or cs_sales = #{condition}
+    </if>
+  </select>  
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_customers

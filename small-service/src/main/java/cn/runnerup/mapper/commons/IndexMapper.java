@@ -8,6 +8,10 @@ import cn.runnerup.kpi.model.KpiModel;
 public interface IndexMapper {
 
 	 List<KpiModel> selectBussinessCount(Map<String, Object> map);
+	 
 	 List<KpiModel> selectProfits(Map<String, Object> map);
+	 
 	 List<KpiModel> selectSales(Map<String, Object> map);
+	 
+	 KpiModel selectBySales(Map<String, Object> map);
 }

@@ -61,7 +61,17 @@
 	</if>
 </select>
 
-
-
+<select id="selectBySales" resultMap="BaseResultMap" parameterType="map" >
+	select
+		count(*) as total ,
+		SUM(cs_carLoans) as sum ,
+		cs_sales as type
+	from sp_businesses, sp_customers
+	where buss_customer = cs_id
+	and cs_isFlow = true
+	<if test="sales != null">
+		and cs_sales = #{sales}
+	</if>
+</select>
 
 </mapper>

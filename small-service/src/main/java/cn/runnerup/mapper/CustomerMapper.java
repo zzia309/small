@@ -25,4 +25,8 @@ public interface CustomerMapper {
     int getCustomersCount(Map<String, Object> map);
 
     List<Customer> getCustomers(Map<String, Object> map);
+    
+    List<Customer> getCheckCustomers(Map<String, Object> map);    
+    
+    int getCheckCustomersCount(Map<String, Object> map);
 }
