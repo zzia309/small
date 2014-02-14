@@ -32,7 +32,7 @@
 <select id="selectProfits" resultMap="BaseResultMap" parameterType="map" >
 	select
 		SUM(buss_profits) as sum,
-		'其他业务' as type
+		cs_carType as type
 	from sp_businesses, sp_customers
 	where buss_customer = cs_id and cs_carType not like  '%租赁%'
 	<if test="start != null and end != null">
@@ -44,6 +44,17 @@
 		'租赁业务' as type
 	from sp_businesses, sp_customers
 	where buss_customer = cs_id and cs_carType like  '%租赁%'
+	<if test="start != null and end != null">
+		and buss_finisiTime between #{start} and #{end}
+	</if>
+</select>
+
+<select id="selecTypeProfits" resultMap="BaseResultMap" parameterType="map" >
+	select
+		SUM(buss_profits) as sum,
+		cs_carType as type
+	from sp_businesses, sp_customers
+	where buss_customer = cs_id
 	<if test="start != null and end != null">
 		and buss_finisiTime between #{start} and #{end}
 	</if>

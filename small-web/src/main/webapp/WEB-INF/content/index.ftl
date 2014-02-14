@@ -11,12 +11,13 @@
 <script type="text/javascript">
 	Ext.onReady(function() {
 		<#include "porlets/businesscount.ftl">
+		<#include "porlets/profitcount.ftl">
 		<@initlayout />
 	Ext.create('Ext.panel.Panel', {
 		id: 'mainContent',
 		autoScroll: true,
 		layout: 'column',
-		items: [bussinesscountchart]
+		items: [bussinesscountchart, profitcountchart]
 	});
 
 		//App.createContentPanel({
