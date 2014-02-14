@@ -42,6 +42,7 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		text: '搜索',
 		icon: '${request.contextPath}/statics/style/img/action/search.png',
 		handler: function() {
+			listgrid.down('pagingtoolbar').moveFirst();
 			store.proxy.url = '${request.contextPath}/customers/list.gson';
 			store.load();
 		}
