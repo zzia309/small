@@ -22,11 +22,11 @@ var typeProfitStore = Ext.create('Ext.data.Store', {
 	autoLoad: true
  });
 
-var profitStore1 = Ext.create('Ext.data.Store', {
+var profitStore = Ext.create('Ext.data.Store', {
 	 fields: ['sum', 'type'],
      proxy: {
 		type: 'ajax',
-		url: '${request.contextPath}/stores/profits.gson',
+		url: '${request.contextPath}/stores/profits-store.gson',
 		reader: {
 			type: 'json',
 			root: 'list'
@@ -35,30 +35,6 @@ var profitStore1 = Ext.create('Ext.data.Store', {
 	autoLoad: true
  });
 
-var profitStore = Ext.create('Ext.data.Store', {
-	fields: ['type', 'sum'],
-	data:[{
-		'type': '新车卡分期', 'sum': '100'
-	},{
-		'type': '新车普通', 'sum': '200'
-	},{
-		'type': '二手车', 'sum': '100'
-	},{
-		'type': '存量车', 'sum': '200'
-	},{
-		'type': '公牌', 'sum': '100'
-	},{
-		'type': '货车', 'sum': '200'
-	},{
-		'type': '租赁零首付', 'sum': '100'
-	},{
-		'type': '租赁二手车', 'sum': '200'
-	},{
-		'type': '租赁', 'sum': '200'
-	},{
-		'type': '其他', 'sum': '200'
-	}]
-});
 
 var profitgrid = Ext.create('Ext.grid.Panel', {
 	columnWidth: 0.3,
@@ -85,7 +61,7 @@ var profitchart = Ext.create('Ext.chart.Chart', {
     style: 'background:#fff',
     animate: true,
     shadow: true,
-    store: profitStore,
+    store: typeProfitStore,
     axes: [{
         type: 'Numeric',
         position: 'left',
@@ -192,7 +168,21 @@ var profitcountchart = Ext.create('Ext.panel.Panel',	{
 		    },{
 				xtype: 'button',
 				margin: '-1 -1 -1 -1',
-				text: '搜索'
+				text: '搜索',
+				handler: function(){
+					var start = Ext.getCmp('#start').getValue();
+					var end = Ext.getCmp('#end').getValue();
+					typeProfitStore.proxy.extraParams = {};
+					profitStore.proxy.extraParams = {};
+					if(!Ext.isEmpty(start) && !Ext.isEmpty('end')){
+						typeProfitStore.proxy.extraParams['start'] = start;
+						typeProfitStore.proxy.extraParams['end'] = end;
+						profitStore.proxy.extraParams['start'] = start;
+						profitStore.proxy.extraParams['end'] = end;
+					}
+					typeProfitStore.load();
+					profitStore.load();
+				}
 			}];
 			con.header.insert(1,items);
 

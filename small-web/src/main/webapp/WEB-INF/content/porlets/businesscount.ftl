@@ -18,7 +18,7 @@ var chart = Ext.create('Ext.chart.Chart', {
 	    tips: {
 	      trackMouse: true,
 	      width: 120,
-	      height: 20,
+	      height: 40,
 	      renderer: function(storeItem, item) {
 	        var total = 0;
 	        typeBusinessStore.each(function(rec) {
