@@ -5,19 +5,18 @@
 <@myhead/>
 <script type="text/javascript" src="${request.contextPath}/statics/model/User.js"></script>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/style/style.css"/>
-<title>融悦汽车担保</title>
+<title>test</title>
 <head>
 <body>
 <script type="text/javascript">
 	Ext.onReady(function() {
 		<#include "porlets/businesscount.ftl">
-		<#include "porlets/sales.ftl">
 		<@initlayout />
 	Ext.create('Ext.panel.Panel', {
 		id: 'mainContent',
 		autoScroll: true,
 		layout: 'column',
-		items: [bussinesscountchart, salesPanel]
+		items: [bussinesscountchart]
 	});
 
 		//App.createContentPanel({

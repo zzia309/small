@@ -1,13 +1,14 @@
 <#include "search.ftl">
 var chart = Ext.create('Ext.chart.Chart', {
 	columnWidth: 0.62,
-	height: 200,
+	height: 220,
 	animate: true,
 	store: typeBusinessStore,
 	shadow: true,
 	legend: {
 	    position: 'right'
 	},
+	insetPadding: 35,
 	theme: 'Base:gradients',
 	series: [{
 	    type: 'pie',
@@ -16,7 +17,7 @@ var chart = Ext.create('Ext.chart.Chart', {
 	    donut: false,
 	    tips: {
 	      trackMouse: true,
-	      width: 140,
+	      width: 120,
 	      height: 40,
 	      renderer: function(storeItem, item) {
 	        var total = 0;
@@ -31,20 +32,22 @@ var chart = Ext.create('Ext.chart.Chart', {
 	    },
 	    highlight: {
 	      segment: {
-	        margin: 10
+	        margin: 3
 	      }
 	    },
 	    label: {
 	        field: 'type',
 	        display: 'rotate',
 	        contrast: true,
-	        font: '12px Arial'
+	        font: '10px Arial'
 	    }
 	}]
 });
 
 var bussinesscountchart = Ext.create('Ext.panel.Panel',	{
 	layout: 'column',
+	height: 220,
+	collapsible: true,
 	title: '业务类型贷款统计',
 	columnWidth: 0.5,
 	items: [searchPanel, chart]

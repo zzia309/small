@@ -64,7 +64,6 @@ public class UserAction extends RunnerSupport implements ModelDriven<UserModel>{
 	}
 
 	public HttpHeaders update() {
-
 		if(user != null) {
 			if(model.getDisabled()==null)
 				model.setDisabled(false);

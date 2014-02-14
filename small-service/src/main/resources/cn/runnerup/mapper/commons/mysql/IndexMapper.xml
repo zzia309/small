@@ -31,22 +31,39 @@
 
 <select id="selectProfits" resultMap="BaseResultMap" parameterType="map" >
 	select
+		count(*) as total,
 		SUM(buss_profits) as sum,
-		'其他业务' as type
-	from sp_businesses, sp_customers
-	where buss_customer = cs_id and cs_carType not like  '%租赁%'
-	<if test="start != null and end != null">
-		and buss_finisiTime between #{start} and #{end}
-	</if>
-	union
+		cs_carType as type
+	from
+	(
+		select buss_profits, cs_carType
+		from sp_businesses, sp_customers
+		where buss_customer = cs_id and cs_carType not like  '%租赁%'
+		<if test="start != null and end != null">
+			and buss_finishTime between #{start} and #{end}
+		</if>
+		union
+		select buss_profits, '租赁' as cs_carType
+		from sp_businesses, sp_customers
+		where buss_customer = cs_id and cs_carType like  '%租赁%'
+		<if test="start != null and end != null">
+			and buss_finishTime between #{start} and #{end}
+		</if>
+	) a group by type
+
+</select>
+
+<select id="selecTypeProfits" resultMap="BaseResultMap" parameterType="map" >
 	select
 		SUM(buss_profits) as sum,
-		'租赁业务' as type
+		cs_carType as type,
+		count(*) as total
 	from sp_businesses, sp_customers
-	where buss_customer = cs_id and cs_carType like  '%租赁%'
+	where buss_customer = cs_id
 	<if test="start != null and end != null">
-		and buss_finisiTime between #{start} and #{end}
+		and buss_finishTime between #{start} and #{end}
 	</if>
+	group by type
 </select>
 
 <select id="selectSales" resultMap="BaseResultMap" parameterType="map" >

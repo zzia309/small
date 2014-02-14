@@ -56,8 +56,12 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '客户职位',
 		name: 'loanerposition'
 	}, {
+		xtype: 'combo',
 		fieldLabel: '客户婚姻状态',
-		name: 'loanermarry'
+		name: 'loanermarry',
+		store: marryStore,
+		valueField: 'name',
+		displayField: 'code'
 	}, {
 		fieldLabel: '客户所在地区',
 		name: 'loanerarea'
@@ -177,8 +181,12 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '担保人职位',
 		name: 'guaranteeposition'
 	}, {
+		xtype: 'combo',
 		fieldLabel: '担保人婚姻状态',
-		name: 'guaranteemarry'
+		name: 'guaranteemarry',
+		store: marryStore,
+		valueField: 'name',
+		displayField: 'code'
 	}, {
 		fieldLabel: '担保人所在地区',
 		name: 'guaranteearea'

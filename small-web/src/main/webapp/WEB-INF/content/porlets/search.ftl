@@ -42,7 +42,7 @@ var carStore = Ext.create('Ext.data.Store', {
 
 var searchPanel = Ext.create('Ext.form.Panel',{
 	columnWidth: 0.38,
-	height: 200,
+	height: 250,
 	layout: 'column',
     defaults: {
 	    margin:'2 0 2 0',
@@ -76,8 +76,8 @@ var searchPanel = Ext.create('Ext.form.Panel',{
 					var o = dateUtil.getDate(date);
 					start.setValue(o['start']);
 					end.setValue(o['end']);
-					start.setVisible(true);
-					end.setVisible(true);
+					start.setVisible(false);
+					end.setVisible(false);
 				}
 			}
 		}
@@ -87,7 +87,7 @@ var searchPanel = Ext.create('Ext.form.Panel',{
 		name: 'start',
 		format: 'Y-m-d H:i:s',
 		columnWidth: 1,
-		hidden: false
+		hidden: true
     }, {
     	fieldLabel: '结束时间',
 		labelAlign: 'right',
@@ -95,7 +95,7 @@ var searchPanel = Ext.create('Ext.form.Panel',{
 		columnWidth: 1,
 		xtype: 'datefield',
 		format: 'Y-m-d H:i:s',
-		hidden: false
+		hidden: true
     }, {
     	fieldLabel: '业务类型',
 		xtype: 'combo',

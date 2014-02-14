@@ -10,6 +10,15 @@
 </#macro>
 
 <#macro initlayout>
+	var genderStore = Ext.create('Ext.data.Store', {
+		fields: ['id', 'value'],
+		data:[{
+			'id': 'M', 'value': '男'
+		},{
+			'id': 'G', 'value': '女'
+		}]
+	});
+	
 	var root = Ext.create('Ext.data.TreeStore', {
 		root: {
 			expanded: true,
@@ -30,7 +39,7 @@
 	});
 	Eap.layout.Default.createMenu({store: root});
 	<#if action.user??>
-	Eap.layout.Default.createBanner({username: '${action.user.fullname!""}', 'path':'${request.contextPath}'});
+	Eap.layout.Default.createBanner({username: '${action.user.fullname!""}', 'path': '${request.contextPath}', 'id': '${action.user.id!""}'});
 	</#if>
 </#macro>
 
