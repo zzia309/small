@@ -67,8 +67,8 @@
 	<result column="cs_isGps" property="isgps" />
 
 	<association property="createdby" column="cs_createdby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
-
   </resultMap>
+  
   <sql id="Base_Column_List" >
     cs_id, cs_loanerName, cs_loanerSex, cs_loanerAge, cs_loanerCard, cs_loanerTel, cs_loanerHomeAddress,
     cs_loanerUnit, cs_loanerUnitTel, cs_loanerMarry, cs_loanerArea, cs_loanerBirthplace,

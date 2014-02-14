@@ -238,7 +238,7 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '是否GPS',
 		name: 'isgps',
 		xtype: 'checkbox',
-		inputValue: false
+		inputValue: true
 	}, {
 		fieldLabel: '贷款分期',
 		name: 'stages',

@@ -128,7 +128,7 @@ public class Customer {
 
     private String bankaccount;
 
-    private String isgps;
+    private boolean isgps;
 
 	public String getGuaranteematecard() {
 		return guaranteematecard;
@@ -162,11 +162,11 @@ public class Customer {
 		this.bankaccount = bankaccount;
 	}
 
-	public String getIsgps() {
+	public boolean isIsgps() {
 		return isgps;
 	}
 
-	public void setIsgps(String isgps) {
+	public void setIsgps(boolean isgps) {
 		this.isgps = isgps;
 	}
 
