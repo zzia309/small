@@ -12,18 +12,11 @@
 	Ext.onReady(function() {
 		<#include "porlets/businesscount.ftl">
 		<@initlayout />
-
-	var chartpanel = Ext.create('Ext.panel.Panel',	{
-		layout: 'fit',
-		title: 'yang',
-		columnWidth: .5,
-		items: [chart]
-	});
 	Ext.create('Ext.panel.Panel', {
 		id: 'mainContent',
 		autoScroll: true,
 		layout: 'column',
-		items: [chartpanel]
+		items: [bussinesscountchart]
 	});
 
 		//App.createContentPanel({

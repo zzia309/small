@@ -23,9 +23,6 @@
 	<if test="branch != null">
 	    and buss_branch = #{branch}
 	</if>
-	<if test="carno != null">
-		and buss_carNo = #{carno}
-	</if>
 	<if test="start != null and end != null">
 		and cs_created between #{start} and #{end}
 	</if>
@@ -59,8 +56,8 @@
 		cs_sales as type
 	from sp_businesses, sp_customers
 	where buss_customer = cs_id
-	<if test="sale != null">
-		and cs_sales = #{sale}
+	<if test="sales != null">
+		and cs_sales = #{sales}
 	</if>
 </select>
 

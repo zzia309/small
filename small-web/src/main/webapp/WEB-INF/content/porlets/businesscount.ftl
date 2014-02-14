@@ -1,48 +1,51 @@
-var store1 = Ext.create('Ext.data.Store', {
-	fields:['total','name'],
-	data: [
-	  {name: '浙江泰隆商业银行(融悦)', total: 23},
-	  {name: '杭州银行清泰支行(融悦)', total: 32},
-	  {name: '杭州银行清泰支行(易顺)', total: 34},
-	  {name: '浙江泰隆商业银行(樊郡等)', total: 123}
-	]
+<#include "search.ftl">
+var chart = Ext.create('Ext.chart.Chart', {
+	columnWidth: 0.62,
+	height: 200,
+	animate: true,
+	store: typeBusinessStore,
+	shadow: true,
+	legend: {
+	    position: 'right'
+	},
+	theme: 'Base:gradients',
+	series: [{
+	    type: 'pie',
+	    field: 'total',
+	    showInLegend: true,
+	    donut: false,
+	    tips: {
+	      trackMouse: true,
+	      width: 140,
+	      height: 40,
+	      renderer: function(storeItem, item) {
+	        var total = 0;
+	        typeBusinessStore.each(function(rec) {
+	            total += rec.get('total');
+	        });
+	        var total1 = Math.round(storeItem.get('total'));
+	        var type = storeItem.get('type');
+	        var sum = storeItem.get('sum');
+	        this.setTitle("共"+total1 +"笔, 贷款总额"+sum+"元");
+	      }
+	    },
+	    highlight: {
+	      segment: {
+	        margin: 10
+	      }
+	    },
+	    label: {
+	        field: 'type',
+	        display: 'rotate',
+	        contrast: true,
+	        font: '12px Arial'
+	    }
+	}]
 });
 
-var chart = Ext.create('Ext.chart.Chart', {
-			height: 300,
-            animate: true,
-            store: store1,
-            shadow: true,
-            legend: {
-                position: 'right'
-            },
-            theme: 'Base:gradients',
-            series: [{
-                type: 'pie',
-                field: 'total',
-                showInLegend: true,
-                donut: false,
-                tips: {
-                  trackMouse: true,
-                  renderer: function(storeItem, item) {
-                    //calculate percentage.
-                    var total = 0;
-                    store1.each(function(rec) {
-                        total += rec.get('total');
-                    });
-                    this.setTitle(storeItem.get('name') + ': ' + Math.round(storeItem.get('total') / total * 100) + '%');
-                  }
-                },
-                highlight: {
-                  segment: {
-                    margin: 20
-                  }
-                },
-                label: {
-                    field: 'name',
-                    display: 'rotate',
-                    contrast: true,
-                    font: '18px Arial'
-                }
-            }]
-        });
+var bussinesscountchart = Ext.create('Ext.panel.Panel',	{
+	layout: 'column',
+	title: '业务类型贷款统计',
+	columnWidth: 0.5,
+	items: [searchPanel, chart]
+});
