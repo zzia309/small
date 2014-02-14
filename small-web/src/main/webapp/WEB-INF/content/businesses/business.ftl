@@ -76,7 +76,11 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		name: 'advanceDate'
 	}, {
 		fieldLabel: '垫款银行',
-		name: 'advancebank'
+		name: 'advancebank',
+		xtype: 'combo',
+		store: bankStore,
+		valueField: 'code',
+		displayField: 'name'
 	}, {
 		fieldLabel: '银行放款金额',
 		name: 'amounts'
@@ -198,6 +202,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 	},
 	buttons:[{
 		text: '驳回',
+		icon: '${request.contextPath}/statics/style/img/action/reject.png',
 		handler: function(){
 			var me = this;
 			var form = me.up('form').getForm();
@@ -225,6 +230,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			<#else>
 			true
 		</#if>,
+		icon: '${request.contextPath}/statics/style/img/action/first.png',
 		handler: function(){
 			var me = this;
 			var form = me.up('form').getForm();
@@ -247,6 +253,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		}
 	},{
 		text: '终审',
+		icon: '${request.contextPath}/statics/style/img/action/final.png',
 		hidden:<#if action.user?? && (action.user.priority=3)>
 			false
 			<#else>
@@ -274,6 +281,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		}
 	},{
 		text: '老板过件',
+		icon: '${request.contextPath}/statics/style/img/action/boss.png',
 		hidden:<#if action.user?? && (action.user.priority=4)>
 			false
 			<#else>
@@ -301,6 +309,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		}
 	},{
 		text: '财务',
+		icon: '${request.contextPath}/statics/style/img/action/cash.png',
 		hidden:<#if action.user?? && (action.user.priority=5)>
 			false
 			<#else>
@@ -328,6 +337,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		}
 	},{
 		text: '后勤',
+		icon: '${request.contextPath}/statics/style/img/action/workback.png',
 		hidden:<#if action.user?? && (action.user.priority=6)>
 			false
 			<#else>
@@ -355,6 +365,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		}
 	},{
 		text: '关闭',
+		icon: '${request.contextPath}/statics/style/img/action/close.png',
 		hidden:
 		<#if action.user?? && (action.user.priority=7)>
 			false

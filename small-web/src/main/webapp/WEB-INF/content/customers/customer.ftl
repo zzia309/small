@@ -224,11 +224,7 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		name: 'manager'
 	}, {
 		fieldLabel: '开户银行',
-		name: 'bankaccount',
-		xtype: 'combo',
-		store: bankStore,
-		valueField: 'code',
-		displayField: 'name'
+		name: 'bankaccount'
 	}, {
 		fieldLabel: ' 贷款年限',
 		name: 'years',
@@ -408,8 +404,8 @@ var customerForm = Ext.create('Ext.form.Panel', {
 	    	xtype: 'button',
 			text: '转征信人员',
 			itemId: 'credit ',
-			disabled: true,
-			formBind: true,
+			icon: '${request.contextPath}/statics/style/img/action/credit.png',
+			id: 'credit',
 			handler: function(){
 				var form = this.up('form').getForm();
 				if(form.isValid()){
@@ -431,6 +427,7 @@ var customerForm = Ext.create('Ext.form.Panel', {
 	    	xtype: 'button',
 			text: '重置',
 			itemId: 'reset',
+			id: 'reset',
 			icon: '${request.contextPath}/statics/style/img/action/reset.png',
 			handler: function(){
 				this.up('form').getForm().reset();
@@ -501,6 +498,13 @@ var customerTab = {
 							}
 							field.resetOriginalValue();
 						});
+						if(flow) {
+							Ext.getCmp('credit').setDisabled(true);
+							Ext.getCmp('reset').setDisabled(true);
+						}else {
+							Ext.getCmp('credit').setDisabled(false);
+							Ext.getCmp('reset').setDisabled(false);
+						}
 					}
 				};
 			}
