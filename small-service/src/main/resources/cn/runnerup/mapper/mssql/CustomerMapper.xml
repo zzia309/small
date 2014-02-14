@@ -113,12 +113,16 @@
   	select
     <include refid="Base_Column_List" />
     from sp_customers
+    <if test="condition != null">
+    	left join sp_businesses on cs_id = buss_customer
+    </if>
     <if test="user != null">
 	    where cs_createdby = #{user,jdbcType=INTEGER}
     </if>
     <if test="condition != null">
-    	and (cs_loanerName like '%${condition}%' or cs_loanerCard like '%${condition}%'
-    	or cs_guaranteeName like '%${condition}%' or cs_guaranteeCard like '%${condition}%' or cs_carType like '%${condition}%')
+    	and (cs_loanerName= #{condition} or cs_loanerCard= #{condition}
+    	or cs_guaranteeName= #{condition} or cs_guaranteeCard= #{condition} or cs_carType like '%${condition}%'
+    	or exists(select 1 from sp_businesses where cs_id = buss_customer and buss_carNo = #{condition}))
     </if>
     limit ${limit} offset ${start}
   </select>
@@ -131,8 +135,9 @@
 	    where cs_createdby = #{user,jdbcType=INTEGER}
     </if>
     <if test="condition != null">
-    	and (cs_loanerName like '%${condition}%' or cs_loanerCard like '%${condition}%'
-    	or cs_guaranteeName like '%${condition}%' or cs_guaranteeCard like '%${condition}%' or cs_carType like '%${condition}%')
+    	and (cs_loanerName= #{condition} or cs_loanerCard= #{condition}
+    	or cs_guaranteeName= #{condition} or cs_guaranteeCard= #{condition} or cs_carType like '%${condition}%'
+    	or exists(select 1 from sp_businesses where cs_id = buss_customer and buss_carNo = #{condition}))
     </if>
   </select>
 

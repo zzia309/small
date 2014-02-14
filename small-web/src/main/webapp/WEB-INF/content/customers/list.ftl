@@ -30,7 +30,7 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		xtype: 'textfield',
 		id: 'searchField',
 		width: 300,
-		emptyText: '客户姓名/身份证或担保人姓名/身份证号',
+		emptyText: '客户姓名/身份证或担保人姓名/身份证号/车牌号',
 		listeners: {
 			change: function(oldvalue, newvalue) {
 				store.proxy.extraParams = {};
