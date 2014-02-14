@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.runnerup.mapper.CustomerMapper;
 import cn.runnerup.model.Customer;
@@ -25,6 +26,7 @@ public class CustomerService {
 		return customerMapper.selectByPrimaryKey(id);
 	}
 
+	@Transactional
 	public Customer createCustomer(Customer customer){
 		customerMapper.insert(customer);
 		return customer;

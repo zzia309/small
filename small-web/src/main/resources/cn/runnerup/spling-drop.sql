@@ -208,7 +208,7 @@ CREATE TABLE `sp_businesses` (
   `buss_advanceBank` varchar(64) DEFAULT NULL,
   `buss_amounts` double(10, 4) DEFAULT NULL,
   `buss_profits` double(10, 4) DEFAULT NULL,
-
+  `buss_finishTime` datetime DEFAULT NULL,
 
 
   PRIMARY KEY (`buss_id`),

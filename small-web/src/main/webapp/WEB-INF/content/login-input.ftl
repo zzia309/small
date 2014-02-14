@@ -8,7 +8,7 @@
     <script type="text/javascript">
 	    Ext.onReady(function(){
 	    	var panel = Ext.create('Ext.form.Panel',{
-	    		title: 'LoginForm',
+	    		title: '用户登录',
 				url: 'login',
 				method: 'POST',
 				standardSubmit: true,

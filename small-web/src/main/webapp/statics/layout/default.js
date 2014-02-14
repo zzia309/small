@@ -70,7 +70,7 @@ Ext.define('Eap.layout.Default', {
 				icon: config.path+'/statics/style/img/action/setting.png',
 				cls: 'my-btn',
 				handler: function() {
-					window.location = Eap.contextPath + '/eap/profile/index';
+					window.location = config.path + '/eap/profile/index';
 				}
 			},
 			'-',
@@ -80,7 +80,7 @@ Ext.define('Eap.layout.Default', {
 				icon: config.path+'/statics/style/img/action/home.png',
 				cls: 'my-btn',
 				handler: function() {
-					window.location = Eap.contextPath + '/index';
+					window.location = config.path + '/index';
 				}
 			},
 			'-',

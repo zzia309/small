@@ -145,6 +145,11 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 	}, {
 		fieldLabel: '车牌',
 		name: 'carno'
+	},{
+		fieldLabel: '完成时期',
+		xtype:'xdatefield',
+		format:'Y-m-d',
+		name: 'finishtime'
 	}]
 });
 
@@ -395,6 +400,35 @@ var businessTab = {
 		activate: function(){
 			var fieldSet = Ext.getCmp('businessFile');
 			fieldSet.query('[addFieldContainer]')[0].removeAll();
+
+			var form = businessForm.getForm();
+			var config = {
+				url: '${request.contextPath}/businesses/business/new.gson',
+				method: 'GET',
+				callback: function(options, success, response) {
+					var values = Ext.decode(response.responseText);
+					form.setValues(values);
+					var fields = form.getFields();
+					fields.each(function(field){
+						field.setReadOnly(false);
+						field.validate();
+					});
+				}
+			};
+			if(App.currentId){
+				config = {
+					url: '${request.contextPath}/businesses/business/' + App.currentId + '.gson',
+					success: function(response){
+						var values = Ext.decode(response.responseText);
+						form.setValues(values);
+						var fields = form.getFields();
+						fields.each(function(field){
+							field.resetOriginalValue();
+						});
+					}
+				};
+			}
+			Ext.Ajax.request(config);
 		}
 	}
 };

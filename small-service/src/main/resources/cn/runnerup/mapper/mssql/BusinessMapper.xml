@@ -8,6 +8,7 @@
     <result column="buss_court" property="court" jdbcType="VARCHAR" />
     <result column="buss_branch" property="branch" jdbcType="VARCHAR" />
     <result column="buss_advances" property="advances" jdbcType="DOUBLE" />
+    <result column="buss_finishTime" property="finishtime" jdbcType="TIMESTAMP" />
     <result column="buss_advanceDate" property="advancedate" jdbcType="TIMESTAMP" />
     <result column="buss_loanDate" property="loandate" jdbcType="TIMESTAMP" />
     <result column="buss_insuranceAgent" property="insuranceagent" jdbcType="VARCHAR" />
@@ -32,7 +33,7 @@
     buss_advanceDate, buss_loanDate, buss_insuranceAgent, buss_insuranceStart, buss_insuranceEnd,
     buss_certificate, buss_isImpawn, buss_isSongHang, buss_carModel, buss_carEngine,
     buss_carFrame, buss_status,
-    buss_carNo, buss_advanceBank, buss_amounts, buss_profits
+    buss_carNo, buss_advanceBank, buss_amounts, buss_profits,buss_finishTime
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -108,7 +109,7 @@
       buss_advanceBank,
       buss_amounts,
       buss_profits,
-
+      buss_finishTime,
       buss_customer)
     values (#{id,jdbcType=INTEGER}, #{credit,jdbcType=VARCHAR},
       #{publicorder,jdbcType=VARCHAR}, #{court,jdbcType=VARCHAR}, #{branch,jdbcType=VARCHAR},
@@ -121,6 +122,7 @@
       #{advancebank,jdbcType=VARCHAR},
       #{amounts,jdbcType=DOUBLE},
       #{profits,jdbcType=DOUBLE},
+      #{finishtime,jdbcType=TIMESTAMP},
       <if test="customer == null">NULL</if><if test="customer != null">#{customer.id,jdbcType=INTEGER}</if>)
       <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
 		select LAST_INSERT_ID() as id
@@ -151,6 +153,7 @@
 			buss_advanceBank = #{advancebank, jdbcType=VARCHAR},
 			buss_amounts = #{amounts, jdbcType=DOUBLE},
 			buss_profits = #{profits, jdbcType=DOUBLE},
+			buss_finishTime = #{finishtime,jdbcType=TIMESTAMP},
       		<if test="customer == null">buss_customer = NULL</if><if test="customer != null">buss_customer = #{customer.id,jdbcType=INTEGER}</if>
 		where buss_id = #{id,jdbcType=INTEGER}
   </update>

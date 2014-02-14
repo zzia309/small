@@ -199,7 +199,9 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 		name: 'guaranteematetel'
 	}, {
 		fieldLabel: '是否银行担保',
-		name: 'isbank'
+		name: 'isbank',
+		xtype: 'checkbox',
+		inputValue: false
 	}]
 });
 
@@ -228,13 +230,15 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		valueField: 'code',
 		displayField: 'name'
 	}, {
-		fieldLabel: '是否GPS',
-		name: 'isgps'
-	}, {
 		fieldLabel: ' 贷款年限',
 		name: 'years',
 		xtype: 'numberfield',
 		minValue: 1
+	}, {
+		fieldLabel: '是否GPS',
+		name: 'isgps',
+		xtype: 'checkbox',
+		inputValue: false
 	}, {
 		fieldLabel: '贷款分期',
 		name: 'stages',
@@ -375,6 +379,7 @@ var customerForm = Ext.create('Ext.form.Panel', {
 			formBind: true,
 			handler: function(){
 				var form = this.up('form').getForm();
+				customerForm.suspendEvents();
 				if(form.isValid()){
 					var url = '${request.contextPath}/customers/customer.gson';
 					var params = {};
@@ -393,6 +398,7 @@ var customerForm = Ext.create('Ext.form.Panel', {
 								App.currentId = null;
 								App.openTab('list');
 								store.load();
+								customerForm.resumeEvents();
 							}
 						}
 					});

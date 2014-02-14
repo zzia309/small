@@ -10,9 +10,25 @@
 <body>
 <script type="text/javascript">
 	Ext.onReady(function() {
+		<#include "porlets/businesscount.ftl">
 		<@initlayout />
-		App.createContentPanel({
-		});
+
+	var chartpanel = Ext.create('Ext.panel.Panel',	{
+		layout: 'fit',
+		title: 'yang',
+		columnWidth: .5,
+		items: [chart]
+	});
+	Ext.create('Ext.panel.Panel', {
+		id: 'mainContent',
+		autoScroll: true,
+		layout: 'column',
+		items: [chartpanel]
+	});
+
+		//App.createContentPanel({
+		//	tabs: [chart]
+		//});
 		<@dolayout/>
 	});
 </script>

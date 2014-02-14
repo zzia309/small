@@ -42,11 +42,8 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		text: '搜索',
 		icon: '${request.contextPath}/statics/style/img/action/search.png',
 		handler: function() {
-			var value = Ext.getCmp('searchField').getValue();
-			if(!Ext.isEmpty(value)) {
-				store.proxy.url = '${request.contextPath}/customers/list.gson';
-				store.load();
-			}
+			store.proxy.url = '${request.contextPath}/customers/list.gson';
+			store.load();
 		}
 	}, {
 		xtype: 'button',
@@ -235,6 +232,12 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		dataIndex: 'otherfees'
 	}],
 	store: store,
+	dockedItems: [{
+		xtype: 'pagingtoolbar',
+		store: store,
+		dock: 'bottom',
+		displayInfo: true
+	}],
 	listeners: {
 		itemclick: function(view, record, item, index, e, eOpts){
 			App.currentId = record.get("id");

@@ -89,6 +89,10 @@ var timePanel = Ext.create('Ext.form.FieldContainer',{
 		valueField: 'code',
 		displayField: 'name',
 		store: typeStore
+    },{
+    	fieldLabel: '车牌号',
+    	xtype: 'textfield',
+    	name: 'carno'
     }]
 });
 
@@ -119,6 +123,7 @@ var mixSearchPanel = Ext.create('Ext.form.FieldContainer',{
 			var condition = form.findField('condition').getValue();
 			var type = form.findField('type').getValue();
 			var area = form.findField('area').getValue();
+			var carno = form.findField('carno').getValue();
 			businessStore.proxy.extraParams = {};
 			if(!Ext.isEmpty(condition))
 				businessStore.proxy.extraParams['condition'] = condition;
@@ -126,8 +131,9 @@ var mixSearchPanel = Ext.create('Ext.form.FieldContainer',{
 				businessStore.proxy.extraParams['type'] = type;
 			if(!Ext.isEmpty(area))
 				businessStore.proxy.extraParams['area'] = area;
+			if(!Ext.isEmpty(carno))
+				businessStore.proxy.extraParams['carno'] = carno;
 			businessStore.load();
-
 		}
 	}]
 });

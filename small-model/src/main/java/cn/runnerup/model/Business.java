@@ -50,7 +50,17 @@ public class Business {
 
     private Double profits;
 
-    public Integer getId() {
+    private Date finishtime;
+
+    public Date getFinishtime() {
+		return finishtime;
+	}
+
+	public void setFinishtime(Date finishtime) {
+		this.finishtime = finishtime;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
