@@ -284,7 +284,8 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		name: 'carbrokerage',
 		xtype: 'numberfield',
 		allowDecimals: true,
-		decimalPrecision: 4
+		decimalPrecision: 4,
+		maxValue: 1
 	}, {
 		fieldLabel: '打款对象',
 		name: 'cartoobject'
@@ -524,5 +525,5 @@ var customerTab = {
 			Ext.Ajax.request(config);
 		}
 	}
-	
+
 };

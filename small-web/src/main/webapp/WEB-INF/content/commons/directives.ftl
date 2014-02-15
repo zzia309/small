@@ -35,7 +35,7 @@
 				</#if>
 				<#if action.user?? && (action.user.priority>3)>
 				{ text: "担保客户信息查询", icon: '${request.contextPath}/statics/style/img/action/customer.png',leaf: true, uri: '${request.contextPath}/checkcustomers/index' }
-				</#if>				
+				</#if>
 			]}
 	});
 	Eap.layout.Default.createMenu({store: root});

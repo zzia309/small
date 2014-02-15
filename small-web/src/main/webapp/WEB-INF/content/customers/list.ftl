@@ -8,7 +8,7 @@ var store = Ext.create('Ext.data.Store', {
 			root: 'models'
 		}
 	},
-	pageSize: 1,
+	pageSize: 25,
 	autoLoad: true
  });
 
