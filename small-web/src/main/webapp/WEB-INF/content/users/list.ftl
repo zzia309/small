@@ -146,7 +146,6 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	}
 });
 
-
 var listTab = {
 	itemId: 'list',
 	title: '用户信息维护',

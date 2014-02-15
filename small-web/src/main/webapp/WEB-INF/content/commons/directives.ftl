@@ -10,6 +10,7 @@
 </#macro>
 
 <#macro initlayout>
+
 	var genderStore = Ext.create('Ext.data.Store', {
 		fields: ['id', 'value'],
 		data:[{

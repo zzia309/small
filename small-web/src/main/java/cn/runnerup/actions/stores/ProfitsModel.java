@@ -25,4 +25,5 @@ public class ProfitsModel{
 		this.list = list;
 	}
 
+	
 }

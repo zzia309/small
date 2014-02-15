@@ -21,6 +21,7 @@ public class UserStoreAction extends RunnerSupport implements ModelDriven<List<U
 	private UserService userService;
 
 	public String index(){
+		
 		model = userService.selectAll();
 		return SUCCESS;
 	}

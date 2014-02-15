@@ -8,6 +8,7 @@
 <title>test</title>
 <head>
 <body>
+
 <script type="text/javascript">
 	Ext.onReady(function() {
 		<#include "porlets/businesscount.ftl">

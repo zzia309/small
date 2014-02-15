@@ -29,6 +29,7 @@ public class SalesAction extends RunnerSupport implements ModelDriven<KpiModel> 
 			map.put("sales", sales);
 			model = indexMapper.selectBySales(map);
 		}
+		
 		return SUCCESS;
 	}
 

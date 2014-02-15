@@ -19,6 +19,7 @@ public class CustomerStore extends RunnerSupport implements ModelDriven<List<Cus
 
 	@Autowired
 	private CustomerService customerService;
+	
 	public String index(){
 		model = customerService.selectAll();
 		return SUCCESS;

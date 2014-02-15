@@ -28,6 +28,7 @@ public class ProfitsStoreAction extends RunnerSupport implements ModelDriven<Pro
 			map.put("start", start);
 			map.put("end", end);
 		}
+		
 		model.setModels(indexMapper.selectProfits(map));
 		model.setList(indexMapper.selecTypeProfits(map));
 		return SUCCESS;

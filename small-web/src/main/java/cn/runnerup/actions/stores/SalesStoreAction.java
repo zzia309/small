@@ -28,6 +28,7 @@ public class SalesStoreAction extends RunnerSupport implements ModelDriven<List<
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(StringUtils.isNotBlank(sales))
 			map.put("sales", sales);
+		
 		model = indexMapper.selectSales(map);
 		return SUCCESS;
 	}

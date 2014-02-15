@@ -51,4 +51,5 @@ var woFlowPanel = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	}
+	
 });

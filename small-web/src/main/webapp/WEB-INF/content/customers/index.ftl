@@ -9,6 +9,7 @@
 <title>客户信息维护</title>
 <head>
 <body>
+
 <script type="text/javascript">
 	Ext.onReady(function() {
 		<@initlayout/>

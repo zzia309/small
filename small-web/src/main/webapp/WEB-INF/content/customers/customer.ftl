@@ -519,4 +519,5 @@ var customerTab = {
 			Ext.Ajax.request(config);
 		}
 	}
+	
 };

@@ -30,6 +30,7 @@ public class TypeBusinessStoreAction extends RunnerSupport implements ModelDrive
 		String branch = servletRequest.getParameter("branch");
 		String start = servletRequest.getParameter("start");
 		String end = servletRequest.getParameter("end");
+		
 		if(StringUtils.isNotBlank(type))
 			map.put("type", type);
 		if(StringUtils.isNotBlank(sales))
