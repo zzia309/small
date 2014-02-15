@@ -52,28 +52,12 @@ public class AttachmentService {
 			else
 				return new FileInputStream(file);
 	}
-//
-//	public void createThumbnailImage(Attachment attachment, ImageInputStream Image) throws Exception{
-//		String root = getRoot();
-//		String path = attachment.getPath();
-//
-//		File file1 = new File(FilenameUtils.concat(root, path));
-//		File file = new File(file1.getParent(), "thumbnail_" + file1.getName());
-//
-//		BufferedImage bufferedImage = ImageIO.read(Image);
-//		BufferedImage thumvnail = Scalr.resize(bufferedImage, 150);
-//		ImageIO.write(thumvnail, "JPG", file);
-//	}
 
-//	public int deleteAttachment(Attachment attachment) {
-//		File file = new File(FilenameUtils.concat(getRoot(), attachment.getPath()));
-////		if(attachment.getType() == AttachmentType.IMAGE){
-////			File thumbnailFile = new File(file.getParent(), "thumbnail_" + attachment.getFilename());
-////			thumbnailFile.delete();
-////		}
-//		file.delete();
-//		return attachmentMapper.delete(attachment.getId());
-//	}
+	public int deleteAttachment(Attachment attachment) {
+		File file = new File(FilenameUtils.concat(getRoot(), attachment.getPath()));
+		file.delete();
+		return attachmentMapper.deleteByPrimaryKey(attachment.getId());
+	}
 
 	public Attachment upload(User user, String model, String record, int type, File file, String fileName) throws IOException {
 		String root, path, filename, name;

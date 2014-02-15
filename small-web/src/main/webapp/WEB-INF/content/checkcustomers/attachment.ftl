@@ -68,8 +68,22 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
         width:50,
         items: [{
         	icon: '${request.contextPath}/statics/style/img/action/delete.png',
-            tooltip: 'Delete',
+            tooltip: '删除',
             handler: function(grid, rowIndex, colIndex) {
+            	var record = grid.store.getAt(rowIndex);
+            	var id = record.get('id');
+            	Ext.Ajax.request({
+            		url: '${request.contextPath}/commons/attachment/' + id + '.gson',
+            		params: {
+            			_method: 'delete'
+            		},
+            		success: function(response) {
+            			var value = Ext.decode(response.responseText);
+            			if(value['success']) {
+            				attachmentGrid.store.remove(record);
+            			}
+            		}
+            	});
             }
         }]
 	}],

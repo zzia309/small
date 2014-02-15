@@ -57,6 +57,15 @@ public class AttachmentAction extends RunnerSupport implements ModelDriven<Attac
 		}
 		return SUCCESS;
 	}
+	
+	public String destroy()throws Exception {
+		Attachment attachment = attachmentService.getAttachment(Integer.valueOf(id));
+		if(attachment != null) {
+			attachmentService.deleteAttachment(attachment);
+			model.setSuccess(true);
+		}
+		return SUCCESS;
+	}	
 
 	public AttachmentModel getModel() {
 		return model;
