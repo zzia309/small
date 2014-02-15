@@ -10,7 +10,7 @@ var businessStore = Ext.create('Ext.data.Store', {
 			root: 'models'
 		}
 	},
-	pageSize: 10,
+	pageSize: 25,
 	autoLoad: true
  });
 
