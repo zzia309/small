@@ -11,5 +11,6 @@ public interface IndexMapper {
 	 List<KpiModel> selectProfits(Map<String, Object> map);
 	 List<KpiModel> selectSales(Map<String, Object> map);
 	 KpiModel selectBySales(Map<String, Object> map);
-	 List<KpiModel> selecTypeProfits(Map<String, Object> map);
+	 List<KpiModel> selectTypeProfits(Map<String, Object> map);
+	 List<KpiModel> selectBoss(Map<String, Object> map);
 }

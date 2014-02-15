@@ -1,21 +1,24 @@
 package cn.runnerup.actions.stores;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
+
 import cn.runnerup.actions.RunnerSupport;
+import cn.runnerup.kpi.model.KpiModel;
 import cn.runnerup.mapper.commons.IndexMapper;
 
-public class ProfitsStoreAction extends RunnerSupport implements ModelDriven<ProfitsModel>{
+public class BossStoreAction extends RunnerSupport implements ModelDriven<List<KpiModel>>{
 
-	private static final long serialVersionUID = -6851098871011607847L;
+	private static final long serialVersionUID = 1L;
 
-	private ProfitsModel model = new ProfitsModel();
+	private List<KpiModel> model = new ArrayList<KpiModel>();
 
 	@Autowired
 	private IndexMapper indexMapper;
@@ -28,15 +31,13 @@ public class ProfitsStoreAction extends RunnerSupport implements ModelDriven<Pro
 			map.put("start", start);
 			map.put("end", end);
 		}
-
-		model.setModels(indexMapper.selectProfits(map));
-		model.setList(indexMapper.selectTypeProfits(map));
+		model = indexMapper.selectBoss(map);
 		return SUCCESS;
 
 	}
 
 	@Override
-	public ProfitsModel getModel() {
+	public List<KpiModel> getModel() {
 		return model;
 	}
 

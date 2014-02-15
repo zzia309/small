@@ -91,7 +91,14 @@ var profitchart = Ext.create('Ext.chart.Chart', {
           width: 120,
 	      height: 40,
           renderer: function(storeItem, item) {
-            this.setTitle(storeItem.get('type') + ': ' + storeItem.get('sum'));
+          	var type = storeItem.get('type');
+          	var sum = storeItem.get('sum');
+          	var total = storeItem.get('total');
+          	if(Ext.isEmpty(sum))
+          		sum = 0;
+      		if(Ext.isEmpty(total))
+      			total = 0;
+            this.setTitle( type+ ': 共'+total+"笔, 利润为"+ sum+"元");
           }
         },
         label: {
@@ -152,7 +159,6 @@ var profitcountchart = Ext.create('Ext.panel.Panel',	{
 				xtype: 'datefield',
 				name: 'start',
 				id: '#start',
-				margin: '-1 -1 -1 -1',
 				format: 'Y-m-d H:i:s',
 				width: 150,
 				empty: '起始时间',
@@ -167,7 +173,6 @@ var profitcountchart = Ext.create('Ext.panel.Panel',	{
 				hidden: true
 		    },{
 				xtype: 'button',
-				margin: '-1 -1 -1 -1',
 				text: '搜索',
 				handler: function(){
 					var start = Ext.getCmp('#start').getValue();

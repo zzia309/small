@@ -2,6 +2,10 @@ var salesPanel = Ext.create('Ext.panel.Panel', {
 	title: '业务员业绩',
 	columnWidth: .5,
 	height: 228,
+	header: {
+		minHeight: 25,
+		maxHeight: 25,
+	},
 	items: [{
 		xtype: 'displayfield',
 		fieldLabel: '贷款总数',

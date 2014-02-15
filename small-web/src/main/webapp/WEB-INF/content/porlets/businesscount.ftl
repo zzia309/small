@@ -6,7 +6,10 @@ var chart = Ext.create('Ext.chart.Chart', {
 	store: typeBusinessStore,
 	shadow: true,
 	legend: {
-	    position: 'right'
+	    position: 'right',
+	    labelFont: '8px Helvetica, sans-serif',
+	    padding: 4,
+	    itemSpacing: 5
 	},
 	insetPadding: 35,
 	theme: 'Base:gradients',
@@ -27,12 +30,13 @@ var chart = Ext.create('Ext.chart.Chart', {
 	        var total1 = Math.round(storeItem.get('total'));
 	        var type = storeItem.get('type');
 	        var sum = storeItem.get('sum');
-	        this.setTitle("共"+total1 +"笔, 贷款总额"+sum+"元");
+
+	        this.setTitle(type+": 共"+total1 +"笔 , 贷款总额"+sum+"元");
 	      }
 	    },
 	    highlight: {
 	      segment: {
-	        margin: 3
+	        margin: 20
 	      }
 	    },
 	    label: {

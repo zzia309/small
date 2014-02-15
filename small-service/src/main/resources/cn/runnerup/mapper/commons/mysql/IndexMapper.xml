@@ -53,7 +53,7 @@
 
 </select>
 
-<select id="selecTypeProfits" resultMap="BaseResultMap" parameterType="map" >
+<select id="selectTypeProfits" resultMap="BaseResultMap" parameterType="map" >
 	select
 		SUM(buss_profits) as sum,
 		cs_carType as type,
@@ -88,6 +88,24 @@
 	and cs_isFlow = true
 	<if test="sales != null">
 		and cs_sales = #{sales}
+	</if>
+</select>
+
+<select id="selectBoss" resultMap="BaseResultMap" parameterType="map" >
+
+	select count(*) as total, SUM(buss_advances) as sum, '已垫款' as type from sp_businesses where buss_advances is not null
+	<if test="start != null and end != null">
+		and buss_finishTime between #{start} and #{end}
+	</if>
+	union
+	select count(*) as total, SUM(buss_advances) as sum, '已送行' as type from sp_businesses where buss_advances is not null and buss_isSonghang = 1
+	<if test="start != null and end != null">
+		and buss_finishTime between #{start} and #{end}
+	</if>
+	union
+	select count(*) as total, SUM(buss_advances) as sum, '未送行' as type from sp_businesses where buss_advances is not null and buss_isSonghang = 0
+	<if test="start != null and end != null">
+		and buss_finishTime between #{start} and #{end}
 	</if>
 </select>
 
