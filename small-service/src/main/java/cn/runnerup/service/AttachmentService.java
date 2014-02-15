@@ -103,7 +103,7 @@ public class AttachmentService {
 	}
 
 	public String getRoot() {
-		return FilenameUtils.concat(FileUtils.getTempDirectoryPath(), ATTACHMENT_DIR);
+		return FilenameUtils.concat("d:/", ATTACHMENT_DIR);
 	}
 
 	private String getPath() {

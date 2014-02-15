@@ -1,11 +1,9 @@
 var creditPanel = Ext.create('Ext.panel.Panel', {
-	defaultType: 'textfield',
-	anchor: '100% 38%',
 	title: '征信信息',
 	layout: 'column',
 	collapsible: true,
+	height: 210,
 	defaults: {
-		columnWidth: 0.5,
 		labelAlign: 'right',
 		margin: '2 0 2 0',
 		<#if action.user?? && action.user.priority==2>
@@ -15,8 +13,11 @@ var creditPanel = Ext.create('Ext.panel.Panel', {
 		</#if>
 	},
 	items: [{
-		name: 'id',
-		hidden: true
+		xtype: 'hidden',
+		name: 'id'
+	},{
+		xtype: 'hidden',
+		name: 'customer'
 	},{
 		fieldLabel: '客户',
 		xtype: 'xcombo',
@@ -30,18 +31,19 @@ var creditPanel = Ext.create('Ext.panel.Panel', {
 		hidden: true,
 		displayField: 'loanername'
 	},{
-		name: 'customer',
-		hidden: true
-	},{
 		fieldLabel: '信用记录',
 		name: 'credit',
 		columnWidth: 1,
 		xtype: 'htmleditor'
 	}, {
+		xtype: 'textfield',
 		fieldLabel: '公安记录',
-		name: 'publicorder'
+		name: 'publicorder',
+		columnWidth: 0.5
 	}, {
+		xtype: 'textfield',
 		fieldLabel: '法院记录',
+		columnWidth: 0.5,
 		name: 'court'
 	}]
 });
@@ -398,7 +400,6 @@ var businessForm = Ext.create('Ext.form.Panel', {
 
 var businessTab = {
 	autoScroll: true,
-	layout: 'anchor',
 	itemId: 'business',
 	title: '担保基本信息',
 	items: businessForm,

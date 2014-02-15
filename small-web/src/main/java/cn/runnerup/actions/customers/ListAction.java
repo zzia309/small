@@ -25,12 +25,12 @@ public class ListAction extends RunnerSupport implements ModelDriven<ListModel>{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("limit", model.getLimit());
 		map.put("start", model.getStart());
+		map.put("user", getUser().getId());
 		if(StringUtils.isNotBlank(condition))
 			map.put("condition", condition.trim());
-		if(getUser().getPriority()>3) {
-			model.setModels(customerMapper.getCheckCustomers(map));
-			model.setTotal(customerMapper.getCheckCustomersCount(map));
-		}
+		
+		model.setModels(customerMapper.getCheckCustomers(map));
+		model.setTotal(customerMapper.getCheckCustomersCount(map));
 		return SUCCESS;
 	}
 

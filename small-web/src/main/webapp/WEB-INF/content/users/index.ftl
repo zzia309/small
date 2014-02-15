@@ -5,7 +5,7 @@
 <@myhead/>
 <script type="text/javascript" src="${request.contextPath}/statics/model/User.js"></script>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/style/style.css"/>
-<title>test</title>
+<title>用户信息维护</title>
 <head>
 <body>
 
