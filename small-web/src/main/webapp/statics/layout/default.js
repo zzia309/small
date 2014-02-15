@@ -171,7 +171,6 @@ Ext.define('Eap.layout.Default', {
 							}
 						}
 					});
-					
 					settingwindows.show();
 				}
 			},
