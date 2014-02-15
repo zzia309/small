@@ -164,7 +164,9 @@ var listTab = {
 	edit: function(){},
 	listeners: {
 		activate: function() {
-
+			var rec = listgrid.getSelectionModel().getSelection()[0];
+			if(!rec)
+				App.currentId = 0;
 	    }
 	}
 };
