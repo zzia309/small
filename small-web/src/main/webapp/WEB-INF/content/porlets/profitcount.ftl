@@ -1,5 +1,5 @@
 var timeStore = Ext.create('Ext.data.Store', {
-	fields: ['code', 'name'],
+	fields: ['code', 'name', 'total'],
 	data:[{'code': 'customer', 'name': '自定义日期'},
 		{'code': 'today', 'name': '今天'},
 		{'code': 'yesterday', 'name': '昨天'},
@@ -10,7 +10,7 @@ var timeStore = Ext.create('Ext.data.Store', {
 });
 
 var typeProfitStore = Ext.create('Ext.data.Store', {
-	 fields: ['sum', 'type'],
+	 fields: ['sum', 'type', 'total'],
      proxy: {
 		type: 'ajax',
 		url: '${request.contextPath}/stores/profits-store.gson',
@@ -77,7 +77,7 @@ var profitchart = Ext.create('Ext.chart.Chart', {
 	    fields: ['type'],
 	    label: {
             rotate: {
-                degrees: 45
+                degrees: 315
             }
         },
 	    title: '业务类型'
@@ -116,7 +116,6 @@ var profitchart = Ext.create('Ext.chart.Chart', {
 
 var profitcountchart = Ext.create('Ext.panel.Panel',	{
 	layout: 'column',
-	collapsible: true,
 	columnWidth: 0.5,
 	title: '业务利润统计',
 	items: [profitgrid, profitchart],

@@ -51,7 +51,6 @@ var chart = Ext.create('Ext.chart.Chart', {
 var bussinesscountchart = Ext.create('Ext.panel.Panel',	{
 	layout: 'column',
 	height: 220,
-	collapsible: true,
 	title: '业务类型贷款统计',
 	columnWidth: 0.5,
 	items: [searchPanel, chart]
