@@ -18,7 +18,7 @@
 			'id': 'G', 'value': '女'
 		}]
 	});
-	
+
 	var root = Ext.create('Ext.data.TreeStore', {
 		root: {
 			expanded: true,
