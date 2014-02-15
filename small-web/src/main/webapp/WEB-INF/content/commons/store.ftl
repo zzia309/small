@@ -47,3 +47,18 @@ var bankStore = Ext.create('Ext.data.Store', {
 	  {name: '浙江泰隆商业银行(樊郡等)', code: '浙江泰隆商业银行(樊郡等)'}
 	]
 });
+
+
+var flowStore = Ext.create('Ext.data.Store', {
+	fields:['name','code'],
+	data: [
+	  {name: '新建', code: 'new'},
+	  {name: '初审', code: 'trial'},
+	  {name: '终审', code: 'final'},
+	  {name: '老板过件', code:'boss'},
+	  {name: '财务', code: 'finance'},
+	  {name: '后勤', code: 'logistics'},
+	  {name: '关闭', code: 'closed'},
+	  {name: '驳回', code: '-'}
+	]
+});

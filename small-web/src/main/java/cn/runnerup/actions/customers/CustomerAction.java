@@ -112,7 +112,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 				business.setStatus("new");
 				businessService.createBusiness(business);
 			}
-			woFlowService.createWoFlow(user, "", "-", "new", business.getId());
+			woFlowService.createWoFlow(user, "", "", "new", business.getId());
 			model.setSuccess(true);
 		} catch (Exception e) {
 			// TODO: handle exception

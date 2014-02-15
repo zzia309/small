@@ -17,11 +17,25 @@ var woFlowPanel = Ext.create('Ext.grid.Panel', {
 	}, {
 		header: '上一状态',
 		dataIndex: 'oldstatus',
-		flex: 1
+		flex: 1,
+		renderer: function(value) {
+			if(value) {
+				var record =flowStore.findRecord('code',value);
+				if(record)
+					return record.get('name');
+			}
+		}
 	}, {
 		header: '新状态',
 		dataIndex: 'status',
-		flex: 1
+		flex: 1,
+		renderer: function(value) {
+			if(value) {
+				var record =flowStore.findRecord('code',value);
+				if(record)
+					return record.get('name');
+			}
+		}
 	}, {
 		header: '提示信息',
 		dataIndex: 'descr',

@@ -84,6 +84,7 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		displayField: 'name',
 		editable: false
 	}, {
+		xtype:'numberfield',
 		fieldLabel: '银行放款金额',
 		name: 'amounts'
 	}, {

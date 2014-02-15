@@ -54,6 +54,18 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 		}
 	},{
 		xtype:'actioncolumn',
+		header: '下载',
+        width:80,
+        items: [{
+        	icon: '${request.contextPath}/statics/style/img/action/download.png',
+            tooltip: '下载',
+            handler: function(grid, rowIndex, colIndex) {
+            	var record = grid.store.getAt(rowIndex);
+            	window.location = '${request.contextPath}/commons/down/' + record.get('id');
+            }
+        }]
+	},{
+		xtype:'actioncolumn',
 		header: '删除附件',
         width:80,
         items: [{
@@ -65,7 +77,7 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 	}],
 	listeners: {
 		itemdblclick: function(view, record) {
-			window.location = '${request.contextPath}/commons/down/' + record.get('id');
+			//window.location = '${request.contextPath}/commons/down/' + record.get('id');
 		}
 	}
 });
