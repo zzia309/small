@@ -29,6 +29,7 @@ Ext.define('Eap.layout.Default', {
 		    }
 		});
 	},
+	//创建菜单
 	createMenu: function(config) {
 		var me = this;
 		store = config.store || {};
