@@ -5,6 +5,7 @@ var creditPanel = Ext.create('Ext.panel.Panel', {
 	height: 210,
 	defaults: {
 		labelAlign: 'right',
+		xtype: 'textfield',
 		margin: '2 0 2 0',
 		<#if action.user?? && action.user.priority==2>
 			readOnly: false
@@ -13,12 +14,9 @@ var creditPanel = Ext.create('Ext.panel.Panel', {
 		</#if>
 	},
 	items: [{
-		xtype: 'hidden',
-		name: 'id'
-	},{
-		xtype: 'hidden',
-		name: 'customer'
-	},{
+		name: 'id',
+		hidden: true
+	}, {
 		fieldLabel: '客户',
 		xtype: 'xcombo',
     	name: 'customer',
@@ -31,17 +29,18 @@ var creditPanel = Ext.create('Ext.panel.Panel', {
 		hidden: true,
 		displayField: 'loanername'
 	},{
+		name: 'customer',
+		hidden: true
+	},{
 		fieldLabel: '信用记录',
 		name: 'credit',
 		columnWidth: 1,
 		xtype: 'htmleditor'
 	}, {
-		xtype: 'textfield',
 		fieldLabel: '公安记录',
 		name: 'publicorder',
 		columnWidth: 0.5
 	}, {
-		xtype: 'textfield',
 		fieldLabel: '法院记录',
 		columnWidth: 0.5,
 		name: 'court'
@@ -208,7 +207,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		icon: '${request.contextPath}/statics/style/img/action/reject.png',
 		handler: function(){
 			var me = this;
-			var form = me.up('form').getForm();
+			var form = this.up('form').getForm();
 			var id = form.findField('id').getValue();
 			if(Ext.isEmpty(id)){
 			}else{
@@ -236,8 +235,9 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		icon: '${request.contextPath}/statics/style/img/action/first.png',
 		handler: function(){
 			var me = this;
-			var form = me.up('form').getForm();
+			var form = businessForm.getForm();
 			var id = form.findField('id').getValue();
+			console.log(id);
 			if(Ext.isEmpty(id)){
 			}else{
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';

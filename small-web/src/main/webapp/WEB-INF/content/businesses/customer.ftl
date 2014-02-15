@@ -18,9 +18,6 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 		margin: '2 0 0 0'
 	},
 	items:[{
-		name: 'id',
-		hidden: true
-	}, {
 		fieldLabel: '客户姓名',
 		name: 'loanername',
 		allowBlank: false
