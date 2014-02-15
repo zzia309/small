@@ -110,13 +110,9 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	}, {
 		header: '客户户口所在地',
 		dataIndex: 'loanerhukou'
-	},
-	{
+	},{
 		header: '配偶姓名',
 		dataIndex: 'matename'
-	}, {
-		header: '配偶性别',
-		dataIndex: 'matesex'
 	}, {
 		header: '配偶年龄',
 		dataIndex: 'mateage'
@@ -262,5 +258,5 @@ var listTab = {
 				App.currentId = 0;
 	    }
 	}
-	
+
 };
