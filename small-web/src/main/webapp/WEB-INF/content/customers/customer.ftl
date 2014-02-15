@@ -23,6 +23,7 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 		store: genderStore,
 		valueField: 'id',
 		displayField: 'value',
+		editable: false,
 		allowBlank: false
 	}, {
 		xtype: 'numberfield',
@@ -61,7 +62,8 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 		name: 'loanermarry',
 		store: marryStore,
 		valueField: 'name',
-		displayField: 'code'
+		displayField: 'code',
+		editable: false
 	}, {
 		fieldLabel: '客户所在地区',
 		name: 'loanerarea'
@@ -149,7 +151,8 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 		store: genderStore,
 		valueField: 'id',
 		displayField: 'value',
-		allowBlank: false
+		allowBlank: false,
+		editable: false
 	}, {
 		xtype: 'numberfield',
 		fieldLabel: '担保人年龄',
@@ -186,7 +189,8 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 		name: 'guaranteemarry',
 		store: marryStore,
 		valueField: 'name',
-		displayField: 'code'
+		displayField: 'code',
+		editable: false
 	}, {
 		fieldLabel: '担保人所在地区',
 		name: 'guaranteearea'
@@ -255,7 +259,8 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	    store: carStore,
 	    queryMode: 'local',
 	    displayField: 'name',
-	    valueField: 'code'
+	    valueField: 'code',
+	    editable: false
 	}, {
 		fieldLabel: '车价',
 		name: 'carprice',

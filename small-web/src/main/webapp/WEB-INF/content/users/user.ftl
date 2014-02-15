@@ -29,14 +29,16 @@ var userForm = Ext.create('Ext.form.Panel', {
 		store: rolestore,
 		valueField: 'id',
 		displayField: 'value',
-		allowBlank: false
+		allowBlank: false,
+		editable: false
 	},{
 		xtype: 'combo',
 		fieldLabel: '性别',
 		name: 'gender',
 		store: genderStore,
 		valueField: 'id',
-		displayField: 'value'
+		displayField: 'value',
+		editable: false
 	},{
 		fieldLabel: '是否停用',
 		xtype: 'checkbox',

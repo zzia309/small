@@ -104,7 +104,8 @@ Ext.define('Eap.layout.Default', {
 							name: 'gender',
 							store: gStore,
 							valueField: 'id',
-							displayField: 'value'
+							displayField: 'value',
+							editable: false
 						},{
 							fieldLabel: '地址',
 							name: 'address'

@@ -80,7 +80,8 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		xtype: 'combo',
 		store: bankStore,
 		valueField: 'code',
-		displayField: 'name'
+		displayField: 'name',
+		editable: false
 	}, {
 		fieldLabel: '银行放款金额',
 		name: 'amounts'
