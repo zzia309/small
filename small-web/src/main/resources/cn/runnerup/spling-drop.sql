@@ -47,6 +47,23 @@ CREATE TABLE `sp_flowauthorizations` (
 --
 -- Table structure for table `sp_woflows`
 --
+DROP TABLE IF EXISTS `sp_codes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sp_codes` (
+  `cod_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_type` varchar(128) DEFAULT NULL,
+  `cod_code` varchar(64) DEFAULT NULL,
+  `cod_name` varchar(64) DEFAULT NULL,
+  `cod_created` datetime NOT NULL DEFAULT '2014-01-03 12:05:53',
+  `cod_createdby` int(11) DEFAULT NULL,
+  PRIMARY KEY (`cod_id`),
+  UNIQUE KEY `cod_code_UNIQUE` (`cod_code`),
+  KEY `key1` (`cod_createdby`),
+  CONSTRAINT `key1` FOREIGN KEY (`cod_createdby`) REFERENCES `sp_users` (`usr_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 
 DROP TABLE IF EXISTS `sp_woflows`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
