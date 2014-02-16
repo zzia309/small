@@ -22,6 +22,26 @@
     where cod_id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="selectCodes" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+    select
+    <include refid="Base_Column_List" />
+    from sp_codes
+   	<if test="type != null">
+		and cod_type = #{type}
+   	</if>
+   	limit ${limit} offset ${start}
+  </select>
+
+  <select id="selectCodesCount" resultType="int" parameterType="java.util.HashMap">
+    select
+    	count(*)
+    from sp_codes
+   	<if test="type != null">
+		and cod_type = #{type}
+   	</if>
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_codes
     where cod_id = #{id,jdbcType=INTEGER}

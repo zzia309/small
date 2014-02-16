@@ -13,7 +13,7 @@ public class Code {
 
     private Date created = new Date(System.currentTimeMillis());;
 
-    private Integer createdby;
+    private User createdby;
 
     public Integer getId() {
         return id;
@@ -55,11 +55,13 @@ public class Code {
         this.created = created;
     }
 
-    public Integer getCreatedby() {
-        return createdby;
-    }
+	public User getCreatedby() {
+		return createdby;
+	}
 
-    public void setCreatedby(Integer createdby) {
-        this.createdby = createdby;
-    }
+	public void setCreatedby(User createdby) {
+		this.createdby = createdby;
+	}
+
+
 }

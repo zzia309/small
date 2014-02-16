@@ -26,6 +26,7 @@
 			children: [
 				<#if action.user?? && (action.user.username=='admin')>
 				{ text: "用户信息维护", icon: '${request.contextPath}/statics/style/img/action/user.png',leaf: true, uri: '${request.contextPath}/users/index' },
+				{ text: "基本信息维护", icon: '${request.contextPath}/statics/style/img/action/user.png',leaf: true, uri: '${request.contextPath}/codes/index' },
 				</#if>
 				<#if action.user?? && (action.user.priority>1)>
 				{ text: "担保流程", icon: '${request.contextPath}/statics/style/img/action/flow.png',leaf: true, uri: '${request.contextPath}/businesses/index' },
