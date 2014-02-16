@@ -1,10 +1,10 @@
-<#include "search.ftl">
+<#include "../search.ftl">
 
 var businessStore = Ext.create('Ext.data.Store', {
      model: 'Model.Business',
      proxy: {
 		type: 'ajax',
-		url: '${request.contextPath}/businesses/list.gson',
+		url: '${request.contextPath}/businesses/checks/list.gson',
 		reader: {
 			type: 'json',
 			root: 'models'

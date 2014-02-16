@@ -29,6 +29,7 @@
 				</#if>
 				<#if action.user?? && (action.user.priority>1)>
 				{ text: "担保流程", icon: '${request.contextPath}/statics/style/img/action/flow.png',leaf: true, uri: '${request.contextPath}/businesses/index' },
+				{ text: "担保流程查看", icon: '${request.contextPath}/statics/style/img/action/flow.png',leaf: true, uri: '${request.contextPath}/businesses/checks/index' },
 				</#if>
 				<#if action.user?? && (action.user.priority==1)>
 				{ text: "担保信息维护", icon: '${request.contextPath}/statics/style/img/action/customer.png',leaf: true, uri: '${request.contextPath}/customers/index' }

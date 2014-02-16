@@ -7,11 +7,7 @@ var creditPanel = Ext.create('Ext.panel.Panel', {
 		labelAlign: 'right',
 		xtype: 'textfield',
 		margin: '2 0 2 0',
-		<#if action.user?? && action.user.priority==2>
-			readOnly: false
-		<#else>
-			readOnly: true
-		</#if>
+		readOnly: true
 	},
 	items: [{
 		name: 'id',
@@ -57,11 +53,7 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		columnWidth: 0.25,
 		labelAlign: 'right',
 		margin: '2 0 2 0',
-		<#if action.user?? && action.user.priority==6>
-			readOnly: false
-		<#else>
-			readOnly: true
-		</#if>
+		readOnly: true
 	},
 	items: [{
 		fieldLabel: '分公司',
@@ -108,11 +100,7 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 		columnWidth: 0.3333,
 		labelAlign: 'right',
 		margin: '2 0 2 0',
-		<#if action.user?? && action.user.priority==7>
-			readOnly: false
-		<#else>
-			readOnly: true
-		</#if>
+		readOnly: true
 	},
 	items: [ {
 		fieldLabel: '保险公司',
@@ -133,7 +121,7 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 		xtype: 'checkbox',
 		inputValue: true
 	}, {
-		fieldLabel: '是否送行',
+		fieldLabel: '是否送杭',
 		name: 'isSongHang',
 		xtype: 'checkbox',
 		inputValue: true
@@ -163,12 +151,8 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 
 var businessForm = Ext.create('Ext.form.Panel', {
 	items:[creditPanel,
-		<#if action.user?? && (action.user.priority>5)>
 		feePanel,
-		</#if>
-		<#if action.user?? && (action.user.priority>6)>
 		insurancePanel,
-		</#if>
 		{
 		xtype: 'panel',
 		layout: 'column',
@@ -182,6 +166,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		},{
 	    	xtype: 'button',
 	    	columnWidth: 0.09,
+	    	disabled: true,
 	    	text: '添加附件',
 	    	iconCls:'y-action-attachment',
 	    	handler: function(){
@@ -203,6 +188,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 	init: function(id){
 
 	},
+	/*
 	buttons:[{
 		text: '驳回',
 		icon: '${request.contextPath}/statics/style/img/action/reject.png',
@@ -397,6 +383,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			}
 		}
 	}]
+*/
 });
 
 var businessTab = {

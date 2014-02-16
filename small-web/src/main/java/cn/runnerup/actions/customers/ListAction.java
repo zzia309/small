@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.runnerup.actions.RunnerSupport;
-import cn.runnerup.mapper.CustomerMapper;
+import cn.runnerup.service.CustomerService;
 
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -18,7 +18,7 @@ public class ListAction extends RunnerSupport implements ModelDriven<ListModel>{
 	private ListModel model = new ListModel();
 
 	@Autowired
-	private CustomerMapper customerMapper;
+	private CustomerService customerService;
 
 	public String index(){
 		String condition = servletRequest.getParameter("condition");
@@ -28,9 +28,9 @@ public class ListAction extends RunnerSupport implements ModelDriven<ListModel>{
 		map.put("user", getUser().getId());
 		if(StringUtils.isNotBlank(condition))
 			map.put("condition", condition.trim());
-		
-		model.setModels(customerMapper.getCheckCustomers(map));
-		model.setTotal(customerMapper.getCheckCustomersCount(map));
+
+		model.setModels(customerService.getCustomers(map));
+		model.setTotal(customerService.getCustomerCount(map));
 		return SUCCESS;
 	}
 

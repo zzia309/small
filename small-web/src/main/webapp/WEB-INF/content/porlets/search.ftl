@@ -126,7 +126,7 @@ var searchPanel = Ext.create('Ext.form.Panel',{
     },{
 		xtype: 'button',
 		text: '查询',
-		margin:'2 0 2 150',
+		margin:'2 0 2 0',
 		columnWidth: 1,
 		handler:function(){
 			var me = this;

@@ -13,7 +13,7 @@
 	   	cs_cartype as type,
 	   	sum(cs_carLoans) as sum
    	from
-   	sp_businesses , sp_customers where buss_customer = cs_id
+   	sp_businesses , sp_customers where buss_customer = cs_id and cs_isFlow = true
    	<if test="type != null">
 		and cs_cartype = #{type}
    	</if>
@@ -24,7 +24,7 @@
 	    and buss_branch = #{branch}
 	</if>
 	<if test="start != null and end != null">
-		and cs_created between #{start} and #{end}
+		and buss_finishTime between #{start} and #{end}
 	</if>
 	group by cs_cartype;
 </select>
@@ -38,14 +38,14 @@
 	(
 		select buss_profits, cs_carType
 		from sp_businesses, sp_customers
-		where buss_customer = cs_id and cs_carType not like  '%租赁%'
+		where buss_customer = cs_id and cs_isFlow = true and cs_carType not like  '%租赁%'
 		<if test="start != null and end != null">
 			and buss_finishTime between #{start} and #{end}
 		</if>
 		union
 		select buss_profits, '租赁' as cs_carType
 		from sp_businesses, sp_customers
-		where buss_customer = cs_id and cs_carType like  '%租赁%'
+		where buss_customer = cs_id and cs_isFlow = true and cs_carType like  '%租赁%'
 		<if test="start != null and end != null">
 			and buss_finishTime between #{start} and #{end}
 		</if>
@@ -59,7 +59,7 @@
 		cs_carType as type,
 		count(*) as total
 	from sp_businesses, sp_customers
-	where buss_customer = cs_id
+	where buss_customer = cs_id and cs_isFlow = true
 	<if test="start != null and end != null">
 		and buss_finishTime between #{start} and #{end}
 	</if>
@@ -72,7 +72,7 @@
 		SUM(cs_carLoans) as sum ,
 		cs_sales as type
 	from sp_businesses, sp_customers
-	where buss_customer = cs_id
+	where buss_customer = cs_id and cs_isFlow = true
 	<if test="sales != null">
 		and cs_sales = #{sales}
 	</if>
@@ -84,7 +84,7 @@
 		SUM(cs_carLoans) as sum ,
 		cs_sales as type
 	from sp_businesses, sp_customers
-	where buss_customer = cs_id
+	where buss_customer = cs_id and cs_isFlow = true
 	and cs_isFlow = true
 	<if test="sales != null">
 		and cs_sales = #{sales}
@@ -93,17 +93,17 @@
 
 <select id="selectBoss" resultMap="BaseResultMap" parameterType="map" >
 
-	select count(*) as total, SUM(buss_advances) as sum, '已垫款' as type from sp_businesses where buss_advances is not null
+	select count(*) as total, SUM(buss_advances) as sum, '已垫款' as type from sp_businesses, sp_customers where buss_customer = cs_id and buss_advances is not null and cs_isFlow = true
 	<if test="start != null and end != null">
 		and buss_finishTime between #{start} and #{end}
 	</if>
 	union
-	select count(*) as total, SUM(buss_advances) as sum, '已送行' as type from sp_businesses where buss_advances is not null and buss_isSonghang = 1
+	select count(*) as total, SUM(buss_advances) as sum, '已送行' as type from sp_businesses, sp_customers where buss_customer = cs_id and cs_isFlow = true and buss_advances is not null and buss_isSonghang = 1
 	<if test="start != null and end != null">
 		and buss_finishTime between #{start} and #{end}
 	</if>
 	union
-	select count(*) as total, SUM(buss_advances) as sum, '未送行' as type from sp_businesses where buss_advances is not null and buss_isSonghang = 0
+	select count(*) as total, SUM(buss_advances) as sum, '未送行' as type from sp_businesses where buss_customer = cs_id and cs_isFlow = true and buss_advances is not null and buss_isSonghang = 0
 	<if test="start != null and end != null">
 		and buss_finishTime between #{start} and #{end}
 	</if>

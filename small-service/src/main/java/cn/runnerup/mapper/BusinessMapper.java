@@ -24,4 +24,8 @@ public interface BusinessMapper {
 
     Business selectByCustomer(Integer customer);
 
+    List<Business> getBusinessesHistory(Map<String, Object> map);
+
+    int getBusinessesHistoryCount(Map<String, Object> map);
+
 }

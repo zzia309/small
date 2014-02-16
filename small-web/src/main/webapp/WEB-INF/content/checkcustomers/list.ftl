@@ -2,7 +2,7 @@ var store = Ext.create('Ext.data.Store', {
      model: 'Model.Customer',
      proxy: {
 		type: 'ajax',
-		url: '${request.contextPath}/customers/list.gson',
+		url: '${request.contextPath}/checkcustomers/list.gson',
 		reader: {
 			type: 'json',
 			root: 'models'
@@ -43,7 +43,7 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		icon: '${request.contextPath}/statics/style/img/action/search.png',
 		handler: function() {
 			listgrid.down('pagingtoolbar').moveFirst();
-			store.proxy.url = '${request.contextPath}/customers/list.gson';
+			store.proxy.url = '${request.contextPath}/checkcustomers/list.gson';
 			store.load();
 		}
 	}],
