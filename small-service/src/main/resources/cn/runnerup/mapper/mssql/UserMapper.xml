@@ -18,8 +18,10 @@
     <result column="usr_priority" property="priority" jdbcType="INTEGER" />
     <result column="usr_created" property="created" jdbcType="TIMESTAMP" />
     <result column="usr_updated" property="updated" jdbcType="TIMESTAMP" />
-    <result column="usr_createdby" property="createdby" jdbcType="INTEGER" />
-    <result column="usr_updatedby" property="updatedby" jdbcType="INTEGER" />
+
+
+    <association property="createdby" column="usr_createdby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
+    <association property="updatedby" column="usr_updatedby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
   </resultMap>
 
   <sql id="Base_Column_List" >
@@ -64,7 +66,9 @@
       #{idnumber,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
       #{postalcode,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP},
-      #{updated,jdbcType=TIMESTAMP}, #{createdby,jdbcType=INTEGER}, #{updatedby,jdbcType=INTEGER}
+      #{updated,jdbcType=TIMESTAMP},
+      <if test="createdby == null">NULL,</if><if test="createdby != null">#{createdby.id,jdbcType=INTEGER},</if>
+      <if test="updatedby == null">NULL</if><if test="updatedby != null">#{updatedby.id,jdbcType=INTEGER}</if>
       )
 	<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
 		select LAST_INSERT_ID() as id
@@ -259,8 +263,8 @@
       usr_qq = #{qq,jdbcType=VARCHAR},
       usr_created = #{created,jdbcType=TIMESTAMP},
       usr_updated = #{updated,jdbcType=TIMESTAMP},
-      usr_createdby = #{createdby,jdbcType=INTEGER},
-      usr_updatedby = #{updatedby,jdbcType=INTEGER}
+      <if test="createdby == null">usr_createdby = NULL,</if><if test="createdby != null">usr_createdby = #{createdby.id,jdbcType=INTEGER},</if>
+      <if test="updatedby == null">usr_updatedby = NULL,</if><if test="updatedby != null">usr_updatedby = #{updatedby.id,jdbcType=INTEGER}</if>
     where usr_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

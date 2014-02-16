@@ -103,7 +103,7 @@
 		and buss_finishTime between #{start} and #{end}
 	</if>
 	union
-	select count(*) as total, SUM(buss_advances) as sum, '未送行' as type from sp_businesses where buss_customer = cs_id and cs_isFlow = true and buss_advances is not null and buss_isSonghang = 0
+	select count(*) as total, SUM(buss_advances) as sum, '未送行' as type from sp_businesses , sp_customers  where buss_customer = cs_id and cs_isFlow = true and buss_advances is not null and buss_isSonghang = 0
 	<if test="start != null and end != null">
 		and buss_finishTime between #{start} and #{end}
 	</if>

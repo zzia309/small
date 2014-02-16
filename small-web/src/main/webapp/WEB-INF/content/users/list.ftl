@@ -136,7 +136,11 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	},{
 		header: '创建人',
 		flex: 1,
-		dataIndex: 'createdby'
+		dataIndex: 'createdby',
+		renderer: function(value){
+			if(value)
+				return value['username'];
+		}
 	}],
 	store: userStore,
 	listeners: {

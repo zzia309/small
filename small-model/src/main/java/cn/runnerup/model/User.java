@@ -35,9 +35,9 @@ public class User {
 
     private Date updated;
 
-    private Integer createdby;
+    private User createdby;
 
-    private Integer updatedby;
+    private User updatedby;
 
     public Integer getId() {
         return id;
@@ -159,21 +159,21 @@ public class User {
         this.updated = updated;
     }
 
-    public Integer getCreatedby() {
-        return createdby;
-    }
+	public User getCreatedby() {
+		return createdby;
+	}
 
-    public void setCreatedby(Integer createdby) {
-        this.createdby = createdby;
-    }
+	public void setCreatedby(User createdby) {
+		this.createdby = createdby;
+	}
 
-    public Integer getUpdatedby() {
-        return updatedby;
-    }
+	public User getUpdatedby() {
+		return updatedby;
+	}
 
-    public void setUpdatedby(Integer updatedby) {
-        this.updatedby = updatedby;
-    }
+	public void setUpdatedby(User updatedby) {
+		this.updatedby = updatedby;
+	}
 
 	public Integer getPriority() {
 		return priority;

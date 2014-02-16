@@ -18,8 +18,8 @@
     <result column="usr_priority" property="priority" jdbcType="INTEGER" />
     <result column="usr_created" property="created" jdbcType="TIMESTAMP" />
     <result column="usr_updated" property="updated" jdbcType="TIMESTAMP" />
-    <result column="usr_createdby" property="createdby" jdbcType="INTEGER" />
-    <result column="usr_updatedby" property="updatedby" jdbcType="INTEGER" />
+    <association property="createdby" column="usr_createdby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
+    <association property="updatedby" column="usr_updatedby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
   </resultMap>
   <sql id="Base_Column_List" >
     usr_id, usr_username, usr_password, usr_fullname, usr_disabled, usr_priority, usr_idnumber, usr_gender,

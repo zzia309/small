@@ -31,8 +31,8 @@
 			}]
 		});
 
-		<#include "user.ftl">
 		<#include "list.ftl">
+		<#include "user.ftl">
 		App.createContentPanel({
 		tabs: [listTab]
 		});

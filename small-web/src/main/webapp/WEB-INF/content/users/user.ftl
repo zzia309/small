@@ -59,6 +59,43 @@ var userForm = Ext.create('Ext.form.Panel', {
 	},{
 		fieldLabel: 'QQ',
 		name: 'qq'
+	}, {
+		fieldLabel: '创建日期',
+		xtype: 'xdatefield',
+		name: 'created',
+		format: 'Y-m-d H:i:s',
+		readOnly: true
+	}, {
+		fieldLabel: '创建人',
+		xtype: 'xcombo',
+    	name: 'createdby',
+    	store: userStore,
+		triggerAction: 'all',
+		selectOnFocus: true,
+		editable: false,
+		queryMode: 'local',
+		valueField: 'id',
+		readOnly: true,
+		displayField: 'username'
+	}, {
+		fieldLabel: '更新日期',
+		xtype: 'xdatefield',
+		name: 'updated',
+		format: 'Y-m-d H:i:s',
+		readOnly: true
+	}, {
+		fieldLabel: '更新人',
+		xtype: 'xcombo',
+    	name: 'updatedby',
+    	store: userStore,
+		triggerAction: 'all',
+		selectOnFocus: true,
+		editable: false,
+		queryMode: 'local',
+		valueField: 'id',
+		readOnly: true,
+		displayField: 'username',
+		value: 9
 	}],
 	buttons:[{
 		text: '保存',
@@ -111,6 +148,9 @@ var windows = Ext.create('Ext.window.Window', {
 	listeners: {
 		beforehide: function(view, eOpts){
 			var me = this;
+			var form = userForm.getForm();
+			var password = form.findField('password');
+			password.setReadOnly(false);
 			this.clearData();
 		}
 	},
@@ -120,10 +160,12 @@ var windows = Ext.create('Ext.window.Window', {
 			var record = sm.getSelection()[0];
 			var form = userForm.getForm();
 			form.setValues(record.data);
+			var password = form.findField('password');
 			var fields = form.getFields();
 			fields.each(function(field){
 				field.resetOriginalValue();
 			});
+			password.setReadOnly(true);
 			windows.show();
 		}else{
 			Ext.Msg.alert('提醒', '请先选择一条记录');

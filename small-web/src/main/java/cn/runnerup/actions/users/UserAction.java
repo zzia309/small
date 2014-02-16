@@ -53,6 +53,8 @@ public class UserAction extends RunnerSupport implements ModelDriven<UserModel>{
 			Date now = Calendar.getInstance().getTime();
 			model.setCreated(now);
 			model.setUpdated(now);
+			model.setCreatedby(getUser());
+			model.setUpdatedby(getUser());
 			if(model.getDisabled()==null)
 				model.setDisabled(false);
 			userService.createUser(model);
@@ -67,6 +69,7 @@ public class UserAction extends RunnerSupport implements ModelDriven<UserModel>{
 		if(user != null) {
 			if(model.getDisabled()==null)
 				model.setDisabled(false);
+			model.setUpdatedby(user);
 			model.setUpdated(Calendar.getInstance().getTime());
 			userService.updateUser(model);
 		}

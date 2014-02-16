@@ -17,6 +17,8 @@ Ext.define('Model.User', {
 	    {name: 'created'},
 	    {name: 'updated'},
 	    {name: 'disabled'},
+	    {name: 'createdby'},
+	    {name: 'updatedby'}
 	]
 });
 
