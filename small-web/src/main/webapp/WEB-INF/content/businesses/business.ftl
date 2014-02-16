@@ -15,6 +15,7 @@ var creditPanel = Ext.create('Ext.panel.Panel', {
 	layout: 'column',
 	collapsible: true,
 	height: 210,
+	region: 'center',
 	defaults: {
 		labelAlign: 'right',
 		xtype: 'textfield',
@@ -172,7 +173,6 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 	}]
 });
 
-
 var businessForm = Ext.create('Ext.form.Panel', {
 	items:[creditPanel,
 		<#if action.user?? && (action.user.priority>5)>
@@ -181,6 +181,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		<#if action.user?? && (action.user.priority>6)>
 		insurancePanel,
 		</#if>
+		woFlowPanel,
 		{
 		xtype: 'panel',
 		layout: 'column',
@@ -453,7 +454,7 @@ var businessTab = {
 	autoScroll: true,
 	itemId: 'business',
 	title: '担保基本信息',
-	items: businessForm,
+	items: [businessForm],
 	edit: function(id){
 		var form = businessForm.getForm();
 		if(!Ext.isEmpty(id)){
@@ -472,6 +473,7 @@ var businessTab = {
 				callback: function(options, success, response) {
 					var values = Ext.decode(response.responseText);
 					form.setValues(values);
+					woFlowStore.removeAll();
 					var fields = form.getFields();
 					fields.each(function(field){
 						field.setReadOnly(false);
@@ -485,6 +487,8 @@ var businessTab = {
 					success: function(response){
 						var values = Ext.decode(response.responseText);
 						form.setValues(values);
+						woFlowStore.removeAll();
+						woFlowStore.loadRawData(values['woflows']);
 						var fields = form.getFields();
 						fields.each(function(field){
 							field.resetOriginalValue();

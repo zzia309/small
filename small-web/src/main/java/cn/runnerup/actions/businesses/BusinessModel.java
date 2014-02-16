@@ -1,8 +1,10 @@
 package cn.runnerup.actions.businesses;
 
 import java.io.File;
+import java.util.List;
 
 import cn.runnerup.model.Business;
+import cn.runnerup.model.Woflow;
 
 public class BusinessModel extends Business{
 
@@ -15,6 +17,8 @@ public class BusinessModel extends Business{
 	private String newStatus;
 
 	private String woflowDescr;
+	
+	private List<Woflow> woflows;
 
 	public boolean isSuccess() {
 		return success;
@@ -54,6 +58,14 @@ public class BusinessModel extends Business{
 
 	public void setWoflowDescr(String woflowDescr) {
 		this.woflowDescr = woflowDescr;
+	}
+
+	public List<Woflow> getWoflows() {
+		return woflows;
+	}
+
+	public void setWoflows(List<Woflow> woflows) {
+		this.woflows = woflows;
 	}
 
 }

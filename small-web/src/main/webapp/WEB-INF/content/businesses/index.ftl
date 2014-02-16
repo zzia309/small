@@ -14,7 +14,7 @@
 		<@initlayout/>
 		<#include "../commons/store.ftl">
 		<#include "list.ftl">
-		<#include "woflow.ftl">
+		<#include "../commons/woflow.ftl">
 		<#include "customer.ftl">
 		<#include "business.ftl">
 		<#include "attachment.ftl">

@@ -154,6 +154,7 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 					var fields = form.getFields();
 					fields.each(function(field){
 						field.resetOriginalValue();
+						field.setReadOnly(true);
 					});
 				}
 			});

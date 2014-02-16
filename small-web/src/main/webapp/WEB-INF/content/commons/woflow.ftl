@@ -40,7 +40,7 @@ var woFlowPanel = Ext.create('Ext.grid.Panel', {
 	}, {
 		header: '提示信息',
 		dataIndex: 'descr',
-		flex: 1
+		flex: 10
 	}, {
 		header: '创建人',
 		dataIndex: 'createdby',
@@ -54,7 +54,7 @@ var woFlowPanel = Ext.create('Ext.grid.Panel', {
 		header: '创建日期',
 		dataIndex: 'created',
 		format: 'Y-m-d H:i:s',
-		flex: 1
+		flex: 2
 	}],
 	listeners:{
 		itemclick: function(view, record) {

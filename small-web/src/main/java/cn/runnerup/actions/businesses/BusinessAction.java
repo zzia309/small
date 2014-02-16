@@ -43,8 +43,11 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 
 	private int id;
 
-	public String show(){
-		model.setSuccess(true);
+	public String show() {
+		if(business != null) {
+			model.setWoflows(woFlowService.getBusinessFlow(id));
+			model.setSuccess(true);
+		}
 		return SUCCESS;
 	}
 

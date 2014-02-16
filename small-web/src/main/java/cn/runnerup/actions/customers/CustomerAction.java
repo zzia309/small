@@ -42,7 +42,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 	private Customer customer;
 
 	public String show(){
-		model.setSuccess(true);
+		model.setSuccess(customer != null);
 		return SUCCESS;
 	}
 

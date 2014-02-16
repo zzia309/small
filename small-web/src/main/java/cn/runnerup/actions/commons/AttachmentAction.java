@@ -27,10 +27,10 @@ public class AttachmentAction extends RunnerSupport implements ModelDriven<Attac
 	private AttachmentService attachmentService;
 
 	@Autowired
-	private WoFlowService woFlowService;
-
-	@Autowired
 	private BusinessService businessService;
+	
+	@Autowired
+	private WoFlowService woFlowService;
 
 	public String show() {
 		if(StringUtils.isNotBlank(id)){
@@ -42,9 +42,8 @@ public class AttachmentAction extends RunnerSupport implements ModelDriven<Attac
 				Business business = businessService.getBusiness(record);
 				if(business != null && business.getCustomer() != null) {
 					attachments.addAll(attachmentService.getAttachments("customer", business.getCustomer().getId().toString(), 0));
-					model.setWoflows(woFlowService.getBusinessFlow(record));
 				}
-			}else {
+			}else if("customer".equals(type)) {
 				Business business = businessService.getBusinessByCustomer(record);
 				if(business != null) {
 					Integer businessId = business.getId();

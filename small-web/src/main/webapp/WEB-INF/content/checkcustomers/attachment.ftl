@@ -103,6 +103,7 @@ var attachmentTab = {
 	listeners: {
 		activate: function() {
 			if(App.currentId) {
+				woFlowStore.removeAll();
 				attachmentStore.removeAll();
 				Ext.Ajax.request({
 					url: '${request.contextPath}/commons/attachment/' + App.currentId + '.gson?type=customer',
@@ -110,6 +111,8 @@ var attachmentTab = {
 						var result = Ext.decode(response.responseText);
 						if(result.success) {
 							attachmentStore.loadData(result['attachments']);
+							if(!Ext.isEmpty(result['woflows']))
+								woFlowStore.loadData(result['woflows']);
 						}else {
 							Ext.MessageBox.alert("提醒", "没有记录");
 						}

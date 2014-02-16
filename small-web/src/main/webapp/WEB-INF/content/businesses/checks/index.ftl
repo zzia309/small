@@ -14,10 +14,10 @@
 		<@initlayout/>
 		<#include "../../commons/store.ftl">
 		<#include "list.ftl">
-		<#include "woflow.ftl">
+		<#include "../../commons/woflow.ftl">
 		<#include "customer.ftl">
 		<#include "business.ftl">
-		<#include "attachment.ftl">
+		<#include "../attachment.ftl">
 		App.createContentPanel({
 			tabs: [listTab, businessTab, customerTab, attachmentTab]
 		});

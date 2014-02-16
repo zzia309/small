@@ -16,7 +16,7 @@
 		<#include "../commons/store.ftl">
 		<#include "list.ftl">
 		<#include "customer.ftl">
-		<#include "woflow.ftl">
+		<#include "../commons/woflow.ftl">
 		<#include "attachment.ftl">
 		App.createContentPanel({
 			tabs: [listTab, customerTab, attachmentTab]

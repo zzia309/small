@@ -1,13 +1,30 @@
+function savesuccess(form, action, mask){
+	if(action.result.success) {
+		App.openTab('list');
+		businessStore.load();
+		mask.hide();
+		form.resumeEvents();
+	}else {
+		mask.hide();
+		Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
+	}
+}
+
 var creditPanel = Ext.create('Ext.panel.Panel', {
 	title: '征信信息',
 	layout: 'column',
 	collapsible: true,
 	height: 210,
+	region: 'center',
 	defaults: {
 		labelAlign: 'right',
 		xtype: 'textfield',
 		margin: '2 0 2 0',
-		readOnly: true
+		<#if action.user?? && action.user.priority==2>
+			readOnly: false
+		<#else>
+			readOnly: true
+		</#if>
 	},
 	items: [{
 		name: 'id',
@@ -53,7 +70,11 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		columnWidth: 0.25,
 		labelAlign: 'right',
 		margin: '2 0 2 0',
-		readOnly: true
+		<#if action.user?? && action.user.priority==6>
+			readOnly: false
+		<#else>
+			readOnly: true
+		</#if>
 	},
 	items: [{
 		fieldLabel: '分公司',
@@ -100,7 +121,11 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 		columnWidth: 0.3333,
 		labelAlign: 'right',
 		margin: '2 0 2 0',
-		readOnly: true
+		<#if action.user?? && action.user.priority==7>
+			readOnly: false
+		<#else>
+			readOnly: true
+		</#if>
 	},
 	items: [ {
 		fieldLabel: '保险公司',
@@ -121,7 +146,7 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 		xtype: 'checkbox',
 		inputValue: true
 	}, {
-		fieldLabel: '是否送杭',
+		fieldLabel: '是否送行',
 		name: 'isSongHang',
 		xtype: 'checkbox',
 		inputValue: true
@@ -151,8 +176,13 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 
 var businessForm = Ext.create('Ext.form.Panel', {
 	items:[creditPanel,
+		<#if action.user?? && (action.user.priority>5)>
 		feePanel,
+		</#if>
+		<#if action.user?? && (action.user.priority>6)>
 		insurancePanel,
+		</#if>
+		woFlowPanel,
 		{
 		xtype: 'panel',
 		layout: 'column',
@@ -166,7 +196,6 @@ var businessForm = Ext.create('Ext.form.Panel', {
 		},{
 	    	xtype: 'button',
 	    	columnWidth: 0.09,
-	    	disabled: true,
 	    	text: '添加附件',
 	    	iconCls:'y-action-attachment',
 	    	handler: function(){
@@ -187,210 +216,14 @@ var businessForm = Ext.create('Ext.form.Panel', {
 	autoScroll: true,
 	init: function(id){
 
-	},
-	/*
-	buttons:[{
-		text: '驳回',
-		icon: '${request.contextPath}/statics/style/img/action/reject.png',
-		handler: function(){
-			var me = this;
-			var form = this.up('form').getForm();
-			var id = form.findField('id').getValue();
-			if(Ext.isEmpty(id)){
-			}else{
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: '-'
-					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
-			}
-		}
-	}, {
-		text: '初审',
-		hidden:<#if action.user?? && (action.user.priority=2)>
-			false
-			<#else>
-			true
-		</#if>,
-		icon: '${request.contextPath}/statics/style/img/action/first.png',
-		handler: function(){
-			var me = this;
-			var form = businessForm.getForm();
-			var id = form.findField('id').getValue();
-			console.log(id);
-			if(Ext.isEmpty(id)){
-			}else{
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'trial'
-					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
-			}
-		}
-	},{
-		text: '终审',
-		icon: '${request.contextPath}/statics/style/img/action/final.png',
-		hidden:<#if action.user?? && (action.user.priority=3)>
-			false
-			<#else>
-			true
-		</#if>,
-		handler: function(){
-			var me = this;
-			var form = me.up('form').getForm();
-			var id = form.findField('id').getValue();
-			if(Ext.isEmpty(id)){
-			}else{
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'final'
-					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
-			}
-		}
-	},{
-		text: '老板过件',
-		icon: '${request.contextPath}/statics/style/img/action/boss.png',
-		hidden:<#if action.user?? && (action.user.priority=4)>
-			false
-			<#else>
-			true
-		</#if>,
-		handler: function(){
-			var me = this;
-			var form = me.up('form').getForm();
-			var id = form.findField('id').getValue();
-			if(Ext.isEmpty(id)){
-			}else{
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'boss'
-					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
-			}
-		}
-	},{
-		text: '财务',
-		icon: '${request.contextPath}/statics/style/img/action/cash.png',
-		hidden:<#if action.user?? && (action.user.priority=5)>
-			false
-			<#else>
-			true
-		</#if>,
-		handler: function(){
-			var me = this;
-			var form = me.up('form').getForm();
-			var id = form.findField('id').getValue();
-			if(Ext.isEmpty(id)){
-			}else{
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'finance'
-					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
-			}
-		}
-	},{
-		text: '后勤',
-		icon: '${request.contextPath}/statics/style/img/action/workback.png',
-		hidden:<#if action.user?? && (action.user.priority=6)>
-			false
-			<#else>
-			true
-		</#if>,
-		handler: function(){
-			var me = this;
-			var form = me.up('form').getForm();
-			var id = form.findField('id').getValue();
-			if(Ext.isEmpty(id)){
-			}else{
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'logistics'
-					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
-			}
-		}
-	},{
-		text: '关闭',
-		icon: '${request.contextPath}/statics/style/img/action/close.png',
-		hidden:
-		<#if action.user?? && (action.user.priority=7)>
-			false
-			<#else>
-			true
-		</#if>,
-		handler: function(){
-			var me = this;
-			var form = me.up('form').getForm();
-			var id = form.findField('id').getValue();
-			if(Ext.isEmpty(id)){
-			}else{
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'closed'
-					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
-			}
-		}
-	}]
-*/
+	}
 });
 
 var businessTab = {
 	autoScroll: true,
 	itemId: 'business',
 	title: '担保基本信息',
-	items: businessForm,
+	items: [businessForm],
 	edit: function(id){
 		var form = businessForm.getForm();
 		if(!Ext.isEmpty(id)){
@@ -409,6 +242,7 @@ var businessTab = {
 				callback: function(options, success, response) {
 					var values = Ext.decode(response.responseText);
 					form.setValues(values);
+					woFlowStore.removeAll();
 					var fields = form.getFields();
 					fields.each(function(field){
 						field.setReadOnly(false);
@@ -422,6 +256,8 @@ var businessTab = {
 					success: function(response){
 						var values = Ext.decode(response.responseText);
 						form.setValues(values);
+						woFlowStore.removeAll();
+						woFlowStore.loadRawData(values['woflows']);
 						var fields = form.getFields();
 						fields.each(function(field){
 							field.resetOriginalValue();
