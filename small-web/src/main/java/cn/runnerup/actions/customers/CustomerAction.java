@@ -70,7 +70,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 			}
 			model.setSuccess(true);
 		} catch (Exception e) {
-
+			addActionError("请检查操作，附件大小不能超过150M！");
 		}
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
 	}
@@ -115,7 +115,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 			woFlowService.createWoFlow(user, "", "", "new", business.getId());
 			model.setSuccess(true);
 		} catch (Exception e) {
-			// TODO: handle exception
+			addActionError("请检查操作，附件大小不能超过150M！");
 		}
 		return SUCCESS;
 	}
@@ -132,7 +132,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 				model.setSuccess(true);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			addActionError("请检查操作，附件大小不能超过150M！");
 		}
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
 	}

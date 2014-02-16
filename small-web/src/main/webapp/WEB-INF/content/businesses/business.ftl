@@ -1,3 +1,15 @@
+function savesuccess(form, action, mask){
+	if(action.result.success) {
+		App.openTab('list');
+		businessStore.load();
+		mask.hide();
+		form.resumeEvents();
+	}else {
+		mask.hide();
+		Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
+	}
+}
+
 var creditPanel = Ext.create('Ext.panel.Panel', {
 	title: '征信信息',
 	layout: 'column',
@@ -227,7 +239,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			}
 		}
 	}, {
-		text: '初审',
+		text: '转初审',
 		hidden:<#if action.user?? && (action.user.priority=2)>
 			false
 			<#else>
@@ -238,7 +250,11 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var me = this;
 			var form = businessForm.getForm();
 			var id = form.findField('id').getValue();
-			console.log(id);
+			businessForm.suspendEvents();
+			var mask = new Ext.LoadMask(Ext.getBody(), {
+				msg: "正在转初审。。。"
+			});
+			mask.show();
 			if(Ext.isEmpty(id)){
 			}else{
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
@@ -248,15 +264,18 @@ var businessForm = Ext.create('Ext.form.Panel', {
 						_method: 'PUT',
 						newStatus: 'trial'
 					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
+					success: function(form, action){
+						savesuccess(form, action, mask);
+					},
+					failure: function(form, action){
+						mask.hide();
+						Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
 					}
 				});
 			}
 		}
 	},{
-		text: '终审',
+		text: '转终审',
 		icon: '${request.contextPath}/statics/style/img/action/final.png',
 		hidden:<#if action.user?? && (action.user.priority=3)>
 			false
@@ -267,6 +286,11 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var me = this;
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
+			businessForm.suspendEvents();
+			var mask = new Ext.LoadMask(Ext.getBody(), {
+				msg: "正在转终审。。。"
+			});
+			mask.show();	
 			if(Ext.isEmpty(id)){
 			}else{
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
@@ -276,15 +300,18 @@ var businessForm = Ext.create('Ext.form.Panel', {
 						_method: 'PUT',
 						newStatus: 'final'
 					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
+					success: function(form, action){
+						savesuccess(form, action, mask);
+					},
+					failure: function(form, action){
+						mask.hide();
+						Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
 					}
 				});
 			}
 		}
 	},{
-		text: '老板过件',
+		text: '转老板过件',
 		icon: '${request.contextPath}/statics/style/img/action/boss.png',
 		hidden:<#if action.user?? && (action.user.priority=4)>
 			false
@@ -295,6 +322,11 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var me = this;
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
+			businessForm.suspendEvents();
+			var mask = new Ext.LoadMask(Ext.getBody(), {
+				msg: "正在转老板过件。。。"
+			});
+			mask.show();
 			if(Ext.isEmpty(id)){
 			}else{
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
@@ -304,15 +336,18 @@ var businessForm = Ext.create('Ext.form.Panel', {
 						_method: 'PUT',
 						newStatus: 'boss'
 					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
+					success: function(form, action){
+						savesuccess(form, action, mask);
+					},
+					failure: function(form, action){
+						mask.hide();
+						Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
 					}
 				});
 			}
 		}
 	},{
-		text: '财务',
+		text: '转财务',
 		icon: '${request.contextPath}/statics/style/img/action/cash.png',
 		hidden:<#if action.user?? && (action.user.priority=5)>
 			false
@@ -323,6 +358,11 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var me = this;
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
+			businessForm.suspendEvents();
+			var mask = new Ext.LoadMask(Ext.getBody(), {
+				msg: "正在转财务。。。"
+			});
+			mask.show();
 			if(Ext.isEmpty(id)){
 			}else{
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
@@ -332,15 +372,18 @@ var businessForm = Ext.create('Ext.form.Panel', {
 						_method: 'PUT',
 						newStatus: 'finance'
 					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
+					success: function(form, action){
+						savesuccess(form, action, mask);
+					},
+					failure: function(form, action){
+						mask.hide();
+						Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
 					}
 				});
 			}
 		}
 	},{
-		text: '后勤',
+		text: '转后勤',
 		icon: '${request.contextPath}/statics/style/img/action/workback.png',
 		hidden:<#if action.user?? && (action.user.priority=6)>
 			false
@@ -351,6 +394,10 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var me = this;
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
+			var mask = new Ext.LoadMask(Ext.getBody(), {
+				msg: "正在转后勤。。。"
+			});
+			mask.show();	
 			if(Ext.isEmpty(id)){
 			}else{
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
@@ -360,9 +407,12 @@ var businessForm = Ext.create('Ext.form.Panel', {
 						_method: 'PUT',
 						newStatus: 'logistics'
 					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
+					success: function(form, action){
+						savesuccess(form, action, mask);
+					},
+					failure: function(form, action){
+						mask.hide();
+						Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
 					}
 				});
 			}

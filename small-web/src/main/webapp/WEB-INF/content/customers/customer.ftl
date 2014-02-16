@@ -390,6 +390,10 @@ var customerForm = Ext.create('Ext.form.Panel', {
 			handler: function(){
 				var form = this.up('form').getForm();
 				customerForm.suspendEvents();
+				var mask = new Ext.LoadMask(Ext.getBody(), {
+					msg: "正在保存。。。"
+				});
+				mask.show();
 				if(form.isValid()){
 					var url = '${request.contextPath}/customers/customer.gson';
 					var params = {};
@@ -409,7 +413,15 @@ var customerForm = Ext.create('Ext.form.Panel', {
 								App.openTab('list');
 								store.load();
 								customerForm.resumeEvents();
+								mask.hide();
+							}else {
+								mask.hide();
+								Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
 							}
+						},
+						failure: function(form, action){
+							mask.hide();
+							Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
 						}
 					});
 				}
@@ -422,6 +434,11 @@ var customerForm = Ext.create('Ext.form.Panel', {
 			id: 'credit',
 			handler: function(){
 				var form = this.up('form').getForm();
+				customerForm.suspendEvents();
+				var mask = new Ext.LoadMask(Ext.getBody(), {
+					msg: "正在转征信人员。。。"
+				});
+				mask.show();
 				if(form.isValid()){
 					var url = '${request.contextPath}/customers/customer!createFlow.gson';
 					form.submit({
@@ -432,7 +449,15 @@ var customerForm = Ext.create('Ext.form.Panel', {
 								App.currentId = null;
 								App.openTab('list');
 								store.load();
+								mask.hide();
+							}else {
+								mask.hide();
+								Ext.MessageBox.alert("转征信失败", "请检查操作，附件大小不能超过150M！");						
 							}
+						},
+						failure: function(form, action){
+							mask.hide();
+							Ext.MessageBox.alert("转征信失败", "请检查操作，附件大小不能超过150M！");
 						}
 					});
 				}
