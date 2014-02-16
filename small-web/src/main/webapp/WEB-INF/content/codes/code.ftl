@@ -25,15 +25,27 @@ var codeForm = Ext.create('Ext.form.Panel', {
 	}, {
 		fieldLabel: '类型',
 		name: 'type',
+		xtype: 'combo',
+		store: typeStore,
+		valueField: 'code',
+		displayField: 'name',
+		editable: false,
 		allowBlank: false
 	}, {
 		fieldLabel: '代码',
 		name: 'code',
-		allowBlank: false
+		allowBlank: false,
+		listeners: {
+			change: function(oldValue, newValue){
+				var form = codeForm.getForm();
+				form.findField('name').setValue(newValue);
+			}
+		}
 	}, {
 		fieldLabel: '显示名称',
 		name: 'name',
-		allowBlank: false
+		allowBlank: false,
+		readOnly: true
 	}, {
 		fieldLabel: '创建日期',
 		xtype: 'xdatefield',
@@ -51,7 +63,8 @@ var codeForm = Ext.create('Ext.form.Panel', {
 		queryMode: 'local',
 		valueField: 'id',
 		readOnly: true,
-		displayField: 'username'
+		displayField: 'username',
+		hidden: true
 	}],
 	dockedItems: [{
 	    xtype: 'toolbar',
@@ -85,12 +98,21 @@ var codeForm = Ext.create('Ext.form.Panel', {
 							if(values.success){
 								App.currentId = null;
 								App.openTab('list');
-								listStore.load();
+								store.load();
 								codeForm.resumeEvents();
 							}
 						}
 					});
 				}
+			}
+	    }, {
+	    	xtype: 'button',
+			text: '重置',
+			itemId: 'reset',
+			id: 'reset',
+			icon: '${request.contextPath}/statics/style/img/action/reset.png',
+			handler: function(){
+				this.up('form').getForm().reset();
 			}
 	    }]
 	}],

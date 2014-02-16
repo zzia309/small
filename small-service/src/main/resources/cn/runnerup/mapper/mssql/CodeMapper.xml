@@ -27,7 +27,7 @@
     <include refid="Base_Column_List" />
     from sp_codes
    	<if test="type != null">
-		and cod_type = #{type}
+		where cod_type = #{type} or cod_code like '%${type}%'
    	</if>
    	limit ${limit} offset ${start}
   </select>
@@ -37,7 +37,7 @@
     	count(*)
     from sp_codes
    	<if test="type != null">
-		and cod_type = #{type}
+		where cod_type = #{type} or cod_code like '%${type}%'
    	</if>
   </select>
 

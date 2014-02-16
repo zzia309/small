@@ -62,7 +62,7 @@ public class CodeAction extends RunnerSupport implements ModelDriven<CodeModel>{
 
 	public HttpHeaders update() {
 		if(code != null) {
-			codeService.updateCode(code);
+			codeService.updateCode(model);
 			model.setSuccess(true);
 		}
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());

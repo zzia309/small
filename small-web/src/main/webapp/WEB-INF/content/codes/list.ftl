@@ -1,4 +1,4 @@
-var listStore = Ext.create('Ext.data.Store', {
+var store = Ext.create('Ext.data.Store', {
      model: 'Model.Code',
      proxy: {
 		type: 'ajax',
@@ -12,16 +12,26 @@ var listStore = Ext.create('Ext.data.Store', {
 	autoLoad: true
  });
 
+var typeStore = Ext.create('Ext.data.Store', {
+	fields:['name','code'],
+	data:[
+	  {code: 'BANK_STORE', name: '银行'},
+	  {code: 'CAR_TYPE_STORE', name: '业务类型'},
+	  {code: 'AREA_STORE', name: '经销商'}
+	]
+});
+
 var listgrid = Ext.create('Ext.grid.Panel', {
 	tbar:[{
 		xtype: 'textfield',
-		id: 'searchField',
+		id: '#searchField',
 		width: 120,
 		emptyText: '类型/代码/显示名称',
 		listeners: {
 			change: function(oldvalue, newvalue) {
 				store.proxy.extraParams = {};
-				store.proxy.extraParams['condition'] = newvalue;
+				if(!Ext.isEmpty(newValue))
+					store.proxy.extraParams['type'] = newvalue;
 			}
 		}
 	},{
@@ -29,24 +39,22 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		text: '搜索',
 		icon: '${request.contextPath}/statics/style/img/action/search.png',
 		handler: function() {
-			listgrid.down('pagingtoolbar').moveFirst();
-			store.proxy.url = '${request.contextPath}/customers/list.gson';
 			store.load();
 		}
 	}, {
 		xtype: 'button',
 		icon: '${request.contextPath}/statics/style/img/action/add.png',
-		text: '新增客户信息',
+		text: '新增基本信息',
 		handler: function(){
 			App.currentId = null;
-			App.openTab('customer', App.currentId);
+			App.openTab('code', App.currentId);
 		}
 	},{
 		xtype: 'button',
-		text: '修改客户资料',
+		text: '修改基本信息',
 		icon: '${request.contextPath}/statics/style/img/action/edit.png',
 		handler: function(){
-			App.openTab('customer', App.currentId);
+			App.openTab('code', App.currentId);
 		}
 	}],
 	columns: [{
@@ -77,10 +85,10 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		width: 150,
 		format: 'Y-m-d H:i:s'
 	}],
-	store: listStore,
+	store: store,
 	dockedItems: [{
 		xtype: 'pagingtoolbar',
-		store: listStore,
+		store: store,
 		dock: 'bottom',
 		displayInfo: true
 	}],
