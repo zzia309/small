@@ -1,5 +1,7 @@
 package cn.runnerup.actions.businesses;
 
+import java.util.Calendar;
+
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -92,6 +94,8 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 				}
 				if(StringUtils.isNotBlank(newStatus))
 					model.setStatus(newStatus);
+				if("closed".equals(newStatus))
+					model.setFinishtime(Calendar.getInstance().getTime());
 				if(model.getBusinessfiles() != null) {
 					for(int i=0; i<model.getBusinessfiles().length; i++) {
 						attachmentService.upload(user, "business", modelId.toString(), 0, model.getBusinessfiles()[i], model.getBusinessfilesFileName()[i]);

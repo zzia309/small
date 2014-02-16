@@ -165,11 +165,6 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 	}, {
 		fieldLabel: '车牌',
 		name: 'carno'
-	},{
-		fieldLabel: '完成时期',
-		xtype:'xdatefield',
-		format:'Y-m-d',
-		name: 'finishtime'
 	}]
 });
 

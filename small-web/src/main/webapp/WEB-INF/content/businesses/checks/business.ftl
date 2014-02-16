@@ -168,7 +168,7 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 	},{
 		fieldLabel: '完成时期',
 		xtype:'xdatefield',
-		format:'Y-m-d',
+		format:'Y-m-d H:i:s',
 		name: 'finishtime'
 	}]
 });
