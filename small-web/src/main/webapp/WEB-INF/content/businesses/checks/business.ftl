@@ -160,7 +160,7 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '车辆发动机型号',
 		name: 'carengine'
 	}, {
-		fieldLabel: '车架',
+		fieldLabel: '车架号',
 		name: 'carframe'
 	}, {
 		fieldLabel: '车牌',
