@@ -224,11 +224,11 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	//anchor: '100% 20.5%',
 	defaultType: 'textfield',
 	defaults: {
-		columnWidth: 0.25,
+		columnWidth: 0.2,
 		labelAlign: 'right',
 		margin: '2 0 0 0'
 	},
-	items:[ {
+	items:[{
 		fieldLabel: '业务员',
 		name: 'sales'
 	}, {
@@ -236,22 +236,14 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		name: 'manager'
 	}, {
 		fieldLabel: '开户银行',
-		name: 'bankaccount'
+		name: 'bankaccount',
+		columnWidth: 0.4,
 	}, {
-		fieldLabel: ' 贷款年限',
-		name: 'years',
-		xtype: 'numberfield',
-		minValue: 1
+		fieldLabel: '打款对象',
+		name: 'cartoobject'
 	}, {
-		fieldLabel: '是否GPS',
-		name: 'isgps',
-		xtype: 'checkbox',
-		inputValue: true
-	}, {
-		fieldLabel: '贷款分期',
-		name: 'stages',
-		xtype: 'numberfield',
-		minValue: 1
+		fieldLabel: '打款账户',
+		name: 'cartoaccount'
 	}, {
 		fieldLabel: '购车类型',
 		xtype: 'combobox',
@@ -262,11 +254,26 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	    valueField: 'code',
 	    editable: false
 	}, {
+		fieldLabel: '是否GPS',
+		name: 'isgps',
+		xtype: 'checkbox',
+		inputValue: true
+	}, {
 		fieldLabel: '车价',
 		name: 'carprice',
 		xtype: 'numberfield',
 		allowDecimals: true,
 		decimalPrecision: 4
+	}, {
+		fieldLabel: ' 贷款年限',
+		name: 'years',
+		xtype: 'numberfield',
+		minValue: 1
+	}, {
+		fieldLabel: '贷款分期',
+		name: 'stages',
+		xtype: 'numberfield',
+		minValue: 1
 	}, {
 		fieldLabel: '贷款金额',
 		name: 'carloans',
@@ -274,24 +281,21 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		allowDecimals: true,
 		decimalPrecision: 4
 	}, {
-		fieldLabel: '贷款利率',
+		fieldLabel: '贷款利率(%)',
 		name: 'carrate',
 		xtype: 'numberfield',
 		allowDecimals: true,
-		decimalPrecision: 4
+		decimalPrecision: 4,
+		maxValue: 100,
+		minValue: 0
 	}, {
-		fieldLabel: '佣金',
+		fieldLabel: '佣金(%)',
 		name: 'carbrokerage',
 		xtype: 'numberfield',
 		allowDecimals: true,
 		decimalPrecision: 4,
-		maxValue: 1
-	}, {
-		fieldLabel: '打款对象',
-		name: 'cartoobject'
-	}, {
-		fieldLabel: '打款账户',
-		name: 'cartoaccount'
+		maxValue: 100,
+		minValue: 0
 	}, {
 		fieldLabel: '保证金',
 		xtype: 'numberfield',
