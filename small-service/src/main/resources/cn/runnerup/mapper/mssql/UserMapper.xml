@@ -264,7 +264,7 @@
       usr_created = #{created,jdbcType=TIMESTAMP},
       usr_updated = #{updated,jdbcType=TIMESTAMP},
       <if test="createdby == null">usr_createdby = NULL,</if><if test="createdby != null">usr_createdby = #{createdby.id,jdbcType=INTEGER},</if>
-      <if test="updatedby == null">usr_updatedby = NULL,</if><if test="updatedby != null">usr_updatedby = #{updatedby.id,jdbcType=INTEGER}</if>
+      <if test="updatedby == null">usr_updatedby = NULL</if><if test="updatedby != null">usr_updatedby = #{updatedby.id,jdbcType=INTEGER}</if>
     where usr_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
