@@ -89,6 +89,7 @@
     		<directory>${basedir}/src/main/resources</directory>
     		<includes>
     			<include>log4j.properties</include>
+    			<include>small.properties</include>
     			<include>context-config.xml</include>
     			<include>struts.xml</include>
     		</includes>
@@ -98,6 +99,7 @@
     		<directory>${basedir}/src/main/resources</directory>
     		<excludes>
     			<exclude>log4j.properties</exclude>
+    			<exclude>small.properties</exclude>
     			<exclude>context-config.xml</exclude>
     			<exclude>struts.xml</exclude>
     		</excludes>
