@@ -13,10 +13,10 @@
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-     	<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-     	<property name="url" value="jdbc:mysql://localhost/test?useUnicode=TRUE&amp;characterEncoding=UTF-8"/>
-    	<property name="username" value="root"/>
-     	<property name="password" value="root"/>
+     	<property name="driverClassName" value="${jdbc.driver}"/>
+     	<property name="url" value="${jdbc.url}"/>
+    	<property name="username" value="${jdbc.username}"/>
+     	<property name="password" value="${jdbc.password}"/>
         <property name="maxActive" value="150"/>
         <property name="maxIdle" value="5"/>
         <property name="minIdle" value="20"/>
@@ -46,7 +46,7 @@
         <property name="mapperLocations">
             <list>
                 <value>classpath*:cn/runnerup/mapper/commons/**/*.xml</value>
-                <value>classpath*:cn/runnerup/mapper/${jdbc.engin}/**/*.xml</value>
+                <value>classpath*:cn/runnerup/mapper/${jdbc.engine}/**/*.xml</value>
             </list>
         </property>
     </bean>
