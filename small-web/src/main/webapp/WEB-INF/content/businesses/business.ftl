@@ -1,3 +1,15 @@
+ var userStore = Ext.create('Ext.data.Store', {
+	 fields: ['id', 'username'],
+     proxy: {
+		type: 'ajax',
+		url: '${request.contextPath}/stores/user-store.gson',
+		reader: {
+			type: 'json',
+			root: 'model'
+		}
+	},
+	autoLoad: true
+ });
 function savesuccess(form, action, mask){
 	if(action.result.success) {
 		App.openTab('list');
@@ -77,8 +89,8 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		</#if>
 	},
 	items: [{
-		fieldLabel: '分公司',
-		name: 'branch'
+		fieldLabel: '贷款金额',
+		name: 'loans'
 	}, {
 		xtype:'numberfield',
 		fieldLabel: '垫款金额',
@@ -286,7 +298,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var mask = new Ext.LoadMask(Ext.getBody(), {
 				msg: "正在转终审。。。"
 			});
-			mask.show();	
+			mask.show();
 			if(Ext.isEmpty(id)){
 			}else{
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
@@ -393,7 +405,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var mask = new Ext.LoadMask(Ext.getBody(), {
 				msg: "正在转后勤。。。"
 			});
-			mask.show();	
+			mask.show();
 			if(Ext.isEmpty(id)){
 			}else{
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
@@ -462,12 +474,15 @@ var businessTab = {
 			fieldSet.query('[addFieldContainer]')[0].removeAll();
 
 			var form = businessForm.getForm();
+			var loan = form.findField('loans');
 			var config = {
 				url: '${request.contextPath}/businesses/business/new.gson',
 				method: 'GET',
 				callback: function(options, success, response) {
 					var values = Ext.decode(response.responseText);
+					var customer = values.customer;
 					form.setValues(values);
+					loan.setValue(customer.carloans);
 					woFlowStore.removeAll();
 					var fields = form.getFields();
 					fields.each(function(field){
@@ -481,6 +496,9 @@ var businessTab = {
 					url: '${request.contextPath}/businesses/business/' + App.currentId + '.gson',
 					success: function(response){
 						var values = Ext.decode(response.responseText);
+						var customer = values.customer;
+						form.setValues(values);
+						loan.setValue(customer.carloans);
 						form.setValues(values);
 						woFlowStore.removeAll();
 						woFlowStore.loadRawData(values['woflows']);

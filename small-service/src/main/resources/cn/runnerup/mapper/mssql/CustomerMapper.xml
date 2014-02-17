@@ -35,7 +35,7 @@
     <result column="cs_guaranteeUnit" property="guaranteeunit" jdbcType="VARCHAR" />
     <result column="cs_guaranteeUnitTel" property="guaranteeunittel" jdbcType="VARCHAR" />
     <result column="cs_guaranteeArea" property="guaranteearea" jdbcType="VARCHAR" />
-    <result column="cs_guaranteeMary" property="guaranteemary" jdbcType="VARCHAR" />
+    <result column="cs_guaranteeMarry" property="guaranteemarry" jdbcType="VARCHAR" />
     <result column="cs_guaranteeBirthplace" property="guaranteebirthplace" jdbcType="VARCHAR" />
     <result column="cs_guaranteeHukou" property="guaranteehukou" jdbcType="VARCHAR" />
     <result column="cs_guaranteeUnitAddress" property="guaranteeunitaddress" jdbcType="VARCHAR" />
@@ -79,7 +79,7 @@
     cs_mateAge, cs_mateCard, cs_mateTel, cs_mateUnit, cs_mateUnitTel, cs_mateBirthplace,
     cs_mateHukou, cs_mateUnitAddress, cs_matePosition, cs_guaranteeName, cs_guaranteeSex,
     cs_guaranteeAge, cs_guaranteeCard, cs_guaranteeTel, cs_guaranteeHomeAddress, cs_guaranteeUnit,
-    cs_guaranteeUnitTel, cs_guaranteeArea, cs_guaranteeMary, cs_guaranteeBirthplace,
+    cs_guaranteeUnitTel, cs_guaranteeArea, cs_guaranteeMarry, cs_guaranteeBirthplace,
     cs_guaranteeHukou, cs_guaranteeUnitAddress, cs_guaranteePosition, cs_sales, cs_manager,
     cs_years, cs_stages, cs_carType, cs_carPrice, cs_carLoans, cs_carRate, cs_carBrokerage,
     cs_carToObject, cs_carToAccount, cs_bail, cs_notaryFees, cs_otherFees, cs_guaranteeFees, cs_isflow,
@@ -123,7 +123,7 @@
     	left join sp_businesses on cs_id = buss_customer
     </if>
     <if test="user != null">
-	    where cs_createdby = #{user,jdbcType=INTEGER} and cs_isFlow is true
+	    where cs_createdby = #{user,jdbcType=INTEGER}
     </if>
     <if test="condition != null">
     	and (cs_loanerName= #{condition} or cs_loanerCard= #{condition}
@@ -138,7 +138,7 @@
     count(*)
     from sp_customers
     <if test="user != null">
-	    where cs_createdby = #{user,jdbcType=INTEGER} and cs_isFlow is true
+	    where cs_createdby = #{user,jdbcType=INTEGER}
     </if>
     <if test="condition != null">
     	and (cs_loanerName= #{condition} or cs_loanerCard= #{condition}
@@ -180,7 +180,8 @@
   </delete>
 
   <insert id="insert" parameterType="cn.runnerup.model.Customer" >
-    insert into sp_customers (cs_loanerName, cs_loanerSex,
+    insert into sp_customers (
+    cs_loanerName, cs_loanerSex,
       cs_loanerAge, cs_loanerCard, cs_loanerTel,
       cs_loanerHomeAddress, cs_loanerUnit, cs_loanerUnitTel,
       cs_loanerMarry,
@@ -192,7 +193,7 @@
       cs_mateUnitAddress, cs_matePosition, cs_guaranteeName,
       cs_guaranteeSex, cs_guaranteeAge, cs_guaranteeCard,
       cs_guaranteeTel, cs_guaranteeHomeAddress, cs_guaranteeUnit,
-      cs_guaranteeUnitTel, cs_guaranteeArea, cs_guaranteeMary,
+      cs_guaranteeUnitTel, cs_guaranteeArea, cs_guaranteeMarry,
       cs_guaranteeBirthplace, cs_guaranteeHukou, cs_guaranteeUnitAddress,
       cs_guaranteePosition, cs_sales, cs_manager,
       cs_years, cs_stages, cs_carType,
@@ -223,7 +224,7 @@
       #{mateunitaddress,jdbcType=VARCHAR}, #{mateposition,jdbcType=VARCHAR}, #{guaranteename,jdbcType=VARCHAR},
       #{guaranteesex,jdbcType=VARCHAR}, #{guaranteeage,jdbcType=INTEGER}, #{guaranteecard,jdbcType=VARCHAR},
       #{guaranteetel,jdbcType=VARCHAR}, #{guaranteehomeaddress,jdbcType=VARCHAR}, #{guaranteeunit,jdbcType=VARCHAR},
-      #{guaranteeunittel,jdbcType=VARCHAR}, #{guaranteearea,jdbcType=VARCHAR}, #{guaranteemary,jdbcType=VARCHAR},
+      #{guaranteeunittel,jdbcType=VARCHAR}, #{guaranteearea,jdbcType=VARCHAR}, #{guaranteemarry,jdbcType=VARCHAR},
       #{guaranteebirthplace,jdbcType=VARCHAR}, #{guaranteehukou,jdbcType=VARCHAR}, #{guaranteeunitaddress,jdbcType=VARCHAR},
       #{guaranteeposition,jdbcType=VARCHAR}, #{sales,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR},
       #{years,jdbcType=INTEGER}, #{stages,jdbcType=INTEGER}, #{cartype,jdbcType=VARCHAR},
@@ -284,7 +285,7 @@
       cs_guaranteeUnit = #{guaranteeunit,jdbcType=VARCHAR},
       cs_guaranteeUnitTel = #{guaranteeunittel,jdbcType=VARCHAR},
       cs_guaranteeArea = #{guaranteearea,jdbcType=VARCHAR},
-      cs_guaranteeMary = #{guaranteemary,jdbcType=VARCHAR},
+      cs_guaranteeMarry = #{guaranteemarry,jdbcType=VARCHAR},
       cs_guaranteeBirthplace = #{guaranteebirthplace,jdbcType=VARCHAR},
       cs_guaranteeHukou = #{guaranteehukou,jdbcType=VARCHAR},
       cs_guaranteeUnitAddress = #{guaranteeunitaddress,jdbcType=VARCHAR},

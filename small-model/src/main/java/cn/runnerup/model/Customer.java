@@ -69,7 +69,7 @@ public class Customer {
 
     private String guaranteearea;
 
-    private String guaranteemary;
+    private String guaranteemarry;
 
     private String guaranteebirthplace;
 
@@ -130,7 +130,7 @@ public class Customer {
 
     private Double prepayments;
 
-    private String listedAreas;
+    private String listedareas;
 
     private String dealer;
 
@@ -471,12 +471,12 @@ public class Customer {
 		this.guaranteearea = guaranteearea;
 	}
 
-	public String getGuaranteemary() {
-		return guaranteemary;
+	public String getGuaranteemarry() {
+		return guaranteemarry;
 	}
 
-	public void setGuaranteemary(String guaranteemary) {
-		this.guaranteemary = guaranteemary;
+	public void setGuaranteemarry(String guaranteemarry) {
+		this.guaranteemarry = guaranteemarry;
 	}
 
 	public String getGuaranteebirthplace() {
@@ -647,13 +647,16 @@ public class Customer {
 		this.prepayments = prepayments;
 	}
 
-	public String getListedAreas() {
-		return listedAreas;
+	public String getListedareas() {
+		return listedareas;
 	}
 
-	public void setListedAreas(String listedAreas) {
-		this.listedAreas = listedAreas;
+	public void setListedareas(String listedareas) {
+		this.listedareas = listedareas;
 	}
+
+
+
 
 
 

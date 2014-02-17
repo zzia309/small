@@ -9,14 +9,13 @@ Ext.define('Model.Customer',{
 	{name: 'loanerhomeaddress'},
 	{name: 'loanerunit'},
 	{name: 'loanerunittel'},
+	{name: 'loanermarry'},
 	{name: 'loanerunitaddress'},
 	{name: 'loanerposition'},
 	{name: 'loanermarry'},
-	{name: 'loanerarea'},
 	{name: 'loanerbirthplace'},
 	{name: 'loanerhukou'},
 	{name: 'matename'},
-	{name: 'matesex'},
 	{name: 'mateage'},
 	{name: 'matecard'},
 	{name: 'matetel'},
@@ -55,7 +54,18 @@ Ext.define('Model.Customer',{
 	{name: 'notaryfees'},
 	{name: 'guaranteefees'},
 	{name: 'otherfees'},
-	{name: 'isFlow'}
+	{name: 'isFlow'},
+	{name: 'createdby'},
+	{name: 'created'},
+	{name: 'guaranteematename'},
+	{name: 'guaranteematecard'},
+	{name: 'guaranteematetel'},
+	{name: 'isbank'},
+	{name: 'bankaccount'},
+	{name: 'isgps'},
+	{name: 'prepayments'},
+	{name: 'listedareas'},
+	{name: 'dealer'}
 	]
 });
 
