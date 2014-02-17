@@ -32,6 +32,7 @@ var timePanel = Ext.create('Ext.form.FieldContainer',{
 		valueField: 'code',
 		displayField: 'name',
 		store: timeStore,
+		width: 160,
 		listeners: {
 			change: function(view, newValue, oldValue, eOpts){
 				var form = searchPanel.getForm();
@@ -44,7 +45,6 @@ var timePanel = Ext.create('Ext.form.FieldContainer',{
 				if(date == 'customer')
 					customerContainer.setVisible(true);
 				else{
-
 				}
 			}
 		}
@@ -53,21 +53,24 @@ var timePanel = Ext.create('Ext.form.FieldContainer',{
 		layout: 'hbox',
 		hidden: true,
 		id:'customContainer',
-		width:310,
+		width:320,
 		items:[{
 			margin:'0 2 0 2',
 			xtype: 'datefield',
 			name: 'start',
 			format: 'Y-m-d H:i:s',
+			width: 150,
 		},{
 			xtype:'label',
-			text: '到'
+			text: '到',
+			width: 10
 		},{
 			margin:'0 2 0 2',
 			labelAlign: 'right',
 			name: 'end',
 			xtype: 'datefield',
-			format: 'Y-m-d H:i:s'
+			format: 'Y-m-d H:i:s',
+			width: 150
 		}]
 	}, {
     	fieldLabel: '业务类型',
@@ -133,6 +136,12 @@ var mixSearchPanel = Ext.create('Ext.form.FieldContainer',{
 				businessStore.proxy.extraParams['area'] = area;
 			if(!Ext.isEmpty(carno))
 				businessStore.proxy.extraParams['carno'] = carno;
+			var start = form.findField('start').getValue();
+			var end = form.findField('end').getValue();
+			if(!Ext.isEmpty(start) && !Ext.isEmpty(end)){
+				businessStore.proxy.extraParams['starttime'] = start;
+				businessStore.proxy.extraParams['endtime'] = end;
+			}
 			businessStore.load();
 		}
 	}]

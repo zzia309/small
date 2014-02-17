@@ -12,4 +12,5 @@ public interface CodeMapper {
     int updateByPrimaryKey(Code code);
     List<Code> selectCodes(Map<String, Object> map);
     int selectCodesCount(Map<String, Object> map);
+    List<Code> selectCodesByType(String type);
 }

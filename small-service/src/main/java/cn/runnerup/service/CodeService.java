@@ -40,4 +40,8 @@ public class CodeService {
 		return code;
 	}
 
+	public List<Code> getCodesByType(String type){
+		return codeMapper.selectCodesByType(type);
+	}
+
 }

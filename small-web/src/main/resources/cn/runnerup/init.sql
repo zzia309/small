@@ -16,3 +16,20 @@ insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(5, 
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(5, 'boss', 'finance');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(6, 'finance', 'logistics');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(7, 'logistics', 'closed');
+
+
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('BANK_STORE', '浙江泰隆商业银行(融悦)', '浙江泰隆商业银行(融悦)', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('BANK_STORE', '杭州银行清泰支行(融悦)', '杭州银行清泰支行(融悦)', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('BANK_STORE', '杭州银行清泰支行(易顺)', '杭州银行清泰支行(易顺)', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('BANK_STORE', '浙江泰隆商业银行(樊郡波)', '浙江泰隆商业银行(樊郡波)', '2014-01-03 12:05:53');
+
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('CAR_TYPE_STORE', '新车卡分期', '新车卡分期', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('CAR_TYPE_STORE', '新车普通', '新车普通', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('CAR_TYPE_STORE', '二手车', '二手车', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('CAR_TYPE_STORE', '存量车', '存量车', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('CAR_TYPE_STORE', '公牌', '公牌', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('CAR_TYPE_STORE', '货车', '货车', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('CAR_TYPE_STORE', '租赁零首付', '租赁零首付', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('CAR_TYPE_STORE', '租赁', '租赁', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('CAR_TYPE_STORE', '租赁二手车', '租赁二手车', '2014-01-03 12:05:53');
+insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('CAR_TYPE_STORE', '其他', '其他', '2014-01-03 12:05:53');

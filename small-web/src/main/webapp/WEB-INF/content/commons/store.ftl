@@ -1,17 +1,10 @@
 var carStore = Ext.create('Ext.data.Store', {
 	fields:['name','code'],
-	data:[
-	  {name: '新车卡分期', code: '新车卡分期'},
-	  {name: '新车普通', code: '新车普通'},
-	  {name: '二手车', code: '二手车'},
-	  {name: '存量车', code: '存量车'},
-	  {name: '公牌', code: '公牌'},
-	  {name: '货车', code: '货车'},
-	  {name: '租赁零首付', code: '租赁零首付'},
-	  {name: '租赁', code: '租赁'},
-	  {name: '租赁二手车', code: '租赁二手车'},
-	  {name: '其他', code: '其他'}
-	]
+	data:[<#list action.getCodes('CAR_TYPE_STORE')![] as bank>
+			{'code': '${bank.code!?js_string}',
+			'name': '${bank.name!?js_string}'
+			}<#if bank_has_next>,</#if>
+		</#list>]
 });
 
 var genderStore = Ext.create('Ext.data.Store', {

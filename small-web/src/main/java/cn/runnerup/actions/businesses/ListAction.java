@@ -32,8 +32,8 @@ public class ListAction extends RunnerSupport implements ModelDriven<ListModel>{
 		String condition = servletRequest.getParameter("condition");
 		String area = servletRequest.getParameter("area");
 		String type = servletRequest.getParameter("type");
-		String start = servletRequest.getParameter("start");
-		String end = servletRequest.getParameter("end");
+		String starttime = servletRequest.getParameter("starttime");
+		String endtime = servletRequest.getParameter("endtime");
 		String carno = servletRequest.getParameter("carno");
 		System.out.println(condition);
 		map.put("limit", model.getLimit());
@@ -42,9 +42,9 @@ public class ListAction extends RunnerSupport implements ModelDriven<ListModel>{
 			map.put("area", area);
 		if(StringUtils.isNotBlank(type))
 			map.put("type", type);
-		if(StringUtils.isNotBlank(start) && StringUtils.isNotBlank(end)){
-			map.put("start", start);
-			map.put("end", end);
+		if(StringUtils.isNotBlank(starttime) && StringUtils.isNotBlank(endtime)){
+			map.put("start", starttime);
+			map.put("end", endtime);
 		}
 		if(StringUtils.isNotBlank(carno))
 			map.put("carno", carno);

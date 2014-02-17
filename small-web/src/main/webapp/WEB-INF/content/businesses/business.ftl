@@ -472,17 +472,18 @@ var businessTab = {
 		activate: function(){
 			var fieldSet = Ext.getCmp('businessFile');
 			fieldSet.query('[addFieldContainer]')[0].removeAll();
-
 			var form = businessForm.getForm();
-			var loan = form.findField('loans');
 			var config = {
 				url: '${request.contextPath}/businesses/business/new.gson',
 				method: 'GET',
 				callback: function(options, success, response) {
 					var values = Ext.decode(response.responseText);
-					var customer = values.customer;
 					form.setValues(values);
-					loan.setValue(customer.carloans);
+					<#if action.user?? && (action.user.priority>5)>
+						var loan = form.findField('loans');
+						var customer = values.customer;
+						loan.setValue(customer.carloans);
+					</#if>
 					woFlowStore.removeAll();
 					var fields = form.getFields();
 					fields.each(function(field){
@@ -496,10 +497,12 @@ var businessTab = {
 					url: '${request.contextPath}/businesses/business/' + App.currentId + '.gson',
 					success: function(response){
 						var values = Ext.decode(response.responseText);
-						var customer = values.customer;
 						form.setValues(values);
-						loan.setValue(customer.carloans);
-						form.setValues(values);
+						<#if action.user?? && (action.user.priority>5)>
+							var loan = form.findField('loans');
+							var customer = values.customer;
+							loan.setValue(customer.carloans);
+						</#if>
 						woFlowStore.removeAll();
 						woFlowStore.loadRawData(values['woflows']);
 						var fields = form.getFields();

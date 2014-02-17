@@ -20,11 +20,7 @@ var creditPanel = Ext.create('Ext.panel.Panel', {
 		labelAlign: 'right',
 		xtype: 'textfield',
 		margin: '2 0 2 0',
-		<#if action.user?? && action.user.priority==2>
-			readOnly: false
-		<#else>
-			readOnly: true
-		</#if>
+		readOnly: true
 	},
 	items: [{
 		name: 'id',
@@ -70,11 +66,7 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		columnWidth: 0.25,
 		labelAlign: 'right',
 		margin: '2 0 2 0',
-		<#if action.user?? && action.user.priority==6>
-			readOnly: false
-		<#else>
-			readOnly: true
-		</#if>
+		readOnly: true
 	},
 	items: [{
 		fieldLabel: '贷款金额',
@@ -122,11 +114,7 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 		columnWidth: 0.3333,
 		labelAlign: 'right',
 		margin: '2 0 2 0',
-		<#if action.user?? && action.user.priority==7>
-			readOnly: false
-		<#else>
-			readOnly: true
-		</#if>
+		readOnly: true
 	},
 	items: [ {
 		fieldLabel: '保险公司',
@@ -177,12 +165,8 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 
 var businessForm = Ext.create('Ext.form.Panel', {
 	items:[creditPanel,
-		<#if action.user?? && (action.user.priority>5)>
 		feePanel,
-		</#if>
-		<#if action.user?? && (action.user.priority>6)>
 		insurancePanel,
-		</#if>
 		woFlowPanel,
 		{
 		xtype: 'panel',
@@ -198,6 +182,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 	    	xtype: 'button',
 	    	columnWidth: 0.09,
 	    	text: '添加附件',
+	    	disabled: true,
 	    	iconCls:'y-action-attachment',
 	    	handler: function(){
 	    		var con = this.up('panel').query('[addFieldContainer]')[0];
@@ -235,21 +220,18 @@ var businessTab = {
 		activate: function(){
 			var fieldSet = Ext.getCmp('businessFile');
 			fieldSet.query('[addFieldContainer]')[0].removeAll();
-
 			var form = businessForm.getForm();
-			var loan = form.findField('loans');
 			var config = {
 				url: '${request.contextPath}/businesses/business/new.gson',
 				method: 'GET',
 				callback: function(options, success, response) {
 					var values = Ext.decode(response.responseText);
+					var customer = values.customer;
+					var loans = form.findField('loans');
 					form.setValues(values);
+					loans.setValue(customer.carloans);
 					woFlowStore.removeAll();
 					var fields = form.getFields();
-					fields.each(function(field){
-						field.setReadOnly(false);
-						field.validate();
-					});
 				}
 			};
 			if(App.currentId){
@@ -257,10 +239,10 @@ var businessTab = {
 					url: '${request.contextPath}/businesses/business/' + App.currentId + '.gson',
 					success: function(response){
 						var values = Ext.decode(response.responseText);
+						var loans = form.findField('loans');
 						var customer = values.customer;
 						form.setValues(values);
-						loan.setValue(customer.carloans);
-						form.setValues(values);
+						loans.setValue(customer.carloans);
 						woFlowStore.removeAll();
 						woFlowStore.loadRawData(values['woflows']);
 						var fields = form.getFields();

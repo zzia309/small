@@ -22,6 +22,13 @@
     where cod_id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="selectCodesByType" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from sp_codes
+	where cod_type = #{type} or cod_code = #{type}
+  </select>
+
   <select id="selectCodes" resultMap="BaseResultMap" parameterType="java.util.HashMap">
     select
     <include refid="Base_Column_List" />
@@ -32,7 +39,8 @@
    	limit ${limit} offset ${start}
   </select>
 
-  <select id="selectCodesCount" resultType="int" parameterType="java.util.HashMap">
+
+  <select id="selectCodesCount" resultType="int" parameterType="java.lang.Integer">
     select
     	count(*)
     from sp_codes

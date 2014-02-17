@@ -1,16 +1,8 @@
-var carStore = Ext.create('Ext.data.Store', {
-	fields:['name','code'],
-	data:[
-	  {name: '二手车', code: '二手车'},
-	  {name: '新车', code: '新车'}
-	]
-});
-
 var loanerPanel = Ext.create('Ext.panel.Panel', {
 	title: '贷款人信息',
 	layout: 'column',
 	collapsible: true,
-	anchor: '100% 24%',
+	//anchor: '100% 24%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.3333,
@@ -18,6 +10,9 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 		margin: '2 0 0 0'
 	},
 	items:[{
+		name: 'id',
+		hidden: true
+	}, {
 		fieldLabel: '客户姓名',
 		name: 'loanername',
 		allowBlank: false
@@ -27,22 +22,28 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 		name: 'loanersex',
 		store: genderStore,
 		valueField: 'id',
-		displayField: 'value'
+		displayField: 'value',
+		editable: false,
+		allowBlank: false
 	}, {
 		xtype: 'numberfield',
 		fieldLabel: '客户年龄',
 		name: 'loanerage',
+		allowBlank: false,
 		maxValue: 57,
         minValue: 20
 	}, {
 		fieldLabel: '客户身份证',
-		name: 'loanercard'
+		name: 'loanercard',
+		allowBlank: false
 	}, {
 		fieldLabel: '客户电话',
-		name: 'loanertel'
+		name: 'loanertel',
+		allowBlank: false
 	}, {
 		fieldLabel: '客户家庭住址',
-		name: 'loanerhomeaddress'
+		name: 'loanerhomeaddress',
+		allowBlank: false
 	}, {
 		fieldLabel: '客户所在单位',
 		name: 'loanerunit'
@@ -56,11 +57,13 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '客户职位',
 		name: 'loanerposition'
 	}, {
+		xtype: 'combo',
 		fieldLabel: '客户婚姻状态',
-		name: 'loanermarry'
-	}, {
-		fieldLabel: '客户所在地区',
-		name: 'loanerarea'
+		name: 'loanermarry',
+		store: marryStore,
+		valueField: 'name',
+		displayField: 'code',
+		editable: false
 	}, {
 		fieldLabel: '客户籍贯',
 		name: 'loanerbirthplace'
@@ -74,7 +77,7 @@ var matePanel = Ext.create('Ext.panel.Panel', {
 	title: '贷款人配偶信息',
 	layout: 'column',
 	collapsible: true,
-	anchor: '100% 20.5%',
+	//anchor: '100% 20.5%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.3333,
@@ -84,13 +87,6 @@ var matePanel = Ext.create('Ext.panel.Panel', {
 	items:[{
 		fieldLabel: '配偶姓名',
 		name: 'matename'
-	}, {
-		xtype: 'combo',
-		fieldLabel: '配偶性别',
-		name: 'matesex',
-		store: genderStore,
-		valueField: 'id',
-		displayField: 'value'
 	}, {
 		xtype: 'numberfield',
 		fieldLabel: '配偶年龄',
@@ -127,7 +123,6 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 	title: '担保人信息',
 	layout: 'column',
 	collapsible: true,
-	anchor: '100% 24%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.3333,
@@ -136,28 +131,35 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 	},
 	items:[{
 		fieldLabel: '担保人姓名',
-		name: 'guaranteename'
+		name: 'guaranteename',
+		allowBlank: false
 	}, {
 		xtype: 'combo',
 		fieldLabel: '担保人性别',
 		name: 'guaranteesex',
 		store: genderStore,
 		valueField: 'id',
-		displayField: 'value'
+		displayField: 'value',
+		allowBlank: false,
+		editable: false
 	}, {
 		xtype: 'numberfield',
 		fieldLabel: '担保人年龄',
 		name: 'guaranteeage',
+		allowBlank: false,
         minValue: 20
 	}, {
 		fieldLabel: '担保人身份证',
-		name: 'guaranteecard'
+		name: 'guaranteecard',
+		allowBlank: false
 	}, {
 		fieldLabel: '担保人电话',
-		name: 'guaranteetel'
+		name: 'guaranteetel',
+		allowBlank: false
 	}, {
 		fieldLabel: '担保人家庭住址',
-		name: 'guaranteehomeaddress'
+		name: 'guaranteehomeaddress',
+		allowBlank: false
 	}, {
 		fieldLabel: '担保人所在单位',
 		name: 'guaranteeunit'
@@ -171,8 +173,13 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '担保人职位',
 		name: 'guaranteeposition'
 	}, {
+		xtype: 'combo',
 		fieldLabel: '担保人婚姻状态',
-		name: 'guaranteemarry'
+		name: 'guaranteemarry',
+		store: marryStore,
+		valueField: 'name',
+		displayField: 'code',
+		editable: false
 	}, {
 		fieldLabel: '担保人所在地区',
 		name: 'guaranteearea'
@@ -182,6 +189,20 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 	}, {
 		fieldLabel: '担保人户口所在地',
 		name: 'guaranteehukou'
+	}, {
+		fieldLabel: '担保人配偶姓名',
+		name: 'guaranteematename'
+	}, {
+		fieldLabel: '担保人配偶身份证',
+		name: 'guaranteematecard'
+	}, {
+		fieldLabel: '担保人配偶电话',
+		name: 'guaranteematetel'
+	}, {
+		fieldLabel: '是否银行担保',
+		name: 'isbank',
+		xtype: 'checkbox',
+		inputValue: false
 	}]
 });
 
@@ -189,25 +210,21 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	title: '车辆及销售信息',
 	layout: 'column',
 	collapsible: true,
-	anchor: '100% 20.5%',
 	defaultType: 'textfield',
 	defaults: {
-		columnWidth: 0.25,
+		columnWidth: 0.2,
 		labelAlign: 'right',
 		margin: '2 0 0 0'
 	},
-	items:[ {
+	items:[{
+		fieldLabel: '合作经销商',
+		name: 'dealer'
+	},{
 		fieldLabel: '业务员',
 		name: 'sales'
 	}, {
 		fieldLabel: ' 经理',
 		name: 'manager'
-	}, {
-		fieldLabel: ' 贷款年限',
-		name: 'years'
-	}, {
-		fieldLabel: '贷款分期',
-		name: 'stages'
 	}, {
 		fieldLabel: '购车类型',
 		xtype: 'combobox',
@@ -215,19 +232,20 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	    store: carStore,
 	    queryMode: 'local',
 	    displayField: 'name',
-	    valueField: 'code'
+	    valueField: 'code',
+	    editable: false
 	}, {
-		fieldLabel: '车价',
-		name: 'carprice'
+		fieldLabel: '车辆上牌地区',
+		name: 'listedareas'
 	}, {
-		fieldLabel: '贷款金额',
-		name: 'carloans'
+		fieldLabel: '是否GPS',
+		name: 'isgps',
+		xtype: 'checkbox',
+		inputValue: true
 	}, {
-		fieldLabel: '贷款利率',
-		name: 'carrate'
-	}, {
-		fieldLabel: '佣金',
-		name: 'carbrokerage'
+		fieldLabel: '开户银行',
+		name: 'bankaccount',
+		columnWidth: 0.4,
 	}, {
 		fieldLabel: '打款对象',
 		name: 'cartoobject'
@@ -235,17 +253,71 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '打款账户',
 		name: 'cartoaccount'
 	}, {
+		fieldLabel: '车价',
+		name: 'carprice',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
+	}, {
+		fieldLabel: '首付款',
+		name: 'prepayments',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
+	}, {
+		fieldLabel: ' 贷款年限',
+		name: 'years',
+		xtype: 'numberfield',
+		minValue: 1
+	}, {
+		fieldLabel: '贷款分期',
+		name: 'stages',
+		xtype: 'numberfield',
+		minValue: 1
+	}, {
+		fieldLabel: '贷款金额',
+		name: 'carloans',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
+	}, {
+		fieldLabel: '贷款利率(%)',
+		name: 'carrate',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4,
+		maxValue: 100,
+		minValue: 0
+	}, {
+		fieldLabel: '佣金(%)',
+		name: 'carbrokerage',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4,
+		maxValue: 100,
+		minValue: 0
+	}, {
 		fieldLabel: '保证金',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4,
 		name: 'bail'
 	}, {
 		fieldLabel: '公证费',
-		name: 'notaryfees'
+		name: 'notaryfees',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
 	}, {
 		fieldLabel: '担保费',
-		name: 'guaranteefees'
+		name: 'guaranteefees',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
 	}, {
 		fieldLabel: '其他费用',
-		name: 'otherfees'
+		name: 'otherfees',
+		columnWidth: 1
 	}]
 });
 
