@@ -29,6 +29,9 @@ public class AttachmentService {
 
 	@Autowired
 	private MimeService mimeService;
+	
+	@Autowired
+	private ConfigService configService;
 
 	public Attachment getAttachment(Integer id) {
 		return attachmentMapper.selectByPrimaryKey(id);
@@ -87,7 +90,7 @@ public class AttachmentService {
 	}
 
 	public String getRoot() {
-		return FilenameUtils.concat("d:/", ATTACHMENT_DIR);
+		return FilenameUtils.concat(configService.getConfig("attachpath"), ATTACHMENT_DIR);
 	}
 
 	private String getPath() {

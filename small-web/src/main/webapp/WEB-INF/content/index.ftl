@@ -19,7 +19,11 @@
 		id: 'mainContent',
 		autoScroll: true,
 		layout: 'column',
-		items: [bussinesscountchart, profitcountchart, salesPanel, bosscountchart]
+		items: [bussinesscountchart, profitcountchart
+		<#if action.user??&&(action.user.priority=5)>
+		, salesPanel
+		</#if>
+		, bosscountchart]
 	});
 
 		//App.createContentPanel({

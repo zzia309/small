@@ -72,7 +72,7 @@ public class FtpService {
         return loginSuccess;
     }
 
-    public String uploadFiles(String filePath, String changeDirectory) {
+	public String uploadFiles(String filePath, String changeDirectory) {
         String message = null;
         File file = new File(filePath);
         try {
@@ -100,7 +100,7 @@ public class FtpService {
         }
         return message;
     }
-
+//
 //    public static void main(String[] args) {
 //        FtpService ftpUtilService = new FtpService("zxy", "enqishuang", "192.168.0.105", 21);
 //        String result = ftpUtilService.uploadFiles("D:/files", "");
