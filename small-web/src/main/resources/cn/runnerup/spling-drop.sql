@@ -159,7 +159,7 @@ CREATE TABLE `sp_customers` (
   `cs_guaranteeUnit` varchar(64) DEFAULT NULL,
   `cs_guaranteeUnitTel` varchar(64) DEFAULT NULL,
   `cs_guaranteeArea` varchar(64) DEFAULT NULL,
-  `cs_guaranteeMary` varchar(64) DEFAULT NULL,
+  `cs_guaranteeMarry` varchar(64) DEFAULT NULL,
   `cs_guaranteeBirthplace` varchar(64) DEFAULT NULL,
   `cs_guaranteeHukou` varchar(64) DEFAULT NULL,
   `cs_guaranteeUnitAddress` varchar(64) DEFAULT NULL,

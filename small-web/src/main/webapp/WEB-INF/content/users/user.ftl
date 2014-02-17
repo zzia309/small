@@ -94,8 +94,7 @@ var userForm = Ext.create('Ext.form.Panel', {
 		queryMode: 'local',
 		valueField: 'id',
 		readOnly: true,
-		displayField: 'username',
-		value: 9
+		displayField: 'username'
 	}],
 	buttons:[{
 		text: '保存',
@@ -104,6 +103,7 @@ var userForm = Ext.create('Ext.form.Panel', {
 			var me = this;
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
+			userForm.suspendEvents(true);
 			if(Ext.isEmpty(id)){
 				var url = '${request.contextPath}/users/user.gson';
 				form.submit({
@@ -111,6 +111,7 @@ var userForm = Ext.create('Ext.form.Panel', {
 					success: function(){
 						windows.hide();
 						userStore.load();
+						userForm.resumeEvents();
 					}
 				});
 			}else{
@@ -123,6 +124,7 @@ var userForm = Ext.create('Ext.form.Panel', {
 					success: function(){
 						windows.hide();
 						userStore.load();
+						userForm.resumeEvents();
 					}
 				});
 			}

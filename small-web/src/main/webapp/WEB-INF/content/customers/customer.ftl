@@ -65,9 +65,6 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 		displayField: 'code',
 		editable: false
 	}, {
-		fieldLabel: '客户所在地区',
-		name: 'loanerarea'
-	}, {
 		fieldLabel: '客户籍贯',
 		name: 'loanerbirthplace'
 	}, {
@@ -258,6 +255,12 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	}, {
 		fieldLabel: '车价',
 		name: 'carprice',
+		xtype: 'numberfield',
+		allowDecimals: true,
+		decimalPrecision: 4
+	}, {
+		fieldLabel: '首付款',
+		name: 'prepayments',
 		xtype: 'numberfield',
 		allowDecimals: true,
 		decimalPrecision: 4

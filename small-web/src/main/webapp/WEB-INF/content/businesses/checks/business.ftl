@@ -77,8 +77,9 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		</#if>
 	},
 	items: [{
-		fieldLabel: '分公司',
-		name: 'branch'
+		fieldLabel: '贷款金额',
+		name: 'loans',
+		readOnly: true
 	}, {
 		xtype:'numberfield',
 		fieldLabel: '垫款金额',
@@ -236,6 +237,7 @@ var businessTab = {
 			fieldSet.query('[addFieldContainer]')[0].removeAll();
 
 			var form = businessForm.getForm();
+			var loan = form.findField('loans');
 			var config = {
 				url: '${request.contextPath}/businesses/business/new.gson',
 				method: 'GET',
@@ -255,6 +257,9 @@ var businessTab = {
 					url: '${request.contextPath}/businesses/business/' + App.currentId + '.gson',
 					success: function(response){
 						var values = Ext.decode(response.responseText);
+						var customer = values.customer;
+						form.setValues(values);
+						loan.setValue(customer.carloans);
 						form.setValues(values);
 						woFlowStore.removeAll();
 						woFlowStore.loadRawData(values['woflows']);

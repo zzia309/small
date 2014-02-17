@@ -102,9 +102,6 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		header: '客户婚姻状态',
 		dataIndex: 'loanermarry'
 	}, {
-		header: '客户所在地区',
-		dataIndex: 'loanerarea'
-	}, {
 		header: '客户籍贯',
 		dataIndex: 'loanerbirthplace'
 	}, {
@@ -227,6 +224,66 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	}, {
 		header: '其他费用',
 		dataIndex: 'otherfees'
+	},{
+		header: '是否流程',
+		dataIndex: 'isFlow',
+		renderer: function(value){
+			if(value)
+				return "是";
+			else
+				return "否"
+		}
+	},{
+		header: '创建人',
+		dataIndex: 'createdby',
+		renderer: function(value){
+			if(value)
+				return value['username'];
+		}
+	},{
+		xtype: 'xdatecolumn',
+		header: '创建日期',
+		format: 'Y-m-d',
+		dataIndex: 'created'
+	},{
+		header: '担保人配偶姓名',
+		dataIndex: 'guaranteematename'
+	},{
+		header: '担保人配偶身份证',
+		dataIndex: 'guaranteematecard'
+	},{
+		header: '担保人配偶电话',
+		dataIndex: 'guaranteematetel'
+	},{
+		header: '是否银行担保',
+		dataIndex: 'isbank',
+		renderer: function(value){
+			if(value)
+				return "是";
+			else
+				return "否"
+		}
+	},{
+		header: '银行账号',
+		dataIndex: 'bankaccount'
+	},{
+		header: '是否GPS',
+		dataIndex: 'isgps',
+		renderer: function(value){
+			if(value)
+				return "是";
+			else
+				return "否"
+		}
+	},{
+		header: '首付',
+		dataIndex: 'prepayments'
+	},{
+		header: '车辆上牌地区',
+		dataIndex: 'listedareas'
+	},{
+		header: '经销商',
+		dataIndex: 'dealer'
 	}],
 	store: store,
 	dockedItems: [{
