@@ -6,7 +6,6 @@
     <result column="buss_credit" property="credit" jdbcType="VARCHAR" />
     <result column="buss_publicOrder" property="publicorder" jdbcType="VARCHAR" />
     <result column="buss_court" property="court" jdbcType="VARCHAR" />
-    <result column="buss_branch" property="branch" jdbcType="VARCHAR" />
     <result column="buss_advances" property="advances" jdbcType="DOUBLE" />
     <result column="buss_finishTime" property="finishtime" jdbcType="TIMESTAMP" />
     <result column="buss_advanceDate" property="advancedate" jdbcType="TIMESTAMP" />
@@ -29,7 +28,8 @@
   </resultMap>
 
   <sql id="Base_Column_List" >
-    buss_id, buss_customer, buss_credit, buss_publicOrder, buss_court, buss_branch, buss_advances,
+    buss_id, buss_customer, buss_credit, buss_publicOrder, buss_court,
+    buss_advances,
     buss_advanceDate, buss_loanDate, buss_insuranceAgent, buss_insuranceStart, buss_insuranceEnd,
     buss_certificate, buss_isImpawn, buss_isSongHang, buss_carModel, buss_carEngine,
     buss_carFrame, buss_status,
@@ -69,7 +69,7 @@
 		and cs_carType = #{type}
 	</if>
 	<if test="area != null">
-		and buss_branch = #{area}
+		and cs_dealer = #{area}
 	</if>
 	<if test="carno != null">
 		and buss_carNo = #{carno}
@@ -93,7 +93,7 @@
 		and cs_carType = #{type}
 	</if>
 	<if test="area != null">
-		and buss_branch = #{area}
+		and cs_dealer = #{area}
 	</if>
 	<if test="condition != null">
 		and (cs_loanername like '%${condition}%' or cs_sales like '%${condition}%' or buss_id = '%${condition}%' or cs_loanercard like '%${condition}%')
@@ -117,7 +117,7 @@
 					and cs_carType = #{type}
 				</if>
 				<if test="area != null">
-					and buss_branch = #{area}
+					and cs_dealer = #{area}
 				</if>
 				<if test="condition != null">
 					and (cs_loanername like '%${condition}%' or cs_sales like '%${condition}%' or buss_id = '%${condition}%' or cs_loanercard like '%${condition}%')
@@ -141,7 +141,7 @@
 					and cs_carType = #{type}
 				</if>
 				<if test="area != null">
-					and buss_branch = #{area}
+					and cs_dealer = #{area}
 				</if>
 				<if test="condition != null">
 					and (cs_loanername like '%${condition}%' or cs_sales like '%${condition}%' or buss_id = '%${condition}%' or cs_loanercard like '%${condition}%')
@@ -151,7 +151,7 @@
 
    <insert id="insert" parameterType="cn.runnerup.model.Business" >
     insert into sp_businesses (buss_id, buss_credit,
-      buss_publicOrder, buss_court, buss_branch,
+      buss_publicOrder, buss_court,
       buss_advances, buss_advanceDate, buss_loanDate,
       buss_insuranceAgent, buss_insuranceStart, buss_insuranceEnd,
       buss_certificate, buss_isImpawn, buss_isSongHang,
@@ -164,7 +164,7 @@
       buss_finishTime,
       buss_customer)
     values (#{id,jdbcType=INTEGER}, #{credit,jdbcType=VARCHAR},
-      #{publicorder,jdbcType=VARCHAR}, #{court,jdbcType=VARCHAR}, #{branch,jdbcType=VARCHAR},
+      #{publicorder,jdbcType=VARCHAR}, #{court,jdbcType=VARCHAR},
       #{advances,jdbcType=DOUBLE}, #{advancedate,jdbcType=TIMESTAMP}, #{loandate,jdbcType=TIMESTAMP},
       #{insuranceagent,jdbcType=VARCHAR}, #{insurancestart,jdbcType=TIMESTAMP}, #{insuranceend,jdbcType=TIMESTAMP},
       #{certificate,jdbcType=VARCHAR}, #{isimpawn,jdbcType=TINYINT}, #{issonghang,jdbcType=TINYINT},
@@ -187,7 +187,6 @@
 			set buss_credit = #{credit,jdbcType=VARCHAR},
 			buss_publicOrder = #{publicorder,jdbcType=VARCHAR},
 			buss_court = #{court,jdbcType=VARCHAR},
-			buss_branch = #{branch,jdbcType=VARCHAR},
 			buss_advances = #{advances,jdbcType=DOUBLE},
 			buss_advanceDate = #{advancedate,jdbcType=TIMESTAMP},
 			buss_loanDate = #{loandate,jdbcType=TIMESTAMP},

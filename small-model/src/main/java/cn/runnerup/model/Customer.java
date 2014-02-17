@@ -23,8 +23,6 @@ public class Customer {
 
     private String loanermarry;
 
-    private String loanerarea;
-
     private String loanerbirthplace;
 
     private String loanerhukou;
@@ -81,7 +79,6 @@ public class Customer {
 
     private String guaranteeposition;
 
-
     private String sales;
 
     private String manager;
@@ -126,11 +123,26 @@ public class Customer {
 
     private boolean isbank;
 
-    private String bankaccount;
+
+	private String bankaccount;
 
     private boolean isgps;
 
-	public String getGuaranteematecard() {
+    private Double prepayments;
+
+    private String listedAreas;
+
+    private String dealer;
+
+    public String getDealer() {
+    	return dealer;
+    }
+
+    public void setDealer(String dealer) {
+    	this.dealer = dealer;
+    }
+
+    public String getGuaranteematecard() {
 		return guaranteematecard;
 	}
 
@@ -264,14 +276,6 @@ public class Customer {
 
 	public void setLoanermarry(String loanermarry) {
 		this.loanermarry = loanermarry;
-	}
-
-	public String getLoanerarea() {
-		return loanerarea;
-	}
-
-	public void setLoanerarea(String loanerarea) {
-		this.loanerarea = loanerarea;
 	}
 
 	public String getLoanerbirthplace() {
@@ -634,5 +638,23 @@ public class Customer {
 	public void setFlow(boolean isFlow) {
 		this.isFlow = isFlow;
 	}
+
+	public Double getPrepayments() {
+		return prepayments;
+	}
+
+	public void setPrepayments(Double prepayments) {
+		this.prepayments = prepayments;
+	}
+
+	public String getListedAreas() {
+		return listedAreas;
+	}
+
+	public void setListedAreas(String listedAreas) {
+		this.listedAreas = listedAreas;
+	}
+
+
 
 }

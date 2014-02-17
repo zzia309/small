@@ -90,13 +90,6 @@ var matePanel = Ext.create('Ext.panel.Panel', {
 	items:[{
 		fieldLabel: '配偶姓名',
 		name: 'matename'
-	//}, {
-	//	xtype: 'combo',
-	//	fieldLabel: '配偶性别',
-	//	name: 'matesex',
-	//	store: genderStore,
-	//	valueField: 'id',
-	//	displayField: 'value'
 	}, {
 		xtype: 'numberfield',
 		fieldLabel: '配偶年龄',
@@ -130,10 +123,9 @@ var matePanel = Ext.create('Ext.panel.Panel', {
 });
 
 var guaranteePanel = Ext.create('Ext.panel.Panel', {
-	title: '    担保人信息',
+	title: '担保人信息',
 	layout: 'column',
 	collapsible: true,
-	//anchor: '100% 24%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.3333,
@@ -221,7 +213,6 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	title: '车辆及销售信息',
 	layout: 'column',
 	collapsible: true,
-	//anchor: '100% 20.5%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.2,
@@ -229,21 +220,14 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		margin: '2 0 0 0'
 	},
 	items:[{
+		fieldLabel: '合作经销商',
+		name: 'dealer'
+	},{
 		fieldLabel: '业务员',
 		name: 'sales'
 	}, {
 		fieldLabel: ' 经理',
 		name: 'manager'
-	}, {
-		fieldLabel: '开户银行',
-		name: 'bankaccount',
-		columnWidth: 0.4,
-	}, {
-		fieldLabel: '打款对象',
-		name: 'cartoobject'
-	}, {
-		fieldLabel: '打款账户',
-		name: 'cartoaccount'
 	}, {
 		fieldLabel: '购车类型',
 		xtype: 'combobox',
@@ -254,10 +238,23 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	    valueField: 'code',
 	    editable: false
 	}, {
+		fieldLabel: '车辆上牌地区',
+		name: 'listedareas'
+	}, {
 		fieldLabel: '是否GPS',
 		name: 'isgps',
 		xtype: 'checkbox',
 		inputValue: true
+	}, {
+		fieldLabel: '开户银行',
+		name: 'bankaccount',
+		columnWidth: 0.4,
+	}, {
+		fieldLabel: '打款对象',
+		name: 'cartoobject'
+	}, {
+		fieldLabel: '打款账户',
+		name: 'cartoaccount'
 	}, {
 		fieldLabel: '车价',
 		name: 'carprice',
@@ -456,7 +453,7 @@ var customerForm = Ext.create('Ext.form.Panel', {
 								mask.hide();
 							}else {
 								mask.hide();
-								Ext.MessageBox.alert("转征信失败", "请检查操作，附件大小不能超过150M！");						
+								Ext.MessageBox.alert("转征信失败", "请检查操作，附件大小不能超过150M！");
 							}
 						},
 						failure: function(form, action){

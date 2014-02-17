@@ -12,7 +12,6 @@
     <result column="cs_loanerUnit" property="loanerunit" jdbcType="VARCHAR" />
     <result column="cs_loanerUnitTel" property="loanerunittel" jdbcType="VARCHAR" />
     <result column="cs_loanerMarry" property="loanermarry" jdbcType="VARCHAR" />
-    <result column="cs_loanerArea" property="loanerarea" jdbcType="VARCHAR" />
     <result column="cs_loanerBirthplace" property="loanerbirthplace" jdbcType="VARCHAR" />
     <result column="cs_loanerHukou" property="loanerhukou" jdbcType="VARCHAR" />
     <result column="cs_loanerUnitAddress" property="loanerunitaddress" jdbcType="VARCHAR" />
@@ -66,12 +65,16 @@
 	<result column="cs_bankAccount" property="bankaccount" jdbcType="VARCHAR" />
 	<result column="cs_isGps" property="isgps" />
 
+	<result column="cs_prepayments" property="prepayments" jdbcType="DOUBLE" />
+	<result column="cs_listedAreas" property="listedareas" jdbcType="VARCHAR" />
+	<result column="cs_dealer" property="dealer" jdbcType="VARCHAR" />
 	<association property="createdby" column="cs_createdby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
   </resultMap>
-  
+
   <sql id="Base_Column_List" >
     cs_id, cs_loanerName, cs_loanerSex, cs_loanerAge, cs_loanerCard, cs_loanerTel, cs_loanerHomeAddress,
-    cs_loanerUnit, cs_loanerUnitTel, cs_loanerMarry, cs_loanerArea, cs_loanerBirthplace,
+    cs_loanerUnit, cs_loanerUnitTel, cs_loanerMarry,
+    cs_loanerBirthplace,
     cs_loanerHukou, cs_loanerUnitAddress, cs_loanerPosition, cs_mateName,
     cs_mateAge, cs_mateCard, cs_mateTel, cs_mateUnit, cs_mateUnitTel, cs_mateBirthplace,
     cs_mateHukou, cs_mateUnitAddress, cs_matePosition, cs_guaranteeName, cs_guaranteeSex,
@@ -87,7 +90,10 @@
     cs_guaranteeMateTel,
     cs_isBank,
     cs_bankAccount,
-    cs_isGps
+    cs_isGps,
+    cs_prepayments,
+    cs_listedAreas,
+    cs_dealer
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -117,7 +123,7 @@
     	left join sp_businesses on cs_id = buss_customer
     </if>
     <if test="user != null">
-	    where cs_createdby = #{user,jdbcType=INTEGER}
+	    where cs_createdby = #{user,jdbcType=INTEGER} and cs_isFlow is true
     </if>
     <if test="condition != null">
     	and (cs_loanerName= #{condition} or cs_loanerCard= #{condition}
@@ -132,7 +138,7 @@
     count(*)
     from sp_customers
     <if test="user != null">
-	    where cs_createdby = #{user,jdbcType=INTEGER}
+	    where cs_createdby = #{user,jdbcType=INTEGER} and cs_isFlow is true
     </if>
     <if test="condition != null">
     	and (cs_loanerName= #{condition} or cs_loanerCard= #{condition}
@@ -140,7 +146,7 @@
     	or exists(select 1 from sp_businesses where cs_id = buss_customer and buss_carNo = #{condition}))
     </if>
   </select>
-  
+
   <select id="getCheckCustomers" resultMap="BaseResultMap" parameterType="java.util.HashMap">
   	select
     <include refid="Base_Column_List" />
@@ -166,7 +172,7 @@
     	or exists(select 1 from sp_businesses where cs_id = buss_customer and buss_carNo = #{condition})
     	or cs_sales = #{condition}
     </if>
-  </select>  
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sp_customers
@@ -177,7 +183,8 @@
     insert into sp_customers (cs_loanerName, cs_loanerSex,
       cs_loanerAge, cs_loanerCard, cs_loanerTel,
       cs_loanerHomeAddress, cs_loanerUnit, cs_loanerUnitTel,
-      cs_loanerMarry, cs_loanerArea, cs_loanerBirthplace,
+      cs_loanerMarry,
+      cs_loanerBirthplace,
       cs_loanerHukou, cs_loanerUnitAddress, cs_loanerPosition,
       cs_mateName,cs_mateAge,
       cs_mateCard, cs_mateTel, cs_mateUnit,
@@ -199,12 +206,16 @@
       cs_isBank,
       cs_bankAccount,
       cs_isGps,
+      cs_prepayments,
+      cs_listedAreas,
+      cs_dealer,
       cs_createdby
       )
     values (#{loanername,jdbcType=VARCHAR}, #{loanersex,jdbcType=VARCHAR},
       #{loanerage,jdbcType=INTEGER}, #{loanercard,jdbcType=VARCHAR}, #{loanertel,jdbcType=VARCHAR},
       #{loanerhomeaddress,jdbcType=VARCHAR}, #{loanerunit,jdbcType=VARCHAR}, #{loanerunittel,jdbcType=VARCHAR},
-      #{loanermarry,jdbcType=VARCHAR}, #{loanerarea,jdbcType=VARCHAR}, #{loanerbirthplace,jdbcType=VARCHAR},
+      #{loanermarry,jdbcType=VARCHAR},
+      #{loanerbirthplace,jdbcType=VARCHAR},
       #{loanerhukou,jdbcType=VARCHAR}, #{loanerunitaddress,jdbcType=VARCHAR}, #{loanerposition,jdbcType=VARCHAR},
       #{matename,jdbcType=VARCHAR}, #{mateage,jdbcType=INTEGER},
       #{matecard,jdbcType=VARCHAR}, #{matetel,jdbcType=VARCHAR}, #{mateunit,jdbcType=VARCHAR},
@@ -227,6 +238,10 @@
       #{isbank, jdbcType=BOOLEAN},
       #{bankaccount, jdbcType=VARCHAR},
       #{isgps, jdbcType=BOOLEAN},
+      #{prepayments,jdbcType=DOUBLE},
+      #{listedareas,jdbcType=VARCHAR},
+      #{dealer,jdbcType=VARCHAR},
+
       <if test="createdby == null">NULL</if><if test="createdby != null">#{createdby.id,jdbcType=INTEGER}</if>
       )
 	<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
@@ -246,7 +261,6 @@
       cs_loanerUnit = #{loanerunit,jdbcType=VARCHAR},
       cs_loanerUnitTel = #{loanerunittel,jdbcType=VARCHAR},
       cs_loanerMarry = #{loanermarry,jdbcType=VARCHAR},
-      cs_loanerArea = #{loanerarea,jdbcType=VARCHAR},
       cs_loanerBirthplace = #{loanerbirthplace,jdbcType=VARCHAR},
       cs_loanerHukou = #{loanerhukou,jdbcType=VARCHAR},
       cs_loanerUnitAddress = #{loanerunitaddress,jdbcType=VARCHAR},
@@ -298,6 +312,9 @@
       cs_isBank = #{isbank, jdbcType=BOOLEAN},
       cs_bankAccount = #{bankaccount, jdbcType=VARCHAR},
       cs_isGps = #{isgps, jdbcType=BOOLEAN},
+      cs_prepayments = #{prepayments,jdbcType=DOUBLE},
+      cs_listedAreas = #{listedareas,jdbcType=VARCHAR},
+      cs_dealer = #{dealer,jdbcType=VARCHAR},
       <if test="createdby == null">cs_createdby = NULL</if><if test="createdby != null">cs_createdby = #{createdby.id,jdbcType=INTEGER}</if>
     where cs_id = #{id,jdbcType=INTEGER}
   </update>

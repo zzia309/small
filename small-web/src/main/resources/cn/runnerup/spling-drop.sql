@@ -136,7 +136,6 @@ CREATE TABLE `sp_customers` (
   `cs_loanerUnit` varchar(64) DEFAULT NULL,
   `cs_loanerUnitTel` varchar(64) DEFAULT NULL,
   `cs_loanerMarry` varchar(64) DEFAULT NULL,
-  `cs_loanerArea` varchar(64) DEFAULT NULL,
   `cs_loanerBirthplace` varchar(64) DEFAULT NULL,
   `cs_loanerHukou` varchar(64) DEFAULT NULL,
   `cs_loanerUnitAddress` varchar(64) DEFAULT NULL,
@@ -189,7 +188,9 @@ CREATE TABLE `sp_customers` (
   `cs_isBank` tinyint(1) NOT NULL DEFAULT '0',
   `cs_bankAccount` varchar(64) DEFAULT NULL,
   `cs_isGps` tinyint(1) NOT NULL DEFAULT '0',
-
+  `cs_prepayments` double(32, 4) DEFAULT NULL,
+  `cs_listedAreas` varchar(64) DEFAULT NULL,
+  `cs_dealer` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`cs_id`),
   KEY `foreign_key_createdby` (`cs_createdby`),
   CONSTRAINT `foreign_key_createdby` FOREIGN KEY (`cs_createdby`) REFERENCES `sp_users` (`usr_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -207,7 +208,6 @@ CREATE TABLE `sp_businesses` (
   `buss_credit` varchar(256) DEFAULT NULL,
   `buss_publicOrder` varchar(256) DEFAULT NULL,
   `buss_court` varchar(256) DEFAULT NULL,
-  `buss_branch` varchar(64) DEFAULT NULL,
   `buss_advances` double(32, 4) DEFAULT NULL,
   `buss_advanceDate` datetime DEFAULT NULL,
   `buss_loanDate` datetime DEFAULT NULL,
