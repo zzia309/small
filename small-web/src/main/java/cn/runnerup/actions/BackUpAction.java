@@ -25,13 +25,15 @@ public class BackUpAction extends RunnerSupport implements ModelDriven<BackUpMod
 	
 	public String index() {
 		try {
-			FtpService ftpService = new FtpService(model.getUsername(), model.getPassword(), model.getHostip(), 21);
-			if(!isFile) {
-				Runtime.getRuntime().exec("cmd /c start d:\\files\\small.bat");
-				ftpService.uploadFiles(attachmentService.getRoot(), "");
-			}else
-				ftpService.uploadFiles(FilenameUtils.concat(attachmentService.getRoot(), "small.db"), "");
-			model.setSuccess(true);
+			if(getUser().getPriority() == 5) {
+				FtpService ftpService = new FtpService(model.getUsername(), model.getPassword(), model.getHostip(), 21);
+				if(!isFile) {
+					Runtime.getRuntime().exec("cmd /c start d:\\files\\small.bat");
+					ftpService.uploadFiles(attachmentService.getRoot(), "");
+				}else
+					ftpService.uploadFiles(FilenameUtils.concat(attachmentService.getRoot(), "small.db"), "");
+				model.setSuccess(true);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
