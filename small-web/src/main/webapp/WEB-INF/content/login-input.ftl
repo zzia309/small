@@ -7,6 +7,13 @@
     <title>index</title>
     <script type="text/javascript">
 	    Ext.onReady(function(){
+			var enterSubmit = function(field, e) {
+				if (e.getKey() == e.ENTER) {
+					var form = field.up('form').getForm();
+					if(form.isValid())
+						form.submit();
+				}
+			};	    
 	    	var panel = Ext.create('Ext.form.Panel',{
 	    		title: '用户登录',
 				url: 'login',
@@ -27,11 +34,19 @@
 	    			items: [{
 		    			fieldLabel: '用户名',
 		    			name: 'username',
-		    			value: '${username!""}'
+		    			value: '${username!""}',
+		    			allowblank: false,
+		    			listeners: {
+							specialkey: enterSubmit
+						}
 		    		},{
 		    			fieldLabel: '密码',
 		    			inputType: 'password',
-		    			name: 'password'
+		    			name: 'password',
+		    			allowblank: false,
+		    			listeners: {
+							specialkey: enterSubmit
+						}
 		    		}]
 	    		}],
 	    		buttons: [{
@@ -41,7 +56,12 @@
 	    				if(form.isValid())
 	    					form.submit();
 	    			}
-	    		}]
+	    		}],
+				listeners: {
+					afterrender: function(form) {
+						form.down('field[name=username]').focus(true);
+					}
+				}
 	    	});
 	    	Ext.create('Ext.container.Viewport',{
 	    		layout: {
