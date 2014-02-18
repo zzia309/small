@@ -76,6 +76,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 	}
 
 	public String createFlow() {
+		String descr = servletRequest.getParameter("descr");
 		try {
 			Integer modelId = model.getId();
 			model.setFlow(true);
@@ -84,13 +85,15 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 			if(modelId != null) {
 				business = businessService.getBusinessByCustomer(modelId);
 				if(business != null) {
-					business.setStatus("new");
+					business.setStatus("trial");
 					businessService.updateBusiness(business);
+					woFlowService.createWoFlow(user, descr, "-", "trial", business.getId());
 				}else {
 					business = new Business();
 					business.setCustomer(model);
 					business.setStatus("new");
 					businessService.createBusiness(business);
+					woFlowService.createWoFlow(user, descr, "", "new", business.getId());
 				}
 				if(model.getCustomerfile() != null) {
 					for(int i=0; i<model.getCustomerfile().length; i++) {
@@ -111,8 +114,8 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 				business.setCustomer(model);
 				business.setStatus("new");
 				businessService.createBusiness(business);
+				woFlowService.createWoFlow(user, descr, "", "new", business.getId());
 			}
-			woFlowService.createWoFlow(user, "", "", "new", business.getId());
 			model.setSuccess(true);
 		} catch (Exception e) {
 			addActionError("请检查操作，附件大小不能超过150M！");

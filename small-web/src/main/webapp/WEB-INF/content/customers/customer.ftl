@@ -443,6 +443,8 @@ var customerForm = Ext.create('Ext.form.Panel', {
 			icon: '${request.contextPath}/statics/style/img/action/credit.png',
 			id: 'credit',
 			handler: function(){
+				showWindow.show();
+				/*
 				var form = this.up('form').getForm();
 				customerForm.suspendEvents();
 				var mask = new Ext.LoadMask(Ext.getBody(), {
@@ -471,6 +473,7 @@ var customerForm = Ext.create('Ext.form.Panel', {
 						}
 					});
 				}
+				*/
 			}
 	    },{
 	    	xtype: 'button',
@@ -526,6 +529,7 @@ var customerTab = {
 					fields.each(function(field){
 						field.setReadOnly(false);
 						field.validate();
+						field.resetOriginalValue();
 					});
 				}
 			};
