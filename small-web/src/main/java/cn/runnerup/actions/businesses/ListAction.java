@@ -43,8 +43,8 @@ public class ListAction extends RunnerSupport implements ModelDriven<ListModel>{
 		if(StringUtils.isNotBlank(type))
 			map.put("type", type);
 		if(StringUtils.isNotBlank(starttime) && StringUtils.isNotBlank(endtime)){
-			map.put("start", starttime);
-			map.put("end", endtime);
+			map.put("starttime", starttime);
+			map.put("endtime", endtime);
 		}
 		if(StringUtils.isNotBlank(carno))
 			map.put("carno", carno);

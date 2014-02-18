@@ -1,17 +1,14 @@
+<#include "../commons/dateUtil.ftl">
+
 var timeStore = Ext.create('Ext.data.Store', {
 	fields: ['code', 'name'],
 	data:[{'code': 'customer', 'name': '自定义日期'},
+		{'code': 'today', 'name': '今天'},
+		{'code': 'yesterday', 'name': '昨天'},
 		{'code': 'thisMonth', 'name': '本月'},
 		{'code': 'lastMonth', 'name': '上月'},
+		{'code': 'thisYear', 'name': '今年'},
 		]
-});
-
-var typeStore = Ext.create('Ext.data.Store', {
-	fields:['name','code'],
-	data:[
-	  {name: '二手车', code: '二手车'},
-	  {name: '新车', code: '新车'}
-	]
 });
 
 var timePanel = Ext.create('Ext.form.FieldContainer',{
@@ -20,7 +17,8 @@ var timePanel = Ext.create('Ext.form.FieldContainer',{
     margin:'2 0 2 0',
     defaults: {
     	labelWidth: 60,
-		labelAlign: 'right'
+		labelAlign: 'right',
+		width: 205
 	},
     items:[{
     	fieldLabel: '时间',
@@ -37,41 +35,38 @@ var timePanel = Ext.create('Ext.form.FieldContainer',{
 			change: function(view, newValue, oldValue, eOpts){
 				var form = searchPanel.getForm();
 				var date = form.findField('date').getValue();
-				var customerContainer = Ext.getCmp('customContainer').setVisible(false);
 				var start = form.findField('start');
 				var end = form.findField('end');
+				var dateUtil = new DateProcess();
 				start.setValue();
 				end.setValue();
-				if(date == 'customer')
-					customerContainer.setVisible(true);
-				else{
+				if(date == 'customer'){
+					start.setVisible(true);
+					end.setVisible(true);
+				}else{
+					var o = dateUtil.getDate(date);
+					start.setValue(o['start']);
+					end.setValue(o['end']);
+					start.setVisible(false);
+					end.setVisible(false);
 				}
 			}
 		}
     }, {
-		xtype:'container',
-		layout: 'hbox',
+    	fieldLabel: '起始时间',
+		margin:'0 2 0 2',
+		xtype: 'datefield',
+		name: 'start',
 		hidden: true,
-		id:'customContainer',
-		width:320,
-		items:[{
-			margin:'0 2 0 2',
-			xtype: 'datefield',
-			name: 'start',
-			format: 'Y-m-d H:i:s',
-			width: 150,
-		},{
-			xtype:'label',
-			text: '到',
-			width: 10
-		},{
-			margin:'0 2 0 2',
-			labelAlign: 'right',
-			name: 'end',
-			xtype: 'datefield',
-			format: 'Y-m-d H:i:s',
-			width: 150
-		}]
+		format: 'Y-m-d H:i:s'
+	}, {
+		fieldLabel: '结束时间',
+		margin:'0 2 0 2',
+		labelAlign: 'right',
+		name: 'end',
+		hidden: true,
+		xtype: 'datefield',
+		format: 'Y-m-d H:i:s'
 	}, {
     	fieldLabel: '业务类型',
 		xtype: 'combo',
@@ -81,17 +76,18 @@ var timePanel = Ext.create('Ext.form.FieldContainer',{
 		triggerAction:'all',
 		valueField: 'code',
 		displayField: 'name',
-		store: typeStore
+		store: carStore
     },{
-    	fieldLabel: '区域',
-		xtype: 'combo',
+		fieldLabel: '合作经销商',
 		name: 'area',
-		queryMode: 'local',
-		editable:'false',
+		labelWidth: 70,
 		triggerAction:'all',
-		valueField: 'code',
-		displayField: 'name',
-		store: typeStore
+		xtype: 'combobox',
+	    store: areaStore,
+	    queryMode: 'local',
+	    displayField: 'name',
+	    valueField: 'code',
+	    editable: false
     },{
     	fieldLabel: '车牌号',
     	xtype: 'textfield',
@@ -114,12 +110,12 @@ var mixSearchPanel = Ext.create('Ext.form.FieldContainer',{
 		name: 'condition',
 		margin: '0 2 0 2',
 		emptyText: '输入ID/客户姓名/客户身份证/业务员名称',
-		width: 340
+		width: 300
 	},{
 		xtype: 'button',
 		text: '查询',
 		margin: '0 2 0 2',
-		width:100,
+		width:80,
 		handler:function(){
 			var me = this;
 			var form = me.up('form').getForm();
@@ -139,10 +135,25 @@ var mixSearchPanel = Ext.create('Ext.form.FieldContainer',{
 			var start = form.findField('start').getValue();
 			var end = form.findField('end').getValue();
 			if(!Ext.isEmpty(start) && !Ext.isEmpty(end)){
-				businessStore.proxy.extraParams['starttime'] = start;
-				businessStore.proxy.extraParams['endtime'] = end;
+				start1 = Ext.Date.format(start, 'Y-m-d H:i:s');
+				end1 = Ext.Date.format(end, 'Y-m-d H:i:s');
+				businessStore.proxy.extraParams['starttime'] = start1;
+				businessStore.proxy.extraParams['endtime'] = end1;
 			}
 			businessStore.load();
+		}
+	},{
+		xtype: 'button',
+		text: '清空查询条件',
+		margin: '0 2 0 2',
+		width:80,
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var fields = form.getFields();
+			fields.each(function(field){
+				field.setValue();
+			});
 		}
 	}]
 });

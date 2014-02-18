@@ -138,8 +138,10 @@ var searchPanel = Ext.create('Ext.form.Panel',{
 			var sales = form.findField('sales').getValue();
 			typeBusinessStore.proxy.extraParams = {};
 			if(!Ext.isEmpty(start) && !Ext.isEmpty(end)){
-				typeBusinessStore.proxy.extraParams['start'] = start;
-				typeBusinessStore.proxy.extraParams['end'] = end;
+				start1 = Ext.Date.format(start, 'Y-m-d H:i:s');
+				end1 = Ext.Date.format(end, 'Y-m-d H:i:s');
+				typeBusinessStore.proxy.extraParams['start'] = start1;
+				typeBusinessStore.proxy.extraParams['end'] = end1;
 			}
 			if(!Ext.isEmpty(type))
 				typeBusinessStore.proxy.extraParams['type'] = type;

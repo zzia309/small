@@ -98,6 +98,9 @@
 	<if test="area != null">
 		and cs_dealer = #{area}
 	</if>
+	<if test="carno != null">
+		and buss_carNo = #{carno}
+	</if>
 	<if test="starttime != null and endtime != null">
 		and buss_finishTime between #{starttime} and #{endtime}
 	</if>
@@ -121,6 +124,9 @@
 		    	</if>
 			    <if test="type != null">
 					and cs_carType = #{type}
+				</if>
+				<if test="carno != null">
+					and buss_carNo = #{carno}
 				</if>
 				<if test="area != null">
 					and cs_dealer = #{area}
@@ -148,6 +154,9 @@
 		    	</if>
 		    	<if test="type != null">
 					and cs_carType = #{type}
+				</if>
+				<if test="carno != null">
+					and buss_carNo = #{carno}
 				</if>
 				<if test="area != null">
 					and cs_dealer = #{area}

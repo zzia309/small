@@ -45,6 +45,7 @@ var codeForm = Ext.create('Ext.form.Panel', {
 		fieldLabel: '显示名称',
 		name: 'name',
 		allowBlank: false,
+		editable: false,
 		readOnly: true
 	}, {
 		fieldLabel: '创建日期',
@@ -152,11 +153,6 @@ var codeTab = {
 				callback: function(options, success, response) {
 					var values = Ext.decode(response.responseText);
 					form.setValues(values);
-					var fields = form.getFields();
-					fields.each(function(field){
-						field.setReadOnly(false);
-						field.validate();
-					});
 				}
 			};
 			if(App.currentId){

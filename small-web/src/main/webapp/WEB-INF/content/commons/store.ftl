@@ -1,9 +1,27 @@
 var carStore = Ext.create('Ext.data.Store', {
 	fields:['name','code'],
-	data:[<#list action.getCodes('CAR_TYPE_STORE')![] as bank>
+	data:[<#list action.getCodes('CAR_TYPE_STORE')![] as type>
+			{'code': '${type.code!?js_string}',
+			'name': '${type.name!?js_string}'
+			}<#if type_has_next>,</#if>
+		</#list>]
+});
+
+var bankStore = Ext.create('Ext.data.Store', {
+	fields:['name','code'],
+	data:[<#list action.getCodes('BANK_STORE')![] as bank>
 			{'code': '${bank.code!?js_string}',
 			'name': '${bank.name!?js_string}'
 			}<#if bank_has_next>,</#if>
+		</#list>]
+});
+
+var areaStore = Ext.create('Ext.data.Store', {
+	fields:['name','code'],
+	data:[<#list action.getCodes('AREA_STORE')![] as area>
+			{'code': '${area.code!?js_string}',
+			'name': '${area.name!?js_string}'
+			}<#if area_has_next>,</#if>
 		</#list>]
 });
 
@@ -30,17 +48,6 @@ var marryStore = Ext.create('Ext.data.Store', {
 
 //（浙江泰隆商业银行（融悦），杭州银行清泰支行(融悦)，杭州银行清泰支行(易顺)，
 //浙江泰隆商业银行(樊郡等)），
-
-var bankStore = Ext.create('Ext.data.Store', {
-	fields:['name','code'],
-	data: [
-	  {name: '浙江泰隆商业银行(融悦)', code: '浙江泰隆商业银行(融悦)'},
-	  {name: '杭州银行清泰支行(融悦)', code: '杭州银行清泰支行(融悦)'},
-	  {name: '杭州银行清泰支行(易顺)', code: '杭州银行清泰支行(易顺)'},
-	  {name: '浙江泰隆商业银行(樊郡波)', code: '浙江泰隆商业银行(樊郡波)'}
-	]
-});
-
 
 var flowStore = Ext.create('Ext.data.Store', {
 	fields:['name','code'],
