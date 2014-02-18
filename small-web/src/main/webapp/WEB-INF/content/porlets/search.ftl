@@ -127,7 +127,7 @@ var searchPanel = Ext.create('Ext.form.Panel',{
 		xtype: 'button',
 		text: '查询',
 		margin:'2 0 2 0',
-		columnWidth: 1,
+		columnWidth: 0.5,
 		handler:function(){
 			var me = this;
 			var form = me.up('form').getForm();
@@ -150,6 +150,18 @@ var searchPanel = Ext.create('Ext.form.Panel',{
 			if(!Ext.isEmpty(sales))
 				typeBusinessStore.proxy.extraParams['sales'] = sales;
 			typeBusinessStore.load();
+		}
+	}, {
+		xtype: 'button',
+		text: '清空搜索',
+		columnWidth: 0.5,
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var fields = form.getFields();
+			fields.each(function(field){
+				field.setValue();
+			});
 		}
 	}]
 });
