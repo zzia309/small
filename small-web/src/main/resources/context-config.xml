@@ -27,7 +27,7 @@
         <property name="testWhileIdle" value="false"/>
         <property name="timeBetweenEvictionRunsMillis" value="1800000"/>
         <property name="minEvictableIdleTimeMillis" value="1800000"/>
-        <property name="logAbandoned" value="true"/>
+        <property name="logAbandoned" value="false"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
