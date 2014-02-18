@@ -17,17 +17,35 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-    	<groupId>org.apache.struts</groupId>
-    	<artifactId>struts2-core</artifactId>
+     <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <scope>compile</scope>
     </dependency>
     <dependency>
-    	<groupId>org.apache.struts</groupId>
-    	<artifactId>struts2-convention-plugin</artifactId>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-core</artifactId>
+      <scope>compile</scope>
     </dependency>
     <dependency>
-    	<groupId>org.apache.struts</groupId>
-    	<artifactId>struts2-rest-plugin</artifactId>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-convention-plugin</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-rest-plugin</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-json-plugin</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-spring-plugin</artifactId>
+      <scope>compile</scope>
     </dependency>
     <dependency>
     	<groupId>ro.isdc.wro4j</groupId>
@@ -47,10 +65,6 @@
     	<artifactId>spring-web</artifactId>
     </dependency>
     <dependency>
-    	<groupId>org.apache.struts</groupId>
-    	<artifactId>struts2-spring-plugin</artifactId>
-    </dependency>
-    <dependency>
     	<groupId>${project.groupId}</groupId>
     	<artifactId>small-model</artifactId>
     	<version>${project.version}</version>
@@ -59,10 +73,6 @@
     	<groupId>${project.groupId}</groupId>
     	<artifactId>small-service</artifactId>
     	<version>${project.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.struts.xwork</groupId>
-        <artifactId>xwork-core</artifactId>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
