@@ -79,8 +79,7 @@ var profitchart = Ext.create('Ext.chart.Chart', {
             rotate: {
                 degrees: 315
             }
-        },
-	    title: '业务类型'
+        }
 	}],
     series: [{
         type: 'column',

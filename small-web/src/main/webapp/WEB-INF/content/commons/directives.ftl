@@ -7,6 +7,7 @@
 	<script type="text/javascript" src="${request.contextPath}/statics/ComboBox.js"></script>
 	<script type="text/javascript" src="${request.contextPath}/statics/layout/default.js"></script>
 	<link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/style/style.css"/>
+	<link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/style/login.css"/>
 </#macro>
 
 <#macro initlayout>

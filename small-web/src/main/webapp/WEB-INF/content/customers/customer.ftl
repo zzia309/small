@@ -239,7 +239,8 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	    queryMode: 'local',
 	    displayField: 'name',
 	    valueField: 'code',
-	    editable: false
+	    editable: false,
+	    allowBlank: false
 	}, {
 		fieldLabel: '车辆上牌地区',
 		name: 'listedareas'
