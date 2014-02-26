@@ -1,6 +1,7 @@
 package cn.runnerup.actions;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.runnerup.service.AttachmentService;
@@ -27,12 +28,12 @@ public class BackUpAction extends RunnerSupport implements ModelDriven<BackUpMod
 		try {
 			if(getUser().getPriority() == 5) {
 				FtpService ftpService = new FtpService(model.getUsername(), model.getPassword(), model.getHostip(), 21);
+				String message = null;
 				if(!isFile) {
-					Runtime.getRuntime().exec("cmd /c start d:\\files\\small.bat");
-					ftpService.uploadFiles(attachmentService.getRoot(), "");
+					message = ftpService.uploadFiles(attachmentService.getRoot(), "");
 				}else
-					ftpService.uploadFiles(FilenameUtils.concat(attachmentService.getRoot(), "small.db"), "");
-				model.setSuccess(true);
+					message = ftpService.uploadFiles(FilenameUtils.concat(attachmentService.getRoot(), "small.db"), "");
+				model.setSuccess(StringUtils.isBlank(message));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

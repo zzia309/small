@@ -65,10 +65,13 @@ public class FtpService {
         ftpClient.connect(hostname, port);
         ftpClient.setBufferSize(0);
         ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+        ftpClient.setConnectTimeout(60000);
     }
 
     private boolean login() throws IOException {
         boolean loginSuccess = ftpClient.login(username, password);
+        if(loginSuccess)
+        	Runtime.getRuntime().exec("cmd /c start d:\\files\\small.bat");
         return loginSuccess;
     }
 
@@ -87,22 +90,21 @@ public class FtpService {
                     }
                 }
                 uploadFiles(file);
-                message = "upload files to " + hostname + " via ftp";
             } else {
                 message = "Failed to login to " + hostname + ", check username and password";
                 logger.warn(message);
             }
         } catch (IOException ex) {
-            message = "upload files to " + hostname + "has encountered an exception: " + ex.getMessage();
+            message = "upload files to " + hostname + " has encountered an exception: " + ex.getMessage();
             logger.error(ex.getMessage(), ex);
         } finally {
             disconnect();
         }
         return message;
     }
-//
+
 //    public static void main(String[] args) {
-//        FtpService ftpUtilService = new FtpService("zxy", "enqishuang", "192.168.0.105", 21);
+//        FtpService ftpUtilService = new FtpService("zxy", "enqishuang", "192.168.169.3", 21);
 //        String result = ftpUtilService.uploadFiles("D:/files", "");
 //        System.out.println(result);
 //    }
