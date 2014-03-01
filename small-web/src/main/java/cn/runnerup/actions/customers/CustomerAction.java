@@ -87,7 +87,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 				if(business != null) {
 					business.setStatus("trial");
 					businessService.updateBusiness(business);
-					woFlowService.createWoFlow(user, descr, "-", "trial", business.getId());
+					woFlowService.createWoFlow(user, descr, "-", "new", business.getId());
 				}else {
 					business = new Business();
 					business.setCustomer(model);

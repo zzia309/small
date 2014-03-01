@@ -52,7 +52,7 @@ var marryStore = Ext.create('Ext.data.Store', {
 var flowStore = Ext.create('Ext.data.Store', {
 	fields:['name','code'],
 	data: [
-	  {name: '新建', code: 'new'},
+	  {name: '征信', code: 'new'},
 	  {name: '初审', code: 'trial'},
 	  {name: '终审', code: 'final'},
 	  {name: '老板过件', code:'boss'},
