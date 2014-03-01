@@ -35,7 +35,6 @@ public class ListAction extends RunnerSupport implements ModelDriven<ListModel>{
 		String starttime = servletRequest.getParameter("starttime");
 		String endtime = servletRequest.getParameter("endtime");
 		String carno = servletRequest.getParameter("carno");
-		System.out.println(condition);
 		map.put("limit", model.getLimit());
 		map.put("start", model.getStart());
 		if(StringUtils.isNotBlank(area))
