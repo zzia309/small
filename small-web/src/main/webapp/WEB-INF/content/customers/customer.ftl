@@ -202,7 +202,7 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '是否银行担保',
 		name: 'isbank',
 		xtype: 'checkbox',
-		inputValue: false
+		inputValue: true
 	}]
 });
 

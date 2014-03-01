@@ -1,5 +1,5 @@
 <#include "../commons/dateUtil.ftl">
-
+<#include "../commons/store.ftl">
 var timeStore = Ext.create('Ext.data.Store', {
 	fields: ['code', 'name'],
 	data:[{'code': 'customer', 'name': '自定义日期'},
@@ -23,22 +23,6 @@ var typeBusinessStore = Ext.create('Ext.data.Store', {
 	},
 	autoLoad: true
  });
-
-var carStore = Ext.create('Ext.data.Store', {
-	fields:['name','code'],
-	data:[
-	  {name: '新车卡分期', code: '新车卡分期'},
-	  {name: '新车普通', code: '新车普通'},
-	  {name: '二手车', code: '二手车'},
-	  {name: '存量车', code: '存量车'},
-	  {name: '公牌', code: '公牌'},
-	  {name: '货车', code: '货车'},
-	  {name: '租赁零首付', code: '租赁零首付'},
-	  {name: '租赁', code: '租赁'},
-	  {name: '租赁二手车', code: '租赁二手车'},
-	  {name: '其他', code: '其他'}
-	]
-});
 
 var searchPanel = Ext.create('Ext.form.Panel',{
 	columnWidth: 0.38,
@@ -108,7 +92,7 @@ var searchPanel = Ext.create('Ext.form.Panel',{
 		displayField: 'name',
 		store: carStore
     },{
-    	fieldLabel: '区域',
+    	fieldLabel: '经销商',
 		xtype: 'combo',
 		name: 'branch',
 		columnWidth: 1,
@@ -117,7 +101,7 @@ var searchPanel = Ext.create('Ext.form.Panel',{
 		triggerAction:'all',
 		valueField: 'code',
 		displayField: 'name',
-		store: carStore
+		store: areaStore
     },{
     	fieldLabel: '业务员',
     	xtype: 'textfield',

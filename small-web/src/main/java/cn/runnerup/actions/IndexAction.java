@@ -1,8 +1,12 @@
 package cn.runnerup.actions;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.runnerup.model.Code;
 import cn.runnerup.model.User;
+import cn.runnerup.service.CodeService;
 import cn.runnerup.service.MenuService;
 import cn.runnerup.service.UserService;
 
@@ -18,6 +22,9 @@ public class IndexAction extends RunnerSupport implements ModelDriven<User> {
 	@Autowired
 	private MenuService menuService;
 
+	@Autowired
+	private CodeService codeService;
+
 	private User model = new User();
 
 	public String index() {
@@ -27,6 +34,10 @@ public class IndexAction extends RunnerSupport implements ModelDriven<User> {
 
 	public User getModel() {
 		return model;
+	}
+
+	public List<Code> getCodes(String entity) {
+		return codeService.getCodesByType(entity);
 	}
 
 }

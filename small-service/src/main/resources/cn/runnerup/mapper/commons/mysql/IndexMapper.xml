@@ -21,7 +21,7 @@
 	    and cs_sales = #{sales}
 	</if>
 	<if test="branch != null">
-	    and buss_branch = #{branch}
+	    and cs_dealer = #{branch}
 	</if>
 	<if test="start != null and end != null">
 		and buss_finishTime between #{start} and #{end}

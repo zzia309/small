@@ -22,8 +22,8 @@
 				renderTo: 'login2',
 				standardSubmit: true,
 	    		border: 1,
-				width: 425,
-				height: 185,
+				width: 600,
+				height: 60,
 				bodyPadding: '0 10 0 10',
 				frame: true,
 				baseCls: 'background-color:#FFFFFF',
@@ -31,8 +31,8 @@
 				defaults: {
 					xtype: 'textfield',
 					labelAlign: 'right',
-					labelWidth: 100,
-					columnWidth: 1,
+					labelWidth: 50,
+					columnWidth: 0.43,
 					margin: '5 0 0 0'
 				},
 	    		items: [{
@@ -51,7 +51,19 @@
 	    			listeners: {
 						specialkey: enterSubmit
 					}
+	    		},{
+	    			xtype: 'button',
+	    			text: '登陆',
+	    			columnWidth: 0.14,
+	    			margin: '5 0 2 4',
+	    			handler: function(){
+	    				var form = this.up('form').getForm();
+	    				console.log(this.up('form').xtype);
+	    				if(form.isValid())
+	    					form.submit();
+	    			}
 	    		}],
+	    		/*
 	    		buttons: [{
 	    			text: '登录',
 	    			handler: function(){
@@ -60,23 +72,13 @@
 	    					form.submit();
 	    			}
 	    		}],
+	    		*/
 				listeners: {
 					afterrender: function(form) {
 						form.down('field[name=username]').focus(true);
 					}
 				}
 	    	});
-	    	/*
-	    	Ext.create('Ext.container.Viewport',{
-	    		layout: {
-	    			type: 'hbox',
-	    			align: 'middle',
-	    			pack: 'center'
-	    		},
-	    		items: panel,
-	    		renderTo: Ext.getBody()
-	    	});
-	    	*/
 	    });
 	</script>
 	<div id="login1"><div id="login2"></div></div>
