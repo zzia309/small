@@ -1,3 +1,8 @@
+drop database longyuedatabase;
+create database longyuedatabase DEFAULT CHARACTER SET = utf8;
+grant all privileges on longyuedatabase.* to longyue@localhost identified by 'longyuexiangmu';
+flush privileges;
+
 insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_fullname)values('admin', '356a192b7913b04c54574d18c28d46e6395428ab', 1, 'M', '业务员');
 insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_fullname)values('111', '356a192b7913b04c54574d18c28d46e6395428ab', 2, 'M', '征信人员');
 insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_fullname)values('222', '356a192b7913b04c54574d18c28d46e6395428ab', 3, 'M', '初审');

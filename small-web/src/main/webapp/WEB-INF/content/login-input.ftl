@@ -4,7 +4,7 @@
 <head>
 <@myhead />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>index</title>
+    <title>登录</title>
 </head>
 <body id="login-body">
     <script type="text/javascript">

@@ -1,7 +1,7 @@
 
-drop database test;
-CREATE DATABASE  IF NOT EXISTS `test` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `test`;
+drop database longyuedatabase;
+CREATE DATABASE  IF NOT EXISTS `longyuedatabase` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `longyuedatabase`;
 -- MySQL dump 10.13  Distrib 5.1.40, for Win32 (ia32)
 --
 -- Host: localhost    Database: sp
