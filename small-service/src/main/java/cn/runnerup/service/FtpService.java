@@ -3,14 +3,13 @@ package cn.runnerup.service;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPSClient;
 
 public class FtpService {
 
@@ -20,48 +19,18 @@ public class FtpService {
     private String password;
     private String hostname;
     private Integer port;
-    private Boolean isFTPS;
     private String protocol;
     private Boolean isImplicit;
-
+    
     public FtpService(String username, String password, String hostname, Integer port) {
         this.username = username;
         this.password = password;
         this.hostname = hostname;
         this.port = port;
-        isFTPS = false;
-    }
-
-    public FtpService(String username, String password, String hostname, Integer port, String protocol, Boolean isImplicit) {
-        this.username = username;
-        this.password = password;
-        this.hostname = hostname;
-        this.port = port;
-        isFTPS = true;
-        this.protocol = protocol;
-        this.isImplicit = isImplicit;
     }
 
     private void connect() throws IOException {
-        if (!isFTPS) {
-            ftpClient = new FTPClient();
-        } else {
-            FTPSClient ftpsClient;
-            if (protocol == null) {
-                if (isImplicit == null) {
-                    ftpsClient = new FTPSClient();
-                } else {
-                    ftpsClient = new FTPSClient(isImplicit);
-                }
-            } else {
-                if (isImplicit == null) {
-                    ftpsClient = new FTPSClient(protocol);
-                } else {
-                    ftpsClient = new FTPSClient(protocol, isImplicit);
-                }
-            }
-            ftpClient = ftpsClient;
-        }
+        ftpClient = new FTPClient();
         ftpClient.connect(hostname, port);
         ftpClient.setBufferSize(0);
         ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
@@ -69,26 +38,18 @@ public class FtpService {
     }
 
     private boolean login() throws IOException {
-        boolean loginSuccess = ftpClient.login(username, password);
-        if(loginSuccess)
-        	Runtime.getRuntime().exec("cmd /c start d:\\files\\small.bat");
+    	boolean	loginSuccess = ftpClient.login(username, password);
         return loginSuccess;
     }
 
-	public String uploadFiles(String filePath, String changeDirectory) {
+	public String uploadFiles(String filePath) {
         String message = null;
         File file = new File(filePath);
         try {
             connect();
-            if (login()) {
-                if (StringUtils.isNotBlank(changeDirectory)) {
-                    // Change working directory
-                    if (!ftpClient.changeWorkingDirectory(changeDirectory)) {
-                        message = "Failed to change working directory to " + changeDirectory + " on " + hostname;
-                        logger.warn(message);
-                        return message;
-                    }
-                }
+            boolean success = login();
+            if (success) {
+            	mkdirs(ftpClient, getDatePath());
                 uploadFiles(file);
             } else {
                 message = "Failed to login to " + hostname + ", check username and password";
@@ -102,60 +63,31 @@ public class FtpService {
         }
         return message;
     }
-
+//
 //    public static void main(String[] args) {
-//        FtpService ftpUtilService = new FtpService("zxy", "enqishuang", "192.168.169.3", 21);
-//        String result = ftpUtilService.uploadFiles("D:/files", "");
+//        FtpService ftpUtilService = new FtpService("zxy", "enqishuang", "192.168.169.2", 21);
+//        String result = ftpUtilService.uploadFiles("D:/files");
 //        System.out.println(result);
 //    }
-    
-    public String uploadStream(List<String> remoteList, List<InputStream> inputStreamList, String changeDirectory) {
-        String message = null;
-        try {
-            connect();
-            if (login()) {
-                if (StringUtils.isNotBlank(changeDirectory)) {
-                    // Change working directory
-                    if (!ftpClient.changeWorkingDirectory(changeDirectory)) {
-                        message = "Failed to change working directory to " + changeDirectory + " on " + hostname;
-                        logger.warn(message);
-                        return message;
-                    }
-                }
-                // upload input streams
-                int size = remoteList.size();
-                for (int i = 0; i < size; i++) {
-                    ftpClient.storeFile(remoteList.get(i), inputStreamList.get(i));
-                }
-                message = "upload files to " + hostname;
-            } else {
-                message = "Failed to login to " + hostname + ", check username and password";
-                logger.warn(message);
-            }
-        } catch (IOException ex) {
-            message = "upload files to " + hostname + "has encountered an exception: " + ex.getMessage();
-            logger.error(ex.getMessage(), ex);
-        } finally {
-            disconnect();
-        }
-        return message;
-    }
-
+//    
     private void uploadFiles(File src) throws IOException {
         if (src.isDirectory()) {
+        	String dir = src.getName();
+        	if(!ftpClient.changeWorkingDirectory(dir)) {
+        		ftpClient.makeDirectory(dir);
+        		ftpClient.changeWorkingDirectory(dir);
+        	}
+        	for (File file : src.listFiles()) {
+        		uploadFiles(file);
+        	}
             // Upload directory
-            ftpClient.makeDirectory(src.getName());
-            ftpClient.changeWorkingDirectory(src.getName());
-            for (File file : src.listFiles()) {
-                uploadFiles(file);
-            }
             ftpClient.changeToParentDirectory();
         } else {
             // upload single file
             InputStream srcStream = null;
             try {
                 srcStream = src.toURI().toURL().openStream();
-                ftpClient.storeFile(src.getName(), srcStream);
+                ftpClient.storeFile(new String(src.getName().getBytes("GBK"),"iso-8859-1"), srcStream);
             } finally {
                 IOUtils.closeQuietly(srcStream);
             }
@@ -204,14 +136,6 @@ public class FtpService {
         this.port = port;
     }
 
-    public Boolean getIsFTPS() {
-        return isFTPS;
-    }
-
-    public void setIsFTPS(Boolean isFTPS) {
-        this.isFTPS = isFTPS;
-    }
-
     public String getProtocol() {
         return protocol;
     }
@@ -227,4 +151,18 @@ public class FtpService {
     public void setIsImplicit(Boolean isImplicit) {
         this.isImplicit = isImplicit;
     }
+    
+    private void mkdirs(FTPClient ftpClient, String directory) throws IOException{
+    	for(String dir : directory.split("/")) {
+    		if(!ftpClient.changeWorkingDirectory(dir)) {
+    			ftpClient.makeDirectory(dir);
+    			ftpClient.changeWorkingDirectory(dir);
+    		}
+    	}
+    }
+    
+	public String getDatePath() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		return simpleDateFormat.format(new Date());
+	}    
 }

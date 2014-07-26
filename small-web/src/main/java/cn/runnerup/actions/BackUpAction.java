@@ -1,6 +1,5 @@
 package cn.runnerup.actions;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,17 +21,12 @@ public class BackUpAction extends RunnerSupport implements ModelDriven<BackUpMod
 	@Autowired
 	private AttachmentService attachmentService;
 	
-	private boolean isFile = false;
-	
-	public String index() {
+	public String create() {
 		try {
 			if(getUser().getPriority() == 5) {
 				FtpService ftpService = new FtpService(model.getUsername(), model.getPassword(), model.getHostip(), 21);
 				String message = null;
-				if(!isFile) {
-					message = ftpService.uploadFiles(attachmentService.getRoot(), "");
-				}else
-					message = ftpService.uploadFiles(FilenameUtils.concat(attachmentService.getRoot(), "small.db"), "");
+				message = ftpService.uploadFiles(attachmentService.getRoot());
 				model.setSuccess(StringUtils.isBlank(message));
 			}
 		} catch (Exception e) {
@@ -46,12 +40,4 @@ public class BackUpAction extends RunnerSupport implements ModelDriven<BackUpMod
 		return model;
 	}
 
-	public boolean isFile() {
-		return isFile;
-	}
-
-	public void setFile(boolean isFile) {
-		this.isFile = isFile;
-	}
-	
 }

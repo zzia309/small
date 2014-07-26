@@ -218,13 +218,7 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	},
 	items:[{
 		fieldLabel: '合作经销商',
-		name: 'dealer',
-		xtype: 'combobox',
-	    store: areaStore,
-	    queryMode: 'local',
-	    displayField: 'name',
-	    valueField: 'code',
-	    editable: false
+		name: 'dealer'
 	},{
 		fieldLabel: '业务员',
 		name: 'sales'

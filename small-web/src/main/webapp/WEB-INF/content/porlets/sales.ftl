@@ -1,5 +1,5 @@
 var bakupPanel = Ext.create('Ext.form.Panel',{
-	method: 'GET',
+	method: 'POST',
 	columnWidth: 1,
 	defaults: {
 		labelAlign: 'right',
@@ -20,6 +20,31 @@ var bakupPanel = Ext.create('Ext.form.Panel',{
 		allowblank: false
 	}],
 	buttons: [{
+		text: '备份数据库',
+		handler: function() {
+			var mask = new Ext.LoadMask(Ext.getBody(), {
+				msg: "正在备份。。。"
+			});		
+			Ext.Ajax.request({
+				url: '${request.contextPath}/back-database.gson',
+				method: 'GET',
+				success: function(response) {
+					var value = Ext.decode(response.responseText);
+					if(value==="success") {
+						Ext.MessageBox.alert("提示", "数据备份成功！");
+						mask.hide();
+					}
+				},
+				failure: function(response) {
+					var value = Ext.decode(response.responseText);
+					if(!value) {
+						Ext.MessageBox.alert("提示", "数据备份失败 ！");
+						mask.hide();
+					}
+				}
+			});		
+		}
+	}, {
 		text: '数据备份',
 		handler: function(){
 			var form = this.up('form').getForm();
@@ -27,40 +52,19 @@ var bakupPanel = Ext.create('Ext.form.Panel',{
 				msg: "正在备份。。。"
 			});
 			mask.show();
-			if(form.isValid())
+			if(form.isValid()) {
 				form.submit({
-					url: '${request.contextPath}/back-up.gson?isFile=false',
-					success: function(form, action) {
-						var values = action.result;
-						if(values['success']) {
-							Ext.Ajax.request({
-								url: '${request.contextPath}/back-up.gson',
-								method: 'GET',
-								params: {
-									hostip: values['hostip'],
-									username: values['username'],
-									password: values['password'],
-									isFile: true
-								},
-								success: function(response) {
-									var value = Ext.decode(response.responseText);
-									if(value['success']) {
-										Ext.MessageBox.alert("提示", "备份成功！");
-										mask.hide();
-									}
-								}
-							});
-						}
-						else {
-							Ext.MessageBox.alert("提示", "备份失败！");
-							mask.hide();
-						}
-					},
-					failure: function() {
-						Ext.MessageBox.alert("提示", "备份失败！");
+					url: '${request.contextPath}/back-up.gson',
+					success: function(response) {
+						Ext.MessageBox.alert("提示", "文件备份成功！");
 						mask.hide();
-					}
+					},
+					failure: function(response) {
+						Ext.MessageBox.alert("提示", "文件备份失败 ！");
+						mask.hide();
+					}					
 				});
+			}
 		}
 	}],
 	listeners: {

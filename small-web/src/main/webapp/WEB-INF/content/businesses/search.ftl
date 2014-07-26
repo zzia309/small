@@ -78,16 +78,10 @@ var timePanel = Ext.create('Ext.form.FieldContainer',{
 		displayField: 'name',
 		store: carStore
     },{
+    	xtype: 'textfield',
 		fieldLabel: '合作经销商',
 		name: 'area',
-		labelWidth: 70,
-		triggerAction:'all',
-		xtype: 'combobox',
-	    store: areaStore,
-	    queryMode: 'local',
-	    displayField: 'name',
-	    valueField: 'code',
-	    editable: false
+		labelWidth: 70
     },{
     	fieldLabel: '车牌号',
     	xtype: 'textfield',
