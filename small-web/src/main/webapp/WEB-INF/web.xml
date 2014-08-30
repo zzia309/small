@@ -37,10 +37,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<listener>
-		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-	</listener>
-
 	<servlet>
 		<display-name>StaticServlet</display-name>
 		<servlet-name>staticServlet</servlet-name>

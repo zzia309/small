@@ -2,6 +2,7 @@ package cn.runnerup.actions;
 
 import java.io.Serializable;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,9 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.rest.RestActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.runnerup.model.Code;
 import cn.runnerup.model.User;
+import cn.runnerup.service.CodeService;
 import cn.runnerup.service.SmallService;
 import cn.runnerup.service.SmallSession;
 
@@ -28,6 +31,9 @@ public class RunnerSupport extends RestActionSupport implements
 
 	@Autowired
 	private SmallService smallService;
+	
+	@Autowired
+	private CodeService codeService;	
 
 	protected String encodeHttpHeader(String string, String encoding) throws Exception {
 		if(null == string) string = "";
@@ -36,6 +42,10 @@ public class RunnerSupport extends RestActionSupport implements
 		else
 			return URLEncoder.encode(string, encoding);
 	}
+	
+	public List<Code> getCodes(String entity) {
+		return codeService.getCodesByType(entity);
+	}	
 
 	public User getUser() {
 		return smallService.getUser();
@@ -52,6 +62,5 @@ public class RunnerSupport extends RestActionSupport implements
 	public void setServletRequest(HttpServletRequest request) {
 		this.servletRequest = request;
 	}
-
 
 }

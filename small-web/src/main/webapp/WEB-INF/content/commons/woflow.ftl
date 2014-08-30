@@ -1,3 +1,14 @@
+var descrWindow = Ext.create('Ext.window.Window', {
+	title: '流程信息',
+	width: 600,
+	height: 650,
+	layout: 'fit',
+	items: [{
+		xtype: 'textarea',
+		id: 'descrInformation'
+	}]
+});	
+
 var woFlowStore = Ext.create('Ext.data.Store', {
 	fields: ['id', 'wo', 'oldstatus', 'status', 'descr', 'createdby', 'created'],
 	data:[],
@@ -57,8 +68,11 @@ var woFlowPanel = Ext.create('Ext.grid.Panel', {
 		flex: 2
 	}],
 	listeners:{
-		itemclick: function(view, record) {
+		itemdblclick: function(view, record) {
 			if(record) {
+				var des = Ext.getCmp('descrInformation');
+				des.setValue(record.get('descr'));
+				descrWindow.show();
 				//var des = Ext.getCmp('des');
 				//des.setValue(record.get('descr'));
 				//des.resetOriginalValue();

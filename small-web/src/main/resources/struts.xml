@@ -4,12 +4,16 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<bean type="org.apache.struts2.rest.handler.ContentTypeHandler" name="gson" class="cn.runnerup.struts.GsonTypeHandler"/>
+	
+    <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true"/>
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.convention.classes.reload" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
     <constant name="struts.action.extension" value="xhtml,,xml,json,gson"/>
     <constant name="struts.action.excludePattern" value="/statics/.*?"/>
     <constant name="struts.convention.action.packages" value="cn.runnerup.actions"/>
+    <constant name="struts.convention.action.includeJars" value=".*?/small.*?jar(!/)?"/>
     <constant name="struts.convention.action.mapAllMatches" value="true"/>
     <constant name="struts.convention.default.parent.package" value="runnerup-default"/>
     <constant name="struts.convention.package.locators.disable" value="true"/>
