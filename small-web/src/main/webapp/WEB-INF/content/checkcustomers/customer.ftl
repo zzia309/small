@@ -249,13 +249,13 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	    displayField: 'name',
 	    valueField: 'code'
 	}, {
-		fieldLabel: '车价',
+		fieldLabel: '车价(元)',
 		name: 'carprice',
 		xtype: 'numberfield',
 		allowDecimals: true,
 		decimalPrecision: 4
 	}, {
-		fieldLabel: '贷款金额',
+		fieldLabel: '贷款金额(元)',
 		name: 'carloans',
 		xtype: 'numberfield',
 		allowDecimals: true,
@@ -267,7 +267,7 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		allowDecimals: true,
 		decimalPrecision: 4
 	}, {
-		fieldLabel: '佣金',
+		fieldLabel: '佣金(元)',
 		name: 'carbrokerage',
 		xtype: 'numberfield',
 		allowDecimals: true,
@@ -279,19 +279,19 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '打款账户',
 		name: 'cartoaccount'
 	}, {
-		fieldLabel: '保证金',
+		fieldLabel: '保证金(元)',
 		xtype: 'numberfield',
 		allowDecimals: true,
 		decimalPrecision: 4,
 		name: 'bail'
 	}, {
-		fieldLabel: '公证费',
+		fieldLabel: '公证费(元)',
 		name: 'notaryfees',
 		xtype: 'numberfield',
 		allowDecimals: true,
 		decimalPrecision: 4
 	}, {
-		fieldLabel: '担保费',
+		fieldLabel: '担保费(元)',
 		name: 'guaranteefees',
 		xtype: 'numberfield',
 		allowDecimals: true,
