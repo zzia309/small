@@ -96,7 +96,7 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '垫款金额',
 		name: 'advances'
 	}, {
-		fieldLabel: '垫款日期',
+		fieldLabel: '公司垫款日期',
 		xtype:'xdatefield',
 		format:'Y-m-d',
 		name: 'advanceDate'

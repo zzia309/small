@@ -1,5 +1,6 @@
 <#macro myhead>
 	<script type="text/javascript" src="${request.contextPath}/statics/extjs/ext-all-debug.js"></script>
+	<script type="text/javascript" src="${request.contextPath}/statics/ext-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="${request.contextPath}/statics/App.js"></script>
 	<script type="text/javascript" src="${request.contextPath}/statics/Date.js"></script>
 	<script type="text/javascript" src="${request.contextPath}/statics/DateField.js"></script>
