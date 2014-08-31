@@ -38,7 +38,6 @@
 	</listener>
 
 	<servlet>
-		<display-name>StaticServlet</display-name>
 		<servlet-name>staticServlet</servlet-name>
 		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
 	</servlet>
