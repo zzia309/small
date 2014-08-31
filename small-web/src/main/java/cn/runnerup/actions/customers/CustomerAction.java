@@ -68,6 +68,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 					attachmentService.upload(user, "customer", model.getId().toString(), 0, model.getCustomerfile()[i], model.getCustomerfileFileName()[i]);
 				}
 			}
+			servletRequest.getSession().removeAttribute("currentUploadStatus");
 			model.setSuccess(true);
 		} catch (Exception e) {
 			addActionError("请检查操作，附件大小不能超过150M！");
@@ -116,6 +117,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 				businessService.createBusiness(business);
 				woFlowService.createWoFlow(user, descr, "", "new", business.getId());
 			}
+			servletRequest.getSession().removeAttribute("currentUploadStatus");
 			model.setSuccess(true);
 		} catch (Exception e) {
 			addActionError("请检查操作，附件大小不能超过150M！");
@@ -132,6 +134,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 						attachmentService.upload(getUser(), "customer", model.getId().toString(), 0, model.getCustomerfile()[i], model.getCustomerfileFileName()[i]);
 					}
 				}
+				servletRequest.getSession().removeAttribute("currentUploadStatus");
 				model.setSuccess(true);
 			}
 		} catch (Exception e) {
@@ -139,7 +142,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 		}
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
 	}
-
+	
 	public HttpHeaders destroy() {
 		if(customer != null) {
 			customerService.deleteCustomer(customer);

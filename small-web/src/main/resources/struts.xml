@@ -4,7 +4,8 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<bean type="org.apache.struts2.rest.handler.ContentTypeHandler" name="gson" class="cn.runnerup.struts.GsonTypeHandler"/>
-	
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" name="uploadParser" class="cn.runnerup.actions.uploads.UploadMultiPartRequest" scope="default" optional="true" />
+	<constant name="struts.multipart.parser" value="uploadParser" />	
     <constant name="struts.objectFactory" value="spring"/>
     <constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true"/>
 	<constant name="struts.devMode" value="false" />

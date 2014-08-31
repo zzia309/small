@@ -22,6 +22,23 @@ function savesuccess(form, action, mask){
 	}
 }
 
+function loadState(businessForm, mask) {
+	var xfilefields = businessForm.query("[xtype=filefield]");
+	var st = false;
+	if(xfilefields.length>0) {
+		Ext.Array.forEach(xfilefields, function(fileField) {
+			if(fileField.getValue()) {
+				st = true;
+			}
+		});
+	}
+	if(st) {
+		progressWindow.show();
+		fileInterVal = setInterval(interVal, 300);
+	}else
+		mask.show();
+}
+
 var creditPanel = Ext.create('Ext.panel.Panel', {
 	title: '征信信息',
 	layout: 'column',
@@ -262,9 +279,9 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var mask = new Ext.LoadMask(Ext.getBody(), {
 				msg: "正在转初审。。。"
 			});
-			mask.show();
 			if(Ext.isEmpty(id)){
 			}else{
+				loadState(businessForm, mask);
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
 				form.submit({
 					url: url,
@@ -298,9 +315,9 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var mask = new Ext.LoadMask(Ext.getBody(), {
 				msg: "正在转终审。。。"
 			});
-			mask.show();
 			if(Ext.isEmpty(id)){
 			}else{
+				loadState(businessForm, mask);
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
 				form.submit({
 					url: url,
@@ -334,9 +351,9 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var mask = new Ext.LoadMask(Ext.getBody(), {
 				msg: "正在转老板过件。。。"
 			});
-			mask.show();
 			if(Ext.isEmpty(id)){
 			}else{
+				loadState(businessForm, mask);
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
 				form.submit({
 					url: url,
@@ -370,9 +387,9 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var mask = new Ext.LoadMask(Ext.getBody(), {
 				msg: "正在转财务。。。"
 			});
-			mask.show();
 			if(Ext.isEmpty(id)){
 			}else{
+				loadState(businessForm, mask);
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
 				form.submit({
 					url: url,
@@ -405,9 +422,9 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var mask = new Ext.LoadMask(Ext.getBody(), {
 				msg: "正在转后勤。。。"
 			});
-			mask.show();
 			if(Ext.isEmpty(id)){
 			}else{
+				loadState(businessForm, mask);
 				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
 				form.submit({
 					url: url,

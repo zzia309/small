@@ -6,6 +6,40 @@
 	<script type="text/javascript" src="${request.contextPath}/statics/DateField.js"></script>
 	<script type="text/javascript" src="${request.contextPath}/statics/ComboBox.js"></script>
 	<script type="text/javascript" src="${request.contextPath}/statics/layout/default.js"></script>
+	<script type="text/javascript">
+		var progressWindow = Ext.create('Ext.window.Window', {
+			layout: 'fit',
+			id: 'progressWindow',
+			modal: true,
+			closable: false,
+			items: [{
+				xtype: 'progressbar',
+				width: 300,
+				id: 'progressbar',
+				text: '上传中...',
+			}]
+		});
+	
+		var fileInterVal = null;
+		function interVal() {
+			Ext.Ajax.request({
+				url: '${request.contextPath}/upload-state.gson',
+				method: 'POST',
+				success: function(response) {
+					var text = response.responseText;
+					if(text) {
+						var val = Ext.decode(text);
+						if(val.success) {
+							clearInterval(fileInterVal);
+							Ext.getCmp('progressWindow').hide();
+						}
+						var percent = val.readedBytes/val.totalBytes*100;
+						Ext.getCmp('progressbar').updateProgress('', percent.toFixed(2)+'%');
+					}
+				}
+			});
+		}
+	</script>	
 	<link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/extjs/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/style/style.css"/>
 	<link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/style/login.css"/>

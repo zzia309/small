@@ -14,8 +14,21 @@ var flowPanel = Ext.create('Ext.panel.Panel',{
 			var mask = new Ext.LoadMask(Ext.getBody(), {
 				msg: "正在转征信人员。。。"
 			});
-			mask.show();
 			if(form.isValid()){
+				var xfilefields =  customerForm.query("[xtype=filefield]");
+				var st = false;
+				if(xfilefields.length>0) {
+					Ext.Array.forEach(xfilefields, function(fileField) {
+						if(fileField.getValue()) {
+							st = true;
+						}
+					});
+				}
+				if(st) {
+					progressWindow.show();
+					fileInterVal = setInterval(interVal, 300);
+				}else
+					mask.show();
 				var url = '${request.contextPath}/customers/customer!createFlow.gson';
 				form.submit({
 					url: url,
