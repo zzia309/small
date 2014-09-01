@@ -16,6 +16,7 @@ function savesuccess(form, action, mask){
 		businessStore.load();
 		mask.hide();
 		form.resumeEvents();
+		Ext.getCmp('progressWindow').hide();		
 	}else {
 		mask.hide();
 		Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
@@ -23,6 +24,7 @@ function savesuccess(form, action, mask){
 }
 
 function loadState(businessForm, mask) {
+
 	var xfilefields = businessForm.query("[xtype=filefield]");
 	var st = false;
 	if(xfilefields.length>0) {
@@ -276,27 +278,29 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var form = businessForm.getForm();
 			var id = form.findField('id').getValue();
 			businessForm.suspendEvents();
-			var mask = new Ext.LoadMask(Ext.getBody(), {
-				msg: "正在转初审。。。"
-			});
 			if(Ext.isEmpty(id)){
 			}else{
-				loadState(businessForm, mask);
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'trial'
-					},
-					success: function(form, action){
-						savesuccess(form, action, mask);
-					},
-					failure: function(form, action){
-						mask.hide();
-						Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
-					}
-				});
+				if(form.isValid()){
+					var mask = new Ext.LoadMask(Ext.getBody(), {
+						msg: "正在转初审。。。"
+					});
+					loadState(businessForm, mask);
+					var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+					form.submit({
+						url: url,
+						params: {
+							_method: 'PUT',
+							newStatus: 'trial'
+						},
+						success: function(form, action){
+							savesuccess(form, action, mask);
+						},
+						failure: function(form, action){
+							mask.hide();
+							Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
+						}
+					});
+				}
 			}
 		}
 	},{
@@ -312,27 +316,29 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
 			businessForm.suspendEvents();
-			var mask = new Ext.LoadMask(Ext.getBody(), {
-				msg: "正在转终审。。。"
-			});
 			if(Ext.isEmpty(id)){
 			}else{
-				loadState(businessForm, mask);
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'final'
-					},
-					success: function(form, action){
-						savesuccess(form, action, mask);
-					},
-					failure: function(form, action){
-						mask.hide();
-						Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
-					}
-				});
+				if(form.isValid()){
+					var mask = new Ext.LoadMask(Ext.getBody(), {
+						msg: "正在转终审。。。"
+					});
+					loadState(businessForm, mask);
+					var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+					form.submit({
+						url: url,
+						params: {
+							_method: 'PUT',
+							newStatus: 'final'
+						},
+						success: function(form, action){
+							savesuccess(form, action, mask);
+						},
+						failure: function(form, action){
+							mask.hide();
+							Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
+						}
+					});
+				}
 			}
 		}
 	},{
@@ -353,22 +359,27 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			});
 			if(Ext.isEmpty(id)){
 			}else{
-				loadState(businessForm, mask);
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'boss'
-					},
-					success: function(form, action){
-						savesuccess(form, action, mask);
-					},
-					failure: function(form, action){
-						mask.hide();
-						Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
-					}
-				});
+				if(form.isValid()){
+					var mask = new Ext.LoadMask(Ext.getBody(), {
+						msg: "正在转老板过件。。。"
+					});
+					loadState(businessForm, mask);
+					var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+					form.submit({
+						url: url,
+						params: {
+							_method: 'PUT',
+							newStatus: 'boss'
+						},
+						success: function(form, action){
+							savesuccess(form, action, mask);
+						},
+						failure: function(form, action){
+							mask.hide();
+							Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
+						}
+					});
+				}
 			}
 		}
 	},{
@@ -384,27 +395,29 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
 			businessForm.suspendEvents();
-			var mask = new Ext.LoadMask(Ext.getBody(), {
-				msg: "正在转财务。。。"
-			});
 			if(Ext.isEmpty(id)){
 			}else{
-				loadState(businessForm, mask);
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'finance'
-					},
-					success: function(form, action){
-						savesuccess(form, action, mask);
-					},
-					failure: function(form, action){
-						mask.hide();
-						Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
-					}
-				});
+				if(form.isValid()){
+					var mask = new Ext.LoadMask(Ext.getBody(), {
+						msg: "正在转财务。。。"
+					});
+					loadState(businessForm, mask);
+					var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+					form.submit({
+						url: url,
+						params: {
+							_method: 'PUT',
+							newStatus: 'finance'
+						},
+						success: function(form, action){
+							savesuccess(form, action, mask);
+						},
+						failure: function(form, action){
+							mask.hide();
+							Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
+						}
+					});
+				}
 			}
 		}
 	},{
@@ -419,27 +432,29 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var me = this;
 			var form = me.up('form').getForm();
 			var id = form.findField('id').getValue();
-			var mask = new Ext.LoadMask(Ext.getBody(), {
-				msg: "正在转后勤。。。"
-			});
 			if(Ext.isEmpty(id)){
 			}else{
-				loadState(businessForm, mask);
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'logistics'
-					},
-					success: function(form, action){
-						savesuccess(form, action, mask);
-					},
-					failure: function(form, action){
-						mask.hide();
-						Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
-					}
-				});
+				if(form.isValid()){
+					var mask = new Ext.LoadMask(Ext.getBody(), {
+						msg: "正在转后勤。。。"
+					});			
+					loadState(businessForm, mask);
+					var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+					form.submit({
+						url: url,
+						params: {
+							_method: 'PUT',
+							newStatus: 'logistics'
+						},
+						success: function(form, action){
+							savesuccess(form, action, mask);
+						},
+						failure: function(form, action){
+							mask.hide();
+							Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
+						}
+					});
+				}
 			}
 		}
 	},{

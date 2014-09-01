@@ -31,10 +31,11 @@
 						var val = Ext.decode(text);
 						if(val.success) {
 							clearInterval(fileInterVal);
+							Ext.getCmp('progressbar').reset();
 							Ext.getCmp('progressWindow').hide();
 						}
 						var percent = val.readedBytes/val.totalBytes*100;
-						Ext.getCmp('progressbar').updateProgress('', percent.toFixed(2)+'%');
+						Ext.getCmp('progressbar').updateProgress(percent, percent.toFixed(2)+'%');
 					}
 				}
 			});

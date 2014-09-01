@@ -43,6 +43,7 @@ var flowPanel = Ext.create('Ext.panel.Panel',{
 							store.load();
 							mask.hide();
 							showWindow.hide();
+							Ext.getCmp('progressWindow').hide();
 						}else {
 							mask.hide();
 							Ext.MessageBox.alert("转征信失败", "请检查操作，附件大小不能超过150M！");
