@@ -69,12 +69,12 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		readOnly: true
 	},
 	items: [{
-		fieldLabel: '贷款金额',
+		fieldLabel: '贷款金额(元)',
 		name: 'loans',
 		readOnly: true
 	}, {
 		xtype:'numberfield',
-		fieldLabel: '垫款金额',
+		fieldLabel: '垫款金额(元)',
 		name: 'advances'
 	}, {
 		fieldLabel: '垫款日期',
@@ -91,7 +91,7 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		editable: false
 	}, {
 		xtype:'numberfield',
-		fieldLabel: '银行放款金额',
+		fieldLabel: '银行放款金额(元)',
 		name: 'amounts'
 	}, {
 		fieldLabel: '银行放款日期',
@@ -99,7 +99,7 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		format:'Y-m-d',
 		name: 'loandate'
 	},{
-		fieldLabel: '本单毛利',
+		fieldLabel: '本单毛利(元)',
 		name: 'profits'
 	}]
 });
