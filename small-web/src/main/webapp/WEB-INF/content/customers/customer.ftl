@@ -483,6 +483,7 @@ var customerForm = Ext.create('Ext.form.Panel', {
 								store.load();
 								customerForm.resumeEvents();
 								mask.hide();
+								Ext.getCmp('progressWindow').hide();
 							}else {
 								mask.hide();
 								Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
