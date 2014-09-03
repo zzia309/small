@@ -73,7 +73,7 @@
 				<#if action.user?? && (action.user.priority==1)>
 				{ text: "担保信息维护", icon: '${request.contextPath}/statics/style/img/action/customer.png',leaf: true, uri: '${request.contextPath}/customers/index' }
 				</#if>
-				<#if action.user?? && (action.user.priority>3)>
+				<#if action.user?? && (action.user.priority>3)&&(action.user.priority<5)>
 				{ text: "担保客户信息查询", icon: '${request.contextPath}/statics/style/img/action/customer.png',leaf: true, uri: '${request.contextPath}/checkcustomers/index' }
 				</#if>
 			]}
