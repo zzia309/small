@@ -321,7 +321,7 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 });
 
 var lianxirenpanel = Ext.create('Ext.panel.Panel', {
-	title: '创建信息',
+	title: '紧急联系人',
 	layout: 'column',
 	collapsible: true,
 	defaults: {
@@ -332,10 +332,12 @@ var lianxirenpanel = Ext.create('Ext.panel.Panel', {
 	items:[{
 		fieldLabel: '联系人一姓名',
 		xtype: 'textfield',
+		allowBlank: false,
 		name: 'lianxiren1'
 	}, {
 		fieldLabel: '联系人一电话',
 		xtype: 'textfield',
+		allowBlank: false,
 		name: 'lianxiren1dianhua'
 	}, {
 		fieldLabel: '联系人一性别',
@@ -349,6 +351,7 @@ var lianxirenpanel = Ext.create('Ext.panel.Panel', {
 	}, {
 		fieldLabel: '与借款人关系',
 		xtype: 'textfield',
+		allowBlank: false,
 		name: 'lianxiren1guanxi'
 	}, {
 		fieldLabel: '联系人二姓名',
@@ -365,7 +368,6 @@ var lianxirenpanel = Ext.create('Ext.panel.Panel', {
 		store: genderStore,
 		valueField: 'id',
 		displayField: 'value',
-		allowBlank: false,
 		editable: false
 	}, {
 		fieldLabel: '与借款人关系',
