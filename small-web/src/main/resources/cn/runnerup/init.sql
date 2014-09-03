@@ -1,8 +1,3 @@
-drop database longyuedatabase;
-create database longyuedatabase DEFAULT CHARACTER SET = utf8;
-grant all privileges on longyuedatabase.* to longyue@localhost identified by 'longyuexiangmu';
-flush privileges;
-
 insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_fullname)values('admin', '356a192b7913b04c54574d18c28d46e6395428ab', 1, 'M', '业务员');
 insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_fullname)values('111', '356a192b7913b04c54574d18c28d46e6395428ab', 2, 'M', '征信人员');
 insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_fullname)values('222', '356a192b7913b04c54574d18c28d46e6395428ab', 3, 'M', '初审');
@@ -10,6 +5,8 @@ insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_f
 insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_fullname)values('444', '356a192b7913b04c54574d18c28d46e6395428ab', 5, 'M', '老板');
 insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_fullname)values('555', '356a192b7913b04c54574d18c28d46e6395428ab', 6, 'M', '财务');
 insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_fullname)values('666', '356a192b7913b04c54574d18c28d46e6395428ab', 7, 'M', '后勤');
+insert into sp_users(usr_username, usr_password, usr_priority, usr_gender, usr_fullname)values('777', '356a192b7913b04c54574d18c28d46e6395428ab', 8, 'M', '存档专员');
+
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(1, '-', 'new');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(2, 'new', '-');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(2, 'new', 'trial');
@@ -20,7 +17,8 @@ insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(4, 
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(5, 'boss', '-');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(5, 'boss', 'finance');
 insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(6, 'finance', 'logistics');
-insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(7, 'logistics', 'closed');
+insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(7, 'logistics', 'cundang');
+insert into sp_flowauthorizations(fa_role, fa_fromStatus, fa_toStatus)values(8, 'cundang', 'closed');
 
 
 insert into sp_codes (cod_type, cod_name, cod_code, cod_created) values ('BANK_STORE', '浙江泰隆商业银行(融悦)', '浙江泰隆商业银行(融悦)', '2014-01-03 12:05:53');

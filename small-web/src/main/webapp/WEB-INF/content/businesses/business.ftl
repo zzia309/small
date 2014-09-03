@@ -180,6 +180,11 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 		xtype: 'checkbox',
 		inputValue: true
 	}, {
+		fieldLabel: '送达银行日期',
+		xtype:'xdatefield',
+		format:'Y-m-d',
+		name: 'songdayinhangriqi'
+	},{
 		fieldLabel: '证书号',
 		name: 'certificate'
 	}, {
@@ -194,6 +199,46 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 	}, {
 		fieldLabel: '车牌',
 		name: 'carno'
+	}]
+});
+
+var cundangpanel = Ext.create('Ext.panel.Panel',{
+	defaultType: 'textfield',
+	title: '存档信息',
+	layout: 'column',
+	collapsible: true,
+	defaults: {
+		columnWidth: 0.3333,
+		labelAlign: 'right',
+		margin: '2 0 2 0',
+		<#if action.user?? && action.user.priority==8>
+			readOnly: false
+		<#else>
+			readOnly: true
+		</#if>
+	},
+	items: [ {
+		fieldLabel: '保险公司',
+		name: 'baoxiangongsi'
+	}, {
+		fieldLabel: '保险日期',
+		xtype:'xdatefield',
+		format:'Y-m-d',
+		name: 'baoxianriqi'
+	}, {
+		fieldLabel: '是否抵押',
+		name: 'shifoudiya',
+		xtype: 'checkbox',
+		inputValue: true
+	}, {
+		fieldLabel: '车型',
+		name: 'chexing'
+	}, {
+		fieldLabel: '发动机号',
+		name: 'fadongjihao'
+	}, {
+		fieldLabel: '车架号',
+		name: 'chejiahao'
 	}]
 });
 
@@ -443,10 +488,38 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			}
 		}
 	},{
+		text: '转存档专员',
+		hidden:
+		<#if action.user?? && (action.user.priority=7)>
+			false
+			<#else>
+			true
+		</#if>,
+		handler: function(){
+			var me = this;
+			var form = me.up('form').getForm();
+			var id = form.findField('id').getValue();
+			if(Ext.isEmpty(id)){
+			}else{
+				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+				form.submit({
+					url: url,
+					params: {
+						_method: 'PUT',
+						newStatus: 'cundang'
+					},
+					success: function(){
+						App.openTab('list');
+						businessStore.load();
+					}
+				});
+			}
+		}
+	},{
 		text: '关闭',
 		icon: '${request.contextPath}/statics/style/img/action/close.png',
 		hidden:
-		<#if action.user?? && (action.user.priority=7)>
+		<#if action.user?? && (action.user.priority=8)>
 			false
 			<#else>
 			true

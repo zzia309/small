@@ -2,7 +2,6 @@ var loanerPanel = Ext.create('Ext.panel.Panel', {
 	title: '贷款人信息',
 	layout: 'column',
 	collapsible: true,
-	//anchor: '100% 24%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.3333,
@@ -77,7 +76,6 @@ var matePanel = Ext.create('Ext.panel.Panel', {
 	title: '贷款人配偶信息',
 	layout: 'column',
 	collapsible: true,
-	//anchor: '100% 20.5%',
 	defaultType: 'textfield',
 	defaults: {
 		columnWidth: 0.3333,
@@ -134,9 +132,9 @@ var guaranteePanel = Ext.create('Ext.panel.Panel', {
 		name: 'guaranteename',
 		allowBlank: false
 	}, {
-		xtype: 'combo',
 		fieldLabel: '担保人性别',
 		name: 'guaranteesex',
+		xtype: 'combo',
 		store: genderStore,
 		valueField: 'id',
 		displayField: 'value',
@@ -322,11 +320,64 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	}]
 });
 
+var lianxirenpanel = Ext.create('Ext.panel.Panel', {
+	title: '创建信息',
+	layout: 'column',
+	collapsible: true,
+	defaults: {
+		columnWidth: 0.25,
+		labelAlign: 'right',
+		margin: '2 0 0 0'
+	},
+	items:[{
+		fieldLabel: '联系人一姓名',
+		xtype: 'textfield',
+		name: 'lianxiren1'
+	}, {
+		fieldLabel: '联系人一电话',
+		xtype: 'textfield',
+		name: 'lianxiren1dianhua'
+	}, {
+		fieldLabel: '联系人一性别',
+		name: 'lianxiren1sex',
+		xtype: 'combo',
+		store: genderStore,
+		valueField: 'id',
+		displayField: 'value',
+		allowBlank: false,
+		editable: false
+	}, {
+		fieldLabel: '与借款人关系',
+		xtype: 'textfield',
+		name: 'lianxiren1guanxi'
+	}, {
+		fieldLabel: '联系人二姓名',
+		xtype: 'textfield',
+		name: 'lianxiren2'
+	}, {
+		fieldLabel: '联系人二电话',
+		xtype: 'textfield',
+		name: 'lianxiren2dianhua'
+	}, {
+		fieldLabel: '联系人二性别',
+		name: 'lianxiren2sex',
+		xtype: 'combo',
+		store: genderStore,
+		valueField: 'id',
+		displayField: 'value',
+		allowBlank: false,
+		editable: false
+	}, {
+		fieldLabel: '与借款人关系',
+		xtype: 'textfield',
+		name: 'lianxiren2guanxi'
+	}]
+});
+
 var createPanel = Ext.create('Ext.panel.Panel', {
 	title: '创建信息',
 	layout: 'column',
 	collapsible: true,
-	//anchor: '100% 8%',
 	defaults: {
 		columnWidth: 0.5,
 		labelAlign: 'right',
@@ -354,9 +405,9 @@ var createPanel = Ext.create('Ext.panel.Panel', {
 });
 
 var customerForm = Ext.create('Ext.form.Panel', {
-	items: [loanerPanel, matePanel, guaranteePanel, carPanel, createPanel, {
+	items: [loanerPanel, matePanel, guaranteePanel, carPanel, lianxirenpanel, createPanel, {
 		xtype: 'panel',
-		height: 100,
+		height: 120,
 		layout: 'column',
 		id: 'customerFile',
 		items: [{

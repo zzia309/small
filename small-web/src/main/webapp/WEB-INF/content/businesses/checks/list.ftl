@@ -131,7 +131,38 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	}, {
 		header: '车架',
 		dataIndex: 'carframe'
-	}, {
+	},
+
+	{
+		header: '保险公司',
+		dataIndex: 'baoxiangongsi'
+	},
+	{
+		header: '保险日期',
+		dataIndex: 'baoxianriqi'
+	},
+	{
+		header: '是否抵押',
+		dataIndex: 'shifoudiya'
+	},
+	{
+		header: '车型',
+		dataIndex: 'chexing'
+	},
+	{
+		header: '发动机号',
+		dataIndex: 'fadongjihao'
+	},
+	{
+		header: '车架号',
+		dataIndex: 'chejiahao'
+	},
+	{
+		header: '送达日期',
+		dataIndex: 'songdayinhangriqi'
+	},
+
+	{
 		header: '流程节点',
 		dataIndex: 'status'
 	}],

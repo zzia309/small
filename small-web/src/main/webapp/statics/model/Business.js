@@ -3,47 +3,7 @@ Ext.define('Model.Business', {
 	fields: [
 	    {name: 'id'},
 	    {name: 'customer'},
-//	    {name: 'customer.loanername'},
-//	    {name: 'lendername'},
-//	    {name: 'lendersex'},
-//	    {name: 'lenderage'},
-//	    {name: 'lendercard'},
-//	    {name: 'lendertel'},
-//	    {name: 'lenderestate'},
-//	    {name: 'lenderunit'},
-//	    {name: 'lenderunitTel'},
-//	    {name: 'lenderarea'},
-//
-//	    {name: 'matename'},
-//	    {name: 'matesex'},
-//	    {name: 'mateage'},
-//	    {name: 'matecard'},
-//	    {name: 'matetel'},
-//	    {name: 'mateestate'},
-//	    {name: 'mateunit'},
-//	    {name: 'mateunittel'},
-//	    {name: 'matearea'},
-//
-//
-//	    {name: 'guaranteename'},
-//	    {name: 'guaranteesex'},
-//	    {name: 'guaranteeage'},
-//	    {name: 'guaranteecard'},
-//	    {name: 'guaranteetel'},
-//	    {name: 'guaranteeestate'},
-//	    {name: 'guaranteeunit'},
-//	    {name: 'guaranteeunittel'},
-//	    {name: 'guaranteearea'},
-//
-//
-//	    {name: 'sales'},
-//	    {name: 'manager'},
-//	    {name: 'cartype'},
-//	    {name: 'years'},
-//	    {name: 'bail'},
-//	    {name: 'notaryfee'},
-//	    {name: 'otherfee'},
-//	    {name: 'guaranteefee'},
+
 
 	    {name: 'credit'},
 	    {name: 'publicorder'},
@@ -65,6 +25,18 @@ Ext.define('Model.Business', {
 	    {name: 'carengine'},
 	    {name: 'carframe'},
 
-	    {name: 'status'}
+	    {name: 'status'},
+	    {name: 'carno'},
+	    {name: 'advancebank'},
+	    {name: 'amounts'},
+	    {name: 'profits'},
+	    {name: 'finishtime'},
+	    {name: 'baoxiangongsi'},
+	    {name: 'baoxianriqi'},
+	    {name: 'shifoudiya'},
+	    {name: 'chexing'},
+	    {name: 'fadongjihao'},
+	    {name: 'chejiahao'},
+	    {name: 'songdayinhangriqi'},
 	]
 });

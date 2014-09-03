@@ -65,7 +65,15 @@ Ext.define('Model.Customer',{
 	{name: 'isgps'},
 	{name: 'prepayments'},
 	{name: 'listedareas'},
-	{name: 'dealer'}
+	{name: 'dealer'},
+	{name: 'lianxiren1'},
+	{name: 'lianxiren1dianhua'},
+	{name: 'lianxiren1sex'},
+	{name: 'lianxiren1guanxi'},
+	{name: 'lianxiren2'},
+	{name: 'lianxiren2dianhua'},
+	{name: 'lianxiren2sex'},
+	{name: 'lianxiren2guanxi'}
 	]
 });
 

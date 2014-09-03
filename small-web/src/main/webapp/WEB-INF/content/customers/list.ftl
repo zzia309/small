@@ -284,6 +284,30 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	},{
 		header: '经销商',
 		dataIndex: 'dealer'
+	},{
+		header: '紧急联系人1',
+		dataIndex: 'lianxiren1'
+	},{
+		header: '紧急联系人1性别',
+		dataIndex: 'lianxiren1sex'
+	},{
+		header: '紧急联系人1电话',
+		dataIndex: 'lianxiren1dianhua'
+	},{
+		header: '与借款人关系',
+		dataIndex: 'lianxiren1guanxi'
+	},{
+		header: '紧急联系人2',
+		dataIndex: 'lianxiren2'
+	},{
+		header: '紧急联系人2性别',
+		dataIndex: 'lianxiren2sex'
+	},{
+		header: '紧急联系人2电话',
+		dataIndex: 'lianxiren2dianhua'
+	},{
+		header: '与借款人关系',
+		dataIndex: 'lianxiren2guanxi'
 	}],
 	store: store,
 	dockedItems: [{

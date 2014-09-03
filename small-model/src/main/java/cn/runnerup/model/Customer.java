@@ -134,6 +134,22 @@ public class Customer {
 
     private String dealer;
 
+    private String lianxiren1;
+
+    private String lianxiren1dianhua;
+
+    private String lianxiren1sex;
+
+    private String lianxiren1guanxi;
+
+    private String lianxiren2;
+
+    private String lianxiren2dianhua;
+
+    private String lianxiren2sex;
+
+    private String lianxiren2guanxi;
+
     public String getDealer() {
     	return dealer;
     }
@@ -655,9 +671,68 @@ public class Customer {
 		this.listedareas = listedareas;
 	}
 
+	public String getLianxiren1() {
+		return lianxiren1;
+	}
 
+	public void setLianxiren1(String lianxiren1) {
+		this.lianxiren1 = lianxiren1;
+	}
 
+	public String getLianxiren1dianhua() {
+		return lianxiren1dianhua;
+	}
 
+	public void setLianxiren1dianhua(String lianxiren1dianhua) {
+		this.lianxiren1dianhua = lianxiren1dianhua;
+	}
 
+	public String getLianxiren1sex() {
+		return lianxiren1sex;
+	}
+
+	public void setLianxiren1sex(String lianxiren1sex) {
+		this.lianxiren1sex = lianxiren1sex;
+	}
+
+	public String getLianxiren1guanxi() {
+		return lianxiren1guanxi;
+	}
+
+	public void setLianxiren1guanxi(String lianxiren1guanxi) {
+		this.lianxiren1guanxi = lianxiren1guanxi;
+	}
+
+	public String getLianxiren2() {
+		return lianxiren2;
+	}
+
+	public void setLianxiren2(String lianxiren2) {
+		this.lianxiren2 = lianxiren2;
+	}
+
+	public String getLianxiren2dianhua() {
+		return lianxiren2dianhua;
+	}
+
+	public void setLianxiren2dianhua(String lianxiren2dianhua) {
+		this.lianxiren2dianhua = lianxiren2dianhua;
+	}
+
+	public String getLianxiren2sex() {
+		return lianxiren2sex;
+	}
+
+	public void setLianxiren2sex(String lianxiren2sex) {
+		this.lianxiren2sex = lianxiren2sex;
+	}
+
+	public String getLianxiren2guanxi() {
+		return lianxiren2guanxi;
+	}
+
+	public void setLianxiren2guanxi(String lianxiren2guanxi) {
+		this.lianxiren2guanxi = lianxiren2guanxi;
+	}
 
 }

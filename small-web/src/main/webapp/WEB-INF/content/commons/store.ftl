@@ -59,6 +59,7 @@ var flowStore = Ext.create('Ext.data.Store', {
 	  {name: '财务', code: 'finance'},
 	  {name: '后勤', code: 'logistics'},
 	  {name: '关闭', code: 'closed'},
+	  {name: '存档专员', code: 'cundang'},
 	  {name: '驳回', code: '-'}
 	]
 });

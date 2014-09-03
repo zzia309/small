@@ -1,6 +1,4 @@
 
-drop database longyuedatabase;
-CREATE DATABASE  IF NOT EXISTS `longyuedatabase` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `longyuedatabase`;
 -- MySQL dump 10.13  Distrib 5.1.40, for Win32 (ia32)
 --
@@ -191,6 +189,19 @@ CREATE TABLE `sp_customers` (
   `cs_prepayments` double(32, 4) DEFAULT NULL,
   `cs_listedAreas` varchar(64) DEFAULT NULL,
   `cs_dealer` varchar(128) DEFAULT NULL,
+
+  `cs_lianxiren1`  varchar(64) DEFAULT NULL,
+  `cs_lianxiren1dianhua` varchar(64) DEFAULT NULL,
+  `cs_lianxiren1sex` varchar(64) DEFAULT NULL,
+  `cs_lianxiren1guanxi` varchar(64) DEFAULT NULL,
+
+  `cs_lianxiren2`  varchar(64) DEFAULT NULL,
+  `cs_lianxiren2dianhua` varchar(64) DEFAULT NULL,
+  `cs_lianxiren2sex` varchar(64) DEFAULT NULL,
+  `cs_lianxiren2guanxi` varchar(64) DEFAULT NULL,
+
+
+
   PRIMARY KEY (`cs_id`),
   KEY `foreign_key_createdby` (`cs_createdby`),
   CONSTRAINT `foreign_key_createdby` FOREIGN KEY (`cs_createdby`) REFERENCES `sp_users` (`usr_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -227,6 +238,14 @@ CREATE TABLE `sp_businesses` (
   `buss_profits` double(32, 4) DEFAULT NULL,
   `buss_finishTime` datetime DEFAULT NULL,
 
+  `buss_baoxiangongsi` varchar(64) DEFAULT NULL,
+  `buss_baoxianriqi` datetime DEFAULT NULL,
+  `buss_shifoudiya` tinyint(4) DEFAULT NULL,
+  `buss_chexing` varchar(64) DEFAULT NULL,
+  `buss_fadongjihao` varchar(64) DEFAULT NULL,
+  `buss_chejiahao` varchar(64) DEFAULT NULL,
+
+  `buss_songdayinhangriqi` datetime DEFAULT NULL,
 
   PRIMARY KEY (`buss_id`),
   KEY `foreign_key_customer` (`buss_customer`),

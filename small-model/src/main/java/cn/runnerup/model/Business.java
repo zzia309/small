@@ -52,6 +52,21 @@ public class Business {
 
     private Date finishtime;
 
+
+    private String baoxiangongsi;
+
+    private Date  baoxianriqi;
+
+    private String chexing;
+
+    private Boolean shifoudiya;
+
+    private String fadongjihao;
+
+    private String chejiahao;
+
+    private Date songdayinhangriqi;
+
     public Date getFinishtime() {
 		return finishtime;
 	}
@@ -244,7 +259,60 @@ public class Business {
 		this.status = status;
 	}
 
+	public String getBaoxiangongsi() {
+		return baoxiangongsi;
+	}
 
+	public void setBaoxiangongsi(String baoxiangongsi) {
+		this.baoxiangongsi = baoxiangongsi;
+	}
 
+	public Date getBaoxianriqi() {
+		return baoxianriqi;
+	}
+
+	public void setBaoxianriqi(Date baoxianriqi) {
+		this.baoxianriqi = baoxianriqi;
+	}
+
+	public String getChexing() {
+		return chexing;
+	}
+
+	public void setChexing(String chexing) {
+		this.chexing = chexing;
+	}
+
+	public Boolean getShifoudiya() {
+		return shifoudiya;
+	}
+
+	public void setShifoudiya(Boolean shifoudiya) {
+		this.shifoudiya = shifoudiya;
+	}
+
+	public String getFadongjihao() {
+		return fadongjihao;
+	}
+
+	public void setFadongjihao(String fadongjihao) {
+		this.fadongjihao = fadongjihao;
+	}
+
+	public String getChejiahao() {
+		return chejiahao;
+	}
+
+	public void setChejiahao(String chejiahao) {
+		this.chejiahao = chejiahao;
+	}
+
+	public Date getSongdayinhangriqi() {
+		return songdayinhangriqi;
+	}
+
+	public void setSongdayinhangriqi(Date songdayinhangriqi) {
+		this.songdayinhangriqi = songdayinhangriqi;
+	}
 
 }

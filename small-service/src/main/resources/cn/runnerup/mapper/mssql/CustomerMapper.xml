@@ -68,6 +68,17 @@
 	<result column="cs_prepayments" property="prepayments" jdbcType="DOUBLE" />
 	<result column="cs_listedAreas" property="listedareas" jdbcType="VARCHAR" />
 	<result column="cs_dealer" property="dealer" jdbcType="VARCHAR" />
+
+	<result column="cs_lianxiren1" property="lianxiren1" jdbcType="VARCHAR" />
+	<result column="cs_lianxiren1sex" property="lianxiren1sex" jdbcType="VARCHAR" />
+	<result column="cs_lianxiren1dianhua" property="lianxiren1dianhua" jdbcType="VARCHAR" />
+	<result column="cs_lianxiren1guanxi" property="lianxiren1guanxi" jdbcType="VARCHAR" />
+
+	<result column="cs_lianxiren2" property="lianxiren2" jdbcType="VARCHAR" />
+	<result column="cs_lianxiren2sex" property="lianxiren2sex" jdbcType="VARCHAR" />
+	<result column="cs_lianxiren2dianhua" property="lianxiren2dianhua" jdbcType="VARCHAR" />
+	<result column="cs_lianxiren2guanxi" property="lianxiren2guanxi" jdbcType="VARCHAR" />
+
 	<association property="createdby" column="cs_createdby" select="cn.runnerup.mapper.UserMapper.selectByPrimaryKey"/>
   </resultMap>
 
@@ -93,7 +104,10 @@
     cs_isGps,
     cs_prepayments,
     cs_listedAreas,
-    cs_dealer
+    cs_dealer,
+    cs_lianxiren1,cs_lianxiren1sex,cs_lianxiren1dianhua,cs_lianxiren1guanxi,
+    cs_lianxiren2,cs_lianxiren2sex,cs_lianxiren2dianhua,cs_lianxiren2guanxi
+
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -210,6 +224,10 @@
       cs_prepayments,
       cs_listedAreas,
       cs_dealer,
+      
+      cs_lianxiren1, cs_lianxiren1sex, cs_lianxiren1dianhua,cs_lianxiren1guanxi,
+      cs_lianxiren2,cs_lianxiren2sex,cs_lianxiren2dianhua,cs_lianxiren2guanxi,
+
       cs_createdby
       )
     values (#{loanername,jdbcType=VARCHAR}, #{loanersex,jdbcType=VARCHAR},
@@ -243,6 +261,15 @@
       #{listedareas,jdbcType=VARCHAR},
       #{dealer,jdbcType=VARCHAR},
 
+	  #{lianxiren1,jdbcType=VARCHAR},
+	  #{lianxiren1sex,jdbcType=VARCHAR},
+	  #{lianxiren1dianhua,jdbcType=VARCHAR},
+	  #{lianxiren1guanxi,jdbcType=VARCHAR},
+	  
+	  #{lianxiren2,jdbcType=VARCHAR},
+	  #{lianxiren2sex,jdbcType=VARCHAR},
+	  #{lianxiren2dianhua,jdbcType=VARCHAR},
+	  #{lianxiren2guanxi,jdbcType=VARCHAR},
       <if test="createdby == null">NULL</if><if test="createdby != null">#{createdby.id,jdbcType=INTEGER}</if>
       )
 	<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
@@ -316,6 +343,15 @@
       cs_prepayments = #{prepayments,jdbcType=DOUBLE},
       cs_listedAreas = #{listedareas,jdbcType=VARCHAR},
       cs_dealer = #{dealer,jdbcType=VARCHAR},
+
+      cs_lianxiren1 = #{lianxiren1,jdbcType=VARCHAR},
+      cs_lianxiren1sex = #{lianxiren1sex,jdbcType=VARCHAR},
+      cs_lianxiren1dianhua = #{lianxiren1dianhua,jdbcType=VARCHAR},
+      cs_lianxiren1guanxi= #{lianxiren1guanxi,jdbcType=VARCHAR},
+      cs_lianxiren2 = #{lianxiren2,jdbcType=VARCHAR},
+      cs_lianxiren2sex = #{lianxiren2sex,jdbcType=VARCHAR},
+      cs_lianxiren2dianhua = #{lianxiren2dianhua,jdbcType=VARCHAR},
+      cs_lianxiren2guanxi= #{lianxiren2guanxi,jdbcType=VARCHAR},
       <if test="createdby == null">cs_createdby = NULL</if><if test="createdby != null">cs_createdby = #{createdby.id,jdbcType=INTEGER}</if>
     where cs_id = #{id,jdbcType=INTEGER}
   </update>
