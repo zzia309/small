@@ -3,6 +3,7 @@ var descrWindow = Ext.create('Ext.window.Window', {
 	width: 600,
 	height: 650,
 	layout: 'fit',
+	closeAction: 'hide',
 	items: [{
 		xtype: 'textarea',
 		id: 'descrInformation'
