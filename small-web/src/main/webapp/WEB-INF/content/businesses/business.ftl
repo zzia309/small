@@ -21,6 +21,8 @@ function savesuccess(form, action, mask){
 		mask.hide();
 		Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
 	}
+	Ext.getCmp('progressbar').reset();
+	Ext.getCmp('progressWindow').hide();		
 }
 
 function loadState(businessForm, mask) {
