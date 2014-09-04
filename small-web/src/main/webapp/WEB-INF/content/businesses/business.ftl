@@ -16,13 +16,13 @@ function savesuccess(form, action, mask){
 		businessStore.load();
 		mask.hide();
 		form.resumeEvents();
-		Ext.getCmp('progressWindow').hide();		
+		Ext.getCmp('progressWindow').hide();
 	}else {
 		mask.hide();
 		Ext.MessageBox.alert("保存失败", "请检查操作，附件大小不能超过150M！");
 	}
 	Ext.getCmp('progressbar').reset();
-	Ext.getCmp('progressWindow').hide();		
+	Ext.getCmp('progressWindow').hide();
 }
 
 function loadState(businessForm, mask) {
@@ -120,7 +120,7 @@ var feePanel = Ext.create('Ext.panel.Panel', {
 		fieldLabel: '公司垫款日期',
 		xtype:'xdatefield',
 		format:'Y-m-d',
-		name: 'advanceDate'
+		name: 'advancedate'
 	}, {
 		fieldLabel: '垫款银行',
 		name: 'advancebank',
@@ -162,25 +162,25 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 	},
 	items: [ {
 		fieldLabel: '保险公司',
-		name: 'insuranceAgent'
+		name: 'insuranceagent'
 	}, {
 		fieldLabel: '保险起始日期',
 		xtype:'xdatefield',
 		format:'Y-m-d',
-		name: 'insuranceStart'
+		name: 'insurancestart'
 	}, {
 		fieldLabel: '保险结束日期',
 		xtype:'xdatefield',
 		format:'Y-m-d',
-		name: 'insuranceEnd'
+		name: 'insuranceend'
 	}, {
 		fieldLabel: '是否抵押',
-		name: 'isImpawn',
+		name: 'isimpawn',
 		xtype: 'checkbox',
 		inputValue: true
 	}, {
 		fieldLabel: '是否送行',
-		name: 'isSongHang',
+		name: 'issonghang',
 		xtype: 'checkbox',
 		inputValue: true
 	}, {
@@ -206,45 +206,7 @@ var insurancePanel = Ext.create('Ext.panel.Panel', {
 	}]
 });
 
-var cundangpanel = Ext.create('Ext.panel.Panel',{
-	defaultType: 'textfield',
-	title: '存档信息',
-	layout: 'column',
-	collapsible: true,
-	defaults: {
-		columnWidth: 0.3333,
-		labelAlign: 'right',
-		margin: '2 0 2 0',
-		<#if action.user?? && action.user.priority==8>
-			readOnly: false
-		<#else>
-			readOnly: true
-		</#if>
-	},
-	items: [ {
-		fieldLabel: '保险公司',
-		name: 'baoxiangongsi'
-	}, {
-		fieldLabel: '保险日期',
-		xtype:'xdatefield',
-		format:'Y-m-d',
-		name: 'baoxianriqi'
-	}, {
-		fieldLabel: '是否抵押',
-		name: 'shifoudiya',
-		xtype: 'checkbox',
-		inputValue: true
-	}, {
-		fieldLabel: '车型',
-		name: 'chexing'
-	}, {
-		fieldLabel: '发动机号',
-		name: 'fadongjihao'
-	}, {
-		fieldLabel: '车架号',
-		name: 'chejiahao'
-	}]
-});
+
 
 var businessForm = Ext.create('Ext.form.Panel', {
 	items:[creditPanel,
@@ -265,7 +227,16 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			name:'woflowDescr',
 			columnWidth: 1,
 			xtype: 'htmleditor'
-		},{
+		},
+		<#if action.user?? && (action.user.priority == 3)>
+		{
+			fieldLabel: '补齐材料清单',
+			name: 'buqicailiao',
+			columnWidth: 1,
+			xtype: 'textarea'
+		},
+		</#if>
+		{
 	    	xtype: 'button',
 	    	columnWidth: 0.09,
 	    	text: '添加附件',
@@ -484,7 +455,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 				if(form.isValid()){
 					var mask = new Ext.LoadMask(Ext.getBody(), {
 						msg: "正在转后勤。。。"
-					});			
+					});
 					loadState(businessForm, mask);
 					var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
 					form.submit({

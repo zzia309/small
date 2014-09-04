@@ -102,7 +102,7 @@ public class BusinessAction extends RunnerSupport implements ModelDriven<Busines
 					}
 				}
 				businessService.updateBusiness(model);
-				woFlowService.createWoFlow(user, model.getWoflowDescr(), business.getStatus(), newStatus, model.getId());
+				woFlowService.createWoFlow(user, model.getWoflowDescr(), business.getStatus(), newStatus, model.getId(), model.getBuqicailiao());
 				model.setSuccess(true);
 			} catch (Exception e) {
 				logger.error(e.getMessage(), e);

@@ -100,28 +100,28 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		dataIndex: 'advances'
 	}, {
 		header: '垫款 日期',
-		dataIndex: 'advanceDate'
+		dataIndex: 'advancedate'
 	}, {
 		header: '银行放款日期',
 		dataIndex: 'loandate'
 	}, {
 		header: '保险公司',
-		dataIndex: 'insuranceAgent'
+		dataIndex: 'insuranceagent'
 	}, {
 		header: '保险起始日期',
-		dataIndex: 'insuranceStart'
+		dataIndex: 'insurancestart'
 	}, {
 		header: '保险结束日期',
-		dataIndex: 'insuranceEnd'
+		dataIndex: 'insuranceend'
 	}, {
 		header: '证书号',
 		dataIndex: 'certificate'
 	}, {
 		header: '是否抵押',
-		dataIndex: 'isImpawn'
+		dataIndex: 'isimpawn'
 	}, {
 		header: '是否送杭',
-		dataIndex: 'isSongHang'
+		dataIndex: 'issonghang'
 	}, {
 		header: '车辆型号',
 		dataIndex: 'carmodel'
@@ -131,24 +131,6 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 	}, {
 		header: '车架',
 		dataIndex: 'carframe'
-	}, {
-		header: '保险公司',
-		dataIndex: 'baoxiangongsi'
-	},{
-		header: '保险日期',
-		dataIndex: 'baoxianriqi'
-	},{
-		header: '是否抵押',
-		dataIndex: 'shifoudiya'
-	},{
-		header: '车型',
-		dataIndex: 'chexing'
-	},{
-		header: '发动机号',
-		dataIndex: 'fadongjihao'
-	},{
-		header: '车架号',
-		dataIndex: 'chejiahao'
 	},{
 		header: '送达日期',
 		dataIndex: 'songdayinhangriqi'

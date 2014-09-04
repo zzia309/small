@@ -25,12 +25,7 @@
     <result column="buss_amounts" property="amounts" jdbcType="DOUBLE" />
     <result column="buss_profits" property="profits" jdbcType="DOUBLE" />
 
-    <result column="buss_baoxiangongsi" property="baoxiangongsi" jdbcType="VARCHAR" />
-    <result column="buss_baoxianriqi" property="baoxianriqi" />
-    <result column="buss_shifoudiya" property="shifoudiya"/>
-    <result column="buss_chexing" property="chexing" jdbcType="VARCHAR" />
-    <result column="buss_fadongjihao" property="fadongjihao" jdbcType="VARCHAR" />
-    <result column="buss_chejiahao" property="chejiahao" jdbcType="VARCHAR" />
+    
     <result column="buss_songdayinhangriqi" property="songdayinhangriqi"/>
 
 
@@ -44,12 +39,7 @@
     buss_certificate, buss_isImpawn, buss_isSongHang, buss_carModel, buss_carEngine,
     buss_carFrame, buss_status,
     buss_carNo, buss_advanceBank, buss_amounts, buss_profits,buss_finishTime,
-    buss_baoxiangongsi,
-    buss_baoxianriqi,
-    buss_shifoudiya,
-    buss_chexing,
-    buss_fadongjihao,
-    buss_chejiahao,
+  
     buss_songdayinhangriqi
   </sql>
 
@@ -202,12 +192,7 @@
       buss_profits,
       buss_finishTime,
 
-    buss_baoxiangongsi,
-    buss_baoxianriqi,
-    buss_shifoudiya,
-    buss_chexing,
-    buss_fadongjihao,
-    buss_chejiahao,
+   
     buss_songdayinhangriqi,
 
       buss_customer)
@@ -224,12 +209,7 @@
       #{profits,jdbcType=DOUBLE},
       #{finishtime,jdbcType=TIMESTAMP},
       
-      #{baoxiangongsi,jdbcType=VARCHAR},
-      #{baoxianriqi,jdbcType=TIMESTAMP},
-      #{shifoudiya,jdbcType=BOOLEAN},
-      #{chexing,jdbcType=VARCHAR},
-      #{fadongjihao,jdbcType=VARCHAR},
-      #{chejiahao,jdbcType=VARCHAR},
+     
       #{songdayinhangriqi,jdbcType=TIMESTAMP},
       
       <if test="customer == null">NULL</if><if test="customer != null">#{customer.id,jdbcType=INTEGER}</if>)
@@ -263,12 +243,7 @@
 			buss_profits = #{profits, jdbcType=DOUBLE},
 			buss_finishTime = #{finishtime,jdbcType=TIMESTAMP},
 			
-			buss_baoxiangongsi = #{baoxiangongsi,jdbcType=VARCHAR},
-      		buss_baoxianriqi = #{baoxianriqi,jdbcType=TIMESTAMP},
-      		buss_shifoudiya = #{shifoudiya,jdbcType=BOOLEAN},
-      		buss_chexing = #{chexing,jdbcType=VARCHAR},
-      		buss_fadongjihao = #{fadongjihao,jdbcType=VARCHAR},
-      		buss_chejiahao = #{chejiahao,jdbcType=VARCHAR},
+			
       		buss_songdayinhangriqi = #{songdayinhangriqi,jdbcType=TIMESTAMP},
 			
       		<if test="customer == null">buss_customer = NULL</if><if test="customer != null">buss_customer = #{customer.id,jdbcType=INTEGER}</if>

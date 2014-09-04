@@ -88,13 +88,13 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 				if(business != null) {
 					business.setStatus("trial");
 					businessService.updateBusiness(business);
-					woFlowService.createWoFlow(user, descr, "-", "new", business.getId());
+					woFlowService.createWoFlow(user, descr, "-", "new", business.getId(), "");
 				}else {
 					business = new Business();
 					business.setCustomer(model);
 					business.setStatus("new");
 					businessService.createBusiness(business);
-					woFlowService.createWoFlow(user, descr, "", "new", business.getId());
+					woFlowService.createWoFlow(user, descr, "", "new", business.getId(), "");
 				}
 				if(model.getCustomerfile() != null) {
 					for(int i=0; i<model.getCustomerfile().length; i++) {
@@ -115,7 +115,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 				business.setCustomer(model);
 				business.setStatus("new");
 				businessService.createBusiness(business);
-				woFlowService.createWoFlow(user, descr, "", "new", business.getId());
+				woFlowService.createWoFlow(user, descr, "", "new", business.getId(), "");
 			}
 			servletRequest.getSession().removeAttribute("currentUploadStatus");
 			model.setSuccess(true);
@@ -142,7 +142,7 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 		}
 		return new DefaultHttpHeaders(SUCCESS).setLocationId(model.getId());
 	}
-	
+
 	public HttpHeaders destroy() {
 		if(customer != null) {
 			customerService.deleteCustomer(customer);

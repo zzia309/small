@@ -16,7 +16,7 @@ public class WoFlowService {
 	@Autowired
 	private WoflowMapper woflowMapper;
 
-	public void createWoFlow(User createdby, String descr, String oldstatus, String status, Integer wo) {
+	public void createWoFlow(User createdby, String descr, String oldstatus, String status, Integer wo, String buqicailiao) {
 		Woflow record = new Woflow();
 		record.setCreated(Calendar.getInstance().getTime());
 		record.setDescr(descr);
@@ -24,6 +24,7 @@ public class WoFlowService {
 		record.setStatus(status);
 		record.setWo(wo);
 		record.setCreatedby(createdby);
+		record.setBuqicailiao(buqicailiao);
 		woflowMapper.insert(record);
 	}
 

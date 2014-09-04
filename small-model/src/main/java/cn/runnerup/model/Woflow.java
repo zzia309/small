@@ -18,7 +18,17 @@ public class Woflow {
 
     private String descr;
 
-    public Integer getId() {
+    private String buqicailiao;
+
+    public String getBuqicailiao() {
+		return buqicailiao;
+	}
+
+	public void setBuqicailiao(String buqicailiao) {
+		this.buqicailiao = buqicailiao;
+	}
+
+	public Integer getId() {
         return id;
     }
 

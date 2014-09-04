@@ -321,10 +321,67 @@ var carPanel = Ext.create('Ext.panel.Panel', {
 	}]
 });
 
+var lianxirenpanel = Ext.create('Ext.panel.Panel', {
+	title: '紧急联系人',
+	header: false,
+	layout: 'column',
+	collapsible: true,
+	defaults: {
+		columnWidth: 0.25,
+		labelAlign: 'right',
+		margin: '2 0 0 0'
+	},
+	items:[{
+		fieldLabel: '联系人一姓名',
+		xtype: 'textfield',
+		allowBlank: false,
+		name: 'lianxiren1'
+	}, {
+		fieldLabel: '联系人一电话',
+		xtype: 'textfield',
+		allowBlank: false,
+		name: 'lianxiren1dianhua'
+	}, {
+		fieldLabel: '联系人一性别',
+		name: 'lianxiren1sex',
+		xtype: 'combo',
+		store: genderStore,
+		valueField: 'id',
+		displayField: 'value',
+		allowBlank: false,
+		editable: false
+	}, {
+		fieldLabel: '与借款人关系',
+		xtype: 'textfield',
+		allowBlank: false,
+		name: 'lianxiren1guanxi'
+	}, {
+		fieldLabel: '联系人二姓名',
+		xtype: 'textfield',
+		name: 'lianxiren2'
+	}, {
+		fieldLabel: '联系人二电话',
+		xtype: 'textfield',
+		name: 'lianxiren2dianhua'
+	}, {
+		fieldLabel: '联系人二性别',
+		name: 'lianxiren2sex',
+		xtype: 'combo',
+		store: genderStore,
+		valueField: 'id',
+		displayField: 'value',
+		editable: false
+	}, {
+		fieldLabel: '与借款人关系',
+		xtype: 'textfield',
+		name: 'lianxiren2guanxi'
+	}]
+});
+
 var customerForm = Ext.create('Ext.form.Panel', {
-	items: [loanerPanel, matePanel, guaranteePanel, carPanel],
+	items: [loanerPanel, matePanel, guaranteePanel, carPanel, lianxirenpanel],
 	layout: 'anchor',
-	anchor: '98.6% 120%'
+	anchor: '98.6% 125%'
 });
 
 var customerTab = {

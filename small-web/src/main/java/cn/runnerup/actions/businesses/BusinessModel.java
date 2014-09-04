@@ -17,8 +17,18 @@ public class BusinessModel extends Business{
 	private String newStatus;
 
 	private String woflowDescr;
-	
+
+	private String buqicailiao;
+
 	private List<Woflow> woflows;
+
+	public String getBuqicailiao() {
+		return buqicailiao;
+	}
+
+	public void setBuqicailiao(String buqicailiao) {
+		this.buqicailiao = buqicailiao;
+	}
 
 	public boolean isSuccess() {
 		return success;

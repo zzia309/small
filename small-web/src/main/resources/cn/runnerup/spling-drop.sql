@@ -72,6 +72,7 @@ CREATE TABLE `sp_woflows` (
   `wof_oldStatus` varchar(64) DEFAULT NULL,
   `wof_status` varchar(64) DEFAULT NULL,
   `wof_descr` text,
+  `wof_buqicailiao` text,
   `wof_createdby` int(11) DEFAULT NULL,
   `wof_created` datetime NOT NULL DEFAULT '2014-01-03 12:05:53',
   PRIMARY KEY (`wof_id`),
@@ -238,12 +239,7 @@ CREATE TABLE `sp_businesses` (
   `buss_profits` double(32, 4) DEFAULT NULL,
   `buss_finishTime` datetime DEFAULT NULL,
 
-  `buss_baoxiangongsi` varchar(64) DEFAULT NULL,
-  `buss_baoxianriqi` datetime DEFAULT NULL,
-  `buss_shifoudiya` tinyint(4) DEFAULT NULL,
-  `buss_chexing` varchar(64) DEFAULT NULL,
-  `buss_fadongjihao` varchar(64) DEFAULT NULL,
-  `buss_chejiahao` varchar(64) DEFAULT NULL,
+  
 
   `buss_songdayinhangriqi` datetime DEFAULT NULL,
 

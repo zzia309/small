@@ -8,10 +8,10 @@ var descrWindow = Ext.create('Ext.window.Window', {
 		xtype: 'textarea',
 		id: 'descrInformation'
 	}]
-});	
+});
 
 var woFlowStore = Ext.create('Ext.data.Store', {
-	fields: ['id', 'wo', 'oldstatus', 'status', 'descr', 'createdby', 'created'],
+	fields: ['id', 'wo', 'oldstatus', 'status', 'descr', 'buqicailiao', 'createdby', 'created'],
 	data:[],
 	autoLoad: false
 });
@@ -53,7 +53,20 @@ var woFlowPanel = Ext.create('Ext.grid.Panel', {
 		header: '提示信息',
 		dataIndex: 'descr',
 		flex: 10
-	}, {
+	},
+	<#if action.user?? && (action.user.priority == 4)>
+	{
+		header: '补齐材料',
+		dataIndex: 'buqicailiao',
+		flex: 3,
+		renderer: function(value){
+			if(value)
+				return "<span style='color:red'>"+value+"</span>"
+			return "";
+		}
+	},
+	</#if>
+	{
 		header: '创建人',
 		dataIndex: 'createdby',
 		flex: 1,
@@ -80,5 +93,5 @@ var woFlowPanel = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	}
-	
+
 });

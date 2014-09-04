@@ -31,12 +31,7 @@ Ext.define('Model.Business', {
 	    {name: 'amounts'},
 	    {name: 'profits'},
 	    {name: 'finishtime'},
-	    {name: 'baoxiangongsi'},
-	    {name: 'baoxianriqi'},
-	    {name: 'shifoudiya'},
-	    {name: 'chexing'},
-	    {name: 'fadongjihao'},
-	    {name: 'chejiahao'},
+	   
 	    {name: 'songdayinhangriqi'},
 	]
 });
