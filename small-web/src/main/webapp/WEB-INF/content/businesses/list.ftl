@@ -99,18 +99,26 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		header: '垫款金额',
 		dataIndex: 'advances'
 	}, {
+		xtype: 'xdatecolumn',
+		format: 'Y-m-d',	
 		header: '垫款 日期',
 		dataIndex: 'advancedate'
 	}, {
+		xtype: 'xdatecolumn',
+		format: 'Y-m-d',	
 		header: '银行放款日期',
 		dataIndex: 'loandate'
 	}, {
 		header: '保险公司',
 		dataIndex: 'insuranceagent'
 	}, {
+		xtype: 'xdatecolumn',
+		format: 'Y-m-d',
 		header: '保险起始日期',
 		dataIndex: 'insurancestart'
 	}, {
+		xtype: 'xdatecolumn',
+		format: 'Y-m-d',
 		header: '保险结束日期',
 		dataIndex: 'insuranceend'
 	}, {
@@ -132,6 +140,8 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 		header: '车架',
 		dataIndex: 'carframe'
 	},{
+		xtype: 'xdatecolumn',
+		format: 'Y-m-d',	
 		header: '送达日期',
 		dataIndex: 'songdayinhangriqi'
 	},{
