@@ -30,9 +30,9 @@ public class Business {
 
     private String certificate;
 
-    private Byte isimpawn;
+    private boolean isimpawn;
 
-    private Byte issonghang;
+    private boolean issonghang;
 
     private String carmodel;
 
@@ -52,12 +52,19 @@ public class Business {
 
     private Date finishtime;
 
-
+    private String buqicailiao;
   
-
     private Date songdayinhangriqi;
 
-    public Date getFinishtime() {
+    public String getBuqicailiao() {
+		return buqicailiao;
+	}
+
+	public void setBuqicailiao(String buqicailiao) {
+		this.buqicailiao = buqicailiao;
+	}
+
+	public Date getFinishtime() {
 		return finishtime;
 	}
 
@@ -201,19 +208,19 @@ public class Business {
 		this.certificate = certificate;
 	}
 
-	public Byte getIsimpawn() {
+	public boolean isIsimpawn() {
 		return isimpawn;
 	}
 
-	public void setIsimpawn(Byte isimpawn) {
+	public void setIsimpawn(boolean isimpawn) {
 		this.isimpawn = isimpawn;
 	}
 
-	public Byte getIssonghang() {
+	public boolean isIssonghang() {
 		return issonghang;
 	}
 
-	public void setIssonghang(Byte issonghang) {
+	public void setIssonghang(boolean issonghang) {
 		this.issonghang = issonghang;
 	}
 

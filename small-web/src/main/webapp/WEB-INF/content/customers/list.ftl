@@ -321,6 +321,7 @@ var listgrid = Ext.create('Ext.grid.Panel', {
 			App.currentId = record.get("id");
 		},
 		itemdblclick: function(view, record, item, index, e, eOpts){
+			console.log(App.currentId);
 			App.openTab('customer', App.currentId);
 		}
 	}

@@ -6,6 +6,8 @@ import cn.runnerup.model.Customer;
 
 public class CustomerModel extends Customer{
 
+	private static final long serialVersionUID = -6999646670126571299L;
+
 	private boolean success = false;
 
 	private File[] customerfile;

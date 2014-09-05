@@ -24,7 +24,7 @@
     <result column="buss_advanceBank" property="advancebank" jdbcType="VARCHAR" />
     <result column="buss_amounts" property="amounts" jdbcType="DOUBLE" />
     <result column="buss_profits" property="profits" jdbcType="DOUBLE" />
-
+    <result column="buss_buqicailiao" property="buqicailiao" jdbcType="LONGVARCHAR" />
     
     <result column="buss_songdayinhangriqi" property="songdayinhangriqi"/>
 
@@ -38,7 +38,7 @@
     buss_advanceDate, buss_loanDate, buss_insuranceAgent, buss_insuranceStart, buss_insuranceEnd,
     buss_certificate, buss_isImpawn, buss_isSongHang, buss_carModel, buss_carEngine,
     buss_carFrame, buss_status,
-    buss_carNo, buss_advanceBank, buss_amounts, buss_profits,buss_finishTime,
+    buss_carNo, buss_advanceBank, buss_amounts, buss_profits,buss_finishTime,buss_buqicailiao,
   
     buss_songdayinhangriqi
   </sql>
@@ -191,9 +191,9 @@
       buss_amounts,
       buss_profits,
       buss_finishTime,
-
+	  buss_buqicailiao,
    
-    buss_songdayinhangriqi,
+      buss_songdayinhangriqi,
 
       buss_customer)
     values (#{id,jdbcType=INTEGER}, #{credit,jdbcType=VARCHAR},
@@ -208,7 +208,7 @@
       #{amounts,jdbcType=DOUBLE},
       #{profits,jdbcType=DOUBLE},
       #{finishtime,jdbcType=TIMESTAMP},
-      
+      #{buqicailiao,jdbcType=LONGVARCHAR},
      
       #{songdayinhangriqi,jdbcType=TIMESTAMP},
       
@@ -243,7 +243,7 @@
 			buss_profits = #{profits, jdbcType=DOUBLE},
 			buss_finishTime = #{finishtime,jdbcType=TIMESTAMP},
 			
-			
+      		buss_buqicailiao = #{buqicailiao,jdbcType=LONGVARCHAR},
       		buss_songdayinhangriqi = #{songdayinhangriqi,jdbcType=TIMESTAMP},
 			
       		<if test="customer == null">buss_customer = NULL</if><if test="customer != null">buss_customer = #{customer.id,jdbcType=INTEGER}</if>
