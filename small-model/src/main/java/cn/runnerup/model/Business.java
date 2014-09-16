@@ -30,9 +30,9 @@ public class Business {
 
     private String certificate;
 
-    private Byte isimpawn;
+    private Boolean isimpawn;
 
-    private Byte issonghang;
+    private Boolean issonghang;
 
     private String carmodel;
 
@@ -53,7 +53,7 @@ public class Business {
     private Date finishtime;
 
 
-  
+
 
     private Date songdayinhangriqi;
 
@@ -201,21 +201,7 @@ public class Business {
 		this.certificate = certificate;
 	}
 
-	public Byte getIsimpawn() {
-		return isimpawn;
-	}
 
-	public void setIsimpawn(Byte isimpawn) {
-		this.isimpawn = isimpawn;
-	}
-
-	public Byte getIssonghang() {
-		return issonghang;
-	}
-
-	public void setIssonghang(Byte issonghang) {
-		this.issonghang = issonghang;
-	}
 
 	public String getCarmodel() {
 		return carmodel;
@@ -255,6 +241,22 @@ public class Business {
 
 	public void setSongdayinhangriqi(Date songdayinhangriqi) {
 		this.songdayinhangriqi = songdayinhangriqi;
+	}
+
+	public Boolean getIsimpawn() {
+		return isimpawn;
+	}
+
+	public void setIsimpawn(Boolean isimpawn) {
+		this.isimpawn = isimpawn;
+	}
+
+	public Boolean getIssonghang() {
+		return issonghang;
+	}
+
+	public void setIssonghang(Boolean issonghang) {
+		this.issonghang = issonghang;
 	}
 
 }

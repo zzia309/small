@@ -4,7 +4,7 @@ var attachmentStore = Ext.create('Ext.data.Store', {
 });
 
 var attachmentGrid = Ext.create('Ext.grid.Panel',{
-	height: 200,
+	height: 300,
 	autoScroll: true,
 	title: '附件列表',
 	region: 'north',
@@ -97,13 +97,13 @@ var attachmentGrid = Ext.create('Ext.grid.Panel',{
 var attachmentTab = {
 	itemId: 'attachment',
 	title: '客户附件',
-	layout: 'fit',
-	items: [attachmentGrid],
+	layout: 'anchor',
+	items: [woFlowPanel, attachmentGrid],
 	edit: function(){},
 	listeners: {
 		activate: function() {
 			if(App.currentId) {
-				//woFlowStore.removeAll();
+				woFlowStore.removeAll();
 				attachmentStore.removeAll();
 				Ext.Ajax.request({
 					url: '${request.contextPath}/commons/attachment/' + App.currentId + '.gson?type=customer',
@@ -111,8 +111,8 @@ var attachmentTab = {
 						var result = Ext.decode(response.responseText);
 						if(result.success) {
 							attachmentStore.loadData(result['attachments']);
-							//if(!Ext.isEmpty(result['woflows']))
-							//	woFlowStore.loadData(result['woflows']);
+							if(!Ext.isEmpty(result['woflows']))
+								woFlowStore.loadData(result['woflows']);
 						}else {
 							Ext.MessageBox.alert("提醒", "没有记录");
 						}

@@ -19,7 +19,7 @@
 				text: '上传中...',
 			}]
 		});
-	
+
 		var fileInterVal = null;
 		function interVal() {
 			Ext.Ajax.request({
@@ -41,7 +41,7 @@
 				}
 			});
 		}
-	</script>	
+	</script>
 	<link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/extjs/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/style/style.css"/>
 	<link rel="stylesheet" type="text/css" href="${request.contextPath}/statics/style/login.css"/>
@@ -73,7 +73,7 @@
 				<#if action.user?? && (action.user.priority==1)>
 				{ text: "担保信息维护", icon: '${request.contextPath}/statics/style/img/action/customer.png',leaf: true, uri: '${request.contextPath}/customers/index' }
 				</#if>
-				<#if action.user?? && (action.user.priority>3)&&(action.user.priority<5)>
+				<#if action.user?? && (action.user.priority>3)&&(action.user.priority<6)>
 				{ text: "担保客户信息查询", icon: '${request.contextPath}/statics/style/img/action/customer.png',leaf: true, uri: '${request.contextPath}/checkcustomers/index' }
 				</#if>
 			]}

@@ -15,9 +15,11 @@
 		<#include "../commons/store.ftl">
 		<#include "list.ftl">
 		<#include "customer.ftl">
+		<#include "business.ftl">
+		<#include "../commons/woflow.ftl">
 		<#include "attachment.ftl">
 		App.createContentPanel({
-			tabs: [listTab, customerTab, attachmentTab]
+			tabs: [listTab, customerTab, businessTab, attachmentTab]
 		});
 		<@dolayout/>
 	});
