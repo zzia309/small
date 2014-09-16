@@ -24,7 +24,6 @@ public class WoFlowService {
 		record.setStatus(status);
 		record.setWo(wo);
 		record.setCreatedby(createdby);
-		record.setBuqicailiao(buqicailiao);
 		woflowMapper.insert(record);
 	}
 

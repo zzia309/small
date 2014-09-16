@@ -14,7 +14,7 @@
 
   <sql id="Base_Column_List" >
     wof_id, wof_wo, wof_oldStatus, wof_status,wof_createdby,
-    wof_created, wof_descr,wof_buqicailiao
+    wof_created, wof_descr
   </sql>
 
   <select id="getBusinessFlow" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -40,14 +40,13 @@
     insert into sp_woflows (wof_wo,
       wof_oldStatus, wof_status,
       wof_createdby, wof_created,
-      wof_descr, wof_buqicailiao)
+      wof_descr)
     values (#{wo,jdbcType=INTEGER},
       #{oldstatus,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
       <if test="createdby == null">wof_createdby = null,</if>
       <if test="createdby != null">#{createdby.id,jdbcType=INTEGER},</if>
       #{created,jdbcType=TIMESTAMP},
-      #{descr,jdbcType=LONGVARCHAR},
-      #{buqicailiao,jdbcType=LONGVARCHAR})
+      #{descr,jdbcType=LONGVARCHAR})
       <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
 		select LAST_INSERT_ID() as id
 	  </selectKey>

@@ -52,12 +52,19 @@ public class Business {
 
     private Date finishtime;
 
-
-
+    private String buqicailiao;
 
     private Date songdayinhangriqi;
 
-    public Date getFinishtime() {
+    public String getBuqicailiao() {
+		return buqicailiao;
+	}
+
+	public void setBuqicailiao(String buqicailiao) {
+		this.buqicailiao = buqicailiao;
+	}
+
+	public Date getFinishtime() {
 		return finishtime;
 	}
 
@@ -201,7 +208,21 @@ public class Business {
 		this.certificate = certificate;
 	}
 
+	public boolean isIsimpawn() {
+		return isimpawn;
+	}
 
+	public void setIsimpawn(boolean isimpawn) {
+		this.isimpawn = isimpawn;
+	}
+
+	public boolean isIssonghang() {
+		return issonghang;
+	}
+
+	public void setIssonghang(boolean issonghang) {
+		this.issonghang = issonghang;
+	}
 
 	public String getCarmodel() {
 		return carmodel;

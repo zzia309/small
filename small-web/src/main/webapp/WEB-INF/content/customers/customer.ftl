@@ -407,7 +407,13 @@ var createPanel = Ext.create('Ext.panel.Panel', {
 });
 
 var customerForm = Ext.create('Ext.form.Panel', {
-	items: [loanerPanel, matePanel, guaranteePanel, carPanel, lianxirenpanel, createPanel, {
+	items: [loanerPanel, matePanel, guaranteePanel, carPanel, lianxirenpanel, createPanel, <#if buqicailiao??>
+			<#else>{
+			fieldLabel: '补齐材料清单',
+			name: 'buqicailiao',
+			anchor: '100%',
+			xtype: 'textarea'
+		},</#if> {
 		xtype: 'panel',
 		height: 120,
 		layout: 'column',

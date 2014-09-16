@@ -4,6 +4,8 @@ package cn.runnerup.actions.customers;
 import java.util.Calendar;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ import com.opensymphony.xwork2.ModelDriven;
 public class CustomerAction extends RunnerSupport implements ModelDriven<CustomerModel>{
 
 	private static final long serialVersionUID = -3865047448150578498L;
+	
+	private Log logger = LogFactory.getLog(getClass());
 
 	private CustomerModel model = new CustomerModel();
 
@@ -42,7 +46,11 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 	private Customer customer;
 
 	public String show(){
-		model.setSuccess(customer != null);
+		try {
+			model.setSuccess(customer != null);
+		} catch (Exception e) {
+			logger.error("eeee", e);
+		}
 		return SUCCESS;
 	}
 
@@ -161,7 +169,11 @@ public class CustomerAction extends RunnerSupport implements ModelDriven<Custome
 
 	public void setId(Integer id) throws Exception {
 		if(id != null){
-			customer = customerService.getCustomer(id);
+			try {
+				customer = customerService.getCustomer(id);
+			} catch (Exception e) {
+				logger.error("error", e);
+			}
 			PropertyUtils.copyProperties(model, customer);
 		}else{
 			addActionError("miss id or customer is not exist");

@@ -1,9 +1,13 @@
 package cn.runnerup.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Customer {
-    private Integer id;
+public class Customer implements Serializable {
+	
+	private static final long serialVersionUID = -5166297741271683172L;
+
+	private Integer id;
 
     private String loanername;
 
@@ -149,8 +153,18 @@ public class Customer {
     private String lianxiren2sex;
 
     private String lianxiren2guanxi;
+    
+    private String buqicailiao;
 
-    public String getDealer() {
+    public String getBuqicailiao() {
+		return buqicailiao;
+	}
+
+	public void setBuqicailiao(String buqicailiao) {
+		this.buqicailiao = buqicailiao;
+	}
+
+	public String getDealer() {
     	return dealer;
     }
 

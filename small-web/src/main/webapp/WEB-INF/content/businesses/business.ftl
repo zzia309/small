@@ -228,7 +228,7 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			columnWidth: 1,
 			xtype: 'htmleditor'
 		},
-		<#if action.user?? && (action.user.priority == 3)>
+		<#if action.user?? && (action.user.priority == 3 || action.user.priority == 4)>
 		{
 			fieldLabel: '补齐材料清单',
 			name: 'buqicailiao',
@@ -262,6 +262,11 @@ var businessForm = Ext.create('Ext.form.Panel', {
 	},
 	buttons:[{
 		text: '驳回',
+		hidden:<#if action.user?? && (action.user.priority>2 || action.user.priority<5)>
+			false
+			<#else>
+			true
+		</#if>,		
 		icon: '${request.contextPath}/statics/style/img/action/reject.png',
 		handler: function(){
 			var me = this;
@@ -489,18 +494,23 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var id = form.findField('id').getValue();
 			if(Ext.isEmpty(id)){
 			}else{
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'cundang'
-					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
+				if(form.isValid()){
+					var mask = new Ext.LoadMask(Ext.getBody(), {
+						msg: "正在转存档专员。。。"
+					});
+					loadState(businessForm, mask);
+					var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+					form.submit({
+						url: url,
+						params: {
+							_method: 'PUT',
+							newStatus: 'cundang'
+						},
+						success: function(form, action){
+							savesuccess(form, action, mask);
+						}
+					});
+				}
 			}
 		}
 	},{
@@ -518,18 +528,24 @@ var businessForm = Ext.create('Ext.form.Panel', {
 			var id = form.findField('id').getValue();
 			if(Ext.isEmpty(id)){
 			}else{
-				var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
-				form.submit({
-					url: url,
-					params: {
-						_method: 'PUT',
-						newStatus: 'closed'
-					},
-					success: function(){
-						App.openTab('list');
-						businessStore.load();
-					}
-				});
+				if(form.isValid()){
+					var mask = new Ext.LoadMask(Ext.getBody(), {
+						msg: "正在关闭。。。"
+					});
+					loadState(businessForm, mask);			
+					var url = '${request.contextPath}/businesses/business/'+ id +'.gson';
+					form.submit({
+						url: url,
+						params: {
+							_method: 'PUT',
+							newStatus: 'closed'
+						},
+						success: function(){
+							App.openTab('list');
+							businessStore.load();
+						}
+					});
+				}
 			}
 		}
 	}]
